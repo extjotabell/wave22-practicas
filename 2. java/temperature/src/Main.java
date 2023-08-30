@@ -30,7 +30,7 @@ public class Main {
         int maxTemperature = temperatures[0][1];
         int indexMax = 0;
         int indexMin = 0;
-        for(int i= 0; i < citys.length; i++){
+        for(int i= 1; i < citys.length; i++){
             if (maxTemperature < temperatures[i][1]) {
                 maxTemperature = temperatures[i][1];
                 indexMax = i;
