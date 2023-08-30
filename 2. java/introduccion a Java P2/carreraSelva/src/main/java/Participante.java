@@ -1,24 +1,11 @@
+import java.util.Objects;
+
 public class Participante {
 
     private int numeroParticipante;
     private int dni;
     private String nombre;
     private String apellido;
-
-    @Override
-    public String toString() {
-        return "Participante{" +
-                "numeroParticipante=" + numeroParticipante +
-                ", dni=" + dni +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", edad=" + edad +
-                ", celular=" + celular +
-                ", numeroEmergencia=" + numeroEmergencia +
-                ", grupoSanguineo='" + grupoSanguineo + '\'' +
-                '}';
-    }
-
     private int edad;
     private int celular;
     private int numeroEmergencia;
@@ -86,6 +73,32 @@ public class Participante {
 
     public void setGrupoSanguineo(String grupoSanguineo) {
         this.grupoSanguineo = grupoSanguineo;
+    }
+
+    @Override
+    public String toString() {
+        return "\t\tParticipante: " +
+                "\n \t\t\tnumeroParticipante=" + numeroParticipante +
+                "\n \t\t\tdni=" + dni +
+                "\n \t\t\tnombre='" + nombre + '\'' +
+                "\n \t\t\tapellido='" + apellido + '\'' +
+                "\n \t\t\tedad=" + edad +
+                "\n \t\t\tcelular=" + celular +
+                "\n \t\t\tnumeroEmergencia=" + numeroEmergencia +
+                "\n \t\t\tgrupoSanguineo='" + grupoSanguineo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Participante that = (Participante) o;
+        return numeroParticipante == that.numeroParticipante && dni == that.dni && edad == that.edad && celular == that.celular && numeroEmergencia == that.numeroEmergencia && Objects.equals(nombre, that.nombre) && Objects.equals(apellido, that.apellido) && Objects.equals(grupoSanguineo, that.grupoSanguineo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numeroParticipante, dni, nombre, apellido, edad, celular, numeroEmergencia, grupoSanguineo);
     }
 
     public Participante(int numeroParticipante, int dni, String nombre, String apellido, int edad, int celular, int numeroEmergencia, String grupoSanguineo) {

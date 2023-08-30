@@ -1,10 +1,23 @@
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Categoria {
     private int id;
     private String nombre;
     private String descripcion;
-
     private int precioMenores;
     private int precioMayores;
+    private Map<Integer, Participante> participantes = new HashMap<>();
+
+    public Map<Integer, Participante> getParticipantes() {
+        return participantes;
+    }
+
+    public void setParticipantes(Map<Integer, Participante> participantes) {
+        this.participantes = participantes;
+    }
+
 
 
     public int obtenerPrecioPorEdad(int edad){

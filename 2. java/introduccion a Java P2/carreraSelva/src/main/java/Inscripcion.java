@@ -5,7 +5,7 @@ public class Inscripcion {
 
     private int montoAbonar;
 
-    public double getMontoAbonar() {
+    public int getMontoAbonar() {
         return montoAbonar;
     }
 
@@ -17,9 +17,6 @@ public class Inscripcion {
         return numeroInscripcion;
     }
 
-    public void setNumeroInscripcion(int numeroInscripcion) {
-        this.numeroInscripcion = numeroInscripcion;
-    }
 
     public Categoria getCategoria() {
         return categoria;
