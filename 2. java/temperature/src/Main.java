@@ -26,8 +26,8 @@ public class Main {
     };
 
     public static void main(String[] args) {
-        int minTemperature = 0;
-        int maxTemperature = 0;
+        int minTemperature = temperatures[0][0];
+        int maxTemperature = temperatures[0][1];
         int indexMax = 0;
         int indexMin = 0;
         for(int i= 0; i < citys.length; i++){
