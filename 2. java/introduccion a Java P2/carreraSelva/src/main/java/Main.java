@@ -5,7 +5,6 @@ import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
-
         List<Inscripcion> inscripciones = new ArrayList<>();
         //a)
         Categoria circuitoChico = new Categoria(1, "circuitoChico","2 km por selva y arroyos");
@@ -60,7 +59,6 @@ public class Main {
         }catch (RuntimeException e){
             System.out.println(e.getMessage());
         }
-
     }
 
     private static boolean estaInscriptoEnAlgunaCategoria(List<Inscripcion> inscripciones, int numeroParticipante){
