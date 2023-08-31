@@ -22,11 +22,9 @@ public class Distribuidora {
         double precioTotal=0.0;
 
         for (Producto producto : productos) {
-            System.out.println(producto.calcular(1));
             precioTotal+= producto.calcular(1);
-
         }
-        System.out.println(precioTotal);
+        System.out.println("Precio total: " + precioTotal);
 
     }
 }
