@@ -1,3 +1,5 @@
+package calculo_imc;
+
 public class Persona {
 
     private String nombre;
