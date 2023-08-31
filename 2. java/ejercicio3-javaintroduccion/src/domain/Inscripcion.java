@@ -9,46 +9,48 @@ public class Inscripcion {
     private final int id;
     private Categoria categoria;
     private Participante participante;
-    int montoAbonado;
-
-    private int montoCategoria;
+    private int abonoParticipante;
 
 
-    public Inscripcion() {
-        this.id = idCache++;
+    public Inscripcion(Participante participante, Categoria categoria) {
+            participante.setCategoria(categoria);
+            this.id = idCache++;
+            this.participante = participante;
+            this.categoria = categoria;
     }
 
-    public int getMontoCategoria() {
-        return montoCategoria;
+    public int getId() {
+        return id;
     }
 
+    public int getAbonoParticipante() {
+        setAbonoParticipante(participante);
+        return abonoParticipante;
+    }
 
-    public void setMontoCategoria(Participante participante) {
-        final String tipoCategoriaUno = "Circuito Chico";
-        final String tipoCategoriaDos = "Circuito Medio";
-        final String tipoCategoriaTres = "Circuito Avanzado";
+    public void setAbonoParticipante(Participante participante) {
 
-        if (Objects.equals(infoCategoria.get(tipoCategoriaUno), "Circuito Chico")) {
+        if (categoria.getTipoCategoria() == TipoCategoria.CIRCUITO_CHICO) {
             if (participante.getEdad() < 18) {
-                montoCategoria = 1300;
+                abonoParticipante = 1300;
             } else {
-                montoCategoria = 1500;
+                abonoParticipante = 1500;
             }
         }
 
-        if (Objects.equals(infoCategoria.get(tipoCategoriaUno), "Circuito Medio")) {
+        if (categoria.getTipoCategoria() == TipoCategoria.CIRCUITO_MEDIO) {
             if (participante.getEdad() < 18) {
-                montoCategoria = 2000;
+                abonoParticipante = 2000;
             } else {
-                montoCategoria = 2300;
+                abonoParticipante = 2300;
             }
         }
 
-        if (Objects.equals(infoCategoria.get(tipoCategoriaUno), "Circuito Avanzado")) {
+        if (categoria.getTipoCategoria() == TipoCategoria.CIRCUITO_AVANZADO) {
             if (participante.getEdad() < 18) {
                 System.out.println("No se permite inscripciones a menores de 18 años, intente nuevamente con otra categoria");
             } else {
-                montoCategoria = 2800;
+                abonoParticipante = 2800;
             }
         }
     }
@@ -57,18 +59,25 @@ public class Inscripcion {
         return participante;
     }
 
-    public void addParticipante (Participante participante){
-        participante.add(participante);
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void removeParticipante ( int dni){
-        for (Participante participante : participantes) {
-            if (participante.getDni() == dni) {
-                participantes.remove(participante);
-            }
+    public void tieneCategoria() {
+        if(participante.getCategoria() != null)  {
+            System.out.println("Error. El participante ya tiene categoria!");
         }
     }
 
+    @Override
+    public String toString() {
+        return "Inscripcion{" +
+                "id=" + id +
+                ", categoria=" + categoria +
+                ", participante=" + participante +
+                ", abonoParticipante=" + abonoParticipante +
+                '}';
+    }
 }
 
 

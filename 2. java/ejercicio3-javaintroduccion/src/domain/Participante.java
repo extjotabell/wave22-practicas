@@ -1,17 +1,17 @@
 package domain;
 
 public class Participante {
-
     private int nroParticipante;
-    private int dni;
+    private String dni;
     private String nombre;
     private String apellido;
     private int edad;
     private String celular;
     private String nroEmergencia;
     private String grupoSanguineo;
+    private Categoria categoria;
 
-    public Participante(int nroParticipante, int dni, String nombre, String apellido, int edad, String celular, String nroEmergencia, String grupoSanguineo) {
+    public Participante(int nroParticipante, String dni, String nombre, String apellido, int edad, String celular, String nroEmergencia, String grupoSanguineo) {
         this.nroParticipante = nroParticipante;
         this.dni = dni;
         this.nombre = nombre;
@@ -30,11 +30,11 @@ public class Participante {
         this.nroParticipante = nroParticipante;
     }
 
-    public int getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(int dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 
@@ -86,6 +86,14 @@ public class Participante {
         this.grupoSanguineo = grupoSanguineo;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
     @Override
     public String toString() {
         return "Participante{" +
@@ -97,6 +105,7 @@ public class Participante {
                 ", celular='" + celular + '\'' +
                 ", nroEmergencia='" + nroEmergencia + '\'' +
                 ", grupoSanguineo='" + grupoSanguineo + '\'' +
+                ", categoria=" + categoria +
                 '}';
     }
 }

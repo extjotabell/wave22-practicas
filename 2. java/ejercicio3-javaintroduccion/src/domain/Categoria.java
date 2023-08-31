@@ -1,49 +1,50 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.Objects;
 
 public class Categoria {
 
     private static int idCache = 0;
     private final int id;
-    private Map<String, String> infoCategoria;
-    private ArrayList<Inscripcion> inscripciones;
-
+    private Enum<TipoCategoria> tipoCategoria;
+    private String descripcionCategoria;
 
     public Categoria() {
         this.id = idCache++;
     }
 
-    public Categoria(String tipoCategoria, String detalleCategoria) {
+    public Categoria(Enum<domain.TipoCategoria> tipoCategoria, String descripcionCategoria) {
         this();
-        infoCategoria.put(tipoCategoria, detalleCategoria);
+        this.tipoCategoria = tipoCategoria;
+        this.descripcionCategoria = descripcionCategoria;
     }
-
-    public Map<String, String> getInfoCategoria() {
-        return infoCategoria;
-    }
-
-    public void removeInscripcion(int dni) {
-        for (Inscripcion inscripcion : inscripciones) {
-            if (inscripcion.getParticipante().getDni() == dni) {
-                inscripcion.removeParticipante(inscripcion);
-            }
-        }
-    }
-
-
-
 
     public int getId() {
         return id;
     }
 
+    public Enum<domain.TipoCategoria> getTipoCategoria() {
+        return tipoCategoria;
+    }
 
+    public void setTipoCategoria(Enum<domain.TipoCategoria> tipoCategoria) {
+        this.tipoCategoria = tipoCategoria;
+    }
 
-    Calcular el monto total recaudado por cada categoría
+    public String getDescripcionCategoria() {
+        return descripcionCategoria;
+    }
 
-    y el total de toda la carrera incluyendo todas las categorías.
+    public void setDescripcionCategoria(String descripcionCategoria) {
+        this.descripcionCategoria = descripcionCategoria;
+    }
 
+    @Override
+    public String toString() {
+        return "Categoria{" +
+                "id=" + id +
+                ", tipoCategoria=" + tipoCategoria +
+                ", descripcionCategoria='" + descripcionCategoria + '\'' +
+                '}';
+    }
 }
