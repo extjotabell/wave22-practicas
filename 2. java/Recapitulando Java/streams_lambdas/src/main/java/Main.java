@@ -39,7 +39,7 @@ public class Main {
                 .mapToDouble(Vehicle::getCost).average()
                 .orElse(0);
 
-        System.out.print(" Vehicles sorted by cost: " +vehiclesSortedByCost);
+        System.out.print(" Vehicles sorted by cost: " + vehiclesSortedByCost);
         System.out.print("\n\nVehicles sorted by brand and cost: " + vehiclesSortedByBrandAndCost);
         System.out.print("\n\nVehicles sorted costing less than 1000: " + vehiclesWithCostBelow1000);
         System.out.print("\n\nVehicles sorted costing equal or more than 1000: " + vehiclesWithCostEqualOrAbove1000);
