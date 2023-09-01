@@ -1,17 +1,16 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+public class AdvancedCircuit extends Circuit {
 
-public class AdvancedCircuit implements Circuit {
-    private List<Participant> participantList = new ArrayList<>();
+    public AdvancedCircuit(double childFee) {
+        super(childFee);
+    }
     @Override
     public double calculateFee(Participant participant) {
         if (participant.getAge() < 18) {
             throw new RuntimeException("No se puede obtener el monto de un menor de edad");
         }
-        return 2800;
+        return childFee;
     }
 
     @Override
@@ -28,30 +27,5 @@ public class AdvancedCircuit implements Circuit {
         }
         participantList.add(participant);
         participant.subscribe();
-    }
-
-    @Override
-    public int getNumberOfParticipants() {
-        return participantList.size();
-    }
-
-    @Override
-    public double calculateTotalAmount() {
-        double amount = 0;
-        for(Participant participant : participantList) {
-            amount += this.calculateFee(participant);
-        }
-        return amount;
-    }
-
-    @Override
-    public void unsubscribe(Participant participant) {
-        for (Participant aParticipant: participantList) {
-            if (participant.equals(aParticipant)) {
-                participantList = participantList.stream().filter(anotherParticipant -> !anotherParticipant.equals(participant)).collect(Collectors.toList());
-                participant.unsubscribe();
-                break;
-            }
-        }
     }
 }

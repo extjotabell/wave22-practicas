@@ -14,9 +14,9 @@ public class Main {
         Participant participant5 = new Participant("Miguel", "62876435", 12);
         Participant participant6 = new Participant("Lionel", "33016244", 36);
 
-        Circuit shortCircuit = new ShortCircuit();
-        Circuit mediumCircuit = new MediumCircuit();
-        Circuit advancedCircuit = new AdvancedCircuit();
+        Circuit shortCircuit = new ShortCircuit(1300, 1500);
+        Circuit mediumCircuit = new MediumCircuit(2000, 2300);
+        Circuit advancedCircuit = new AdvancedCircuit(2800);
 
         Subscription shortCircuitSubcription = new Subscription(shortCircuit);
         shortCircuitSubcription.subscribe(participant1);
