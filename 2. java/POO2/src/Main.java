@@ -2,27 +2,19 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Main {
-    List<String> mensajeStrings = new LinkedList<>();
-    //Mensaje final
-    String mensajeFinal = "Este es el último mensaje";
+  public static void main(String[] args) {
+        Persona persona1 = new Persona();
+        System.out.println(persona1.toString());
+        Persona persona2 = new Persona("434fewf", "Nicolas", 32, 76.32, 1.75);
+        System.out.println(persona2.toString());
+        Persona persona3 = new Persona("324dfdsfad", "Matias", 23);
+        //System.out.println(persona3);
 
-    int[] numeros = new int[5];
+        double imcStatus = persona2.calcularIMC();
+        boolean esMayor = persona2.esMayorDeEdad();
 
-    public void asignarValor() {
-        //Código que arroja excepción, escribi tu codigo aqui
-        try {
-            numeros[5] = 10;
-        } catch (IndexOutOfBoundsException error){
-            error.getMessage();
-        } finally {
-            imprimirMensaje(mensajeFinal);
-        }
-
-    }
-
-    private void imprimirMensaje(String mensaje) {
-        mensajeStrings.add(mensaje);
-        System.out.println(mensaje);
-    }
+        System.out.println("Estado del IMC: " + (imcStatus == -1 ? "Bajo peso" : (imcStatus == 0 ? "Peso saludable" : "Sobrepeso")));
+        System.out.println("Es mayor de edad: " + esMayor);
+  }
 
 }
