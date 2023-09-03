@@ -21,25 +21,28 @@ public class Main {
         //for (Cliente cliente: listaClientes) {
           //  System.out.println(cliente.toString());
         //}
+        encontrarClientePorDNI(listaClientes);
 
+    }
+
+    public static void encontrarClientePorDNI(List<Cliente> listaClientes) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Ingrese el DNI del cliente ");
         String dniBuscado = scanner.nextLine();
 
         boolean clienteEncontrado = false;
-
-
         if (!dniBuscado.isEmpty()) {
             for (Cliente cliente: listaClientes) {
                 if (cliente.DNI.equals(dniBuscado)){
                     System.out.println(cliente.toString());
                     clienteEncontrado = true;
+                    break;
                 }
             }
         }
-
         if (!clienteEncontrado) {
             System.out.println("Cliente no encontrado");
         }
+
     }
 }
