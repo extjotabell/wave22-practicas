@@ -1,0 +1,52 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>60</x><y>30</y><w>210</w><h>190</h></coordinates><panel_attributes>Vehiculo
+--
+- patente: String
+- velocidad: double
+- aceleracion: double
+- anguloDeGiro: double
+- peso: double
+- ruedas: int
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>680</x><y>30</y><w>240</w><h>250</h></coordinates><panel_attributes>Carrera
+--
+distancia: double
+premioEnDolares: double
+nombre: String
+cantidadDeVehiculosPermitidos: int
+listaDeVehiculos: list&lt;Vehiculo&gt;
+socorristaAuto: SocorristaAuto
+socorristaMoto: SocorristaMoto
+--
++ darDeAltaVehiculo
++ darDeAltaMoto
++ eliminarVehiculo
++ eliminarVehiculoConPatente
++ definirGanador
++ SocorrerAuto
++ SocorrerMoto</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>0</y><w>100</w><h>30</h></coordinates><panel_attributes>/AbstractClass/
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>510</x><y>350</y><w>210</w><h>190</h></coordinates><panel_attributes>SocorristaAuto
+--
+-id: Long
+_-ClassAttribute: Long_
+
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>790</x><y>350</y><w>210</w><h>190</h></coordinates><panel_attributes>SocorristaMoto
+--
+-id: Long
+_-ClassAttribute: Long_
+--
+
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLInterface</id><coordinates><x>330</x><y>80</y><w>80</w><h>100</h></coordinates><panel_attributes>Socorre
+Interface 
+--
+socorrer</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>40</x><y>330</y><w>210</w><h>190</h></coordinates><panel_attributes>Auto
+
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>260</x><y>330</y><w>210</w><h>190</h></coordinates><panel_attributes>Moto
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>140</x><y>210</y><w>40</w><h>140</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>13;16;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>160</x><y>210</y><w>190</w><h>140</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>13;16;170;120</additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>220</y><w>390</w><h>150</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>13;16;280;90;370;130</additional_attributes></element><element><id>Relation</id><coordinates><x>240</x><y>210</y><w>670</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>13;16;650;140</additional_attributes></element><element><id>Relation</id><coordinates><x>400</x><y>150</y><w>200</w><h>220</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>180;200;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>390</x><y>140</y><w>410</w><h>230</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>390;210;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>280</x><y>40</y><w>400</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+m1=1..N</panel_attributes><additional_attributes>380;10;10;10</additional_attributes></element></diagram>
