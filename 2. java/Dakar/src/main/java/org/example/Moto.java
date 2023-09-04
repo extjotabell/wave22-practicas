@@ -1,4 +1,12 @@
 package org.example;
 
-public class Moto {
+public class Moto extends Vehiculo {
+    public Moto(Double velocidad, Double aceleracion, Integer anguloDeGiro, String patente) {
+        super(velocidad, aceleracion, anguloDeGiro, patente, 300.0, 2);
+    }
+
+    @Override
+    public String toString() {
+        return "Moto{} " + super.toString();
+    }
 }
