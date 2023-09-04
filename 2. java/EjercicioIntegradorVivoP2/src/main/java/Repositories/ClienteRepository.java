@@ -1,4 +1,4 @@
-package Repositorios;
+package Repositories;
 
 public interface ClienteRepository {
 
