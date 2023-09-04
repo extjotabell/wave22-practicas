@@ -16,6 +16,7 @@ public class ClienteInt implements crud<Cliente> {
 
     @Override
     public void mostrar() {
+
         for (Cliente cli: listaClientes) {
             System.out.printf(cli.toString());
         }
@@ -40,10 +41,10 @@ public class ClienteInt implements crud<Cliente> {
         boolean band= true;
 
         for (Cliente cli: listaClientes){
-            if (Objects.equals(cli.getDni(),id)){
+            if (Objects.equals(cli.getDni(),id)) {
                 System.out.printf(cli.toString());
                 band=false;
-                break;
+                return Optional.of(cli);
             }if(band){
                 System.out.print("No se encontro el cliente");
             }
@@ -52,8 +53,8 @@ public class ClienteInt implements crud<Cliente> {
     }
 
     @Override
-    public List<Cliente> traerTodo(String id) {
-        return null;
+    public List<Cliente> traerTodo() {
+        return listaClientes;
     }
 
 

@@ -9,5 +9,5 @@ public interface crud <T>{
     public void mostrar();
     public void eliminar(String id);
     public Optional<T> buscar(String id);
-    public List<T> traerTodo(String id);
+    public List<T> traerTodo();
 }

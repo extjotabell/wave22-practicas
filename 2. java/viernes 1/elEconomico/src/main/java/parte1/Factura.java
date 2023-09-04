@@ -2,19 +2,22 @@ package parte1;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Factura {
 
     private Cliente cliente;
 
-    private ArrayList<Item> listaItem;
+    private List<Item> listaItem;
 
     private double total;
 
-    public Factura(Cliente cliente, ArrayList<Item> listaItem, double total) {
+    public Factura(Cliente cliente, List<Item> listaItem) {
         this.cliente = cliente;
         this.listaItem = listaItem;
-        this.total = total;
+    }
+
+    public Factura() {
     }
 
     public Cliente getCliente() {
@@ -25,7 +28,7 @@ public class Factura {
         this.cliente = cliente;
     }
 
-    public ArrayList<Item> getListaItem() {
+    public List<Item> getListaItem() {
         return listaItem;
     }
 
@@ -39,5 +42,21 @@ public class Factura {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    @Override
+    public String toString() {
+        return "Factura{" +
+                "cliente=" + cliente +
+                ", listaItem=" + listaItem +
+                ", total=" + total +
+                '}';
+    }
+
+    public double calcularTotal(){
+        double cantidades;
+        cantidades = listaItem.stream().mapToDouble(Item::getCantidadComprada).sum();
+        this.total = (listaItem.stream().mapToDouble(Item::getCosto).sum())*cantidades;
+        return total;
     }
 }
