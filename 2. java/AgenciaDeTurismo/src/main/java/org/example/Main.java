@@ -1,9 +1,8 @@
 package org.example;
 
-import org.example.models.Cliente;
-import org.example.models.Localizador;
-import org.example.models.RepositorioClientes;
-import org.example.models.RepositorioLocalizadores;
+import org.example.models.*;
+
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -24,5 +23,11 @@ public class Main {
 
         repoLocalizadores.getListaDeLocalizadores().forEach(System.out::println);
 
+        ConsultaLocalizadores query = new ConsultaLocalizadores(repoLocalizadores);
+        System.out.println("Cantidad de localizadores y reservas: " + query.getCantidad());
+        System.out.println("--Cantidad de reservas por tipo--");
+        query.ObtenerCantidadDeReservasClasificadas().forEach((key, value) -> System.out.println(key + ": " + value));
+        System.out.println("Total de ventas: $" + query.totalDeVentas());
+        System.out.println("Promedio de ventas: $" + query.promedioDeVentas());
     }
 }
