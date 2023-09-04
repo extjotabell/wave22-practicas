@@ -13,36 +13,48 @@ public class Main {
         listaClientes.add(cliente2);
         listaClientes.add(cliente3);
 
-        for (Cliente cliente: listaClientes) {
+        for (Cliente cliente : listaClientes) {
             System.out.println(cliente.toString());
         }
-        //System.out.println("Eliminamos el primer cliente");
-        //listaClientes.remove(0);
-        //for (Cliente cliente: listaClientes) {
-          //  System.out.println(cliente.toString());
-        //}
-        encontrarClientePorDNI(listaClientes);
+
+        crearFactura(listaClientes);
+    }
+
+    public static void crearFactura(List<Cliente> listaClientes) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el DNI del cliente para la factura: ");
+        String dniBuscado = scanner.nextLine();
+
+        Cliente clienteFactura = encontrarClientePorDNI(listaClientes, dniBuscado);
+
+        if (clienteFactura == null) {
+            System.out.println("El cliente no existe");
+            return;
+        }
+
+        Factura factura = new Factura(clienteFactura);
+
+        Producto producto1 = new Producto("P001", "Camiseta", 50, 19.99);
+        Producto producto2 = new Producto("P002", "Pantalón", 30, 29.99);
+
+        factura.agregarProducto(producto1);
+        factura.agregarProducto(producto2);
+
+        double totalFactura = factura.getPrecioTotal();
+        System.out.println("El total de la factura es: " + totalFactura);
 
     }
 
-    public static void encontrarClientePorDNI(List<Cliente> listaClientes) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el DNI del cliente ");
-        String dniBuscado = scanner.nextLine();
-
-        boolean clienteEncontrado = false;
+    public static Cliente encontrarClientePorDNI(List<Cliente> listaClientes, String dniBuscado) {
+        Cliente clienteEncontrado = null;
         if (!dniBuscado.isEmpty()) {
-            for (Cliente cliente: listaClientes) {
-                if (cliente.DNI.equals(dniBuscado)){
-                    System.out.println(cliente.toString());
-                    clienteEncontrado = true;
+            for (Cliente cliente : listaClientes) {
+                if (cliente.getDNI().equals(dniBuscado)) {
+                    clienteEncontrado = cliente;
                     break;
                 }
             }
         }
-        if (!clienteEncontrado) {
-            System.out.println("Cliente no encontrado");
-        }
-
+        return clienteEncontrado;
     }
 }

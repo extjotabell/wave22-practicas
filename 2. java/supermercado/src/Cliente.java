@@ -1,7 +1,7 @@
 public class Cliente {
-    String DNI;
-    String nombre;
-    String apellido;
+    private String DNI;
+    private String nombre;
+    private String apellido;
 
     public Cliente(String DNI, String nombre, String apellido) {
         this.DNI = DNI;
@@ -16,5 +16,9 @@ public class Cliente {
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 '}';
+    }
+
+    public String getDNI() {
+        return DNI;
     }
 }
