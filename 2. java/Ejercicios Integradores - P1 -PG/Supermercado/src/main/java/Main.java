@@ -28,9 +28,9 @@ public class Main {
         System.out.println("Ingrese el dni del cliente que desea buscar: ");
         int dni = input.nextInt();
 
-        if(clientes.containsKey(dni)){
+        if (clientes.containsKey(dni)) {
             System.out.println(clientes.get(dni));
-        }else{
+        } else {
             System.out.println("El cliente no se encuentra en la BD");
         }
     }

@@ -32,9 +32,6 @@ public class Factura {
         this.totalCompra = totalCompra;
     }
 
-    public Factura(Cliente cliente) {
-        this.cliente = cliente;
-    }
 
     public Factura(Cliente cliente, List<Item> items, double totalCompra) {
         this.cliente = cliente;
