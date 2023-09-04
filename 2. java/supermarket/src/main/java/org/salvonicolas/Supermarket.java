@@ -7,57 +7,59 @@ import java.util.stream.Collectors;
 
 public class Supermarket {
     public static void main(String[] args) {
-        List<Customer> customers = new ArrayList<>();
+        CustomerRepository customers = new CustomerRepository();
 
-        addCustomer(customers, new Customer("42958432", "Aquiles", "Bailoyo"));
-        addCustomer(customers, new Customer("96234567", "Cosme", "Fulanito"));
-        addCustomer(customers, new Customer("25768239", "Esteban", "Quito"));
+        Customer customer1 = new Customer("42958432", "Aquiles", "Bailoyo");
+        Customer customer2 = new Customer("96234567", "Cosme", "Fulanito");
+        Customer customer3 = new Customer("25768239", "Esteban", "Quito");
+
+        customers.add(customer1);
+        customers.add(customer2);
+        customers.add(customer3);
 
         System.out.println("Consultando clientes...");
-        printCustomers(customers);
+        customers.print();
 
         System.out.println("--------------");
 
         System.out.println("Quitando un cliente...");
-        customers.remove(0);
+        customers.removeByDNI("42958432");
         System.out.println("Consultando clientes...");
-        printCustomers(customers);
+        customers.print();
 
 
         System.out.println("--------------");
 
         System.out.println("Buscando cliente...");
-        searchCustomer(customers, "96234567");
+        customers.searchCustomer("96234567");
         System.out.println("Buscando cliente...");
-        searchCustomer(customers, "Inexistente 🥹");
+        customers.searchCustomer("Inexistente 🥹");
 
         System.out.println("--------------");
         Scanner scanner = new Scanner(System.in);
         System.out.println("Digite el DNI del cliente a buscar:");
         String dni = scanner.nextLine().trim().replaceAll("[.,\\-_]", "");
-        searchCustomer(customers, dni);
-    }
+        customers.searchCustomer(dni);
 
-    private static Customer findCustomerByDni(List<Customer> customers, String dni) {
-        return customers.stream().filter(customer -> customer.getDni().equals(dni)).findFirst().orElse(null);
-    }
+        System.out.println("-------------- Parte II --------------");
+        InvoiceRepository invoices = new InvoiceRepository();
 
-    private static void searchCustomer(List<Customer> customers, String dni) {
-        Customer customerByDni = findCustomerByDni(customers, dni);
-        if (customerByDni != null) {
-            System.out.println(customerByDni);
-        } else {
-            System.out.println("No se encontró el usuario con el DNI Nº" + dni);
-        }
-    }
+        Item bread = new Item(1, "Pan", 100);
+        Item butter = new Item(2, "Manteca", 300);
+        Item jam = new Item(3, "Mermelada", 200);
 
-    private static void printCustomers(List<Customer> customers) {
-        for (Customer customer : customers) {
-            System.out.println(customer);
-        }
-    }
+        Invoice invoice1 = new Invoice(customers.get(0));
+        invoice1.addItem(bread, 5);
+        invoice1.addItem(butter, 1);
+        invoice1.addItem(jam, 1);
 
-    private static void addCustomer(List<Customer> customers, Customer customer) {
-        customers.add(customer);
+        invoice1.printTotal();
+
+        System.out.println("--------------");
+
+        invoices.add(invoice1);
+
+        invoices.print();
+
     }
 }
