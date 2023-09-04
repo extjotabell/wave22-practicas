@@ -37,18 +37,19 @@ public class AgenciaViaje implements LocalizadorRepository {
 
         for(Localizador localizador : this.localizador){
             final double[] descuento = {0};
-            final double[] precioFinal = {0};
+            final double[] precioAcumulado = {0};
             List<PaqueteTuristico> paquete = localizador.getPaqueteTuristico();
-            paquete.stream().map(x -> x).forEach(
+            paquete.forEach(
                     paqueteTuristico ->
                     {
-                        descuento[0] = 0;
-                        descuento[0] += paquete.size() >= 2  ||!paqueteTuristico.isTransporte() && paqueteTuristico.getNroBoleto().size() >= 2   ? 5 : 0;
+                        descuento[0] += 0;
+                        descuento[0] += !paqueteTuristico.isTransporte() && paqueteTuristico.getNroBoleto().size() >= 2 ? 5 : 0;
                         descuento[0] += paqueteTuristico.isTransporte() ? 10 : 0;
-                        precioFinal[0] = paqueteTuristico.getPrecio() - (paqueteTuristico.getPrecio() * descuento[0]/ 100);
+                        precioAcumulado[0] += paqueteTuristico.getPrecio();
                     }
             );
-            System.out.println(localizador.getPersona().toString() + ": Precio final " + precioFinal[0] + " - Descuento: " + descuento[0] + " - Informacion del paquete: " + paquete.toString());
+            descuento[0] += paquete.size() >= 2 ? 5 : 0;
+            System.out.println(localizador.getPersona().toString() + ": Precio final " + (precioAcumulado[0] -  (precioAcumulado[0] * descuento[0]/ 100)) + " - Descuento: " + descuento[0] + " - Informacion del paquete: " + paquete.toString());
         }
     }
 
