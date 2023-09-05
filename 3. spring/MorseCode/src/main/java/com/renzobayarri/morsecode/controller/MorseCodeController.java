@@ -16,4 +16,9 @@ public class MorseCodeController {
     public String decode(@RequestParam String morseCode) {
         return decoder.decode(morseCode);
     }
+
+    @GetMapping("/encode")
+    public String encode(@RequestParam String phrase) {
+        return decoder.encode(phrase);
+    }
 }

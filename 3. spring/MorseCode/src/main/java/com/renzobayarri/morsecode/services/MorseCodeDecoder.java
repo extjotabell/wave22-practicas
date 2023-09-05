@@ -9,6 +9,7 @@ import java.util.Map;
 public class MorseCodeDecoder {
 
     private Map<String, String> map;
+    private Map<String, String> reversedMap;
 
     public MorseCodeDecoder() {
         this.map = new HashMap<>();
@@ -52,6 +53,11 @@ public class MorseCodeDecoder {
         this.map.put("-.-.--","!");
         this.map.put(".-.-.-",".");
         this.map.put("--..--",",");
+
+        this.reversedMap = new HashMap<>();
+        this.map.forEach((key, value)->{
+            this.reversedMap.put(value, key);
+        });
     }
 
     public String decode(String morseCode){
@@ -63,6 +69,20 @@ public class MorseCodeDecoder {
                 sb.append(map.get(codigo));
             }
             sb.append(" ");
+        }
+        return sb.toString();
+    }
+
+    public String encode(String phrase){
+        StringBuilder sb = new StringBuilder();
+        String[] palabras = phrase.split(" ");
+        for(String palabra : palabras){
+            String[] characters = palabra.split("");
+            for(String character : characters){
+                sb.append(reversedMap.get(character));
+                sb.append(" ");
+            }
+            sb.append("  ");
         }
         return sb.toString();
     }
