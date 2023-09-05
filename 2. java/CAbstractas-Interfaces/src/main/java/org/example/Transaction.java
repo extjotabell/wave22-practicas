@@ -1,6 +1,6 @@
 package org.example;
 
-public interface Transaccion {
-    boolean transaccionOk();
-    boolean transaccionNoOk();
+public interface Transaction {
+    void transactionOk();
+    void transactionNotOk();
 }
