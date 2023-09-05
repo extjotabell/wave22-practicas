@@ -20,4 +20,5 @@ public class Main {
     public static void comerAnimal (Animal animal){
         animal.comer();
     }
+
 }
