@@ -4,12 +4,12 @@ import java.util.List;
 public class Factura {
     private Cliente cliente;
     private List<Item> items = new ArrayList<>();
-    private int total;
+    private double total;
 
-    public Factura(Cliente cliente, List<Item> items, int total) {
+    public Factura(Cliente cliente, List<Item> items) {
         this.cliente = cliente;
         this.items = items;
-        this.total = total;
+        calcularTotal();
     }
 
     public Cliente getCliente() {
@@ -28,11 +28,11 @@ public class Factura {
         this.items = items;
     }
 
-    public int getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 
@@ -43,5 +43,9 @@ public class Factura {
                 ", items=" + items +
                 ", total=" + total +
                 '}';
+    }
+
+    private void calcularTotal(){
+        total = items.stream().mapToDouble(x-> x.getCosto()).sum();
     }
 }

@@ -40,5 +40,19 @@ public class Main {
         if(bandera == false){
             System.out.println("No se encontro al cliente");
         }
+
+        List<Item> items = new ArrayList<>();
+        items.add(new Item(1,"cafe",1,100));
+        items.add(new Item(2,"azucar", 2, 150));
+        items.add(new Item(3,"te", 1, 50));
+        Factura factura1 = new Factura(cliente1,items);
+        System.out.println(factura1);
+
+        RepositorioCliente repositorio = new RepositorioCliente();
+
+        repositorio.alta(cliente1);
+        repositorio.consulta(35983934);
+        repositorio.baja(cliente1);
+        repositorio.consulta(35983934);
     }
 }
