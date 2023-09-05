@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.List;
+
 public class Cliente {
 
     private String dni;
@@ -45,4 +47,5 @@ public class Cliente {
                 ", apellido='" + apellido + '\'' +
                 '}';
     }
+
 }

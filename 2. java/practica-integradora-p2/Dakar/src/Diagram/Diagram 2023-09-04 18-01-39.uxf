@@ -1,0 +1,39 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>340</x><y>160</y><w>220</w><h>140</h></coordinates><panel_attributes>&lt;&lt;Vehiculo&gt;&gt;
+--
+-double: velocidad
+-double aceleracion
+-double anguloGiro
+-String patente
+-double peso
+-int ruedas
+--
+public double calcularRendimiento();
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>760</x><y>170</y><w>460</w><h>180</h></coordinates><panel_attributes>Carrera
+--
+-double distancia
+-double premioDolares
+-String nombre
+-int cantidadVehiculosPermitidos
+-List&lt;Vehiculo&gt; listaDeVehiculos
+--
+public void darDeAltaAuto(velocidad,aceleracion,AnguloDeGiro,patente);
+public void darDeAltaMoto(velocidad,aceleracion,AnguloDeGiro,patente);
+public void eliminarVehiculo(vehículo);
+public void eliminarVehiculoConPatente(String unaPatente);
+
+
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>240</x><y>400</y><w>210</w><h>60</h></coordinates><panel_attributes>Auto
+--
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>370</x><y>480</y><w>210</w><h>60</h></coordinates><panel_attributes>Moto
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>290</y><w>130</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>110;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>470</x><y>290</y><w>30</w><h>210</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;190</additional_attributes></element><element><id>Relation</id><coordinates><x>550</x><y>220</y><w>230</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;210;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>810</x><y>610</y><w>380</w><h>80</h></coordinates><panel_attributes>&lt;&lt;Socorrista&gt;&gt;
+--
+--
+ public abstract void socorrer(T vehiculo);
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>860</x><y>470</y><w>100</w><h>30</h></coordinates><panel_attributes>SocorristaMoto
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1010</x><y>470</y><w>100</w><h>30</h></coordinates><panel_attributes>SocorristaAuto
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>900</x><y>490</y><w>110</w><h>140</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;120;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1000</x><y>490</y><w>80</w><h>140</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;120;60;10</additional_attributes></element><element><id>Relation</id><coordinates><x>890</x><y>340</y><w>100</w><h>150</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>80;10;10;130</additional_attributes></element><element><id>Relation</id><coordinates><x>1000</x><y>340</y><w>80</w><h>150</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;10;60;130</additional_attributes></element></diagram>
