@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class Producto {
 
     private String nombre;
@@ -25,4 +27,5 @@ public class Producto {
                 ", precio=" + precio +
                 '}';
     }
+
 }

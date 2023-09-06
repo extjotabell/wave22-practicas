@@ -1,9 +1,10 @@
 package com.miprimerproyecto.pruebaspring.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.miprimerproyecto.pruebaspring.model.Persona;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
 
 @RestController
 public class HolaRestController {
@@ -28,5 +29,17 @@ public class HolaRestController {
             for (; number >= numbersToCompare[i]; number -= numbersToCompare[i])
                 romanNumber.append(romanNumbers[i]);
         return romanNumber.toString();
+    }
+
+    @PostMapping("/save")
+    public Persona save(@RequestBody Persona p){
+        System.out.println(p);
+        p.setEdad(24);
+        HashMap<String,String> diccionario = new HashMap<>();
+        diccionario.put("code1","hello");
+        diccionario.put("code2","hello2");
+        p.setDic(diccionario);
+        p.setList(List.of("Hola Lista", "Hola Lista2"));
+        return p;
     }
 }

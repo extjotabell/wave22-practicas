@@ -3,6 +3,8 @@ package model;
 import model.Producto;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Reserva {
 
@@ -11,6 +13,10 @@ public class Reserva {
     public Reserva() {
         this.total = 0.0;
         this.productos = new ArrayList<>();
+    }
+
+    public ArrayList<Producto> getProductos() {
+        return productos;
     }
 
     public double getTotal() {
@@ -43,4 +49,6 @@ public class Reserva {
                 ", total=" + total +
                 '}';
     }
+
+
 }

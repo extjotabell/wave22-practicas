@@ -2,13 +2,12 @@ import model.Cliente;
 import model.Localizador;
 import model.Producto;
 import model.Reserva;
+import repository.impl.LocalizadorImpl;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        // Crear un repositorio de clientes y localizadores
-        Repositorio repositorio = new Repositorio();
 
 
         // Generar un localizador y cliente
@@ -33,11 +32,12 @@ public class Main {
         localizadores.agregarReserva(reserva1);
         localizadores.agregarReserva(reserva2);
 
+        LocalizadorImpl localizador = new LocalizadorImpl();
+        localizador.save(localizadores);
 
-        System.out.println(localizadores);
+        localizador.mostrarPantalla();
 
-        // Obtener las reservas del cliente1
-        //List<model.Reserva> reservasCliente1 = localizadores.obtenerReservasCliente(cliente1.getDni());
+
 
         // Calcular el total de las reservas del cliente1
        // double totalCliente1 = reservasCliente1.stream()
@@ -64,22 +64,4 @@ public class Main {
         System.out.println("Total de las reservas de Cliente1: " + totalCliente1);
         System.out.println("Descuento aplicado: " + descuento); */
     }
-
-    /*
-    public static boolean contienePaqueteCompleto(List<model.Reserva> reservas) {
-        List<String> productos = reservas.stream()
-                .flatMap(reserva -> reserva.getProductos().stream())
-                .distinct()
-                .collect(Collectors.toList());
-
-        return productos.contains("Hotel") && productos.contains("Comida") &&
-                productos.contains("Boletos de Viaje") && productos.contains("Transporte");
-    }
-
-    public static double calcularDescuentoHotelBoletos(List<model.Reserva> reservas) {
-        return reservas.stream()
-                .filter(reserva -> reserva.getProductos().contains("Hotel") || reserva.getProductos().contains("Boletos de Viaje"))
-                .mapToDouble(model.Reserva::getTotal)
-                .sum() * 0.05;
-    } */
 }
