@@ -1,9 +1,9 @@
-package org.example.Clients;
+package org.example.Ejercicio1.Clients;
 
-import org.example.CashExtraction;
-import org.example.CheckSavings;
-import org.example.ServicePayment;
-import org.example.Transaction;
+import org.example.Ejercicio1.CashExtraction;
+import org.example.Ejercicio1.CheckSavings;
+import org.example.Ejercicio1.ServicePayment;
+import org.example.Ejercicio1.Transaction;
 
 public class Basic extends Client{
     public Basic(String name, String account, double balance) {

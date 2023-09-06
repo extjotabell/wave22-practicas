@@ -1,9 +1,8 @@
-package org.example.Clients;
+package org.example.Ejercicio1.Clients;
 
-import org.example.CashExtraction;
-import org.example.CheckSavings;
-import org.example.ServicePayment;
-import org.example.Transaction;
+import org.example.Ejercicio1.CashExtraction;
+import org.example.Ejercicio1.CheckSavings;
+import org.example.Ejercicio1.Transaction;
 
 public class Cobrador extends Client{
     public Cobrador(String name, String account, double balance) {

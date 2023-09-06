@@ -1,6 +1,8 @@
-package org.example.Clients;
+package org.example.Ejercicio1.Clients;
 
-import org.example.*;
+import org.example.Ejercicio1.Deposit;
+import org.example.Ejercicio1.Transaction;
+import org.example.Ejercicio1.Transference;
 
 public class Ejecutivo extends Client{
 

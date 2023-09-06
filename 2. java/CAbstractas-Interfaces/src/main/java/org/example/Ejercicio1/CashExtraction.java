@@ -1,6 +1,6 @@
-package org.example;
+package org.example.Ejercicio1;
 
-import org.example.Clients.Client;
+import org.example.Ejercicio1.Clients.Client;
 
 public class CashExtraction implements Transaction{
     private Client extractor;

@@ -1,6 +1,4 @@
-package org.example;
-
-import org.example.Clients.Client;
+package org.example.Ejercicio1;
 
 public class CheckSavings implements Transaction{
 

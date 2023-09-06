@@ -1,6 +1,6 @@
-package org.example.Clients;
+package org.example.Ejercicio1.Clients;
 
-import org.example.Transaction;
+import org.example.Ejercicio1.Transaction;
 
 public abstract class Client {
     private String name;
