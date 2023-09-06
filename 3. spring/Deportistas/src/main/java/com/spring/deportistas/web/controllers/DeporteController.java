@@ -23,17 +23,15 @@ public class DeporteController {
     }
 
     @GetMapping("/findSports")
-        public List<Deporte> getSportsPersons() {
+        public List<DeporteDTO> getSportsPersons() {
             return deporteService.findSports();
     }
 
 
     @GetMapping("/findSport/{name}")
     ResponseEntity<DeporteDTO> getSportByName(@PathVariable String name) {
-        DeporteDTO deporteDTO = new DeporteDTO();
         Deporte deportePorNombre = deporteService.findSportByName(name);
-        deporteDTO.setNombre(deportePorNombre.getNombre());
-        deporteDTO.setNivel(deportePorNombre.getNivel());
+        DeporteDTO deporteDTO = new DeporteDTO(deportePorNombre.getNombre(), deportePorNombre.getNivel());
         return new ResponseEntity<>(deporteDTO, HttpStatus.OK);
     }
 }

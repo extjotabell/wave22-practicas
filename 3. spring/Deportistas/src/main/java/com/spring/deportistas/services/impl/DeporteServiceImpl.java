@@ -3,12 +3,14 @@ package com.spring.deportistas.services.impl;
 import com.spring.deportistas.entities.Deporte;
 import com.spring.deportistas.entities.Nivel;
 import com.spring.deportistas.services.DeporteService;
+import com.spring.deportistas.web.dto.DeporteDTO;
+import com.spring.deportistas.web.dto.PersonaDTO;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class DeporteServiceImpl implements DeporteService {
@@ -24,8 +26,14 @@ public class DeporteServiceImpl implements DeporteService {
     }
 
     @Override
-    public List<Deporte> findSports() {
-        return deportes;
+    public List<DeporteDTO> findSports() {
+        List<DeporteDTO> deportesDto;
+        deportesDto = deportes.stream().map(deporte -> {
+            String nombre = deporte.getNombre();
+            String nivel = String.valueOf(deporte.getNivel());
+            return new DeporteDTO(nombre, deporte.getNivel());
+        }).collect(Collectors.toList());
+        return deportesDto;
     }
 
     @Override
