@@ -1,5 +1,7 @@
-import java.util.ArrayList;
-import java.util.List;
+import model.Cliente;
+import model.Localizador;
+import model.Producto;
+import model.Reserva;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -35,11 +37,11 @@ public class Main {
         System.out.println(localizadores);
 
         // Obtener las reservas del cliente1
-        //List<Reserva> reservasCliente1 = localizadores.obtenerReservasCliente(cliente1.getDni());
+        //List<model.Reserva> reservasCliente1 = localizadores.obtenerReservasCliente(cliente1.getDni());
 
         // Calcular el total de las reservas del cliente1
        // double totalCliente1 = reservasCliente1.stream()
-         //       .mapToDouble(Reserva::getTotal)
+         //       .mapToDouble(model.Reserva::getTotal)
            //     .sum();
 /*
         // Aplicar descuentos según las reglas
@@ -64,7 +66,7 @@ public class Main {
     }
 
     /*
-    public static boolean contienePaqueteCompleto(List<Reserva> reservas) {
+    public static boolean contienePaqueteCompleto(List<model.Reserva> reservas) {
         List<String> productos = reservas.stream()
                 .flatMap(reserva -> reserva.getProductos().stream())
                 .distinct()
@@ -74,10 +76,10 @@ public class Main {
                 productos.contains("Boletos de Viaje") && productos.contains("Transporte");
     }
 
-    public static double calcularDescuentoHotelBoletos(List<Reserva> reservas) {
+    public static double calcularDescuentoHotelBoletos(List<model.Reserva> reservas) {
         return reservas.stream()
                 .filter(reserva -> reserva.getProductos().contains("Hotel") || reserva.getProductos().contains("Boletos de Viaje"))
-                .mapToDouble(Reserva::getTotal)
+                .mapToDouble(model.Reserva::getTotal)
                 .sum() * 0.05;
     } */
 }

@@ -1,6 +1,7 @@
+import model.Localizador;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Repositorio {
 
@@ -15,7 +16,7 @@ public class Repositorio {
         localizadores.add(localizador);
     }
 
-    /*public List<Localizador> obtenerReservasCliente(String cliente) {
+    /*public List<model.Localizador> obtenerReservasCliente(String cliente) {
         return localizadores.stream()
                 .filter(r -> r.getCliente().equals(cliente))
                 .collect(Collectors.toList());

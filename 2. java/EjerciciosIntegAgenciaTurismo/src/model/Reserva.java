@@ -1,5 +1,8 @@
+package model;
+
+import model.Producto;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class Reserva {
 
