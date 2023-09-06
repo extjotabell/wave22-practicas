@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface InterfaceCRUD<T> {
 
-    public void save(T objeto);
-
-    public List<T> getAll();
+    void save(T objeto);
 
 }
