@@ -1,4 +1,4 @@
-package com.spring.deportistas.dao.entities;
+package com.spring.deportistas.entities;
 
 public enum Nivel {
     FACIL, INTEMERDIO, DIFICIL;
