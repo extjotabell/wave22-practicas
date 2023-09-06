@@ -2,13 +2,16 @@ package supermercado;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
-public interface FacturaCRUD {
-    void alta(Factura factura, Map<Integer, Factura> listaFacturas, List<Cliente> listaClientes, List<Item> listaItems);
+public interface InterfaceCRUD<T> {
+    void alta(T objeto);
 
-    void baja(Map<Integer, Factura> listaFacturas, Integer id);
+    void baja(Integer id);
 
-    void modificacion(Map<Integer, Factura> listaFacturas, Factura factura);
+    void modificacion(T objeto);
 
-    Factura consulta(Map<Integer, Factura> listaFacturas, Integer id);
+    Optional<T> consulta(Integer id);
+
+    List<T> obtenerTodos();
 }

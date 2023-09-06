@@ -1,22 +1,23 @@
 package supermercado;
 
 public class Item {
-    private String codigo, nombre;
+    private Integer codigo;
+    private String nombre;
     private int cantidadComprada;
     private double costoUnitario;
 
-    public Item(String codigo, String nombre, int cantidadComprada, double costoUnitario) {
+    public Item(Integer codigo, String nombre, int cantidadComprada, double costoUnitario) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.cantidadComprada = cantidadComprada;
         this.costoUnitario = costoUnitario;
     }
 
-    public String getCodigo() {
+    public Integer getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
 
