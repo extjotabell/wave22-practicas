@@ -4,11 +4,9 @@ public abstract class Prototipo {
 
     protected int valorActual;
 
-    public abstract void siguienteValor();
+    public abstract int siguienteValor();
 
     public abstract void reiniciar();
-
-    public abstract void valorInicial(int i);
 
     public int getValorActual() {
         return valorActual;
