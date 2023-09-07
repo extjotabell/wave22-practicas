@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Luke Skywalker",
+    "height": 172,
+    "mass": 73,
+    "hairColor": "Blond",
+    "skinColor": "Fair",
+    "eyeColor": "Blue",
+    "birthYear": "19 BBY",
+    "gender": "Male",
+    "homeWorld":"Tatooine",
+    "species": "Human"
+  },
+  {
+    "name": "Darth Vader",
+    "height": 203,
+    "mass": 136,
+    "hairColor": "None",
+    "skinColor": "Caucasian",
+    "eyeColor": "Yellow",
+    "birthYear": "41 BBY",
+    "gender": "Male",
+    "homeWorld":"Tatooine",
+    "species": "Human"
+  },
+  {
+    "name": "Darth Maul",
+    "height": 175,
+    "mass": 80,
+    "hairColor": "None",
+    "skinColor": "Red",
+    "eyeColor": "Yellow",
+    "birthYear": "54 BBY",
+    "gender": "Male",
+    "homeWorld":"Dathomir",
+    "species": "Dathomirian Zabrak"
+  }
+]
