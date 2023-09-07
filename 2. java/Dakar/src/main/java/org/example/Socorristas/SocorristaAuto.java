@@ -1,2 +1,6 @@
-package org.example.Socorristas;public class SocorristaAuto {
+package org.example.Socorristas;
+
+import org.example.Vehiculos.Auto;
+
+public class SocorristaAuto extends VehiculoSocorrista<Auto>{
 }
