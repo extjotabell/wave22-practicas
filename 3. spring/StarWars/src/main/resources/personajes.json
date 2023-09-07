@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Darth Vader",
+    "height": 1.9,
+    "mass": 120,
+    "hairColor": "N/A",
+    "skinColor": "White",
+    "eyeColor": "Brown",
+    "birthYear": "41",
+    "gender": "Male",
+    "homeworld": "Tatooine",
+    "species": "Human"
+  },
+  {
+    "name": "Luke Skywalker",
+    "height": 1.7,
+    "mass": 80,
+    "hairColor": "Brown",
+    "skinColor": "White",
+    "eyeColor": "Brown",
+    "birthYear": "19",
+    "gender": "Male",
+    "homeworld": "Tatooine",
+    "species": "Human"
+  },
+  {
+    "name": "Darth Maul",
+    "height": 1.8,
+    "mass": 90,
+    "hairColor": "N/A",
+    "skinColor": "Red and Black",
+    "eyeColor": "Brown",
+    "birthYear": "61",
+    "gender": "Male",
+    "homeworld": "Lotho Minor",
+    "species": "Darthomirian Zabrak"
+  },
+  {
+    "name": "Yoda",
+    "height": 0.66,
+    "mass": 40,
+    "hairColor": "White",
+    "skinColor": "Green",
+    "eyeColor": "Green",
+    "birthYear": "900",
+    "gender": "Male",
+    "homeworld": "Dagobah",
+    "species": "Yoda"
+  },
+  {
+    "name": "Baby Yoda",
+    "height": 0.30,
+    "mass": 20,
+    "hairColor": "N/A",
+    "skinColor": "Green",
+    "eyeColor": "Green",
+    "birthYear": "50",
+    "gender": "Male",
+    "homeworld": "Dagobah",
+    "species": "Yoda"
+  }
+]
