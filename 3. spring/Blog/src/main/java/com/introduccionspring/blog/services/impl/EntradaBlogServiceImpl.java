@@ -26,7 +26,7 @@ public class EntradaBlogServiceImpl implements EntradaBlogService {
     public EntradaBlog getBlogById(Long id) {
         EntradaBlog entradaBlogEncontrada = entradaBlogRepository.getById(id);
         if (entradaBlogEncontrada == null) {
-            throw new EntradaBlogNotFoundException();
+            throw new EntradaBlogNotFoundException(id);
         }
         return entradaBlogEncontrada;
     }
@@ -38,7 +38,7 @@ public class EntradaBlogServiceImpl implements EntradaBlogService {
     private void ensureUniqueId(Long id) {
         for (EntradaBlog e : getAllBlogs()) {
             if(Objects.equals(e.getId(), id)) {
-                throw new IdAlreadyTakenException();
+                throw new IdAlreadyTakenException(id);
             }
         }
     }

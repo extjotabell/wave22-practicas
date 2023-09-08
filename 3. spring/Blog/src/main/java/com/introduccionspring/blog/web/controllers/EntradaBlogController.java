@@ -20,10 +20,10 @@ public class EntradaBlogController {
     private final EntradaBlogMapper  entradaBlogMapper;
 
     @PostMapping("/blog")
-    ResponseEntity<EntradaBlogDTO> createEntradaBlog(@RequestBody EntradaBlogDTO entradaBlogDTO) {
+    ResponseEntity<String> createEntradaBlog(@RequestBody EntradaBlogDTO entradaBlogDTO) {
         EntradaBlog entradaBlog = entradaBlogMapper.toEntity(entradaBlogDTO);
         entradaBlogService.addBlog(entradaBlog);
-        return ResponseEntity.ok(entradaBlogDTO);
+        return ResponseEntity.ok("El blog se ha creado exitosamente " + entradaBlogDTO.getId());
     }
 
     @GetMapping("blog/{id}")
