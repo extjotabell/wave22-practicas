@@ -1,0 +1,19 @@
+[
+  {
+    "name": "Ensalada Mediterránea",
+    "ingredienteMap": [
+      {
+        {
+          "name": "Aceitunas verdes",
+          "calories": 47
+        } : 40
+      },
+      {
+        {
+          "name": "Tomate",
+          "calories": 18
+        } : 60,
+      },
+    ]
+  }
+]
