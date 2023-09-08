@@ -1,0 +1,161 @@
+[
+  {
+    "name": "Ensalada Mediterránea",
+    "peso": 200,
+    "ingredientes": [
+      {
+        "name": "Aceitunas verdes",
+        "calories": 47
+      },
+      {
+        "name": "Tomate",
+        "calories": 18
+      },
+      {
+        "name": "Queso feta",
+        "calories": 264
+      },
+      {
+        "name": "Pepino",
+        "calories": 16
+      },
+      {
+        "name": "Aceite de oliva",
+        "calories": 119
+      }
+    ]
+  },
+  {
+    "name": "Sopa de Lentejas",
+    "peso": 300,
+    "ingredientes": [
+      {
+        "name": "Lentejas",
+        "calories": 352
+      },
+      {
+        "name": "Zanahoria",
+        "calories": 41
+      },
+      {
+        "name": "Cebolla",
+        "calories": 40
+      },
+      {
+        "name": "Apio",
+        "calories": 6
+      },
+      {
+        "name": "Caldo de verduras",
+        "calories": 15
+      }
+    ]
+  },
+  {
+    "name": "Pollo a la Parrilla",
+    "peso": 250,
+    "ingredientes": [
+      {
+        "name": "Pechuga de pollo",
+        "calories": 165
+      },
+      {
+        "name": "Limón",
+        "calories": 17
+      },
+      {
+        "name": "Pimienta negra",
+        "calories": 2
+      },
+      {
+        "name": "Aceite de oliva",
+        "calories": 119
+      },
+      {
+        "name": "Sal",
+        "calories": 0
+      }
+    ]
+  },
+
+  {
+    "name": "Pasta Alfredo",
+    "peso": 300,
+    "ingredientes": [
+      {
+        "name": "Fettuccine",
+        "calories": 390
+      },
+      {
+        "name": "Crema de leche",
+        "calories": 822
+      },
+      {
+        "name": "Mantequilla",
+        "calories": 102
+      },
+      {
+        "name": "Parmesano rallado",
+        "calories": 110
+      },
+      {
+        "name": "Sal",
+        "calories": 0
+      }
+    ]
+  },
+
+  {
+    "name": "Tacos de Carne Asada",
+    "peso": 200,
+    "ingredientes": [
+      {
+        "name": "Carne de res",
+        "calories": 250
+      },
+      {
+        "name": "Tortillas de maíz",
+        "calories": 50
+      },
+      {
+        "name": "Cebolla",
+        "calories": 44
+      },
+      {
+        "name": "Cilantro",
+        "calories": 1
+      },
+      {
+        "name": "Limón",
+        "calories": 17
+      }
+    ]
+  },
+
+  {
+    "name": "Sushi de Salmón",
+    "peso": 180,
+    "ingredientes": [
+      {
+        "name": "Salmón fresco",
+        "calories": 367
+      },
+      {
+        "name": "Arroz de sushi",
+        "calories": 206
+      },
+      {
+        "name": "Alga nori",
+        "calories": 10
+      },
+      {
+        "name": "Vinagre de arroz",
+        "calories": 45
+      },
+      {
+        "name": "Salsa de soja",
+        "calories": 8
+      }
+    ]
+  }
+]
