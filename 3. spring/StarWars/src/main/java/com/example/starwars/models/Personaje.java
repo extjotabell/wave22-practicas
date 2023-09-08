@@ -21,4 +21,6 @@ public class Personaje {
    private String homeworld;
    private String sprecies;
 
+
+
 }
