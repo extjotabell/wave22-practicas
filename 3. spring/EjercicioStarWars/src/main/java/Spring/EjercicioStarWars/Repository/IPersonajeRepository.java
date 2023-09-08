@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface IPersonajeRepository {
     List<Personaje> getAllPersonajes();
+    List<Personaje> getPersonajeByNameContains(String name);
 }

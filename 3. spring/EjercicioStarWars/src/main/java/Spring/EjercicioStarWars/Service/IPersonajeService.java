@@ -6,5 +6,5 @@ import Spring.EjercicioStarWars.Model.Personaje;
 import java.util.List;
 
 public interface IPersonajeService {
-    List<PersonajeDto> getPersonajebyWord(String word);
+    List<PersonajeDto> getPersonajeByNameContains(String name);
 }

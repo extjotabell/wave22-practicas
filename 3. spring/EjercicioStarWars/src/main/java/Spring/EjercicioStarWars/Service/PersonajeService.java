@@ -16,9 +16,8 @@ public class PersonajeService implements IPersonajeService {
     @Autowired
     IPersonajeRepository _personajeRepository;
     @Override
-    public List<PersonajeDto> getPersonajebyWord(String word) {
-        List<Personaje>  personajes = _personajeRepository.getAllPersonajes().
-                stream().filter(x -> x.getName().toLowerCase().contains(word)).toList();
+    public List<PersonajeDto> getPersonajeByNameContains(String name) {
+        List<Personaje>  personajes = _personajeRepository.getPersonajeByNameContains(name);
         List<PersonajeDto> personajeDtos = new ArrayList<>();
         for (Personaje personaje: personajes) {
             personajeDtos.add(new PersonajeDto(

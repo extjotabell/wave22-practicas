@@ -17,10 +17,10 @@ public class PersonajeController {
     @Autowired
     PersonajeService _personajeService;
 
-    @GetMapping("/personajesByWord/{word}")
-    public ResponseEntity<List<PersonajeDto>> getPersonajesByWord(@PathVariable String word)
+    @GetMapping("/personajesByName/{name}")
+    public ResponseEntity<List<PersonajeDto>> getPersonajesByName(@PathVariable String name)
     {
-        List<PersonajeDto> personajes = _personajeService.getPersonajebyWord(word);
+        List<PersonajeDto> personajes = _personajeService.getPersonajeByNameContains(name);
         return !personajes.isEmpty() ? new ResponseEntity<>(personajes, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

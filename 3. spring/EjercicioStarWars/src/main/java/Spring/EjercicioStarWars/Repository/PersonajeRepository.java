@@ -1,5 +1,6 @@
 package Spring.EjercicioStarWars.Repository;
 
+import Spring.EjercicioStarWars.Dtos.PersonajeDto;
 import Spring.EjercicioStarWars.Model.Personaje;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -10,6 +11,7 @@ import org.springframework.util.ResourceUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -22,8 +24,16 @@ public class PersonajeRepository implements  IPersonajeRepository{
 
     @Override
     public List<Personaje> getAllPersonajes() {
-        return this.dataBase;
+        return this.loadDataBase();
     }
+
+    @Override
+    public List<Personaje> getPersonajeByNameContains(String name) {
+        List<Personaje>  personajes = this.getAllPersonajes().
+                stream().filter(x -> x.getName().toLowerCase().contains(name)).toList();
+        return personajes;
+    }
+
     private List<Personaje> loadDataBase() {
         File file = null;
 
