@@ -21,4 +21,20 @@ public class Customer {
     public String getDni() {
         return dni;
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj instanceof Customer) {
+            Customer other = (Customer) obj;
+            return other.dni.equals(this.dni);
+        }
+        if (obj instanceof String) {
+            return obj.equals(this.dni);
+        }
+        return false;
+    }
 }
