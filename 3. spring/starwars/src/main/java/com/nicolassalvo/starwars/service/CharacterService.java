@@ -36,7 +36,7 @@ public class CharacterService implements ICharacterService{
     public List<CharacterDTO> getCharactersByName(String name) {
         List<Character> characters = characterRepository.getCharactersByName(name);
         List<CharacterDTO> characterDTOList = new ArrayList<>();
-        
+
         for (Character character : characters) {
             characterDTOList.add(new CharacterDTO(character.getName(), character.getHeight(), character.getMass(), character.getGender(), character.getHomeworld(), character.getSpecies()));
         }
