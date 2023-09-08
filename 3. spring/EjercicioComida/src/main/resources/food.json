@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Pizza",
+    "ingredients": [
+      {
+        "name": "Aceitunas verdes",
+        "calories": 132
+      },
+      {
+        "name": "Queso mozzarella",
+        "calories": 245
+      },
+      {
+        "name": "Salsa de tomate en conserva",
+        "calories": 86
+      },
+      {
+        "name": "Harina de trigo refinada",
+        "calories": 353
+      }
+    ],
+    "grams": 200
+  },
+  {
+    "name": "Tostado",
+    "ingredients": [
+      {
+        "name": "Queso mozzarella",
+        "calories": 245
+      },
+      {
+        "name": "Pan de trigo blanco",
+        "calories": 255
+      },
+      {
+        "name": "Jamón cocido",
+        "calories": 126
+      }
+    ],
+    "grams": 200
+  }
+]
