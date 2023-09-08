@@ -34,16 +34,13 @@ public class CharacterService implements ICharacterService{
 
     @Override
     public List<CharacterDTO> getCharactersByName(String name) {
-        List<Character> characters = characterRepository.getAllCharacters();
+        List<Character> characters = characterRepository.getCharactersByName(name);
         List<CharacterDTO> characterDTOList = new ArrayList<>();
-
-        String lowerCaseName = name.toLowerCase();
-
+        
         for (Character character : characters) {
             characterDTOList.add(new CharacterDTO(character.getName(), character.getHeight(), character.getMass(), character.getGender(), character.getHomeworld(), character.getSpecies()));
         }
 
-        characterDTOList = characterDTOList.stream().filter(character -> character.getName().toLowerCase().contains(lowerCaseName)).collect(Collectors.toList());
         return characterDTOList;
     }
 }

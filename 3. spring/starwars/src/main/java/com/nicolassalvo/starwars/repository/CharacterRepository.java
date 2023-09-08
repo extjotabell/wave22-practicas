@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class CharacterRepository implements ICharacterRepository{
@@ -26,7 +27,8 @@ public class CharacterRepository implements ICharacterRepository{
 
     @Override
     public List<Character> getCharactersByName(String name) {
-        return null;
+        String lowerCaseName = name.toLowerCase();
+        return this.dataBase.stream().filter(character -> character.getName().toLowerCase().contains(lowerCaseName)).collect(Collectors.toList());
     }
 
     private List<Character> loadDataBase() {
