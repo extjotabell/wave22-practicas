@@ -1,16 +1,15 @@
 package com.nicolassalvo.cardealership.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@NoArgsConstructor
 @AllArgsConstructor
-@Getter
-public class CarDTO {
+@NoArgsConstructor
+@Data
+public class FullCarDTO {
     private int id;
     private String brand;
     private String model;
@@ -18,5 +17,6 @@ public class CarDTO {
     private int door;
     private double price;
     private String currency;
+    // private List<Service> services;
     private int countOfOwners;
 }
