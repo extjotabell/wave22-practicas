@@ -46,12 +46,11 @@ public class CarRepositoryImpl implements ICarRepository {
         Car c4 = new Car(4L, "Volkswagen", "Golf", LocalDate.of(2018, 1, 14), 60000, 5, 2200000.00, "AR", services4, 2);
         Car c5 = new Car(5L, "Renault", "Clio", LocalDate.of(2014, 3, 5), 120000, 3, 1500000.00, "AR", services5, 1);
 
-        carsList = Arrays.asList(c1, c2, c3, c4, c5);
+        this.carsList = new ArrayList<>(List.of(c1, c2, c3, c4, c5));
     }
     @Override
-    public Car add(Car car) {
+    public void add(Car car) {
         carsList.add(car);
-        return car;
     }
 
     @Override

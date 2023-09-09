@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface ICarService {
-    Car addCar(Car car);
+    void addCar(Car car);
     List<Car> findAllCars();
     List<Car> findCarsByDate(LocalDate date);
     List<Car> findCarsByPrice(Double price, Double secondPrice);

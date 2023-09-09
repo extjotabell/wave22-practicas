@@ -1,6 +1,7 @@
 package com.spring.consecionariadeautos.web.controllers;
 
 import com.spring.consecionariadeautos.entities.Car;
+import com.spring.consecionariadeautos.repositories.ICarRepository;
 import com.spring.consecionariadeautos.services.ICarService;
 import com.spring.consecionariadeautos.web.dto.CarDTO;
 import com.spring.consecionariadeautos.web.dto.CarServicesDTO;
@@ -24,20 +25,21 @@ public class CarController {
     private final CarServicesMapper carServicesMapper;
 
     @PostMapping
-    ResponseEntity<CarDTO> addCar(@RequestBody CarDTO carDTO) {
-        iCarService.addCar(carMapper.toEntity(carDTO));
+    ResponseEntity<CarServicesDTO> addCar(@RequestBody CarServicesDTO carDTO) {
+        Car car = carServicesMapper.toEntity(carDTO);
+        iCarService.addCar(car);
         return ResponseEntity.ok(carDTO);
     }
 
     @GetMapping
-    ResponseEntity<List<CarServicesDTO>> getAllCars() {
+    ResponseEntity<List<CarDTO>> getAllCars() {
         List<Car> cars = iCarService.findAllCars();
-        List<CarServicesDTO> carServicesDTOS = new ArrayList<>();
+        List<CarDTO> carDTOS = new ArrayList<>();
 
-        carServicesDTOS = cars.stream()
-                .map(carServicesMapper::toDto).toList();
+        carDTOS = cars.stream()
+                .map(carMapper::toDto).toList();
 
-        return ResponseEntity.ok(carServicesDTOS);
+        return ResponseEntity.ok(carDTOS);
     }
 
     @GetMapping("/dates")
@@ -64,5 +66,5 @@ public class CarController {
         return ResponseEntity.ok(carDTO);
     }
 
-    // Fix add bug (null car) and improve getCarsByDate passing only year instead full date
+    // Fix add bug (null car)
 }

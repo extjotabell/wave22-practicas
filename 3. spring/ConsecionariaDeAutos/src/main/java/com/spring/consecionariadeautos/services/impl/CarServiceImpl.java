@@ -19,9 +19,9 @@ public class CarServiceImpl implements ICarService {
     private final ICarRepository iCarRepository;
 
     @Override
-    public Car addCar(Car car) {
+    public void addCar(Car car) {
         ensureUniqueId(car.getId());
-        return iCarRepository.add(car);
+        iCarRepository.add(car);
     }
 
     @Override
