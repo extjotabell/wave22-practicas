@@ -3,6 +3,7 @@ package org.example;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,7 +22,7 @@ public class Main {
 
         Garage garage = new Garage(1, vehiculos);
 
-        System.out.println("Lista ordenada por precio:");
+        System.out.println("Lista ordenada por precio de menor a mayor:");
 
         garage.getVehiculos()
                 .stream()
@@ -45,19 +46,21 @@ public class Main {
                         vehiculo.getModelo() + " " + vehiculo.getCosto()));
 
         System.out.println("\nLista de vehículos con precio no mayor a 1000:");
-        garage.getVehiculos()
+        List<Vehiculo> vehiculosPrecioNoMayorA1000 = garage.getVehiculos()
                 .stream()
                 .filter(v -> v.getCosto() <= 1000)
                 .sorted(Comparator.comparingDouble(Vehiculo::getCosto))
-                .forEach(vehiculo -> System.out.println(vehiculo.getMarca() + " " +
-                        vehiculo.getModelo() + " " + vehiculo.getCosto()));
+                .collect(Collectors.toList());
+        vehiculosPrecioNoMayorA1000.forEach(vehiculo -> System.out.println(vehiculo.getMarca() + " " +
+                vehiculo.getModelo() + " " + vehiculo.getCosto()));
 
         System.out.println("\nLista de vehículos con precio igual o mayor a 1000:");
-        garage.getVehiculos()
+        List<Vehiculo> vehiculosPrecioMayorA1000 = garage.getVehiculos()
                 .stream()
                 .filter(v -> v.getCosto() >= 1000)
                 .sorted(Comparator.comparingDouble(Vehiculo::getCosto))
-                .forEach(vehiculo -> System.out.println(vehiculo.getMarca() + " " +
+                .collect(Collectors.toList());
+        vehiculosPrecioMayorA1000.forEach(vehiculo -> System.out.println(vehiculo.getMarca() + " " +
                         vehiculo.getModelo() + " " + vehiculo.getCosto()));
 
 
