@@ -37,7 +37,7 @@ public class CarService implements ICarService{
 
     @Override
     public FullCarDTO createCar(FullCarDTO car) {
-        Car newCar = new Car(car.getId(), car.getBrand(), car.getModel(), car.getManufacturingDate(), car.getDoor(), car.getPrice(), car.getCurrency(), car.getCountOfOwners());
+        Car newCar = new Car(car.getId(), car.getBrand(), car.getModel(), car.getManufacturingDate(), car.getDoor(), car.getPrice(), car.getCurrency(), car.getServices(),car.getCountOfOwners());
         carRepository.addCar(newCar);
         return car;
     }
@@ -91,6 +91,7 @@ public class CarService implements ICarService{
                 foundCar.getDoor(),
                 foundCar.getPrice(),
                 foundCar.getCurrency(),
+                foundCar.getServices(),
                 foundCar.getCountOfOwners()
         );
     }

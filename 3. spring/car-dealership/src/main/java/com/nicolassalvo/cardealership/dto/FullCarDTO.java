@@ -1,10 +1,12 @@
 package com.nicolassalvo.cardealership.dto;
 
+import com.nicolassalvo.cardealership.entity.Service;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,6 +19,6 @@ public class FullCarDTO {
     private int door;
     private double price;
     private String currency;
-    // private List<Service> services;
+    private List<Service> services;
     private int countOfOwners;
 }

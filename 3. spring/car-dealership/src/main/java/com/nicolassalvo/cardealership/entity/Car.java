@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +18,7 @@ public class Car {
     private int door;
     private double price;
     private String currency;
-    // private List<Service> services;
+    private List<Service> services;
     private int countOfOwners;
 
     public void setId(int id) {
