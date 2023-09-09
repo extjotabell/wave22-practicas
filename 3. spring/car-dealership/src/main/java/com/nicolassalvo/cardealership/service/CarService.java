@@ -3,6 +3,7 @@ package com.nicolassalvo.cardealership.service;
 import com.nicolassalvo.cardealership.dto.CarDTO;
 import com.nicolassalvo.cardealership.dto.FullCarDTO;
 import com.nicolassalvo.cardealership.entity.Car;
+import com.nicolassalvo.cardealership.exception.CarNotFoundException;
 import com.nicolassalvo.cardealership.repository.ICarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,6 +84,9 @@ public class CarService implements ICarService{
     @Override
     public FullCarDTO getVehicleById(int id) {
         Car foundCar = carRepository.getCarById(id);
+        if (foundCar == null) {
+            throw new CarNotFoundException(id);
+        }
         return new FullCarDTO(
                 foundCar.getId(),
                 foundCar.getBrand(),

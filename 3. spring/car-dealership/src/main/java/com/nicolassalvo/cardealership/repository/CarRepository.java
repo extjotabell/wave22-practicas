@@ -23,7 +23,7 @@ public class CarRepository implements ICarRepository{
 
     @Override
     public Car getCarById(int id) {
-        return cars.stream().filter(car -> car.getId() == id).findFirst().get();
+        return cars.stream().filter(car -> car.getId() == id).findFirst().orElse(null);
     }
 
     @Override
