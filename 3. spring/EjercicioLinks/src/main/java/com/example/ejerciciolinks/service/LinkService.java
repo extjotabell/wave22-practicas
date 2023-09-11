@@ -29,7 +29,7 @@ public class LinkService implements ILinkService {
     @Override
     public void invalidateLink(Integer linkId) {
         if (repository.getLinkById(linkId) == null) {
-            //Link inexistente
+            throw  new NotFoundException("No existe el link solicitado.");
         }
         repository.deleteLink(linkId);
     }

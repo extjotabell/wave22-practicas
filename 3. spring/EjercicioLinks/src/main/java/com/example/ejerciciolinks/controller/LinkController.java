@@ -32,7 +32,7 @@ public class LinkController {
         return new ResponseEntity<>(service.getLinkMetrics(linkID), HttpStatus.OK);
 
     }
-    @GetMapping("")
+    @GetMapping()
     public ResponseEntity<?> getById(){
         return new ResponseEntity<>(repository.getAllLink(), HttpStatus.OK);
 
@@ -40,6 +40,7 @@ public class LinkController {
 
     @DeleteMapping("/invalidate/{linkId}")
     public ResponseEntity<?> invalidateLink(@PathVariable Integer linkId){
+        service.invalidateLink(linkId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
