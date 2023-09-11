@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Pizaa",
+    "weigth": 200,
+    "ingrediets": [
+      {
+        "name": "Queso mozzarella"
+      },
+      {
+        "name": "Aceitunas verdes"
+      }
+    ]
+  },
+  {
+    "name": "Ensalada",
+    "weigth": 100,
+    "ingrediets": [
+      {
+        "name": "Lechuga"
+      },
+      {
+        "name": "Tomates"
+      }
+    ]
+  },
+  {
+    "name": "Hamburgesa",
+    "weigth": 200,
+    "ingrediets": [
+      {
+        "name": "Hamburguesa"
+      },
+      {
+        "name": "Pan de trigo blanco"
+      }
+    ]
+  }
+]
