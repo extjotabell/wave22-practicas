@@ -1,6 +1,7 @@
 package Spring.Blog.service;
 
 import Spring.Blog.dtos.BlogDto;
+import Spring.Blog.dtos.CreateBlogDto;
 import Spring.Blog.entity.EntradaBlog;
 import Spring.Blog.exception.NotFoundBlogException;
 import Spring.Blog.repository.IBlogRepository;
@@ -19,9 +20,11 @@ public class BlogService implements IBlogService{
     }
 
     @Override
-    public BlogDto addBlog(BlogDto blogDto) {
-        _blogRepository.addBlog(blogDto);
-        return blogDto;
+    public BlogDto addBlog(CreateBlogDto blogDto) {
+        BlogDto newEntradaBlog = new BlogDto(blogDto.getTitulo(), blogDto.getNombreAutor(), blogDto.getFechaPublicacion());
+        EntradaBlog blogCreado = _blogRepository.addBlog(newEntradaBlog);
+        newEntradaBlog.setId(blogCreado.getId());
+        return newEntradaBlog;
     }
 
     @Override

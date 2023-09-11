@@ -1,10 +1,10 @@
 package Spring.Blog.controller;
 
 import Spring.Blog.dtos.BlogDto;
+import Spring.Blog.dtos.CreateBlogDto;
 import Spring.Blog.service.IBlogService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,15 +16,20 @@ public class BlogController {
         this._blogService = _blogService;
     }
 
-    @GetMapping("/blog/{id}")
-    public BlogDto getById(@PathVariable int id)
+    @PostMapping("/blog")
+    public ResponseEntity<BlogDto> addBlog(@RequestBody CreateBlogDto blog)
     {
-        return _blogService.getById(id);
+        return ResponseEntity.ok(_blogService.addBlog(blog));
+    }
+    @GetMapping("/blog/{id}")
+    public ResponseEntity<BlogDto> getById(@PathVariable int id)
+    {
+        return ResponseEntity.ok( _blogService.getById(id));
     }
 
     @GetMapping("/blogs")
-    public List<BlogDto> getAll()
+    public ResponseEntity<List<BlogDto>> getAll()
     {
-        return _blogService.getAll();
+        return ResponseEntity.ok(_blogService.getAll());
     }
 }

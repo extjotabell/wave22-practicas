@@ -12,4 +12,10 @@ public class BlogDto {
     private String titulo;
     private String nombreAutor;
     private String fechaPublicacion;
+
+    public BlogDto(String titulo, String nombreAutor, String fechaPublicacion) {
+        this.titulo = titulo;
+        this.nombreAutor = nombreAutor;
+        this.fechaPublicacion = fechaPublicacion;
+    }
 }
