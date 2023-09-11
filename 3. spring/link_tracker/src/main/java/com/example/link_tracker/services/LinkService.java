@@ -4,6 +4,7 @@ import com.example.link_tracker.dto.CreateLinkDTO;
 import com.example.link_tracker.dto.InvalidateLinkDTO;
 import com.example.link_tracker.dto.LinkDTO;
 import com.example.link_tracker.dto.MetricDTO;
+import com.example.link_tracker.exception.NotAuthorizedException;
 import com.example.link_tracker.exception.NotFoundUrlException;
 import com.example.link_tracker.repositories.ILinkRepository;
 import org.springframework.stereotype.Service;
@@ -35,10 +36,13 @@ public class LinkService implements ILinkService {
     }
 
     @Override
-    public String redirect(Integer linkId) {
+    public String redirect(Integer linkId, String password) {
         LinkDTO link = linkRepository.getLinkById(linkId);
         if (link == null || !link.getIsActive()){
             throw new NotFoundUrlException("Url not found");
+        }
+        if (!link.getPassword().equals(password)){
+            throw new NotAuthorizedException("Not authorized");
         }
         link.setRedirectCount();
         linkRepository.updateLink(link);
