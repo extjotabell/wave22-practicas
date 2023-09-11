@@ -1,7 +1,5 @@
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-
 public class Localizador {
     Cliente cliente;
     List<Reserva> reservas;
@@ -37,8 +35,8 @@ public class Localizador {
     }
 
     private void calcularCosto(){
-        boolean descViaje = reservas.stream().filter(x->x.tipo == Reserva.tipoReserva.VIAJE).count() >= 2;
-        boolean descHotel = reservas.stream().filter(x->x.tipo == Reserva.tipoReserva.HOTEL).count() >= 2;
+        boolean descViaje = reservas.stream().filter(x->x.tipo == TipoReserva.VIAJE).count() >= 2;
+        boolean descHotel = reservas.stream().filter(x->x.tipo == TipoReserva.HOTEL).count() >= 2;
         double costoSinDescuentos = reservas.stream().mapToDouble(x -> x.costo).sum();
         costo = costoSinDescuentos;
         if(Repositorio.localizadores.stream().filter(x->x.cliente == cliente).count() >= 2){
@@ -49,12 +47,12 @@ public class Localizador {
         }
         if(descViaje){
             double descPorViaje = reservas.stream()
-                    .filter(x->x.tipo == Reserva.tipoReserva.VIAJE).mapToDouble(x -> x.costo).sum()/20;
+                    .filter(x->x.tipo == TipoReserva.VIAJE).mapToDouble(x -> x.costo).sum()/20;
             costo -= descPorViaje;
         }
         if(descHotel) {
             double descPorHotel = reservas.stream()
-                    .filter(x -> x.tipo == Reserva.tipoReserva.HOTEL).mapToDouble(x -> x.costo).sum() / 20;
+                    .filter(x -> x.tipo == TipoReserva.HOTEL).mapToDouble(x -> x.costo).sum() / 20;
             costo -= descPorHotel;
         }
     }

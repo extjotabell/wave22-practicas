@@ -10,6 +10,7 @@ public class Factura {
     }
     public void setItems(List<Producto> items) {
         this.items = items;
+        calcularTotal();
     }
     public double getTotal() {
         return total;

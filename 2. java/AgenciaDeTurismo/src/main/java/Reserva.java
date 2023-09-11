@@ -1,14 +1,9 @@
 public class Reserva {
-    public enum tipoReserva {
-        HOTEL,
-        COMIDA,
-        VIAJE,
-        TRANSPORTE
-    }
-    tipoReserva tipo;
+
+    TipoReserva tipo;
     String descripcion;
 
-    public Reserva(tipoReserva tipo, String descripcion, double costo) {
+    public Reserva(TipoReserva tipo, String descripcion, double costo) {
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.costo = costo;
@@ -24,11 +19,11 @@ public class Reserva {
 
     double costo;
 
-    public tipoReserva getTipo() {
+    public TipoReserva getTipo() {
         return tipo;
     }
 
-    public void setTipo(tipoReserva tipo) {
+    public void setTipo(TipoReserva tipo) {
         this.tipo = tipo;
     }
 
