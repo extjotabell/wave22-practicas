@@ -1,0 +1,17 @@
+[
+  {
+    "codigo": 1,
+    "nombre": "Tos",
+    "nivelDeGravedad": 2
+  },
+  {
+    "codigo": 2,
+    "nombre": "Fiebre",
+    "nivelDeGravedad": 4
+  },
+  {
+    "codigo": 3,
+    "nombre": "Cansancio",
+    "nivelDeGravedad": 1
+  }
+]

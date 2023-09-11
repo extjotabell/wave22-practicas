@@ -1,0 +1,61 @@
+[
+  {
+    "id" : 1,
+    "nombre" : "Rusher",
+    "apellido" : "King",
+    "edad" : 25,
+    "sintomas" : [{
+      "codigo": 1,
+      "nombre": "Tos",
+      "nivelDeGravedad": 2
+    }]
+  },
+
+  {
+    "id" : 2,
+    "nombre" : "Lady",
+    "apellido" : "Gaga",
+    "edad" : 65,
+    "sintomas" : [
+      {
+      "codigo": 1,
+      "nombre": "Tos",
+      "nivelDeGravedad": 2
+      },
+      {
+        "codigo": 2,
+        "nombre": "Fiebre",
+        "nivelDeGravedad": 4
+      }
+    ]
+  },
+  {
+    "id" : 3,
+    "nombre" : "Paolo",
+    "apellido" : "Maldini",
+    "edad" : 72,
+    "sintomas" : [
+      {
+        "codigo": 1,
+        "nombre": "Tos",
+        "nivelDeGravedad": 2
+      },
+      {
+        "codigo": 2,
+        "nombre": "Fiebre",
+        "nivelDeGravedad": 4
+      },
+      {
+        "codigo": 3,
+        "nombre": "Cansancio",
+        "nivelDeGravedad": 1
+      }
+    ]
+  },
+  {
+    "id" : 4,
+    "nombre" : "Bill",
+    "apellido" : "Gates",
+    "edad" : 75
+  }
+]
