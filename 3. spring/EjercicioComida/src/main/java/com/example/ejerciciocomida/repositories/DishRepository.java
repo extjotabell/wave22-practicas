@@ -22,7 +22,7 @@ public class DishRepository implements IDishRepository{
 
     public DishRepository() {
          this.dataBase.add(new Dish("Pizza", 200, Arrays.asList(new Ingredient("Queso mozzarella"), new Ingredient("Aceitunas verdes"))));
-         this.dataBase.add(new Dish("Ensalda", 200, Arrays.asList(new Ingredient("Lechuga"), new Ingredient("Tomates"))));
+         this.dataBase.add(new Dish("Ensalada", 200, Arrays.asList(new Ingredient("Lechuga"), new Ingredient("Tomates"))));
          this.dataBase.add(new Dish("Hamburgesa", 200, Arrays.asList(new Ingredient("Hamburguesa"), new Ingredient("Pan de trigo blanco"))));
     }
 

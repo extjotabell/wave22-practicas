@@ -1,5 +1,7 @@
 package com.example.ejerciciocomida.controllers;
 
+import com.example.ejerciciocomida.dtos.CaloriasDto;
+import com.example.ejerciciocomida.dtos.IngredientDto;
 import com.example.ejerciciocomida.services.IDishesService;
 import lombok.extern.flogger.Flogger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class DishesController {
     @Autowired
@@ -17,7 +21,22 @@ public class DishesController {
 
     @GetMapping("/dishes/calories/{name}")
     public ResponseEntity<?> getCalories(@PathVariable String name, @RequestParam Integer weigth){
-        Double calorias = dishesService.getCalories(name,weigth);
-        return new ResponseEntity<>("Todo Ok "+calorias,HttpStatus.OK);
+        CaloriasDto calorias = dishesService.getCalories(name,weigth);
+        return new ResponseEntity<>(calorias,HttpStatus.OK);
     }
+
+    @GetMapping("/dishes/ingredients/{name}")
+    public ResponseEntity<?> getIngredientes(@PathVariable String name){
+        List<IngredientDto> ingredients = dishesService.getListIngredient(name);
+        return new ResponseEntity<>(ingredients,HttpStatus.OK);
+    }
+
+    @GetMapping("/dishes/worstingredient/{name}")
+    public ResponseEntity<?> getWorstIngrediente(@PathVariable String name){
+        IngredientDto ingredient = dishesService.getWorstIngredient(name);
+        return new ResponseEntity<>(ingredient,HttpStatus.OK);
+    }
+
+
+
 }

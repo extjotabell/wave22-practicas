@@ -4,14 +4,11 @@ import com.example.ejerciciolinks.dto.LinkDTO;
 import com.example.ejerciciolinks.repository.ILinkRepository;
 import com.example.ejerciciolinks.service.ILinkService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
-import java.net.URI;
+
 
 @RestController
 public class LinkController {
