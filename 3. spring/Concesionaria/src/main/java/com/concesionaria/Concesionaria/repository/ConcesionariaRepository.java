@@ -6,6 +6,7 @@ import com.concesionaria.Concesionaria.entity.Car;
 import com.concesionaria.Concesionaria.exceptions.CarsNotFound;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +28,16 @@ public class ConcesionariaRepository implements IConcesionariaRepository{
     }
 
     @Override
-    public List<Car> findByDate(LocalDate date) {
-        List<Car> carsByDate = cars.stream().filter(c-> c.getManufacturingDate().equals(date)).toList();
+    public List<Car> findByDate(LocalDate since, LocalDate to) {
+        List<Car> carsByDate = cars.stream().filter(c-> c.getManufacturingDate().isAfter(since) && c.getManufacturingDate().isBefore(to)).toList();
         return carsByDate;
     }
 
     @Override
-    public List<Car> findByPrice(String price) {
-        List<Car> carsByPrice = cars.stream().filter(c-> c.getPrice().equals(price)).toList();
+    public List<Car> findByPrice(String since, String to) {
+        BigDecimal startPrice = new BigDecimal(since);
+        BigDecimal endPrice = new BigDecimal(to);
+        List<Car> carsByPrice = cars.stream().filter(c-> new BigDecimal(c.getPrice()).compareTo(startPrice) >= 0 && new BigDecimal(c.getPrice()).compareTo(endPrice) <= 0).toList();
         return carsByPrice;
     }
 

@@ -7,9 +7,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface IConcesionariaService {
-    CarDTO saveCar(CarDTO car);
+    void saveCar(CarDTO car);
     List<CarNoServicesDTO> getAll();
-    List<CarDTO> findByDate(LocalDate date);
-    List<CarDTO> findByPrice(String price);
+    List<CarDTO> findByDate(LocalDate since, LocalDate to);
+    List<CarDTO> findByPrice(String since, String to);
     CarDTO findById(int id);
 }

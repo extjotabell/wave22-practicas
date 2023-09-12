@@ -18,7 +18,8 @@ public class ConcesionariaController {
 
     @PostMapping("/")
     public ResponseEntity<?> saveCar(@RequestBody CarDTO car){
-        return ResponseEntity.ok(service.saveCar(car));
+        service.saveCar(car);
+        return ResponseEntity.ok("Auto cargado con exito");
     }
 
     @GetMapping("/")
@@ -28,14 +29,14 @@ public class ConcesionariaController {
     }
 
     @GetMapping("/dates")
-    public ResponseEntity<?> getByDate(@RequestParam LocalDate date){
-        List<CarDTO> cars = service.findByDate(date);
+    public ResponseEntity<?> getByDate(@RequestParam LocalDate since, @RequestParam LocalDate to){
+        List<CarDTO> cars = service.findByDate(since,to);
         return ResponseEntity.ok(cars);
     }
 
     @GetMapping("/prices")
-    public ResponseEntity<?> getByPrice(@RequestParam String price){
-        List<CarDTO> cars = service.findByPrice(price);
+    public ResponseEntity<?> getByPrice(@RequestParam String since, @RequestParam String to){
+        List<CarDTO> cars = service.findByPrice(since, to);
         return ResponseEntity.ok(cars);
     }
 

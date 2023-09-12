@@ -14,14 +14,20 @@ import java.util.List;
 @Service
 public class ConcesionariaService implements IConcesionariaService{
 
+    private int id;
+
+    public ConcesionariaService() {
+        this.id = 0;
+    }
+
     @Autowired
     ConcesionariaRepository repo;
 
     @Override
-    public CarDTO saveCar(CarDTO car) {
-        Car entityCar = new Car(car.getId(),car.getBrand(),car.getModel(),car.getManufacturingDate(),car.getNumberOfKilometers(),car.getDoors(),car.getPrice(),car.getCurrency(),car.getServices(),car.getCountOfOwners());
+    public void saveCar(CarDTO car) {
+        Car entityCar = new Car(id,car.getBrand(),car.getModel(),car.getManufacturingDate(),car.getNumberOfKilometers(),car.getDoors(),car.getPrice(),car.getCurrency(),car.getServices(),car.getCountOfOwners());
         repo.saveCar(entityCar);
-        return car;
+        id++;
     }
 
     @Override
@@ -31,8 +37,8 @@ public class ConcesionariaService implements IConcesionariaService{
     }
 
     @Override
-    public List<CarDTO> findByDate(LocalDate date) {
-        List<CarDTO> carsByDate = repo.findByDate(date).stream().map(c-> new CarDTO(c.getId(),c.getBrand(),c.getModel(),c.getManufacturingDate(),c.getNumberOfKilometers(),c.getDoors(),c.getPrice(),c.getCurrency(),c.getServices(),c.getCountOfOwners())).toList();
+    public List<CarDTO> findByDate(LocalDate since, LocalDate to) {
+        List<CarDTO> carsByDate = repo.findByDate(since,to).stream().map(c-> new CarDTO(c.getId(),c.getBrand(),c.getModel(),c.getManufacturingDate(),c.getNumberOfKilometers(),c.getDoors(),c.getPrice(),c.getCurrency(),c.getServices(),c.getCountOfOwners())).toList();
         if(carsByDate.isEmpty()){
             throw new CarsNotFound("No se encontraron autos con esta fecha");
         }
@@ -40,8 +46,8 @@ public class ConcesionariaService implements IConcesionariaService{
     }
 
     @Override
-    public List<CarDTO> findByPrice(String price) {
-        List<CarDTO> carByPrice = repo.findByPrice(price).stream().map(c-> new CarDTO(c.getId(),c.getBrand(),c.getModel(),c.getManufacturingDate(),c.getNumberOfKilometers(),c.getDoors(),c.getPrice(),c.getCurrency(),c.getServices(),c.getCountOfOwners())).toList();
+    public List<CarDTO> findByPrice(String since, String to) {
+        List<CarDTO> carByPrice = repo.findByPrice(since, to).stream().map(c-> new CarDTO(c.getId(),c.getBrand(),c.getModel(),c.getManufacturingDate(),c.getNumberOfKilometers(),c.getDoors(),c.getPrice(),c.getCurrency(),c.getServices(),c.getCountOfOwners())).toList();
         if(carByPrice.isEmpty()){
             throw new CarsNotFound("No se encontraron autos con ese rango de precio");
         }
