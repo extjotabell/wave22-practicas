@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -13,7 +14,7 @@ import java.util.Date;
 @Setter
 public class Service {
 
-    private Date date;
+    private LocalDate date;
     private int kilometers;
     private String description;
 

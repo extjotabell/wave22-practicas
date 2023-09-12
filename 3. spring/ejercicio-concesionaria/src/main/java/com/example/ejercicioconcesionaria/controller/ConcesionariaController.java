@@ -17,7 +17,7 @@ public class ConcesionariaController {
     private VehicleService vehicleService;
 
     @PostMapping("/vehicles")
-    public ResponseEntity<String> addVehicle(VehicleRequestDTO vehicle) {
+    public ResponseEntity<String> addVehicle(@RequestBody VehicleRequestDTO vehicle) {
         vehicleService.addVehicle(vehicle);
         return ResponseEntity.ok("Vehicle added");
     }

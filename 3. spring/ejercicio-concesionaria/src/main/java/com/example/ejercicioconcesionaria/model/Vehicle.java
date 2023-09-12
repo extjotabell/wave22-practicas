@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -17,7 +17,7 @@ public class Vehicle {
     private int id;
     private String brand;
     private String model;
-    private Date manufacturingDate;
+    private LocalDate manufacturingDate;
     private int doors;
     private int price;
     private String currency;
