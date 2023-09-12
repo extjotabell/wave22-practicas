@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @ControllerAdvice(annotations = RestController.class)
 public class exceptionsConfig {
     @ExceptionHandler(NotFoundVehicle.class)
-    public ResponseEntity<?> NotFoundBlogException(Exception e)
+    public ResponseEntity<?> NotFoundVehicle(Exception e)
     {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
