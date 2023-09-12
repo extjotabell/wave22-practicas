@@ -31,13 +31,19 @@ public class VehicleRepository implements IVehicleRepository {
 
     @Override
     public List<Vehicle> getVehiclesByDate(LocalDate since, LocalDate to) {
-        return this.vehicleList.values().stream().filter(v -> v.getManufacturingDate().isAfter(since) && v.getManufacturingDate().isBefore(to)).collect(Collectors.toList());
+        return this.vehicleList.values()
+                .stream().
+                filter(
+                        v -> v.getManufacturingDate().isAfter(since) && v.getManufacturingDate().isBefore(to)).collect(Collectors.toList()
+                );
     }
 
     @Override
     public List<Vehicle> getVehiclesByPrice(double from, double to) {
         return this.vehicleList.values().stream()
-                .filter(v -> v.getPrice() >= from && v.getPrice()<=to)
+                .filter(
+                        v -> v.getPrice() >= from && v.getPrice() <= to
+                )
                 .collect(Collectors.toList());
     }
 

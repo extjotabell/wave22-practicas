@@ -1,5 +1,6 @@
 package com.example.ConcesionariaAutos.service;
 
+import com.example.ConcesionariaAutos.dto.PostVehicleDTO;
 import com.example.ConcesionariaAutos.dto.VehicleDTO;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 @Service
 public interface IVehicleService {
-    int addVehicle(VehicleDTO vehicleDto);
+    Integer addVehicle(PostVehicleDTO vehicleDto);
 
     VehicleDTO getVehicleById(Integer id);
 

@@ -1,5 +1,6 @@
 package com.example.ConcesionariaAutos.controller;
 
+import com.example.ConcesionariaAutos.dto.PostVehicleDTO;
 import com.example.ConcesionariaAutos.dto.VehicleDTO;
 import com.example.ConcesionariaAutos.service.IVehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,14 @@ import java.util.List;
 @RequestMapping("v1/api/vehicles/")
 public class VehiclesController {
 
-    @Autowired
-    IVehicleService vehicleService;
+    private final IVehicleService vehicleService;
+
+    public VehiclesController(IVehicleService vehicleService) {
+        this.vehicleService = vehicleService;
+    }
 
     @PostMapping
-    public ResponseEntity<Integer> addVehicle(@RequestBody VehicleDTO vehicleDto){
+    public ResponseEntity<Integer> addVehicle(@RequestBody PostVehicleDTO vehicleDto){
         return new ResponseEntity<>(vehicleService.addVehicle(vehicleDto), HttpStatus.OK);
     }
 

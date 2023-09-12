@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.List;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class VehicleDTO {
+public class PostVehicleDTO {
     private String brand;
     private String model;
     private LocalDate manufacturingDate;
@@ -19,5 +19,6 @@ public class VehicleDTO {
     private Integer doors;
     private Double price;
     private String currency;
+    private List<Service> services;
     private Integer countOfOwners;
 }
