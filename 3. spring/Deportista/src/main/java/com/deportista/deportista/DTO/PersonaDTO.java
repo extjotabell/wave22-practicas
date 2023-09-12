@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class PersonaDTO {
     public String nombre;
     public String apellido;
-    public String deporte;
+    public String deporteNombre;
 }

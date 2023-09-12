@@ -1,7 +1,10 @@
 package com.deportista.deportista.Controller;
 
 import com.deportista.deportista.DTO.DeporteDTO;
+import com.deportista.deportista.DTO.PersonaDTO;
 import com.deportista.deportista.Models.Deporte;
+import com.deportista.deportista.Service.IPersonaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,23 +19,21 @@ import java.util.stream.Collectors;
 @RequestMapping("/Sports")
 public class DeportistasController {
 
+    @Autowired
+    IPersonaService service;
+
     @GetMapping("/findSports")
     public ResponseEntity<List<DeporteDTO>> GetAllSport(){
-        Deporte deporte =  new Deporte();
-        List<Deporte> listDeporte =deporte.GetListDeporte();
-
-        List<DeporteDTO> deporteDTOS = listDeporte.stream().map(x->new DeporteDTO(x.getNombre(),x.getNivel())).collect(Collectors.toList());
-
-        return ResponseEntity.ok(deporteDTOS);
+        return ResponseEntity.ok(service.GetAllDeporte());
     }
 
     @GetMapping("/findSports/{name}")
-    public ResponseEntity<DeporteDTO> GetSport(PathVariable String name){
-        Deporte deporte =  new Deporte();
-        List<Deporte> listDeporte =deporte.GetListDeporte();
+    public ResponseEntity<DeporteDTO> GetSport(@PathVariable String name){
+        return ResponseEntity.ok(service.GetByNameDeporte(name));
+    }
 
-        DeporteDTO deporteDTO =listDeporte.stream().filter(x -> x.equals(name)).map(x -> new DeporteDTO(x.getNombre(),x.getNivel())).findFirst();
-
-        return ResponseEntity.ok(deporteDTO);
+    @GetMapping("/findSportsPersons")
+    public ResponseEntity<List<PersonaDTO>> GetPersona(){
+        return ResponseEntity.ok(service.GetPersona());
     }
 }
