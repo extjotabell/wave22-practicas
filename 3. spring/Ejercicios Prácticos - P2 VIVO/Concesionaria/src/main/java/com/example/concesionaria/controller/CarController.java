@@ -31,12 +31,12 @@ public class CarController {
     }
 
     @GetMapping("/dates")
-    public ResponseEntity<List<AutoDTO>> getCarsByDate(@RequestParam String since) {
-        return ResponseEntity.ok().body(carService.getCarsByDateSince(since));
+    public ResponseEntity<List<AutoDTO>> getCarsByDate(@RequestParam String since, @RequestParam String to) {
+        return ResponseEntity.ok().body(carService.getCarsByDateSince(since, to));
     }
 
     @GetMapping("/prices")
-    public ResponseEntity<List<AutoDTO>> getCarsByPrice(@RequestParam double price) {
-        return ResponseEntity.ok().body(carService.getCarsByPrice(price));
+    public ResponseEntity<List<AutoDTO>> getCarsByPrice(@RequestParam double price, @RequestParam double to) {
+        return ResponseEntity.ok().body(carService.getCarsByPrice(price, to));
     }
 }
