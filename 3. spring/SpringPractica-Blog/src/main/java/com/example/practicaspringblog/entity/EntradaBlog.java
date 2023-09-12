@@ -14,4 +14,6 @@ public class EntradaBlog {
     private String titulo;
     private String autor;
     private Date fechaPublicacion;
+
+
 }
