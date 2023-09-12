@@ -12,8 +12,8 @@ public interface IAutoService {
     AutoServiceDTO createCar(AutoServiceDTO autoServiceDTO);
     List<AutoDTO> getCars();
 
-    List<AutoDTO> getCarsByDateSince(String date);
-    List<AutoDTO> getCarsByPrice(double price);
+    List<AutoDTO> getCarsByDateSince(String since, String to);
+    List<AutoDTO> getCarsByPrice(double from, double to);
 
     AutoServiceDTO getCarById(int id);
 }

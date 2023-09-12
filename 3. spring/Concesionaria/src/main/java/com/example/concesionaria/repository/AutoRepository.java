@@ -26,16 +26,17 @@ public class AutoRepository implements IAutoRepository{
     }
 
     @Override
-    public List<Auto> obtenerAutosPorFechaDesde(LocalDate fecha){
+    public List<Auto> obtenerAutosPorFechaDesde(LocalDate fecha, LocalDate to){
         return autos.stream()
                 .filter(auto -> auto.getManufacturingDate().isAfter(fecha.minusDays(1)))
+                .filter(auto -> auto.getManufacturingDate().isBefore(to.plusDays(1)))
                 .toList();
     }
 
     @Override
-    public List<Auto> obtenerAutosPorPrecioDesde(double precio){
+    public List<Auto> obtenerAutosPorPrecioDesde(double precio, double to){
         return autos.stream()
-                .filter(auto -> auto.getPrice() >= precio)
+                .filter(auto -> auto.getPrice() >= precio && auto.getPrice() <= to)
                 .toList();
     }
 

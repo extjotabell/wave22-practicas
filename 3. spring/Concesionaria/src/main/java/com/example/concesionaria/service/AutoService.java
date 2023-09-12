@@ -34,18 +34,19 @@ public class AutoService implements IAutoService {
     }
 
     @Override
-    public List<AutoDTO> getCarsByDateSince(String date) {
+    public List<AutoDTO> getCarsByDateSince(String date, String toDate) {
         LocalDate aDate = LocalDate.parse(date);
+        LocalDate aToDate = LocalDate.parse(toDate);
 
-        return carRepository.obtenerAutosPorFechaDesde(aDate)
+        return carRepository.obtenerAutosPorFechaDesde(aDate, aToDate)
                 .stream()
                 .map(autoMapper::toDTO)
                 .toList();
     }
 
     @Override
-    public List<AutoDTO> getCarsByPrice(double price) {
-        return carRepository.obtenerAutosPorPrecioDesde(price)
+    public List<AutoDTO> getCarsByPrice(double price, double to) {
+        return carRepository.obtenerAutosPorPrecioDesde(price, to)
                 .stream()
                 .map(autoMapper::toDTO)
                 .toList();
