@@ -24,14 +24,23 @@ public class CarService implements ICarService {
     @Override
     public List<CarDto> AllCAr() {
         List<CarDto> carDtoList = new ArrayList<>();
-        List<Car> carList = _repo.AllCar();
-        carDtoList = carList.stream().map(x->new CarDto(x.getBrand(),x.getModel(),x.getNumerOfKilometes(),x.getNumerOfKilometes(), x.getPrice())).collect(Collectors.toList());
+        List<Car> carList = _repo.AllUsedCar();
+        carDtoList = carList.stream().map(x->new CarDto(
+                x.getBrand(),
+                x.getModel(),
+                x.getManufacturingDate(),
+                x.getNumberOfKilometes(),
+                x.getDoors(),
+                x.getPrice(),
+                x.getCurrency(),
+                x.getCountOfOwners())
+        ).collect(Collectors.toList());
         return carDtoList;
     }
 
     @Override
-    public List<CarServiceDto> GetCarDate(String since) {
-        List<Car> carList = _repo.GetCarDate(since);
+    public List<CarServiceDto> GetCarDate(int since,int to) {
+        List<Car> carList = _repo.GetCarDate(since,to);
         return CartoDto(carList);
     }
 
@@ -49,6 +58,7 @@ public class CarService implements ICarService {
     }
 
     private List<CarServiceDto> CartoDto(List<Car> carList) {
-        return  carList.stream().map(x->new CarServiceDto(x.getBrand(),x.getModel(),x.getNumerOfKilometes(),x.getNumerOfKilometes(),x.getPrice(),x.getServiceList())).collect(Collectors.toList());
+        return  carList.stream().map(x->new CarServiceDto(x.getBrand(),x.getModel(),x.getManufacturingDate(),x.getNumberOfKilometes(),
+                                                          x.getDoors(),x.getPrice(),x.getCurrency(),x.getServiceList(),x.getCountOfOwners())).collect(Collectors.toList());
     }
 }

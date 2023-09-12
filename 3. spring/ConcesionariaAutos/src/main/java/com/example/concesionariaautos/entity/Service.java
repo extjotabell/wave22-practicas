@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Service {
     private String date;
-    private String kilometers;
+    private int kilometers;
     private String descriptions;
 }

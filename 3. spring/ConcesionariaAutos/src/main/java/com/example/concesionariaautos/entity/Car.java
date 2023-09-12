@@ -4,7 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.PrimitiveIterator;
 
 @Data
 @AllArgsConstructor
@@ -14,8 +17,11 @@ public class Car {
     private String brand;
     private String model;
     private String manufacturingDate;
-    private String numerOfKilometes;
+    private int numberOfKilometes;
+    private int doors;
     private int price;
+    private String currency;
     private List<Service> serviceList;
+    private int countOfOwners;
 
 }

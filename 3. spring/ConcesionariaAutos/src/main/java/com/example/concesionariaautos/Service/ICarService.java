@@ -9,7 +9,7 @@ public interface ICarService {
 
     void CreateCar(CarServiceDto carDto);
     List<CarDto> AllCAr();
-    List<CarServiceDto> GetCarDate(String since );
+    List<CarServiceDto> GetCarDate(int since,int to );
     List<CarServiceDto> GetCarPrice(int since , int to);
     CarServiceDto GetById(int id);
 

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ServiceDto {
     private String date;
-    private String kilometers;
+    private int kilometers;
     private String descriptions;
 }
 

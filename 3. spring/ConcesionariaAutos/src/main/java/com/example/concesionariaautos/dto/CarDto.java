@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -14,6 +15,9 @@ public class CarDto {
     private String brand;
     private String model;
     private String manufacturingDate;
-    private String numerOfKilometes;
-    private int prince;
+    private int numberOfKilometers;
+    private int doors;
+    private int price;
+    private String currency;
+    private int countOfOwners;
 }

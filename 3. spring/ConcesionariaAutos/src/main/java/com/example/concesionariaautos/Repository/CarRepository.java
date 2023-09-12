@@ -16,7 +16,8 @@ public class CarRepository implements ICarRepository {
     @Override
     public void CreateCar(CarServiceDto carDto) {
         int id= this.carList.size() +1;
-        Car car = new Car(id,carDto.getBrand(), carDto.getModel(), carDto.getManufacturingDate(),carDto.getNumerOfKilometes(),carDto.getPrince(), carDto.getServiceList());
+        Car car = new Car(id,carDto.getBrand(), carDto.getModel(), carDto.getManufacturingDate(),carDto.getNumerOfKilometes(),carDto.getDoors(),carDto.getPrince()
+                            ,carDto.getCurrency(),carDto.getServiceList(),carDto.getCountOfOwners());
         this.carList.add(car);
     }
 ;
@@ -26,8 +27,15 @@ public class CarRepository implements ICarRepository {
     }
 
     @Override
-    public List<Car> GetCarDate(String since) {
-       return this.carList.stream().filter(x-> x.getManufacturingDate().equals(since))
+    public List<Car> AllUsedCar()
+    {
+        return  this.carList.stream().filter(car -> car.getCountOfOwners() > 0).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Car> GetCarDate(int since, int to) {
+       return this.carList.stream().filter(x-> Integer.parseInt( x.getManufacturingDate().substring(0,4)) >= since &&
+                                               Integer.parseInt( x.getManufacturingDate().substring(0,4)) <= to)
                                    .collect(Collectors.toList());
     }
 

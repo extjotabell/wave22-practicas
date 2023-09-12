@@ -1,6 +1,7 @@
 package com.example.concesionariaautos.controller;
 
 
+import com.example.concesionariaautos.Service.CarService;
 import com.example.concesionariaautos.Service.ICarService;
 import com.example.concesionariaautos.dto.CarDto;
 import com.example.concesionariaautos.dto.CarServiceDto;
@@ -15,27 +16,30 @@ import java.util.List;
 public class CarController {
 
     @Autowired
-    ICarService _service;
+    CarService _service;
+
     @PostMapping
-    public ResponseEntity<?> CreateCar(@RequestBody CarServiceDto carDto){
+    public ResponseEntity<?> createCar(@RequestBody CarServiceDto carDto){
         _service.CreateCar(carDto);
         return ResponseEntity.ok().build();
     }
     @GetMapping
-    public  ResponseEntity<List<CarDto>> AllCar(){
+    public  ResponseEntity<List<CarDto>> getAllCar(){
         return ResponseEntity.ok(_service.AllCAr());
     }
+
+    //Este enpoint se pasa como parametro los años para realizar la busqueda
     @GetMapping("/date")
-    public ResponseEntity<List<CarServiceDto>> DateCar(@RequestParam String since){
-        return ResponseEntity.ok(_service.GetCarDate(since));
+    public ResponseEntity<List<CarServiceDto>> ge(@RequestParam int since, @RequestParam int to){
+        return ResponseEntity.ok(_service.GetCarDate(since,to));
     }
 
     @GetMapping("/prices")
-    public ResponseEntity<List<CarServiceDto>> GetCarPrice(@RequestParam int since, @RequestParam int to){
+    public ResponseEntity<List<CarServiceDto>> getCarPrice(@RequestParam int since, @RequestParam int to){
         return ResponseEntity.ok(_service.GetCarPrice(since,to));
     }
     @GetMapping("/{id}")
-    public ResponseEntity<CarServiceDto> GetById(@PathVariable int id){
+    public ResponseEntity<CarServiceDto> getById(@PathVariable int id){
         return ResponseEntity.ok(_service.GetById(id));
     }
 
