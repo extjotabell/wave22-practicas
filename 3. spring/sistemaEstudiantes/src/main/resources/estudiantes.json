@@ -1,0 +1,14 @@
+[
+  {
+    "estudianteId": 1,
+    "nombre": "Edwin",
+    "apellido": "Rodriguez",
+            "dni": 12345678
+  },
+  {
+    "estudianteId": 2,
+    "nombre": "Valentina",
+    "apellido": "Gottelli",
+    "dni": 87654321
+  }
+]
