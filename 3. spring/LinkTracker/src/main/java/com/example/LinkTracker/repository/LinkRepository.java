@@ -38,7 +38,6 @@ public class LinkRepository implements ILinkRepository{
     public void invalidateLink(Integer id) {
         Link link = links.get(id);
         link.setActive(false);
-
     }
 
     @Override

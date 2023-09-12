@@ -11,6 +11,7 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
 public class Link {
     private int id;
     private String url;
+    private String password;
     private boolean isActive;
     private int visits;
 }
