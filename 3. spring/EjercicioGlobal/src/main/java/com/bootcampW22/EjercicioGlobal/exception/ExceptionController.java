@@ -23,5 +23,11 @@ public class ExceptionController {
         return new ResponseEntity<>(exceptionDto, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(ConflictException.class)
+    public ResponseEntity<?> conflict(ConflictException e) {
+        ExceptionDto exceptionDto = new ExceptionDto(e.getMessage());
+        return new ResponseEntity<>(exceptionDto, HttpStatus.CONFLICT);
+    }
+
 
 }

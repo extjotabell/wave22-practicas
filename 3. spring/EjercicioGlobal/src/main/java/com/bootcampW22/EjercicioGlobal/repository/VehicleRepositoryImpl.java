@@ -29,6 +29,16 @@ public class VehicleRepositoryImpl implements IVehicleRepository{
         return listOfVehicles.stream().filter(v -> v.getHeight() >= minHeight && v.getHeight() <= maxHeight && v.getWidth() >= minWidth && v.getWidth() <= maxWidth).toList();
     }
 
+    @Override
+    public void addVehicle(Vehicle vehicle) {
+        listOfVehicles.add(vehicle);
+    }
+
+    @Override
+    public boolean verifyVehicleExists(long id) {
+        return listOfVehicles.stream().anyMatch(v -> v.getId() == id);
+    }
+
 
     private void loadDataBase() throws IOException {
         File file;

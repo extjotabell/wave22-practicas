@@ -9,4 +9,7 @@ public interface IVehicleRepository {
 
     List<Vehicle> findVehiclesByHeightAndWidth(double minHeight, double maxHeight, double minWidth, double maxWidth);
 
+    void addVehicle(Vehicle vehicle);
+    boolean verifyVehicleExists(long id);
+
 }

@@ -2,10 +2,12 @@ package com.bootcampW22.EjercicioGlobal.service;
 
 import com.bootcampW22.EjercicioGlobal.dto.VehicleDto;
 import com.bootcampW22.EjercicioGlobal.entity.Vehicle;
+import com.bootcampW22.EjercicioGlobal.exception.ConflictException;
 import com.bootcampW22.EjercicioGlobal.exception.NotFoundException;
 import com.bootcampW22.EjercicioGlobal.repository.IVehicleRepository;
 import com.bootcampW22.EjercicioGlobal.repository.VehicleRepositoryImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,4 +42,15 @@ public class VehicleServiceImpl implements IVehicleService{
         }
         return vehicleList.stream().map(v -> mapper.convertValue(v, VehicleDto.class)).toList();
     }
+
+    @Override
+    public void addVehicle(VehicleDto vehicleDto) throws ConflictException {
+        ObjectMapper mapper = new ObjectMapper();
+        if(vehicleRepository.verifyVehicleExists(vehicleDto.getId()))
+            throw new ConflictException("Ya existe un vehículo con el id "+vehicleDto.getId());
+        vehicleRepository.addVehicle(mapper.convertValue(vehicleDto, Vehicle.class));
+    }
+
+
+
 }
