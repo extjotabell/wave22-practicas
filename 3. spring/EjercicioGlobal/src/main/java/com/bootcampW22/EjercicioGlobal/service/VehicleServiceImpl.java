@@ -105,9 +105,11 @@ public class VehicleServiceImpl implements IVehicleService{
     }
 
     @Override
-    public List<VehicleDto> searchVehiclesByHeigthYWidth(Double min_h, Double max_h, Double min_w, Double max_w) {
-        List<Vehicle> vehiclesHeight = vehicleRepository.findByHeigth(min_h,max_h);
-        List<Vehicle> vehiclesWidth = vehicleRepository.findByWidth(min_w,max_w);
+    public List<VehicleDto> searchVehiclesByHeigthYWidth(String heigth, String width) {
+        String[] heigths = heigth.split("-");
+        String[] widths = width.split("-");
+        List<Vehicle> vehiclesHeight = vehicleRepository.findByHeigth(Double.parseDouble(heigths[0]),Double.parseDouble(heigths[1]));
+        List<Vehicle> vehiclesWidth = vehicleRepository.findByWidth(Double.parseDouble(widths[0]),Double.parseDouble(widths[1]));
         List<Vehicle> vehicles = new ArrayList<>();
         for (Vehicle vehicle: vehiclesHeight) {
             if (vehiclesWidth.contains(vehicle)){

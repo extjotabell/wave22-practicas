@@ -64,7 +64,7 @@ public class VehicleController {
 
     @DeleteMapping ("/vehicles/{id}")
     public ResponseEntity<?> deleteVehicle(@PathVariable Long id){
-        return new ResponseEntity<>(vehicleService.deleteVehicle(id), HttpStatus.OK);
+        return new ResponseEntity<>(vehicleService.deleteVehicle(id), HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/vehicles/transmission/{type}")
@@ -88,7 +88,7 @@ public class VehicleController {
     }
 
     @GetMapping("/vehicles/dimensions")
-    public ResponseEntity<?> getVehiclesByWidthAndHeigth(@RequestParam Double min_height, @RequestParam Double max_height, @RequestParam Double min_width, @RequestParam Double max_width){
-        return new ResponseEntity<>(vehicleService.searchVehiclesByHeigthYWidth(min_height, max_height, min_width, max_width),HttpStatus.OK);
+    public ResponseEntity<?> getVehiclesByWidthAndHeigth(@RequestParam String height, @RequestParam String width){
+        return new ResponseEntity<>(vehicleService.searchVehiclesByHeigthYWidth(height, width),HttpStatus.OK);
     }
 }

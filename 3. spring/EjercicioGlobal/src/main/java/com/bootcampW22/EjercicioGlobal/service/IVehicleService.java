@@ -12,7 +12,7 @@ public interface IVehicleService {
     List<VehicleDto> searchByColorAndYear(String color, Integer year);
     List<VehicleDto> searchByBrandAndYears(String brand, Integer from, Integer to);
     List<VehicleDto> searchVehiclesByWeight(Double min, Double max);
-    List<VehicleDto> searchVehiclesByHeigthYWidth(Double min_h, Double max_h, Double min_w, Double max_w);
+    List<VehicleDto> searchVehiclesByHeigthYWidth(String heigth, String width);
     List<VehicleDto> searchByFuel(String fuel);
     List<VehicleDto> searchByTransmission(String transmission);
     SpeedAverageDto averageSpeed(String brand);
