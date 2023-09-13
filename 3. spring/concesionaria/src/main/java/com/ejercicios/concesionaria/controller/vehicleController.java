@@ -19,7 +19,7 @@ public class vehicleController {
 
     @PostMapping
     public ResponseEntity<?> addVehicle(@RequestBody VehiclesDTOS vehiclesDTOS){
-        return new ResponseEntity<>(service.save(vehiclesDTOS), HttpStatus.OK);
+        return new ResponseEntity<>(service.save(vehiclesDTOS), HttpStatus.CREATED);
     }
 
     @GetMapping
