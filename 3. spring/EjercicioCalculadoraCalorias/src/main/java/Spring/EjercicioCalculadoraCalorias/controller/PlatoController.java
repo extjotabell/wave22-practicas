@@ -31,8 +31,14 @@ public class PlatoController {
     }
 
     @GetMapping("/ingredientes/mayorCalorias")
-    public ResponseEntity<IngredientDTO> getIngredienteConMayorCalorias()
+    public ResponseEntity<IngredientDTO> getIngredientHighestCalories()
     {
         return ResponseEntity.ok(service.highestIngredientCalories());
+    }
+
+    @GetMapping("/plato/ingredientes/{name}/mayorCalorias")
+    public ResponseEntity<IngredientDTO> getIngredientHighestCaloriesByPlato(String name)
+    {
+        return ResponseEntity.ok(service.highestIngredientCaloriesByPlato(name));
     }
 }

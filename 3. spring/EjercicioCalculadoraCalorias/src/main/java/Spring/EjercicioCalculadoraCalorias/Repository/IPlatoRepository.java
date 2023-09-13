@@ -12,4 +12,5 @@ public interface IPlatoRepository {
     List<Plato> getAllPlatos();
     Plato getPlato(String name, Double weight);
     Ingredient highestIngredientCalories();
+    Ingredient highestIngredientCaloriesByPlato(String name);
 }

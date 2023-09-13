@@ -63,6 +63,7 @@ public class PlatoRepository implements IPlatoRepository {
     public List<Ingredient> getAllIngredientsByName(String name)
     {
         Plato plato = getPlatoByName(name);
+        if (plato == null) return null;
         return plato.getIngredients().stream().toList();
     }
 
@@ -79,8 +80,14 @@ public class PlatoRepository implements IPlatoRepository {
     @Override
     public Ingredient highestIngredientCalories() {
         List<Ingredient> sortedIngredients = this.ingredients;
-        sortedIngredients.stream().sorted(Comparator.comparing(Ingredient::getCalories).reversed());
-        return sortedIngredients.stream().findFirst().orElse(null);
+        return sortedIngredients.stream().sorted(Comparator.comparing(Ingredient::getCalories).reversed()).findFirst().orElse(null);
+    }
+
+    @Override
+    public Ingredient highestIngredientCaloriesByPlato(String name) {
+        List<Ingredient> ingredientList= this.getAllIngredientsByName(name);
+        if (ingredientList == null) return null;
+        return ingredientList.stream().sorted(Comparator.comparing(Ingredient::getCalories).reversed()).findFirst().orElse(null);
     }
 
     private Ingredient getIngrediente(String name){
