@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService implements IUserService {
@@ -20,6 +23,7 @@ public class UserService implements IUserService {
     private final IUserRepository userRepository;
 
     @Override
+
     public UserFollowedDto follow(int followerId, int userToFollowId) {
         //Validations
         if (followerId == userToFollowId){
@@ -68,5 +72,20 @@ public class UserService implements IUserService {
         }
         userFollowedDto.setFollowed(userDtos);
         return userFollowedDto;
+    }
+
+    public UserFollowedDto unfollow(int userId, int userIdToUnfollow) {
+        User userFollower = userRepository.findUsersById(userId);
+        if(userFollower == null){
+            throw new NotFoundException("No se encontro el usuario " + userId);
+        }
+        User userFollowed = userRepository.findUsersById(userIdToUnfollow);
+        if(userFollowed == null){
+            throw new NotFoundException("No se encontro el usuario " + userIdToUnfollow);
+        }
+        User finalUser = userRepository.unfollow(userFollower,userFollowed);
+        List<UserDto> userFollowedFinal = finalUser.getFollowed().stream().map(f-> new UserDto(f.getId(),f.getName())).toList();
+        return new UserFollowedDto(finalUser.getId(), finalUser.getName(),userFollowedFinal);
+
     }
 }

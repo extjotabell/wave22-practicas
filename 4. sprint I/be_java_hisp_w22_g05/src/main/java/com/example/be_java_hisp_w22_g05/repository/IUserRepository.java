@@ -9,5 +9,6 @@ public interface IUserRepository {
 
     User findUsersById(int id);
     List<User> findAllUsers();
+    User unfollow (User userFollower, User userFollowed);
 
 }
