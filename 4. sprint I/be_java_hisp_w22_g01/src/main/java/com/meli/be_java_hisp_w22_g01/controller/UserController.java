@@ -36,4 +36,9 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUserFollowedList(userId));
     }
 
+    @GetMapping("/{UserID}/followers/list")
+    public ResponseEntity<?> orderFollowers (@PathVariable int UserID,@RequestParam String order){
+        return ResponseEntity.status(HttpStatus.OK).body(sellerService.orderFollowersDto(UserID,order));
+    }
+
 }

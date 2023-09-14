@@ -2,6 +2,7 @@ package com.meli.be_java_hisp_w22_g01.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w22_g01.dto.SellerDto;
+import com.meli.be_java_hisp_w22_g01.dto.UserDto;
 import com.meli.be_java_hisp_w22_g01.dto.response.CountFollowersDTO;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
@@ -11,6 +12,8 @@ import com.meli.be_java_hisp_w22_g01.repository.ISellerRepository;
 import com.meli.be_java_hisp_w22_g01.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SellerServiceImp implements ISellerService{
@@ -47,5 +50,18 @@ public class SellerServiceImp implements ISellerService{
         }
 
         return mapper.convertValue(seller,SellerDto.class);
+    }
+
+    @Override
+    public List<UserDto> orderFollowersDto(int userId, String order) {
+        List<User> followers;
+        if (order.equals("name_asc")) {
+            followers = sellerRepository.orderFollowerAsc(userId);
+        }else if (order.equals("name_desc")){
+            followers = sellerRepository.orderFollowerDesc(userId);
+        }else{
+            followers = sellerRepository.getAllFollowers(userId);
+        }
+        return followers.stream().map(f -> mapper.convertValue(f, UserDto.class)).toList();
     }
 }

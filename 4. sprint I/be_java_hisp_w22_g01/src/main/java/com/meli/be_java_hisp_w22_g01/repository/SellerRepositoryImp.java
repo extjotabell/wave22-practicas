@@ -6,6 +6,7 @@ import com.meli.be_java_hisp_w22_g01.entity.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Repository
@@ -105,5 +106,26 @@ public class SellerRepositoryImp implements ISellerRepository{
         seller.getFollowers().add(userRepo.findById(idFollower));
 
         return seller;
+    }
+
+    @Override
+    public List<User> orderFollowerAsc(int userId) {
+        Seller seller = findById(userId);
+        return seller.getFollowers().stream()
+                .sorted(Comparator.comparing(User::getUser_name)).toList();
+    }
+
+    @Override
+    public List<User> orderFollowerDesc(int userId) {
+        Seller seller = findById(userId);
+        return seller.getFollowers().stream()
+                .sorted(Comparator.comparing(User::getUser_name, Comparator.reverseOrder()))
+                .toList();
+    }
+
+    @Override
+    public List<User> getAllFollowers(int userId) {
+        Seller seller = findById(userId);
+        return seller.getFollowers();
     }
 }
