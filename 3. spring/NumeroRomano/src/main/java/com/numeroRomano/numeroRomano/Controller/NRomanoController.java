@@ -2,12 +2,14 @@ package com.numeroRomano.numeroRomano.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/NumeroRomano")
 public class NRomanoController {
 
-    @GetMapping("/{letra}")
+    @GetMapping("/LetraToLetra/{letra}")
     public String GetNumero(@PathVariable String letra){
 
         int sumNumero = 0;

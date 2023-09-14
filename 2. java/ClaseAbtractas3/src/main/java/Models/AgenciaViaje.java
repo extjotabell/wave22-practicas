@@ -1,6 +1,7 @@
 package Models;
 
-import Repositorios.LocalizadorRepository;
+
+import Repository.LocalizadorRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
