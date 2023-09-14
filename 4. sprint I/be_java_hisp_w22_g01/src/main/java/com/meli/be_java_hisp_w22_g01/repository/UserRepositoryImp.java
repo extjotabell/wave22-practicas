@@ -1,16 +1,11 @@
 package com.meli.be_java_hisp_w22_g01.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.meli.be_java_hisp_w22_g01.entity.User;
-import com.meli.be_java_hisp_w22_g01.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Repository
-public class UserRepositoryImp implements IUserRepository{
+public class UserRepositoryImp {
 
     private List<User> list_of_users = new ArrayList<>();
 
