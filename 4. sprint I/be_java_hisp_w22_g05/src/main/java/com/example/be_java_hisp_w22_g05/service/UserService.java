@@ -9,8 +9,9 @@ import com.example.be_java_hisp_w22_g05.exception.NotFoundException;
 import com.example.be_java_hisp_w22_g05.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -53,4 +54,19 @@ public class UserService implements IUserService {
         return new UserNumberFollowersDto(userId, user.getName(), user.getFollower().size());
     }
 
+    public UserFollowedDto getListOfUsersFollowedBy(Integer id){
+        User user = userRepository.findUsersById(id);
+        if(user == null){
+            throw new NotFoundException("No se encontró el usuario especificado");
+        }
+        UserFollowedDto userFollowedDto = new UserFollowedDto();
+        userFollowedDto.setId(user.getId());
+        userFollowedDto.setUserName(user.getName());
+        List<UserDto> userDtos = new ArrayList<>();
+        for (User u : user.getFollowed()) {
+            userDtos.add(new UserDto(u.getId(), u.getName()));
+        }
+        userFollowedDto.setFollowed(userDtos);
+        return userFollowedDto;
+    }
 }
