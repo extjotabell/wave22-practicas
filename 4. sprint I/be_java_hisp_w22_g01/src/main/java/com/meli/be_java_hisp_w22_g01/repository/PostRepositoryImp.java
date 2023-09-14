@@ -2,6 +2,7 @@ package com.meli.be_java_hisp_w22_g01.repository;
 
 import com.meli.be_java_hisp_w22_g01.entity.Post;
 import com.meli.be_java_hisp_w22_g01.entity.Product;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 
 import java.util.Random;
 
+@Repository
 public class PostRepositoryImp implements IPostRepository {
     private List<Post> posts = new ArrayList<>();
     private int nextPostId = 1;
