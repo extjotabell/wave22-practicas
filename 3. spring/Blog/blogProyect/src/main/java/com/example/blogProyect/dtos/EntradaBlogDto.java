@@ -1,7 +1,8 @@
 package com.example.blogProyect.dtos;
 
-import java.util.Date;
+import lombok.NoArgsConstructor;
 
+import java.util.Date;
 public class EntradaBlogDto {
     private int idBlog;
     private String titulo;

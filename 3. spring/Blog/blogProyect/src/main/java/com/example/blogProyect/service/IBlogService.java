@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface IBlogService {
     void add(EntradaBlogDto entradaBlog);
+    List<EntradaBlogDto> findAll();
+
 
 }

@@ -1,5 +1,7 @@
 package com.example.blogProyect.entity;
 
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 
 public class EntradaBlog {
