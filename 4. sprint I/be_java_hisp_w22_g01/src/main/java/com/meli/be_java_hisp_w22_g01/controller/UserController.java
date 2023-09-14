@@ -13,6 +13,7 @@ public class UserController {
 
     @Autowired
     IUserService userService;
+    @Autowired
     ISellerService sellerService;
 
     @GetMapping("/{userId}/followers/list")

@@ -2,11 +2,12 @@ package com.meli.be_java_hisp_w22_g01.repository;
 
 import com.meli.be_java_hisp_w22_g01.entity.Post;
 import com.meli.be_java_hisp_w22_g01.entity.Product;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class ProductRepositoryImp {
+@Repository
+public class ProductRepositoryImp  implements IProductRepository{
 
     private List<Product> products = new ArrayList<>();
 
