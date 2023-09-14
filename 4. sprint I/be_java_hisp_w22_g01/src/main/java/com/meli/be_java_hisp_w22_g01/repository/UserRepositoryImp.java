@@ -34,8 +34,8 @@ public class UserRepositoryImp implements IUserRepository{
 
         // Usuarios falsos
         User user1 = new User(1, "Lisa", sellers1);
-        User user2 = new User(1, "Bart", sellers2);
-        User user3 = new User(1, "Maggie", sellers3);
+        User user2 = new User(2, "Bart", sellers2);
+        User user3 = new User(3, "Maggie", sellers3);
 
         this.list_of_users.add(user1);
         this.list_of_users.add(user2);
