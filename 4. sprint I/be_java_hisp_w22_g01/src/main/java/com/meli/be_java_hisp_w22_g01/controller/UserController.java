@@ -17,9 +17,13 @@ public class UserController {
     ISellerService sellerService;
 
     @GetMapping("/{userId}/followers/list")
-    public ResponseEntity<?> followersList(@PathVariable int userId) {
-        return new ResponseEntity<>(userService.FollowersList(userId), HttpStatus.OK);
+    public ResponseEntity<?> followersList(@PathVariable int userId,@RequestParam(required = false) String order) {
 
+        if(order == null){
+            return new ResponseEntity<>(userService.FollowersList(userId), HttpStatus.OK);
+        }else{
+            return ResponseEntity.status(HttpStatus.OK).body(sellerService.orderFollowersDto(userId,order));
+        }
     }
 
     @GetMapping("/{userId}/followers/count")
@@ -35,11 +39,6 @@ public class UserController {
     @GetMapping("/{userId}/followed/list")
     public ResponseEntity<?> getFollowedList(@PathVariable int userId){
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUserFollowedList(userId));
-    }
-
-    @GetMapping("/{UserID}/followers/list")
-    public ResponseEntity<?> orderFollowers (@PathVariable int UserID,@RequestParam String order){
-        return ResponseEntity.status(HttpStatus.OK).body(sellerService.orderFollowersDto(UserID,order));
     }
 
 }
