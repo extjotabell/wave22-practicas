@@ -27,10 +27,11 @@ public class SellerRepositoryImp implements ISellerRepository{
     }
 
     @Override
-    public void sumAFollower(int idFollower, int idSeller) {
+    public Seller sumAFollower(int idFollower, int idSeller) {
 
         Seller seller = findById(idSeller);
         seller.getFollowers().add(userRepo.findById(idFollower));
 
+        return seller;
     }
 }
