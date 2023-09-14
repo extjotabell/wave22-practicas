@@ -40,4 +40,10 @@ public class UserRepositoryImp implements IUserRepository{
 
         throw new NotFoundException("No existe el usuario");
     }
+    @Override
+    public void updateUser(int user_id, User user) {
+        User oldUser = this.findById(user_id);
+        int indexPos = this.list_of_users.indexOf(oldUser);
+        this.list_of_users.set(indexPos, user);
+    }
 }
