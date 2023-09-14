@@ -30,7 +30,7 @@ public class UserRepositoryImp implements IUserRepository{
      */
     @Override
     public User findById(int user_id) {
-        
+
         for(User user: this.list_of_users){
             if(user.getUser_id() == user_id){
                 return user;
