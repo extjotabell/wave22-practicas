@@ -29,21 +29,54 @@ public class SellerRepositoryImp implements ISellerRepository{
         posts3.add(postRepository.getPostById(1));
         posts3.add(postRepository.getPostById(2));
 
-        //Seguidores de los vendedores
-        List<User> followers1 = new ArrayList<>();
-        List<User> followers2 = new ArrayList<>();
-
-        Seller seller1 = new Seller(posts1, followers1);
+        Seller seller1 = new Seller();
+        seller1.setPosts(posts1);
         seller1.setUser_id(1);
         seller1.setUser_name("Rick Harrison");
 
-        Seller seller2 = new Seller(posts2, followers2);
+        Seller seller2 = new Seller();
+        seller2.setPosts(posts2);
         seller2.setUser_id(2);
         seller2.setUser_name("Zadie Smith");
 
-        Seller seller3 = new Seller(posts3, followers2);
+        Seller seller3 = new Seller();
+        seller3.setPosts(posts3);
         seller3.setUser_id(3);
         seller3.setUser_name("Comefulanito");
+
+        //Generar lista de vendedores a followed
+        List<Seller> sellers1 = new ArrayList<>();
+        sellers1.add(seller1);
+        sellers1.add(seller3);
+
+        List<Seller> sellers2 = new ArrayList<>();
+        sellers2.add(seller3);
+
+        List<Seller> sellers3 = new ArrayList<>();
+        sellers3.add(seller1);
+        sellers3.add(seller2);
+        sellers3.add(seller3);
+
+        // Usuarios falsos
+        User user4 = new User(4, "Lisa", sellers1);
+        User user5 = new User(5, "Bart", sellers2);
+        User user6 = new User(6, "Maggie", sellers3);
+
+        // Seguidores de los vendedores
+        List<User> followers1 = new ArrayList<>();
+        followers1.add(user4);
+        followers1.add(user6);
+        List<User> followers2 = new ArrayList<>();
+        followers2.add(user6);
+        List<User> followers3 = new ArrayList<>();
+        followers3.add(user4);
+        followers3.add(user5);
+        followers3.add(user6);
+
+        // Agregar followers a los vendedores
+        seller1.setFollowers(followers1);
+        seller2.setFollowers(followers2);
+        seller3.setFollowers(followers3);
 
         this.sellerList.add(seller1);
         this.sellerList.add(seller2);
