@@ -9,11 +9,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionConfig {
 
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ExceptionDto> unexpectedException(NotFoundException e){
+        return new ResponseEntity<>(new ExceptionDto(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
 
     //Ultima Exception
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionDto> unexpectedException(Exception e){
         System.out.println(e.getMessage());
-        return new ResponseEntity(new ExceptionDto("Unexpected Error"), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new ExceptionDto("Unexpected Error"), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
