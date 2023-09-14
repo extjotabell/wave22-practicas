@@ -31,4 +31,9 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(sellerService.setAFollower(userId,sellerId));
     }
 
+    @GetMapping("/users/{userId}/followed/list")
+    public ResponseEntity<?> getFollowedList(@PathVariable int userId){
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getUserFollowedList(userId));
+    }
+
 }

@@ -14,4 +14,3 @@ public class FollowedDTO {
     private String user_name;
     private List<FollowedDTO> followed;
 }
-g

@@ -1,5 +1,7 @@
 package com.meli.be_java_hisp_w22_g01.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.meli.be_java_hisp_w22_g01.dto.FollowedDTO;
 import com.meli.be_java_hisp_w22_g01.dto.SellerDto;
 import com.meli.be_java_hisp_w22_g01.dto.UserDto;
 import com.meli.be_java_hisp_w22_g01.dto.response.UserFollowersListDTO;
@@ -19,6 +21,13 @@ public class UserServiceImp implements IUserService{
 
     @Autowired
     IUserRepository userRepository;
+
+    @Override
+    public FollowedDTO getUserFollowedList(int user_id) {
+        User usersById = userRepository.findById(user_id);
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.convertValue(usersById, FollowedDTO.class);
+    }
 
     /**
      * Punto 3
