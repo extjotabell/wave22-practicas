@@ -20,11 +20,23 @@ public class UserRepositoryImp implements IUserRepository{
 
     @Override
     public List<User> getAll() {
-        return null;
+        return this.list_of_users;
     }
 
+    /**
+     * Busca un usuario por su id
+     * @param user_id
+     * @return devuelve el objeto usuario, caso contrario null si no esta
+     */
     @Override
     public User findById(int user_id) {
+
+        for(User user: this.list_of_users){
+            if(user.getUser_id() == user_id){
+                return user;
+            }
+        }
+
         return null;
     }
 }
