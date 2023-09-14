@@ -24,6 +24,6 @@ public class SellerServiceImp implements ISellerService{
             throw new NotFoundException("No se encontró el usuario con id: " + userId);
         }
         int count = seller.getFollowers().size();
-        return new CountFollowersDTO(count);
+        return new CountFollowersDTO(userId,seller.getUser_name(),count);
     }
 }
