@@ -8,5 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CountFollowersDTO {
+    private int user_id;
+    private String user_name;
     private int followers;
 }
