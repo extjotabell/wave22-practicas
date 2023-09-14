@@ -1,6 +1,6 @@
 package com.meli.be_java_hisp_w22_g01.service;
 
-import com.meli.be_java_hisp_w22_g01.dto.FollowedDTO;
+import com.meli.be_java_hisp_w22_g01.dto.response.FollowedDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.UserFollowersListDTO;
 
 public interface IUserService {

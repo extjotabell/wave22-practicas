@@ -1,4 +1,4 @@
-package com.meli.be_java_hisp_w22_g01.dto;
+package com.meli.be_java_hisp_w22_g01.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,5 +12,5 @@ import java.util.List;
 public class FollowedDTO {
     private int user_id;
     private String user_name;
-    private List<FollowedDTO> followed;
+    private List<UserMiniDTO> followed;
 }
