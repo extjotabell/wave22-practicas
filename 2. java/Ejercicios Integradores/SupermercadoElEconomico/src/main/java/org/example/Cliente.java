@@ -1,9 +1,13 @@
 package org.example;
 
-public class Cliente {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Cliente{
     private String dni;
     private String nombre;
     private String apellido;
+
 
     public Cliente(String dni, String nombre, String apellido) {
         this.dni = dni;
@@ -33,5 +37,14 @@ public class Cliente {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "dni='" + dni + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                '}';
     }
 }

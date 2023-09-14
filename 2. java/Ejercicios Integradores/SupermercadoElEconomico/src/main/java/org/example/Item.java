@@ -44,4 +44,8 @@ public class Item {
     public void setCostoUnitario(double costoUnitario) {
         this.costoUnitario = costoUnitario;
     }
+
+    public double getCostoTotal(){
+        return getCantidadComprada() * getCostoUnitario();
+    }
 }
