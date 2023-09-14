@@ -20,4 +20,9 @@ public class UserController {
     public ResponseEntity<?> countFollowers (@PathVariable int userId) {
         return ResponseEntity.status(HttpStatus.OK).body(sellerService.countFollowers(userId));
     }
+
+    @GetMapping("/{userId}/followers/list")
+    public ResponseEntity<?> followersList(@PathVariable int userId){
+        return null;
+    }
 }
