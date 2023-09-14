@@ -10,6 +10,7 @@ import com.meli.be_java_hisp_w22_g01.repository.IUserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class UserServiceImp implements IUserService{
 
@@ -53,5 +54,41 @@ public class UserServiceImp implements IUserService{
         userFollowersList.setFollowers(userDataList);
 
         return userFollowersList;
+    }
+
+    /**
+     * Endpoint 7
+     * Un usuario deja de seguir a otro en base al id de cada uno
+     * @param user_id, userIdToUnfollow
+     * @return booleano para indicar si la operación fue exitosa o no
+     **/
+    @Override
+    public boolean unfollow(int userId, int userIdToUnfollow) {
+
+        List<User> users = userRepository.getAll();
+
+        Optional<User> userToEdit = users.stream()
+                .filter(u -> u.getUser_id() == userId)
+                .findFirst();
+
+        // si se encuentra el userId se modifica
+        if (userToEdit.isPresent()){
+
+            // Buscar el seller en la lista de seguidos (followed) del usuario
+            Optional<Seller> seller = userToEdit.get().getFollowed().stream()
+                    .filter(s -> s.getUser_id() == userIdToUnfollow)
+                    .findFirst();
+
+            // si el vendedor existe en la lista de seguidos del usuario removerlo
+            if (seller.isPresent()) {
+                userToEdit.get().getFollowed().remove(seller.get());
+
+                // Actualizar repositorio
+                userRepository.updateUser(userToEdit.get().getUser_id(), userToEdit.get());
+                return true;
+
+            }
+        }
+        return false;
     }
 }
