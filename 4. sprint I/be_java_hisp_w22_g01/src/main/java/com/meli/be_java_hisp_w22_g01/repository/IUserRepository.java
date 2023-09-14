@@ -8,4 +8,6 @@ public interface IUserRepository {
     void save (User user);
     List<User> getAll ();
     User findById(int user_id);
+
+    void updateUser(int user_id, User user);
 }
