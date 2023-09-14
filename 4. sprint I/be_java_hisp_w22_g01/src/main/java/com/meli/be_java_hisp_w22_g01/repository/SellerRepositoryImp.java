@@ -10,6 +10,7 @@ import java.util.List;
 public class SellerRepositoryImp implements ISellerRepository{
 
     private List<Seller> sellerList = new ArrayList<>();
+    private UserRepositoryImp userRepo;
     @Override
     public void save(Seller seller) {
         sellerList.add(seller);
@@ -23,5 +24,13 @@ public class SellerRepositoryImp implements ISellerRepository{
     @Override
     public Seller findById(int seller_id) {
         return sellerList.stream().filter(seller -> seller.getUser_id() == seller_id).findFirst().orElse(null);
+    }
+
+    @Override
+    public void sumAFollower(int idFollower, int idSeller) {
+
+        Seller seller = findById(idSeller);
+        seller.getFollowers().add(userRepo.findById(idFollower));
+
     }
 }
