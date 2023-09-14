@@ -7,13 +7,17 @@ import com.meli.be_java_hisp_w22_g01.dto.response.UserMiniDTO;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
 import com.meli.be_java_hisp_w22_g01.repository.IUserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class UserServiceImp implements IUserService{
 
+    @Autowired
     IUserRepository userRepository;
 
     /**
@@ -28,11 +32,6 @@ public class UserServiceImp implements IUserService{
         User usersById = userRepository.findById(user_id);
         UserFollowersListDTO userFollowersList = new UserFollowersListDTO();
 
-        // Si no hay usuario con es id, devuelve el dto solo
-        if(usersById == null){
-            return userFollowersList;
-        }
-
         // si hay lista de usuarios
         userFollowersList.setUser_id(usersById.getUser_id());
         userFollowersList.setUser_name(usersById.getUser_name());
@@ -41,13 +40,15 @@ public class UserServiceImp implements IUserService{
         List<UserMiniDTO> userDataList = new ArrayList<>();
         List<Seller> userFollower = usersById.getFollowed();
 
-        for(Seller seller : userFollower){
-            UserMiniDTO userData = new UserMiniDTO();
-            userData.setUser_id(seller.getUser_id());
-            userData.setUser_name(seller.getUser_name());
+        if(!userFollower.isEmpty()){
+            for(Seller seller : userFollower){
+                UserMiniDTO userData = new UserMiniDTO();
+                userData.setUser_id(seller.getUser_id());
+                userData.setUser_name(seller.getUser_name());
 
-            // agregando a lista de usuarios
-            userDataList.add(userData);
+                // agregando a lista de usuarios
+                userDataList.add(userData);
+            }
         }
 
         // agregando los datos de los seguidores a los datos de usuario consultado
