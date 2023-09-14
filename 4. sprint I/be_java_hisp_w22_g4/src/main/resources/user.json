@@ -1,0 +1,230 @@
+[
+  {
+    "user_id" : 1,
+    "rol" : "COMPRADOR",
+    "user_name" : "Diego",
+    "following" : [ 6,10]
+  },
+  {
+    "user_id" : 2,
+    "rol" : "COMPRADOR",
+    "user_name" : "Florencia",
+    "following" : [ 7,8,10]
+  },
+  {
+    "user_id" : 3,
+    "rol" : "COMPRADOR",
+    "user_name" : "Sergio",
+    "following" : [ 9,6]
+  },
+  {
+    "user_id" : 4,
+    "rol" : "COMPRADOR",
+    "user_name" : "Matia",
+    "following" : [9]
+  },
+  {
+    "user_id" : 5,
+    "rol" : "COMPRADOR",
+    "user_name" : "Soledad",
+    "following" : [ 6,7,8]
+  },
+  {
+    "user_id" : 6,
+    "rol" : "VENDEDOR",
+    "user_name" : "Jesica",
+    "postList": [
+      {
+        "post_id" : 1,
+        "user_id": 6,
+        "date": "2023-08-29",
+        "product": {
+          "product_id": 1,
+          "product_name": "Silla Gamer",
+          "type": "Gamer",
+          "brand": "Racer",
+          "color": "negro",
+          "notes": "Edicion especial"
+        },
+        "category": 100,
+        "price": 1500.50,
+        "has_promo": true,
+        "discount": 0.25
+      },
+      {
+        "post_id" : 2,
+        "user_id": 6,
+        "date": "2023-09-09",
+        "product": {
+          "product_id": 2,
+          "product_name": "Mouse",
+          "type": "Gamer",
+          "brand": "Logitech",
+          "color": "rosa",
+          "notes": "Inalambrico"
+        },
+        "category": 200,
+        "price": 360,
+        "has_promo": false,
+        "discount": 0
+      }
+    ],
+    "followers" : [ 1,10],
+    "following" : [ 7,8]
+  },
+  {
+    "user_id" : 7,
+    "rol" : "VENDEDOR",
+    "user_name" : "Daniel",
+    "postList": [
+      {
+        "post_id" : 4,
+        "user_id": 7,
+        "date": "2023-08-08",
+        "product": {
+          "product_id": 8,
+          "product_name": "Billetera",
+          "type": "Cuero",
+          "brand": "XL",
+          "color": "azul",
+          "notes": "Con brillo"
+        },
+        "category": 56,
+        "price": 8900,
+        "has_promo": false,
+        "discount": 0
+      },
+      {
+        "post_id" : 2,
+        "user_id": 7,
+        "date": "2023-09-20",
+        "product": {
+          "product_id": 87,
+          "product_name": "Cartera",
+          "type": "Tela",
+          "brand": "XL",
+          "color": "Violeta",
+          "notes": "Tipo mochila"
+        },
+        "category": 323,
+        "price": 16000,
+        "has_promo": true,
+        "discount": 0.3
+      }
+    ],
+    "followers" : [ 2,6,10],
+    "following" : [ 9,10]
+  },
+  {
+    "user_id" : 8,
+    "rol" : "VENDEDOR",
+    "user_name" : "Hugo",
+    "postList": [
+      {
+        "post_id" : 56,
+        "user_id": 8,
+        "date": "2023-08-24",
+        "product": {
+          "product_id": 87,
+          "product_name": "Remera",
+          "type": "Algodon",
+          "brand": "Adidas",
+          "color": "Azul y blanca",
+          "notes": "Edicion mundial"
+        },
+        "category": 32,
+        "price": 23900,
+        "has_promo": false,
+        "discount": 0
+      },
+      {
+        "post_id" : 2,
+        "user_id": 8,
+        "date": "2023-09-28",
+        "product": {
+          "product_id": 87,
+          "product_name": "Campera",
+          "type": "Piloto",
+          "brand": "Puma",
+          "color": "Rosa",
+          "notes": "Impermeable"
+        },
+        "category": 54,
+        "price": 33000,
+        "has_promo": true,
+        "discount": 0.5
+      }
+    ],
+    "followers" : [ 2,6]
+  },
+  {
+    "user_id" : 9,
+    "rol" : "VENDEDOR",
+    "user_name" : "Rosa",
+    "postList": [
+      {
+        "post_id" : 90,
+        "user_id": 9,
+        "date": "2023-08-25",
+        "product": {
+          "product_id": 67,
+          "product_name": "Televisor",
+          "type": "Smart",
+          "brand": "Sansumg",
+          "color": "negro",
+          "notes": "Full 8K"
+        },
+        "category": 43,
+        "price": 200000,
+        "has_promo": false,
+        "discount": 0
+      },
+      {
+        "post_id" : 65,
+        "user_id": 9,
+        "date": "2023-09-30",
+        "product": {
+          "product_id": 32,
+          "product_name": "Aspiradora",
+          "type": "Robot",
+          "brand": "Motorola",
+          "color": "Celeste",
+          "notes": "G plus"
+        },
+        "category": 77,
+        "price": 180000,
+        "has_promo": true,
+        "discount": 0.25
+      }
+    ],
+    "followers" : [ 3,4,7],
+    "following" : [ 10]
+  }
+,
+  {
+    "user_id" : 10,
+    "rol" : "VENDEDOR",
+    "user_name" : "Hector",
+    "postList": [
+      {
+        "post_id" : 100,
+        "user_id": 10,
+        "date": "2023-08-05",
+        "product": {
+          "product_id": 76,
+          "product_name": "Lampara",
+          "type": "Velador",
+          "brand": "LuzSol",
+          "color": "Dorado",
+          "notes": "Luz calida"
+        },
+        "category": 34,
+        "price": 8900,
+        "has_promo": false,
+        "discount": 0
+      }
+    ],
+    "followers" : [ 1,2,7,10],
+    "following" : [ 6,7]
+  }
+]
