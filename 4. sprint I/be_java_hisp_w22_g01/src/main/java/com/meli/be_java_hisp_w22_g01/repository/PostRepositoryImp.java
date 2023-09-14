@@ -22,8 +22,8 @@ public class PostRepositoryImp implements IPostRepository {
         // Recorre los productos falsos y asigna cada uno a un post
         for (Product product : products.getAllProducts()){
 
-            // Genera un número aleatorio entre 1 y 4. Este numero representa el id del usuario al que le pertenece el post
-            int idUser = random.nextInt(4) + 1;
+            // Genera un número aleatorio entre 1 y 2. Este numero representa el id del usuario(vendedor) al que le pertenece el post
+            int idUser = random.nextInt(2) + 1;
 
             // Número random para la categoria
             int category = random.nextInt(99) + 1;
