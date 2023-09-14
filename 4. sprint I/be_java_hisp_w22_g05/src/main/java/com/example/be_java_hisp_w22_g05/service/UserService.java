@@ -2,21 +2,19 @@ package com.example.be_java_hisp_w22_g05.service;
 
 import com.example.be_java_hisp_w22_g05.dto.UserDto;
 import com.example.be_java_hisp_w22_g05.dto.UserFollowedDto;
+import com.example.be_java_hisp_w22_g05.dto.UserNumberFollowersDto;
 import com.example.be_java_hisp_w22_g05.entity.User;
 import com.example.be_java_hisp_w22_g05.exception.FollowException;
 import com.example.be_java_hisp_w22_g05.exception.NotFoundException;
 import com.example.be_java_hisp_w22_g05.repository.IUserRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements IUserService{
+public class UserService implements IUserService {
 
     private final IUserRepository userRepository;
 
@@ -46,4 +44,13 @@ public class UserService implements IUserService{
                 .map(user -> new UserDto(user.getId(), user.getName()))
                 .collect(Collectors.toList()));
     }
+
+    public UserNumberFollowersDto getNumberFollowers(int userId) {
+        User user = userRepository.findUsersById(userId);
+        if (user == null) {
+            throw new NotFoundException(String.format("User with id %d not found", userId));
+        }
+        return new UserNumberFollowersDto(userId, user.getName(), user.getFollower().size());
+    }
+
 }
