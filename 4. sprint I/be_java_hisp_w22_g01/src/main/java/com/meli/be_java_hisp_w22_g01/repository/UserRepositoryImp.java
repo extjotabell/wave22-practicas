@@ -12,15 +12,7 @@ import java.util.List;
 @Repository
 public class UserRepositoryImp implements IUserRepository{
 
-    private List<User> list_of_users;
-
-    public UserRepositoryImp(){
-        this.list_of_users = new ArrayList<>();
-
-        User User1 = new User();
-        User1.setUser_id(6);
-        User1.setUser_name("Emma");
-    }
+    private List<User> list_of_users = new ArrayList<>();
 
     @Override
     public void save(User user) {
