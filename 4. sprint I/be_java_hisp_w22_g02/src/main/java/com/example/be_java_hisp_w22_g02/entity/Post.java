@@ -14,5 +14,6 @@ public class Post {
     private LocalDate date;
     private String category;
     private Double price;
+    private Product product;
 }
 

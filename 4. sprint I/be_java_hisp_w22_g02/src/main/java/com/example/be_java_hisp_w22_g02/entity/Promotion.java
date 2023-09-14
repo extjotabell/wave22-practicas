@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Promotion extends Post {
-    private boolean has_promo;
+    private boolean hasPromo;
     private double discount;
 }

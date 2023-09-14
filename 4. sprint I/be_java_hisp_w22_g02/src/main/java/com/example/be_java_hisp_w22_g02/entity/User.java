@@ -9,8 +9,9 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class User {
-    private int user_id;
-    private String user_name;
+    private Long userId;
+    private String userName;
     private List<User> followers = new ArrayList<>();
     private List<User> followed = new ArrayList<>();
+    private List<Post> posts = new ArrayList<>();
 }
