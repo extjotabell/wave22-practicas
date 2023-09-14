@@ -1,6 +1,7 @@
 package com.meli.be_java_hisp_w22_g01.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
 import com.meli.be_java_hisp_w22_g01.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,34 @@ import java.util.List;
 public class UserRepositoryImp implements IUserRepository{
 
     private List<User> list_of_users = new ArrayList<>();
+
+    public UserRepositoryImp() {
+
+        ISellerRepository sellerRepository = new SellerRepositoryImp();
+
+        //Generar lista de vendedores a seguir
+        List<Seller> sellers1 = new ArrayList<>();
+        sellers1.add(sellerRepository.findById(1));
+        sellers1.add(sellerRepository.findById(3));
+
+        List<Seller> sellers2 = new ArrayList<>();
+        sellers2.add(sellerRepository.findById(3));
+
+        List<Seller> sellers3 = new ArrayList<>();
+        sellers3.add(sellerRepository.findById(1));
+        sellers3.add(sellerRepository.findById(2));
+        sellers3.add(sellerRepository.findById(3));
+
+        // Usuarios falsos
+        User user1 = new User(1, "Lisa", sellers1);
+        User user2 = new User(1, "Bart", sellers2);
+        User user3 = new User(1, "Maggie", sellers3);
+
+        this.list_of_users.add(user1);
+        this.list_of_users.add(user2);
+        this.list_of_users.add(user3);
+
+    }
 
     @Override
     public void save(User user) {
