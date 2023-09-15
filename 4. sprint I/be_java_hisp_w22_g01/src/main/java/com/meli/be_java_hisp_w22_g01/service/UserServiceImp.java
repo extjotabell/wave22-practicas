@@ -23,8 +23,11 @@ public class UserServiceImp implements IUserService{
     @Override
     public FollowedDTO getUserFollowedList(int user_id) {
         User usersById = userRepository.findById(user_id);
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.convertValue(usersById, FollowedDTO.class);
+        String userName = usersById.getUser_name();
+        List<Seller> followed = usersById.getFollowed();
+        List<UserMiniDTO> userMiniDTOS = new ArrayList<>();
+        followed.forEach(seller -> userMiniDTOS.add(new UserMiniDTO(seller.getUser_id(), seller.getUser_name())));
+        return new FollowedDTO(user_id, userName, userMiniDTOS);
     }
 
     /**
