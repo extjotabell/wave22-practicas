@@ -10,6 +10,8 @@ import com.example.be_java_hisp_w22_g05.exception.NotFoundException;
 import com.example.be_java_hisp_w22_g05.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Comparator;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +61,7 @@ public class UserService implements IUserService {
         return new UserNumberFollowersDto(userId, user.getName(), user.getFollower().size());
     }
 
-    public UserFollowedDto getListOfUsersFollowedBy(Integer id){
+    public UserFollowedDto getListOfUsersFollowedBy(Integer id, String order){
         User user = userRepository.findUsersById(id);
         if(user == null){
             throw new NotFoundException("No se encontró el usuario especificado");
@@ -71,6 +73,7 @@ public class UserService implements IUserService {
         for (User u : user.getFollowed()) {
             userDtos.add(new UserDto(u.getId(), u.getName()));
         }
+        userDtos = orderList(userDtos, order);
         userFollowedDto.setFollowed(userDtos);
         return userFollowedDto;
     }
@@ -89,7 +92,7 @@ public class UserService implements IUserService {
         return new UserFollowedDto(finalUser.getId(), finalUser.getName(),userFollowedFinal);
 
     }
-    public UserFollowersDto findUsersFollowingSeller(int userId) {
+    public UserFollowersDto findUsersFollowingSeller(int userId, String order) {
         User user = userRepository.findUsersById(userId);
         if (user == null) {
             throw new NotFoundException("No se encontró el usuario especificado");
@@ -100,7 +103,18 @@ public class UserService implements IUserService {
                 .map(user1 -> new UserDto(user1.getId(), user1.getName()))
                 .collect(Collectors.toList());
 
+        userDtos = orderList(userDtos, order);
         return new UserFollowersDto(user.getId(), user.getName(), userDtos) ;
     }
 
+    private List<UserDto> orderList(List<UserDto> userDtos, String order){
+        if("name_asc".equals(order)){
+            return userDtos.stream().sorted(Comparator.comparing(UserDto::getName)).collect(Collectors.toList());
+        }
+        else if ("name_desc".equals(order)){
+            return userDtos.stream().sorted(Comparator.comparing(UserDto::getName).reversed()).collect(Collectors.toList());
+
+        }
+        return userDtos;
+    }
 }
