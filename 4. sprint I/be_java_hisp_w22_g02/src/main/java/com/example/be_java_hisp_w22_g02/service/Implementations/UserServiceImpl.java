@@ -17,6 +17,8 @@ import com.example.be_java_hisp_w22_g02.mapper.UserFollowMapper;
 import lombok.AllArgsConstructor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -25,35 +27,16 @@ import java.util.ArrayList;
 
 import java.util.Map;
 
-
-@Service
 @AllArgsConstructor
+@Service
 public class UserServiceImpl implements IUserService {
 
     private final IUserRepository userRepository;
+
     private final UserFollowMapper userFollowMapper;
+
     private final ObjectMapper mapper;
 
-    public UserServiceImpl(IUserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-    @Override
-    public List<TwoWeeksPostDTO> getLastTwoWeeksPostByUser(Long userID) {
-        List<FollowedPostDTO> followedPostDTOS = new ArrayList<>();
-
-        //List<Post> posts = userRepository.getFollowedPostLasTwoWeeks(userID);
-        Map<Integer,Post> posts= userRepository.getFollowedPostLasTwoWeeks(userID);
-
-        for (Map.Entry<Integer,Post> entry: posts.entrySet()) {
-            followedPostDTOS.add(new FollowedPostDTO(entry.getKey().intValue(),entry.getValue()));
-        }
-
-        //List<FollowedPostDTO> followedPosts = userRepository.getFollowedPostLasTwoWeeks(userID);
-
-
-        TwoWeeksPostDTO twoWeeksPostDTO = new TwoWeeksPostDTO(userID,posts);
-    }
 
     @Override
     public void followUser(int userId, int userIdToFollow) {

@@ -3,210 +3,80 @@
     "user_id": 1,
     "user_name": "pepito1234",
     "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 2,
-    "user_name": "juancito5678",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 3,
-    "user_name": "ana_maria",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 4,
-    "user_name": "luisa_89",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 5,
-    "user_name": "carlos22",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 6,
-    "user_name": "mariapaz",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 7,
-    "user_name": "josefina123",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 8,
-    "user_name": "pedro_555",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 9,
-    "user_name": "roberto_gomez",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 10,
-    "user_name": "miguelito",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 11,
-    "user_name": "susanita",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 12,
-    "user_name": "pablo_22",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 13,
-    "user_name": "carolina_12",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 14,
-    "user_name": "andresito",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 15,
-    "user_name": "julian_gomez",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 16,
-    "user_name": "laura_99",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 17,
-    "user_name": "camila_rdz",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 18,
-    "user_name": "felipe_007",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 19,
-    "user_name": "mariana_123",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 20,
-    "user_name": "dieguito",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 21,
-    "user_name": "isabella_22",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 22,
-    "user_name": "victor22",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 23,
-    "user_name": "esteban_10",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 24,
-    "user_name": "anita_123",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 25,
-    "user_name": "rodrigo_88",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 26,
-    "user_name": "sofia_mtz",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 27,
-    "user_name": "danielito",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 28,
-    "user_name": "catalina_11",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 29,
-    "user_name": "ricardo_mtz",
-    "followers": [],
-    "followed": [],
-    "posts": []
-  },
-  {
-    "user_id": 30,
-    "user_name": "andrea_22",
-    "followers": [],
-    "followed": [],
+    "followed": [
+      {
+        "user_id": 2,
+        "user_name": "juancito5678",
+        "followers": [],
+        "followed": [],
+        "posts": [
+                    {
+                      "postId": 1,
+                      "date": "2023-09-14",
+                      "category": "Tecnología",
+                      "price": 1000.0,
+                      "product": {
+                        "productId": 1,
+                        "productName": "Laptop",
+                        "type": "Tecnología",
+                        "brand": "HP",
+                        "color": "Negro",
+                        "notes": "Procesador Intel Core i5, 8GB RAM, 256GB SSD"
+                      }
+                    },
+          {
+            "postId": 2,
+            "date": "2023-09-10",
+            "category": "Tecnología",
+            "price": 500.0,
+            "product": {
+              "productId": 2,
+              "productName": "Smartphone",
+              "type": "Tecnología",
+              "brand": "Samsung",
+              "color": "Azul",
+              "notes": "Pantalla de 6.5 pulgadas, cámara de 64MP, 128GB de almacenamiento"
+            }
+          }
+        ]
+      },
+      {
+        "user_id": 3,
+        "user_name": "ana_maria",
+        "followers": [],
+        "followed": [],
+        "posts": [
+          {
+            "postId": 3,
+            "date": "2023-09-14",
+            "category": "Tecnología",
+            "price": 1000.0,
+            "product": {
+              "productId": 1,
+              "productName": "Laptop",
+              "type": "Tecnología",
+              "brand": "HP",
+              "color": "Negro",
+              "notes": "Procesador Intel Core i5, 8GB RAM, 256GB SSD"
+            }
+          },
+          {
+            "postId": 4,
+            "date": "2023-09-10",
+            "category": "Tecnología",
+            "price": 500.0,
+            "product": {
+              "productId": 2,
+              "productName": "Smartphone",
+              "type": "Tecnología",
+              "brand": "Samsung",
+              "color": "Azul",
+              "notes": "Pantalla de 6.5 pulgadas, cámara de 64MP, 128GB de almacenamiento"
+            }
+          }
+        ]
+      }
+    ],
     "posts": []
   }
-]
+  ]
