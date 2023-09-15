@@ -9,9 +9,9 @@ import org.springframework.util.ResourceUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserRepositoryImpl implements IUserRepository{
@@ -54,5 +54,10 @@ public class UserRepositoryImpl implements IUserRepository{
     @Override
     public List<User> getAllUsers() {
         return usersDatabase.values().stream().toList();
+    }
+
+    @Override
+    public Optional<User> findUserById(Integer userId) {
+        return Optional.ofNullable(this.usersDatabase.get(userId));
     }
 }
