@@ -87,6 +87,10 @@ public class UserService implements IUserService {
         if(userFollowed == null){
             throw new NotFoundException("No se encontro el usuario " + userIdToUnfollow);
         }
+        User userFollowedInFollower = userFollower.getFollowed().stream().filter(u-> u == userFollowed).findFirst().orElse(null);
+        if(userFollowedInFollower == null){
+            throw new NotFoundException("No seguis al usuario con id " + userIdToUnfollow);
+        }
         User finalUser = userRepository.unfollow(userFollower,userFollowed);
         List<UserDto> userFollowedFinal = finalUser.getFollowed().stream().map(f-> new UserDto(f.getId(),f.getName())).toList();
         return new UserFollowedDto(finalUser.getId(), finalUser.getName(),userFollowedFinal);

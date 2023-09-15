@@ -18,6 +18,12 @@ public class ExceptionConfig {
     public ResponseEntity<ExceptionDto> followException(FollowException e){
         return new ResponseEntity<>(new ExceptionDto(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(AlreadyExistsException.class)
+    public ResponseEntity<ExceptionDto> alreadyExistsException(AlreadyExistsException e){
+        return new ResponseEntity<>(new ExceptionDto(e.getMessage()), HttpStatus.CONFLICT);
+    }
+    
     //Ultima Exception
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionDto> unexpectedException(Exception e){
@@ -25,8 +31,5 @@ public class ExceptionConfig {
         return new ResponseEntity<>(new ExceptionDto("Unexpected Error"), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(AlreadyExistsException.class)
-    public ResponseEntity<ExceptionDto> alreadyExistsException(AlreadyExistsException e){
-        return new ResponseEntity<>(new ExceptionDto(e.getMessage()), HttpStatus.CONFLICT);
-    }
+
 }
