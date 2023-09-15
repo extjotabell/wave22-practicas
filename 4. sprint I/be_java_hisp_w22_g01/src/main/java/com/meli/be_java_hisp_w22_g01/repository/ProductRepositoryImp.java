@@ -1,6 +1,5 @@
 package com.meli.be_java_hisp_w22_g01.repository;
 
-import com.meli.be_java_hisp_w22_g01.entity.Post;
 import com.meli.be_java_hisp_w22_g01.entity.Product;
 import org.springframework.stereotype.Repository;
 
@@ -22,5 +21,14 @@ public class ProductRepositoryImp  implements IProductRepository{
 
     public List<Product> getAllProducts() {
         return new ArrayList<>(this.products);
+    }
+
+    public Product getById(int id){
+        return products.stream().filter(product -> product.getProduct_id() == id).findFirst().orElse(null);
+    }
+
+    @Override
+    public void save (Product product){
+        products.add(product);
     }
 }
