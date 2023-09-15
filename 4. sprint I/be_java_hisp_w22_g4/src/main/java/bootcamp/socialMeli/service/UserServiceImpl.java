@@ -1,38 +1,62 @@
 package bootcamp.socialMeli.service;
+
 import bootcamp.socialMeli.dto.FollowersCountDto;
 import bootcamp.socialMeli.dto.FollowersListDto;
 import bootcamp.socialMeli.dto.NameOrderEnumDto;
 import bootcamp.socialMeli.dto.UserDto;
+import bootcamp.socialMeli.entity.RolEnum;
 import bootcamp.socialMeli.entity.User;
+import bootcamp.socialMeli.exception.BadRequestException;
 import bootcamp.socialMeli.exception.NotFoundException;
 import bootcamp.socialMeli.repository.IUserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements IUserService{
+    private final ObjectMapper objectMapper;
     private final IUserRepository userRepository;
     /*private final IPostService postService;
     private final IProductService productService;*/
 
-    public UserServiceImpl(IUserRepository userRepository) {
+    public UserServiceImpl(IUserRepository userRepository, ObjectMapper objectMapper) {
         this.userRepository = userRepository;
         //this.postService = postService;
         //this.productService = productService;
+        this.objectMapper = objectMapper;
     }
 
-    ObjectMapper mapper = new ObjectMapper();
     @Override
     public List<UserDto> getAllUsers() {
-        List<User> userList = userRepository.getAllUsers();
-        return userList.stream()
-                .map(user -> mapper.convertValue(user,UserDto.class))
+        return this.userRepository.getAllUsers()
+                .stream()
+                .map(u -> objectMapper.convertValue(u, UserDto.class))
                 .collect(Collectors.toList());
+    }
+
+    // US 01
+    @Override
+    public void followUser(Integer userId, Integer userIdToFollow) {
+        if (userId.equals(userIdToFollow)) {
+            throw new BadRequestException("IDs enviados iguales");
+        }
+
+        User user = this.findUserById(userId);
+        User userToFollow = this.findUserById(userIdToFollow);
+
+        if (userToFollow.getRol().equals(RolEnum.COMPRADOR)) {
+            throw new BadRequestException("Intentando seguir un COMPRADOR");
+        }
+
+        if (user.getFollowing().contains(userIdToFollow)) {
+            throw new BadRequestException("Ya sigue al usuario");
+        }
+
+        this.userRepository.addFollower(user, userToFollow);
     }
 
     // US 02

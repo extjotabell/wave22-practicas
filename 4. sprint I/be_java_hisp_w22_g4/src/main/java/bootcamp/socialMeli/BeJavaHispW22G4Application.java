@@ -9,5 +9,4 @@ public class BeJavaHispW22G4Application {
 	public static void main(String[] args) {
 		SpringApplication.run(BeJavaHispW22G4Application.class, args);
 	}
-
 }

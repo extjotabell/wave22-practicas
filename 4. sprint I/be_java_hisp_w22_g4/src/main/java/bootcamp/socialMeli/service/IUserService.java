@@ -17,4 +17,5 @@ public interface IUserService {
 
     User findUserById(int userId);
 
+    void followUser(Integer userId, Integer userIdToFollow);
 }

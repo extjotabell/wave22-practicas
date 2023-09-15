@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface IUserRepository {
     List<User> getAllUsers();
-
-    Optional<User> findUserById(Integer userId);
+    Optional<User> findUserById(Integer userIdToFollow);
+    void addFollower(User user, User userToFollow);
 }
