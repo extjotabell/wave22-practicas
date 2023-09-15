@@ -6,11 +6,9 @@ import java.util.List;
 
 
 public interface IUserRepository {
-    User findById(Long id);
+    User findById(Integer id);
 
     void followUser(int userId, int userIdToFollow);
-
-    User getUser(int userId);
 
     List<User> getAllUsers();
 
