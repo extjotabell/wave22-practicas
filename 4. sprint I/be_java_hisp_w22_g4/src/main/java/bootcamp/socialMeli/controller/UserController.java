@@ -28,11 +28,13 @@ public class UserController {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
+    // US 02
     @GetMapping("/users/{userId}/followers/count")
     public ResponseEntity<FollowersCountDto> getFollowersCount(@PathVariable int userId){
         return new ResponseEntity<>(userService.getFollowersCount(userId), HttpStatus.OK);
     }
 
+    // US 03
     @GetMapping("/users/{userId}/followers/list")
     public ResponseEntity<FollowersListDto> getFollowersList(@PathVariable int userId){
         return new ResponseEntity<>(userService.getFollowersList(userId), HttpStatus.OK);

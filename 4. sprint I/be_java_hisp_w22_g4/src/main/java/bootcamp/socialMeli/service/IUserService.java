@@ -14,4 +14,6 @@ public interface IUserService {
 
     FollowersCountDto getFollowersCount(int userId);
 
+    User findUserById(int userId);
+
 }
