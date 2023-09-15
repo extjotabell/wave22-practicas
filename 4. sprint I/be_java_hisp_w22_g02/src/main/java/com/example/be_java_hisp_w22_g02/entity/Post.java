@@ -1,5 +1,6 @@
 package com.example.be_java_hisp_w22_g02.entity;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,8 +12,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Post {
+    @JsonAlias({"post_id"})
     private int postId;
-    private int user_id;
+    @JsonAlias({"user_id"})
+    private int userId;
     private LocalDate date;
     private Product product;
     private int category;

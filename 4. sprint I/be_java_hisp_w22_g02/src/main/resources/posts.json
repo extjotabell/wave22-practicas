@@ -2,7 +2,7 @@
   {
     "postId": 1,
     "date": "2022-11-10",
-    "category": "Tecnología",
+    "category": 1,
     "price": 1000.0,
     "product": {
       "productId": 1,
@@ -16,7 +16,7 @@
   {
     "postId": 2,
     "date": "2022-11-11",
-    "category": "Tecnología",
+    "category": 1,
     "price": 500.0,
     "product": {
       "productId": 2,
@@ -30,7 +30,7 @@
   {
     "postId": 20,
     "date": "2022-11-15",
-    "category": "Indumentaria",
+    "category": 2,
     "price": 50.0,
     "product": {
       "productId": 20,
@@ -44,7 +44,7 @@
   {
     "postId": 21,
     "date": "2022-11-16",
-    "category": "Tecnología",
+    "category": 1,
     "price": 120.0,
     "product": {
       "productId": 21,
@@ -58,7 +58,7 @@
   {
     "postId": 22,
     "date": "2022-11-17",
-    "category": "Indumentaria",
+    "category": 2,
     "price": 80.0,
     "product": {
       "productId": 22,
@@ -72,7 +72,7 @@
   {
     "postId": 23,
     "date": "2022-11-18",
-    "category": "Tecnología",
+    "category": 1,
     "price": 200.0,
     "product": {
       "productId": 23,
@@ -86,7 +86,7 @@
   {
     "postId": 24,
     "date": "2022-11-19",
-    "category": "Indumentaria",
+    "category": 2,
     "price": 35.0,
     "product": {
       "productId": 24,
@@ -100,7 +100,7 @@
   {
     "postId": 25,
     "date": "2022-11-20",
-    "category": "Tecnología",
+    "category": 1,
     "price": 150.0,
     "product": {
       "productId": 25,
@@ -114,7 +114,7 @@
   {
     "postId": 26,
     "date": "2022-11-21",
-    "category": "Indumentaria",
+    "category": 2,
     "price": 60.0,
     "product": {
       "productId": 26,
@@ -128,7 +128,7 @@
   {
     "postId": 27,
     "date": "2022-11-22",
-    "category": "Tecnología",
+    "category": 1,
     "price": 80.0,
     "product": {
       "productId": 27,
@@ -142,7 +142,7 @@
   {
     "postId": 28,
     "date": "2022-11-23",
-    "category": "Indumentaria",
+    "category": 2,
     "price": 90.0,
     "product": {
       "productId": 28,
@@ -156,7 +156,7 @@
   {
     "postId": 29,
     "date": "2022-11-24",
-    "category": "Tecnología",
+    "category": 1,
     "price": 300.0,
     "product": {
       "productId": 29,
@@ -170,7 +170,7 @@
   {
     "postId": 30,
     "date": "2022-11-25",
-    "category": "Indumentaria",
+    "category": 2,
     "price": 40.0,
     "product": {
       "productId": 30,

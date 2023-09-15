@@ -1,5 +1,6 @@
 package com.example.be_java_hisp_w22_g02.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,9 +13,11 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class ProductDto {
     @Min(0)
-    private int product_id;
+    @JsonAlias({"product_id"})
+    private int productId;
     @NotNull
-    private String product_name;
+    @JsonAlias({"product_name"})
+    private String productName;
     @NotNull
     private String type;
     @NotNull
