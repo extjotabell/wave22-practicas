@@ -26,4 +26,10 @@ public class ExceptionController {
         String errorMessage = "Formato inválido: " + ex.getMessage();
         return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(IsEmptyException.class)
+    public ResponseEntity<Object> handleHttpMessageNotReadable(IsEmptyException e) {
+        ExceptionDto exceptionDto = new ExceptionDto(e.getMessage());
+        return new ResponseEntity<>(exceptionDto, HttpStatus.CONFLICT);
+    }
 }
