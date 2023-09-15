@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IPostRepository {
     List<Post> getAllPost();
+    Post getPostById(int postId);
+    List<Post> getPostsByFollowedUsers(int userId);
 }
