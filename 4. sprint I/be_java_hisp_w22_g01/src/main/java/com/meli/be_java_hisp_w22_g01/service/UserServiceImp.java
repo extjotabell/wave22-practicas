@@ -13,6 +13,7 @@ import com.meli.be_java_hisp_w22_g01.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -149,21 +150,26 @@ public class UserServiceImp implements IUserService{
         List<Seller> sellerOfUser = user.getFollowed();
         List<PostDto> listOfPost = new ArrayList<>();
 
+        LocalDate limitDateOfPost = LocalDate.now().minusDays(14);
+
+
         // recorriendo lista de vendedores seguidos por el usuario
         for(Seller seller: sellerOfUser){
             // lista de post publicados por el vendedor
             for(Post post: seller.getPosts()){
 
-                PostDto new_post = new PostDto();
-                new_post.setUser_id(post.getUser_id());
-                new_post.setPost_id(post.getPost_id());
-                new_post.setDate(post.getDate());
-                new_post.setProduct(mapper.convertValue(post.getProduct(), ProductDto.class));
-                new_post.setCategory(post.getCategory());
-                new_post.setPrice(post.getPrice());
+                // si la fecha del post esta dentro de las 2 semanas
+                if(limitDateOfPost.compareTo(post.getDate()) < 0){
+                    PostDto new_post = new PostDto();
+                    new_post.setUser_id(post.getUser_id());
+                    new_post.setPost_id(post.getPost_id());
+                    new_post.setDate(post.getDate());
+                    new_post.setProduct(mapper.convertValue(post.getProduct(), ProductDto.class));
+                    new_post.setCategory(post.getCategory());
+                    new_post.setPrice(post.getPrice());
 
-                listOfPost.add(new_post);
-
+                    listOfPost.add(new_post);
+                }
             }
         }
 
