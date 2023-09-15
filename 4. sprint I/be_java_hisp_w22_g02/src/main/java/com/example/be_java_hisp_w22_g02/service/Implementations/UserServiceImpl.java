@@ -1,15 +1,18 @@
 package com.example.be_java_hisp_w22_g02.service.Implementations;
 
 import com.example.be_java_hisp_w22_g02.dto.response.UserDto;
+import com.example.be_java_hisp_w22_g02.dto.response.UserFollowDTO;
 import com.example.be_java_hisp_w22_g02.entity.User;
 import com.example.be_java_hisp_w22_g02.exception.NotFoundException;
 import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
 import com.example.be_java_hisp_w22_g02.service.Interfaces.IUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -43,5 +46,14 @@ public class UserServiceImpl implements IUserService {
         return userRepository.getAllUsers().stream().map(u -> mapper.convertValue(u, UserDto.class)).toList();
     }
 
-
+    @Override
+    public UserFollowDTO getFollowers(int id) {
+        ObjectMapper mapper = new ObjectMapper();
+        UserDto user = mapper.convertValue(this.userRepository.getFollowers(id), UserDto.class);
+        if(user == null)
+            throw new NotFoundException("No existe ningun user con el id "+id);
+        UserFollowDTO userFollowDTO = new UserFollowDTO(user.getUserId(), user.getUserName());
+        userFollowDTO.setFollowers(user.getFollowers().stream().map(u -> new UserDto(u.getUserId(), u.getUserName(), u.getFollowers(), null, null)).toList());
+        return userFollowDTO;
+    }
 }

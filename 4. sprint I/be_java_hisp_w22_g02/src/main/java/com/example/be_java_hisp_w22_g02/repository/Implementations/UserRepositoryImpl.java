@@ -55,4 +55,9 @@ public class UserRepositoryImpl implements IUserRepository {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public User getFollowers(int id) {
+        return getUser(id);
+    }
 }
