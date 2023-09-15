@@ -49,6 +49,11 @@ public class UserServiceImp implements IUserService{
         Seller sellerById = sellerRepository.findById(user_id);
         UserFollowersListDTO userFollowersList = new UserFollowersListDTO();
 
+        if(sellerById == null){
+            throw  new NotFoundException("El usuario no existe");
+        }
+
+
         // si hay lista de usuarios
         userFollowersList.setUser_id(sellerById.getUser_id());
         userFollowersList.setUser_name(sellerById.getUser_name());
