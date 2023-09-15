@@ -17,10 +17,9 @@ import java.util.List;
 public class UserRepositoryImpl implements IUserRepository{
 
     private HashMap<Integer, User> usersDatabase;
-    private List<User> userList= new ArrayList<>();
 
     public UserRepositoryImpl() {
-        userList = loadDataBase();
+        this.usersDatabase = loadUsers();
     }
 
     private HashMap<Integer, User> loadUsers(){
@@ -34,7 +33,7 @@ public class UserRepositoryImpl implements IUserRepository{
         return usersHashmap;
     }
 
-    public List<User> loadDataBase() {
+    private List<User> loadDataBase() {
         File file = null;
         try {
             file = ResourceUtils.getFile("classpath:user.json");
@@ -54,6 +53,6 @@ public class UserRepositoryImpl implements IUserRepository{
 
     @Override
     public List<User> getAllUsers() {
-        return userList;
+        return usersDatabase.values().stream().toList();
     }
 }
