@@ -49,7 +49,7 @@ public class SellerServiceImp implements ISellerService{
             throw new BadRequestException("El usuario proporcionado no existe");
         }
         if(seller.getFollowers().contains(user)){
-            return new FollowMessageDto("Ya es seguidor de ese seller");
+            throw new BadRequestException("Ya es seguidor de ese seller");
         }else{
             sellerRepository.sumAFollower(idFollower,idSeller);
         }
