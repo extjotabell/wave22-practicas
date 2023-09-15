@@ -6,6 +6,7 @@ import bootcamp.socialMeli.dto.NameOrderEnumDto;
 import bootcamp.socialMeli.dto.UserDto;
 import bootcamp.socialMeli.service.IUserService;
 import jakarta.annotation.Nullable;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class UserController {
 
     // US 03
     @GetMapping("/{userId}/followers/list")
-    public ResponseEntity<FollowersListDto> getFollowersList(@PathVariable int userId, @RequestParam @Nullable NameOrderEnumDto nameOrder) {
+    public ResponseEntity<FollowersListDto> getFollowersList(@PathVariable int userId, @RequestParam @Nullable @DefaultValue() NameOrderEnumDto nameOrder) {
         return new ResponseEntity<>(userService.getFollowersList(userId), HttpStatus.OK);
     }
 }
