@@ -115,9 +115,5 @@ public class UserServiceImpl implements IUserService{
         return userRepository.findUserById(userId).orElseThrow(
                 () -> new NotFoundException("User with ID #" + userId + " not found")
         );
-
-
     }
-
-
 }
