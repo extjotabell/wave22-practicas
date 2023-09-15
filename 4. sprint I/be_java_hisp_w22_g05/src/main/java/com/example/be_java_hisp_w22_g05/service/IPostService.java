@@ -8,6 +8,6 @@ public interface IPostService {
 
     void save(PostDto postDto);
 
-    List<PostDto> getListPostsFromSellersFollowed(int userId);
+    List<PostDto> getListPostsFromSellersFollowed(int userId, String order);
 
 }

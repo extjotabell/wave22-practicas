@@ -26,8 +26,7 @@ public class PostController {
     }
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<?> getListPostsFromSellersFollowed(@PathVariable int userId){
-        return new ResponseEntity<List<PostDto>>(postService.getListPostsFromSellersFollowed(userId), HttpStatus.OK);
+    public ResponseEntity<?> getListPostsFromSellersFollowed(@PathVariable int userId,@RequestParam(required = false) String order){
+        return new ResponseEntity<List<PostDto>>(postService.getListPostsFromSellersFollowed(userId, order), HttpStatus.OK);
     }
-
 }
