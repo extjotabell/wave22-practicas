@@ -16,4 +16,13 @@ public class User {
     private List<Post> postList;
     private List<Integer> following;
     private List<Integer> followers;
+
+    public boolean isBeingFollowedBy(int followerId){
+        return followers.stream().anyMatch(id -> id == followerId);
+    }
+
+    public boolean isFollowing(int userId){
+        return following.stream().anyMatch(id -> id == userId);
+    }
+
 }

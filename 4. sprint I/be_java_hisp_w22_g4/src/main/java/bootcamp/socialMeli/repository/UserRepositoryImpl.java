@@ -1,6 +1,7 @@
 package bootcamp.socialMeli.repository;
 
 import bootcamp.socialMeli.entity.User;
+import bootcamp.socialMeli.exception.NotFoundException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Repository;
@@ -55,4 +56,13 @@ public class UserRepositoryImpl implements IUserRepository{
     public List<User> getAllUsers() {
         return usersDatabase.values().stream().toList();
     }
+
+    @Override
+    public User getUserById(int userId) {
+        if (!usersDatabase.containsKey(userId)) {
+            throw new NotFoundException("Usuario con ID #" + userId + " no encontrado");
+        }
+        return usersDatabase.get(userId);
+    }
+
 }
