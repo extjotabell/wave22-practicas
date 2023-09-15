@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,21 +16,28 @@ import java.util.Map;
 public class UserRepositoryImpl implements IUserRepository {
     private final Map<Long, User> dbUser = new HashMap<>();
 
-    public UserRepositoryImpl() throws IOException {
+    public UserRepositoryImpl() {
         loadDataBase();
     }
 
-    private void loadDataBase() throws IOException {
+    private void loadDataBase(){
         File file;
         ObjectMapper objectMapper = new ObjectMapper();
         List<User> users;
-
-        file = ResourceUtils.getFile("classpath:users.json");
-        users = objectMapper.readValue(file, new TypeReference<List<User>>() {
-        });
-
-        for (User user: users) {
-            dbUser.put(user.getUserId(), user);
+        try {
+            file = ResourceUtils.getFile("classpath:users.json");
+            users = objectMapper.readValue(file, new TypeReference<List<User>>(){});
+            for (User user : users) {
+                dbUser.put(user.getUserId(), user);
+            }
+            System.out.println("Database User loaded successfully...");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
+
+    @Override
+    public User findById(Long id) {
+        return dbUser.get(id);
     }
 }
