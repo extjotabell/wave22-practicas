@@ -23,7 +23,7 @@ public class User {
 
     private List<User> followers;
 
-    public boolean isVendor(){
+    public boolean isSeller(){
         if (!posts.isEmpty()){
             return true;
         }

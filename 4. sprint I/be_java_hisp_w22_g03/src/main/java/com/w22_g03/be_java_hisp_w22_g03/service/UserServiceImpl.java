@@ -26,16 +26,21 @@ public class UserServiceImpl implements UserService {
         User newFollower = userRepository.findById(userId);
         User userToFollow = userRepository.findById(userIdToFollow);
         if (newFollower == null || userToFollow == null){
-            throw new BadRequestException("User not found");
+            throw new BadRequestException("User not found.");
         }
-        if (!userToFollow.isVendor()){
-            throw new BadRequestException("User is not vendor");
+        if (!userToFollow.isSeller()){
+            throw new BadRequestException("User is not vendor.");
         }
-        // Agregar checkeo para que una persona no puede agregar varias veces a la misma persona
+        if (userToFollow == newFollower){
+            throw new BadRequestException("User can't add themselfs.");
+        }
+        if (userRepository.findFollower(userIdToFollow, userId) != null){
+            throw new BadRequestException("User cant follow the same vendor more than once.");
+        }
 
         userToFollow.addFollower(newFollower);
         newFollower.addFollowed(userToFollow);
-        return new ResponseDTO(userId + "successfully followed" + userIdToFollow);
+        return new ResponseDTO(userId + " successfully followed " + userIdToFollow);
     }
 
     @Override
@@ -48,7 +53,7 @@ public class UserServiceImpl implements UserService {
 
         userToUnfollow.popFollower(newFollower);
         newFollower.popFollowed(userToUnfollow);
-        return new ResponseDTO(userId + "successfully unfollowed" + userIdToUnfollow);
+        return new ResponseDTO(userId + " successfully unfollowed " + userIdToUnfollow);
     }
 
     @Override

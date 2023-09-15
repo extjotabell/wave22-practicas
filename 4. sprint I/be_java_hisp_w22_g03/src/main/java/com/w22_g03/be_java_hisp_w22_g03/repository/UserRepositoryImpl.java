@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
@@ -19,18 +20,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     public UserRepositoryImpl() throws IOException {
         loadDatabase();
-//        User user1 = new User();
-//        user1.setUserId(1);
-//        user1.setUsername("user1");
-//        User user2 = new User();
-//        user2.setUserId(2);
-//        user2.setUsername("user2");
-//        User user3 = new User();
-//        user3.setUserId(1);
-//        user3.setUsername("user3");
-//        this.users.add(user1);
-//        this.users.add(user2);
-//        this.users.add(user3);
     }
 
     public User findById(long id) {
@@ -40,6 +29,16 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public List<User> findFollowers(int userId) {
         return findById(userId).getFollowers();
+    }
+
+    @Override
+    public User findFollower(int userIdToFollow, int userId) {
+        List<User> listOfFollowers = findFollowers(userIdToFollow);
+        Optional<User> user = listOfFollowers.stream().filter(u-> u.getUserId() == userId).findFirst();
+        if (user.isPresent()){
+            return user.get();
+        }
+        return null;
     }
 
     @Override

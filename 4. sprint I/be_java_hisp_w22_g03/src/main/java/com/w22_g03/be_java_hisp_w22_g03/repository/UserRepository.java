@@ -11,6 +11,8 @@ public interface UserRepository {
 
     List<User> findFollowers(int userId);
 
+    User findFollower(int userIdToFollow, int userId);
+
     List<User> findFollowed(int userId);
 
     Post savePost(Post post);
