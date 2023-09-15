@@ -35,6 +35,7 @@ public class UserController {
         if(order == null){
             return new ResponseEntity<>(userService.FollowersList(userId), HttpStatus.OK);
         }else{
+            // US 0008-1
             return ResponseEntity.status(HttpStatus.OK).body(sellerService.orderFollowersDto(userId,order));
         }
     }
@@ -45,6 +46,7 @@ public class UserController {
         if(order == null) {
             return ResponseEntity.status(HttpStatus.OK).body(userService.getUserFollowedList(userId));
         } else{
+            // US 0008-2
             return ResponseEntity.status(HttpStatus.OK).body(userService.orderFollowedsDto(userId,order));
         }
     }
