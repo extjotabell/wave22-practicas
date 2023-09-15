@@ -39,6 +39,7 @@ public class SellerServiceImp implements ISellerService{
 
     @Override
     public FollowMessageDto setAFollower(int idFollower, int idSeller) {
+
         Seller seller = sellerRepository.findById(idSeller);
         User user = userRepository.findById(idFollower);
 
@@ -46,6 +47,9 @@ public class SellerServiceImp implements ISellerService{
             throw new BadRequestException("No se encontro el seller");
         }else if (user == null){
             throw new BadRequestException("El usuario proporcionado no existe");
+        }
+        if(seller.getFollowers().contains(user)){
+            return new FollowMessageDto("Ya es seguidor de ese seller");
         }else{
             sellerRepository.sumAFollower(idFollower,idSeller);
         }
