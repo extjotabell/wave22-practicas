@@ -2,6 +2,7 @@ package com.meli.be_java_hisp_w22_g01.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w22_g01.dto.response.FollowedDTO;
+import com.meli.be_java_hisp_w22_g01.dto.response.UnfollowDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.UserFollowersListDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.UserMiniDTO;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
@@ -75,7 +76,7 @@ public class UserServiceImp implements IUserService{
      * @return booleano para indicar si la operación fue exitosa o no
      **/
     @Override
-    public boolean unfollow(int userId, int userIdToUnfollow) {
+    public UnfollowDTO unfollow(int userId, int userIdToUnfollow) {
 
         List<User> users = userRepository.getAll();
 
@@ -97,7 +98,7 @@ public class UserServiceImp implements IUserService{
 
                 // Actualizar repositorio
                 userRepository.updateUser(userToEdit.get().getUser_id(), userToEdit.get());
-                return true;
+                return new UnfollowDTO("El usuario userId: " + userId + " ha dejado de seguir a userId: " + userIdToUnfollow);
             // Si el usuario no sigue al vendedor no se puede dejar de seguir y se lanza la siguiente excepción
             } else {
                 throw new NotFoundException("El usuario userId: " + userId + " no sigue al vendedor userId: " + userIdToUnfollow);
