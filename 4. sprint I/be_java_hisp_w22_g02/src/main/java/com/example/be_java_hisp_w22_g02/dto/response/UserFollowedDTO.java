@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Builder
-public class UserFollowDTO {
+public class UserFollowedDTO {
     private int userId;
     private String userName;
     private List<UserDto> followers = new ArrayList<>();
