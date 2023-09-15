@@ -29,6 +29,13 @@ public class ProductServiceImpl implements IProductService{
 
     @Override
     public ProductDto getProductById(int productId) {
-        return null;
+        Product product = productRepository.getProductById(productId);
+        return new ProductDto(
+                product.getProduct_id(),
+                product.getProduct_name(),
+                product.getType(),
+                product.getBrand(),
+                product.getColor(),
+                product.getNotes());
     }
 }
