@@ -29,6 +29,8 @@ public class PostService implements IPostService{
     private final IPostRepository postRepository;
     private final IUserRepository userRepository;
 
+    @Autowired
+    Jackson2ObjectMapperBuilder mapperBuilder;
 
     @Override
     public void save(PostDto postDto) {
@@ -56,10 +58,7 @@ public class PostService implements IPostService{
     }
 
 
-    @Autowired
-    Jackson2ObjectMapperBuilder mapperBuilder;
-
-    public List<PostDto> getListPostsFromSellersFollowed(int userId){
+    public List<PostDto> getListPostsFromSellersFollowed(int userId, String order){
 
         ObjectMapper objectMapper = mapperBuilder.build();
 
@@ -73,7 +72,7 @@ public class PostService implements IPostService{
 
         // Obtain list of posts from sellers
         List<Post> postList = postRepository.findPostAll().stream()
-                .filter(post -> post.getUser().getId() == userId)
+                .filter(post ->  sellersId.contains(post.getUser().getId()))
                 .filter(x -> ChronoUnit.DAYS.between(x.getDate(), LocalDate.now()) <= 14)
                 .toList();
 
@@ -81,10 +80,19 @@ public class PostService implements IPostService{
             throw new NotFoundException("No se encontró ningún post");
         }
 
-        return postList.stream()
-                .map(p -> objectMapper.convertValue(p, PostDto.class))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+        //Aca ordenamos
+        if(order != null && order.equals("date_asc")){
+            return postList.stream()
+                    .filter(Objects::nonNull).sorted((x, y) -> x.getDate().compareTo(y.getDate()))
+                    .map(p -> objectMapper.convertValue(p, PostDto.class))
+                    .collect(Collectors.toList());
+        }else{
+            return postList.stream()
+                    .filter(Objects::nonNull).sorted((x, y) -> y.getDate().compareTo(x.getDate()))
+                    .map(p -> objectMapper.convertValue(p, PostDto.class))
+                    .collect(Collectors.toList());
+        }
+
     }
 
 
