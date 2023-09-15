@@ -108,24 +108,22 @@ public class SellerRepositoryImp implements ISellerRepository{
         return seller;
     }
 
-    @Override
-    public List<User> orderFollowerAsc(int userId) {
-        Seller seller = findById(userId);
+    /*@Override
+    public List<User> orderFollowerAsc(Seller seller) {
         return seller.getFollowers().stream()
                 .sorted(Comparator.comparing(User::getUser_name)).toList();
     }
 
     @Override
-    public List<User> orderFollowerDesc(int userId) {
-        Seller seller = findById(userId);
+    public List<User> orderFollowerDesc(Seller seller) {
+        System.out.println(seller);
         return seller.getFollowers().stream()
                 .sorted(Comparator.comparing(User::getUser_name, Comparator.reverseOrder()))
                 .toList();
     }
-
+*/
     @Override
-    public List<User> getAllFollowers(int userId) {
-        Seller seller = findById(userId);
+    public List<User> getAllFollowers(Seller seller) {
         return seller.getFollowers();
     }
 }

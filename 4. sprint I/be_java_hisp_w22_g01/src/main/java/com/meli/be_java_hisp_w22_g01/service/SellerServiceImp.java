@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -57,15 +58,16 @@ public class SellerServiceImp implements ISellerService{
     @Override
     public List<UserMiniDTO> orderFollowersDto(int userId, String order) {
         List<User> followers;
-
+        Seller seller = sellerRepository.findById(userId);
+        followers = sellerRepository.getAllFollowers(seller);
         if (order.equals("name_asc")) {
-            followers = sellerRepository.orderFollowerAsc(userId);
+            followers = followers.stream()
+                    .sorted(Comparator.comparing(User::getUser_name)).toList();
         }else if (order.equals("name_desc")){
-            followers = sellerRepository.orderFollowerDesc(userId);
-        }else{
-            followers = sellerRepository.getAllFollowers(userId);
+            followers = followers.stream()
+                    .sorted(Comparator.comparing(User::getUser_name, Comparator.reverseOrder()))
+                    .toList();
         }
-
         return followers.stream().map(f -> mapper.convertValue(f, UserMiniDTO.class)).toList();
     }
 }
