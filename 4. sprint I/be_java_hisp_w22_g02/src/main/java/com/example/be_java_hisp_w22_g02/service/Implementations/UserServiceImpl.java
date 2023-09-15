@@ -1,5 +1,6 @@
 package com.example.be_java_hisp_w22_g02.service.Implementations;
 
+import com.example.be_java_hisp_w22_g02.dto.response.TotalFollowersDto;
 import com.example.be_java_hisp_w22_g02.dto.response.UserDto;
 import com.example.be_java_hisp_w22_g02.dto.response.UserFollowDTO;
 import com.example.be_java_hisp_w22_g02.entity.User;
@@ -51,6 +52,17 @@ public class UserServiceImpl implements IUserService {
         if(user == null)
             throw new NotFoundException("User with id: " + id + " not found.");
         return userFollowMapper.toDto(user);
+    }
+
+    @Override
+    public TotalFollowersDto getTotalFollowersByUserId(int userId) {
+        if (!existsUser(userId)){
+            throw new NotFoundException("User with id: " + userId + " not found.");
+        }
+
+        User user = userRepository.findById(userId);
+
+        return new TotalFollowersDto(user.getUserId(), user.getUserName(), user.getFollowers().size());
     }
 
     public UserFollowDTO getFollowedUsersById(Integer id) {

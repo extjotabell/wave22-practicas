@@ -1,5 +1,6 @@
 package com.example.be_java_hisp_w22_g02.service.Interfaces;
 
+import com.example.be_java_hisp_w22_g02.dto.response.TotalFollowersDto;
 import com.example.be_java_hisp_w22_g02.dto.response.UserDto;
 import com.example.be_java_hisp_w22_g02.dto.response.UserFollowDTO;
 import com.example.be_java_hisp_w22_g02.entity.User;
@@ -19,4 +20,5 @@ public interface IUserService {
 
     List<UserDto> getAllUsers();
     UserFollowDTO getFollowers(int id);
+    TotalFollowersDto getTotalFollowersByUserId(int userId);
 }
