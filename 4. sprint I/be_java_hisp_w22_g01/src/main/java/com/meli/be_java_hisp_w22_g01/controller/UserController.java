@@ -41,8 +41,12 @@ public class UserController {
 
     // US 0004
     @GetMapping("/{userId}/followed/list")
-    public ResponseEntity<?> getFollowedList(@PathVariable int userId){
-        return ResponseEntity.status(HttpStatus.OK).body(userService.getUserFollowedList(userId));
+    public ResponseEntity<?> getFollowedList(@PathVariable int userId,@RequestParam(required = false) String order){
+        if(order == null) {
+            return ResponseEntity.status(HttpStatus.OK).body(userService.getUserFollowedList(userId));
+        } else{
+            return ResponseEntity.status(HttpStatus.OK).body(userService.orderFollowedsDto(userId,order));
+        }
     }
 
     // US 0007
