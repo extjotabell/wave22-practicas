@@ -2,9 +2,11 @@ package com.example.be_java_hisp_w22_g02.service.Implementations;
 
 import com.example.be_java_hisp_w22_g02.dto.response.UserDto;
 import com.example.be_java_hisp_w22_g02.dto.response.UserFollowDTO;
+import com.example.be_java_hisp_w22_g02.dto.response.UserFollowerDTO;
 import com.example.be_java_hisp_w22_g02.entity.User;
 import com.example.be_java_hisp_w22_g02.exception.NotFoundException;
 import com.example.be_java_hisp_w22_g02.mapper.UserFollowMapper;
+import com.example.be_java_hisp_w22_g02.mapper.UserFollowerMapper;
 import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
 import com.example.be_java_hisp_w22_g02.service.Interfaces.IUserService;
 import lombok.AllArgsConstructor;
@@ -12,7 +14,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -21,6 +22,7 @@ public class UserServiceImpl implements IUserService {
 
     private final IUserRepository userRepository;
     private final UserFollowMapper userFollowMapper;
+    private final UserFollowerMapper userFollowerMapper;
     private final ObjectMapper mapper;
 
 
@@ -46,11 +48,11 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public UserFollowDTO getFollowers(int id) {
+    public UserFollowerDTO getFollowers(int id) {
         User user = userRepository.findById(id);
         if(user == null)
             throw new NotFoundException("User with id: " + id + " not found.");
-        return userFollowMapper.toDto(user);
+        return userFollowerMapper.toDto(user);
     }
 
     public UserFollowDTO getFollowedUsersById(Integer id) {
