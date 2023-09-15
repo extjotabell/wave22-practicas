@@ -1,6 +1,7 @@
 package com.example.be_java_hisp_w22_g02.dto.request;
 
 import com.example.be_java_hisp_w22_g02.entity.Product;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,8 @@ import java.util.List;
 public class PostDTO {
     @Min(1)
     @Max(100)
-    private int user_id;
+    @JsonAlias({"user_id"})
+    private int userId;
     @NotNull
     private LocalDate date;
     @NotNull
