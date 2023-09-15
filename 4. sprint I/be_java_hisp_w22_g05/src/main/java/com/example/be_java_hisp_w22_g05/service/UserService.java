@@ -2,6 +2,7 @@ package com.example.be_java_hisp_w22_g05.service;
 
 import com.example.be_java_hisp_w22_g05.dto.UserDto;
 import com.example.be_java_hisp_w22_g05.dto.UserFollowedDto;
+import com.example.be_java_hisp_w22_g05.dto.UserFollowersDto;
 import com.example.be_java_hisp_w22_g05.dto.UserNumberFollowersDto;
 import com.example.be_java_hisp_w22_g05.entity.User;
 import com.example.be_java_hisp_w22_g05.exception.FollowException;
@@ -88,4 +89,18 @@ public class UserService implements IUserService {
         return new UserFollowedDto(finalUser.getId(), finalUser.getName(),userFollowedFinal);
 
     }
+    public UserFollowersDto findUsersFollowingSeller(int userId) {
+        User user = userRepository.findUsersById(userId);
+        if (user == null) {
+            throw new NotFoundException("No se encontró el usuario especificado");
+        }
+
+        List<UserDto> userDtos = user.getFollower()
+                .stream()
+                .map(user1 -> new UserDto(user1.getId(), user1.getName()))
+                .collect(Collectors.toList());
+
+        return new UserFollowersDto(user.getId(), user.getName(), userDtos) ;
+    }
+
 }

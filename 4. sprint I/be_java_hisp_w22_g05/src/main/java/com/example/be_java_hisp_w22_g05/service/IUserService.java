@@ -4,6 +4,7 @@ import com.example.be_java_hisp_w22_g05.dto.UserFollowedDto;
 import java.util.List;
 
 import com.example.be_java_hisp_w22_g05.dto.UserFollowedDto;
+import com.example.be_java_hisp_w22_g05.dto.UserFollowersDto;
 import com.example.be_java_hisp_w22_g05.dto.UserNumberFollowersDto;
 
 public interface IUserService {
@@ -12,5 +13,6 @@ public interface IUserService {
     UserNumberFollowersDto getNumberFollowers(int userId);
     public UserFollowedDto getListOfUsersFollowedBy(Integer id);
     UserFollowedDto unfollow(int userId, int userIdToUnfollow);
+    UserFollowersDto findUsersFollowingSeller(int userId);
 
 }

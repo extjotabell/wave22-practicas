@@ -38,4 +38,9 @@ public class UserController {
         return new ResponseEntity<>(userService.unfollow(userId,userIdToUnfollow), HttpStatus.OK);
     }
 
+    @GetMapping("{userId}/followers/list")
+    public ResponseEntity<?> findUsersFollowingSeller(@PathVariable int userId){
+        return new ResponseEntity<>(userService.findUsersFollowingSeller(userId),HttpStatus.OK);
+    }
+
 }
