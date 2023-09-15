@@ -4,46 +4,45 @@ import com.example.be_java_hisp_w22_g02.dto.response.UserDto;
 import com.example.be_java_hisp_w22_g02.dto.response.UserFollowDTO;
 import com.example.be_java_hisp_w22_g02.entity.User;
 import com.example.be_java_hisp_w22_g02.exception.NotFoundException;
+import com.example.be_java_hisp_w22_g02.mapper.UserFollowMapper;
 import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
 import com.example.be_java_hisp_w22_g02.service.Interfaces.IUserService;
+import lombok.AllArgsConstructor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.stereotype.Service;
 
+import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements IUserService {
 
-    @Autowired
-    private IUserRepository userRepository;
+    private final IUserRepository userRepository;
+    private final UserFollowMapper userFollowMapper;
+    private final ObjectMapper mapper;
 
-    @Autowired
-    ObjectMapper mapper;
 
     @Override
     public void followUser(int userId, int userIdToFollow) {
         userRepository.followUser(userId, userIdToFollow);
     }
 
-    public boolean existsUser(int userId) {
-        User user = userRepository.getUser(userId);
-        return user != null;
-    }
-
     @Override
     public UserDto getUser(int userId) {
         if(existsUser(userId))
-            return mapper.convertValue(userRepository.getUser(userId), UserDto.class);
+            return mapper.convertValue(userRepository.findById(userId), UserDto.class);
         else
             throw new NotFoundException("No existe el usuario");
     }
 
     @Override
     public List<UserDto> getAllUsers() {
-        return userRepository.getAllUsers().stream().map(u -> mapper.convertValue(u, UserDto.class)).toList();
+        return userRepository.getAllUsers()
+                .stream()
+                .map(u -> mapper.convertValue(u, UserDto.class))
+                .toList();
     }
 
     @Override
@@ -56,4 +55,19 @@ public class UserServiceImpl implements IUserService {
         userFollowDTO.setFollowers(user.getFollowers().stream().map(u -> new UserDto(u.getUserId(), u.getUserName(), u.getFollowers(), null, null)).toList());
         return userFollowDTO;
     }
+
+    public UserFollowDTO getFollowedUsersById(Integer id) {
+        User userFounded = userRepository.findById(id);
+        if (userFounded == null) {
+            throw new NotFoundException("User with id: " + id + " not found.");
+        } else {
+            return userFollowMapper.toDto(userFounded);
+        }
+    }
+
+    public boolean existsUser(int userId) {
+        User user = userRepository.findById(userId);
+        return user != null;
+    }
+
 }

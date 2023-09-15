@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,16 +22,18 @@ public class UserRepositoryImpl implements IUserRepository {
     }
 
     @Override
+    public User findById(Integer id) {
+        return dbUser.get(id);
+    }
+
+
+    @Override
     public void followUser(int userId, int userIdToFollow) {
         User user = dbUser.get(userId);
         User userToFollow = dbUser.get(userId);
         user.addFollower(userToFollow);
     }
 
-    @Override
-    public User getUser(int userId) {
-        return dbUser.get(userId);
-    }
 
     @Override
     public List<User> getAllUsers() {
@@ -58,6 +60,7 @@ public class UserRepositoryImpl implements IUserRepository {
 
     @Override
     public User getFollowers(int id) {
-        return getUser(id);
+        return findById(id);
     }
+
 }

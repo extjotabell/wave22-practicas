@@ -13,6 +13,7 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Data
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class UserDto {
