@@ -1,6 +1,7 @@
 package bootcamp.socialMeli.service;
 import bootcamp.socialMeli.dto.FollowersCountDto;
 import bootcamp.socialMeli.dto.FollowersListDto;
+import bootcamp.socialMeli.dto.NameOrderEnumDto;
 import bootcamp.socialMeli.dto.UserDto;
 import bootcamp.socialMeli.entity.User;
 import bootcamp.socialMeli.exception.NotFoundException;
@@ -9,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,19 +45,27 @@ public class UserServiceImpl implements IUserService{
 
     // US 03
     @Override
-    public FollowersListDto getFollowersList(int userId) {
+    public FollowersListDto getFollowersList(int userId, NameOrderEnumDto nameOrder) {
         // Get main user object
         User targetedUser = findUserById(userId);
 
-        List<UserDto> followers = new ArrayList<>();
+        //Create list with followers
+        List<UserDto> followers = targetedUser.getFollowers().stream()
+                .map(followerId -> {
+                    User follower = findUserById(followerId);
+                    return new UserDto(follower.getUser_id(), follower.getUser_name());
+                })
+                .toList();
 
-        for (Integer followerId : targetedUser.getFollowers()) {
-            // Get follower user object
-            User follower = findUserById(followerId);
-            // Map it to UserDto
-            UserDto followerDto = new UserDto(follower.getUser_id(), follower.getUser_name());
-            // Add it to followers list
-            followers.add(followerDto);
+        //Create comparator to sort
+        Comparator<UserDto> usernameComparator = Comparator.comparing(UserDto::getUser_name);
+
+        //Sort depending parameter input
+        if(nameOrder == NameOrderEnumDto.name_desc){
+            followers.sort(usernameComparator.reversed());
+        }
+        else{
+            followers.sort(usernameComparator);
         }
 
         return new FollowersListDto(targetedUser.getUser_id(), targetedUser.getUser_name(), followers);
