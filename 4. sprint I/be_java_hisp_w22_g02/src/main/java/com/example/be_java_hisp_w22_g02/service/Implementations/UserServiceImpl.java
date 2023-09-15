@@ -5,6 +5,7 @@ import com.example.be_java_hisp_w22_g02.dto.response.UserFollowDTO;
 import com.example.be_java_hisp_w22_g02.entity.User;
 import com.example.be_java_hisp_w22_g02.exception.NotFoundException;
 import com.example.be_java_hisp_w22_g02.mapper.UserFollowMapper;
+import com.example.be_java_hisp_w22_g02.mapper.UserMapper;
 import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
 import com.example.be_java_hisp_w22_g02.service.Interfaces.IUserService;
 import lombok.AllArgsConstructor;
@@ -19,20 +20,25 @@ public class UserServiceImpl implements IUserService {
 
     private final IUserRepository userRepository;
     private final UserFollowMapper userFollowMapper;
+    private final UserMapper userMapper;
     private final ObjectMapper mapper;
 
 
     @Override
     public void followUser(int userId, int userIdToFollow) {
+        if(!existsUser(userId))
+            throw new NotFoundException("User with id: " + userId + " not found.");
+        if(!existsUser(userIdToFollow))
+            throw new NotFoundException("User with id: " + userIdToFollow + " not found.");
         userRepository.followUser(userId, userIdToFollow);
     }
 
     @Override
     public UserDto getUser(int userId) {
         if(existsUser(userId))
-            return mapper.convertValue(userRepository.findById(userId), UserDto.class);
+            return userMapper.toDto(userRepository.findById(userId));
         else
-            throw new NotFoundException("No existe el usuario");
+            throw new NotFoundException("User with id: " + userId + " not found.");
     }
 
     @Override
