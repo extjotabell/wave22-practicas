@@ -9,6 +9,7 @@ import org.springframework.util.ResourceUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,9 +17,10 @@ import java.util.List;
 public class UserRepositoryImpl implements IUserRepository{
 
     private HashMap<Integer, User> usersDatabase;
+    private List<User> userList= new ArrayList<>();
 
     public UserRepositoryImpl() {
-        this.usersDatabase = loadUsers();
+        userList = loadDataBase();
     }
 
     private HashMap<Integer, User> loadUsers(){
@@ -52,6 +54,6 @@ public class UserRepositoryImpl implements IUserRepository{
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        return userList;
     }
 }
