@@ -1,4 +1,23 @@
 package com.example.be_java_hisp_w22_g02.controller;
 
+import com.example.be_java_hisp_w22_g02.dto.response.UserFollowedDTO;
+import com.example.be_java_hisp_w22_g02.service.Interfaces.IUserService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@AllArgsConstructor
 public class UserController {
+
+    private final IUserService userService;
+
+    @GetMapping("/users/{userId}/followed/list")
+    public ResponseEntity<UserFollowedDTO> getFollowedUser(@PathVariable Long userId) {
+        UserFollowedDTO userFollowDTO = userService.getFollowedUsersById(userId);
+        return new ResponseEntity<>(userFollowDTO, HttpStatusCode.valueOf(200));
+    }
 }
