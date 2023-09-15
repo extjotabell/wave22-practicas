@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -16,6 +17,16 @@ public class User {
     private List<Post> postList;
     private List<Integer> following;
     private List<Integer> followers;
+
+    public List<Integer> getFollowing() {
+        if (following == null) return new ArrayList<>();
+        return following;
+    }
+
+    public List<Integer> getFollowers() {
+        if (followers == null) return new ArrayList<>();
+        return followers;
+    }
 
     public boolean isBeingFollowedBy(int followerId){
         return followers.stream().anyMatch(id -> id == followerId);
