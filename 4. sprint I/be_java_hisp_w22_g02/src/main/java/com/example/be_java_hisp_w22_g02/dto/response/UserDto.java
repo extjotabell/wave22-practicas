@@ -15,7 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Data
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class UserDto {
 
     @JsonAlias({"user_id"})
