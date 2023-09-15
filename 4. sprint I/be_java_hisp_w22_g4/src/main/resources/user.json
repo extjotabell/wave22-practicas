@@ -82,7 +82,7 @@
         "user_id": 7,
         "date": "2023-08-08",
         "product": {
-          "product_id": 8,
+          "product_id": 3,
           "product_name": "Billetera",
           "type": "Cuero",
           "brand": "XL",
@@ -99,7 +99,7 @@
         "user_id": 7,
         "date": "2023-09-20",
         "product": {
-          "product_id": 87,
+          "product_id": 4,
           "product_name": "Cartera",
           "type": "Tela",
           "brand": "XL",
@@ -125,7 +125,7 @@
         "user_id": 8,
         "date": "2023-08-24",
         "product": {
-          "product_id": 87,
+          "product_id": 5,
           "product_name": "Remera",
           "type": "Algodon",
           "brand": "Adidas",
@@ -142,7 +142,7 @@
         "user_id": 8,
         "date": "2023-09-28",
         "product": {
-          "product_id": 87,
+          "product_id": 6,
           "product_name": "Campera",
           "type": "Piloto",
           "brand": "Puma",
@@ -167,7 +167,7 @@
         "user_id": 9,
         "date": "2023-08-25",
         "product": {
-          "product_id": 67,
+          "product_id": 7,
           "product_name": "Televisor",
           "type": "Smart",
           "brand": "Sansumg",
@@ -184,7 +184,7 @@
         "user_id": 9,
         "date": "2023-09-30",
         "product": {
-          "product_id": 32,
+          "product_id": 8,
           "product_name": "Aspiradora",
           "type": "Robot",
           "brand": "Motorola",
@@ -211,7 +211,7 @@
         "user_id": 10,
         "date": "2023-08-05",
         "product": {
-          "product_id": 76,
+          "product_id": 9,
           "product_name": "Lampara",
           "type": "Velador",
           "brand": "LuzSol",
