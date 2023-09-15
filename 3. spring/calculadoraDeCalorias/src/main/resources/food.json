@@ -1,0 +1,526 @@
+[
+  {
+    "name": "Spaghetti Carbonara",
+    "ingredients": [
+      {
+        "name": "Spaghetti",
+        "calories": 200
+      },
+      {
+        "name": "Huevo",
+        "calories": 68
+      },
+      {
+        "name": "Queso Parmesano",
+        "calories": 120
+      },
+      {
+        "name": "Panceta",
+        "calories": 250
+      },
+      {
+        "name": "Pimienta Negra",
+        "calories": 5
+      },
+      {
+        "name": "Sal",
+        "calories": 0
+      }
+    ]
+  },
+  {
+    "name": "Ensalada César",
+    "ingredients": [
+      {
+        "name": "Lechuga Romana",
+        "calories": 5
+      },
+      {
+        "name": "Pollo a la Parrilla",
+        "calories": 180
+      },
+      {
+        "name": "Queso Parmesano",
+        "calories": 120
+      },
+      {
+        "name": "Pan Tostado",
+        "calories": 70
+      },
+      {
+        "name": "Ajo",
+        "calories": 4
+      },
+      {
+        "name": "Aceite de Oliva",
+        "calories": 120
+      },
+      {
+        "name": "Anchovas",
+        "calories": 40
+      },
+      {
+        "name": "Mostaza",
+        "calories": 15
+      },
+      {
+        "name": "Zumo de Limón",
+        "calories": 10
+      },
+      {
+        "name": "Sal",
+        "calories": 0
+      },
+      {
+        "name": "Pimienta Negra",
+        "calories": 5
+      }
+    ]
+  },
+  {
+    "name": "Pizza Margherita",
+    "ingredients": [
+      {
+        "name": "Masa de Pizza",
+        "calories": 280
+      },
+      {
+        "name": "Tomate",
+        "calories": 22
+      },
+      {
+        "name": "Queso Mozzarella",
+        "calories": 280
+      },
+      {
+        "name": "Albahaca",
+        "calories": 1
+      },
+      {
+        "name": "Aceite de Oliva",
+        "calories": 120
+      },
+      {
+        "name": "Sal",
+        "calories": 0
+      }
+    ]
+  },
+  {
+    "name": "Sopa de Tomate",
+    "ingredients": [
+      {
+        "name": "Tomate",
+        "calories": 22
+      },
+      {
+        "name": "Cebolla",
+        "calories": 47
+      },
+      {
+        "name": "Ajo",
+        "calories": 4
+      },
+      {
+        "name": "Caldo de Pollo",
+        "calories": 20
+      },
+      {
+        "name": "Aceite de Oliva",
+        "calories": 120
+      },
+      {
+        "name": "Sal",
+        "calories": 0
+      },
+      {
+        "name": "Pimienta Negra",
+        "calories": 5
+      },
+      {
+        "name": "Tomillo",
+        "calories": 3
+      },
+      {
+        "name": "Azúcar",
+        "calories": 380
+      }
+    ]
+  },
+  {
+    "name": "Hamburguesa con Queso",
+    "ingredients": [
+      {
+        "name": "Carne de Res",
+        "calories": 250
+      },
+      {
+        "name": "Pan de Hamburguesa",
+        "calories": 120
+      },
+      {
+        "name": "Queso Cheddar",
+        "calories": 381
+      },
+      {
+        "name": "Lechuga",
+        "calories": 5
+      },
+      {
+        "name": "Tomate",
+        "calories": 22
+      },
+      {
+        "name": "Cebolla",
+        "calories": 47
+      },
+      {
+        "name": "Mayonesa",
+        "calories": 718
+      },
+      {
+        "name": "Mostaza",
+        "calories": 15
+      },
+      {
+        "name": "Ketchup",
+        "calories": 98
+      },
+      {
+        "name": "Sal",
+        "calories": 0
+      },
+      {
+        "name": "Pimienta Negra",
+        "calories": 5
+      }
+    ]
+  },
+  {
+    "name": "Sushi de Salmón",
+    "ingredients": [
+      {
+        "name": "Arroz",
+        "calories": 354
+      },
+      {
+        "name": "Salmón",
+        "calories": 172
+      },
+      {
+        "name": "Alga Nori",
+        "calories": 10
+      },
+      {
+        "name": "Vinagre de Arroz",
+        "calories": 8
+      },
+      {
+        "name": "Azúcar",
+        "calories": 380
+      },
+      {
+        "name": "Salsa de Soja",
+        "calories": 61
+      },
+      {
+        "name": "Wasabi",
+        "calories": 10
+      },
+      {
+        "name": "Jengibre encurtido",
+        "calories": 6
+      }
+    ]
+  },
+  {
+    "name": "Tacos de Pollo",
+    "ingredients": [
+      {
+        "name": "Tortillas de Maíz",
+        "calories": 144
+      },
+      {
+        "name": "Pollo a la Parrilla",
+        "calories": 180
+      },
+      {
+        "name": "Lechuga",
+        "calories": 5
+      },
+      {
+        "name": "Tomate",
+        "calories": 22
+      },
+      {
+        "name": "Cebolla",
+        "calories": 47
+      },
+      {
+        "name": "Queso Cheddar",
+        "calories": 381
+      },
+      {
+        "name": "Crema Agria",
+        "calories": 208
+      },
+      {
+        "name": "Salsa de Tomate",
+        "calories": 20
+      },
+      {
+        "name": "Salsa Picante",
+        "calories": 5
+      },
+      {
+        "name": "Cilantro",
+        "calories": 1
+      },
+      {
+        "name": "Limón",
+        "calories": 17
+      },
+      {
+        "name": "Sal",
+        "calories": 0
+      }
+    ]
+  },
+  {
+    "name": "Pasta Alfredo",
+    "ingredients": [
+      {
+        "name": "Fettuccine",
+        "calories": 280
+      },
+      {
+        "name": "Crema",
+        "calories": 120
+      },
+      {
+        "name": "Mantequilla",
+        "calories": 102
+      },
+      {
+        "name": "Queso Parmesano",
+        "calories": 120
+      },
+      {
+        "name": "Ajo",
+        "calories": 4
+      },
+      {
+        "name": "Sal",
+        "calories": 0
+      },
+      {
+        "name": "Pimienta Negra",
+        "calories": 5
+      },
+      {
+        "name": "Perejil",
+        "calories": 1
+      }
+    ]
+  },
+  {
+    "name": "Pollo Asado con Verduras",
+    "ingredients": [
+      {
+        "name": "Pollo Entero",
+        "calories": 1650
+      },
+      {
+        "name": "Pimiento Rojo",
+        "calories": 37
+      },
+      {
+        "name": "Pimiento Verde",
+        "calories": 30
+      },
+      {
+        "name": "Cebolla",
+        "calories": 47
+      },
+      {
+        "name": "Calabacín",
+        "calories": 17
+      },
+      {
+        "name": "Aceite de Oliva",
+        "calories": 120
+      },
+      {
+        "name": "Ajo",
+        "calories": 4
+      },
+      {
+        "name": "Tomillo",
+        "calories": 3
+      },
+      {
+        "name": "Romero",
+        "calories": 2
+      },
+      {
+        "name": "Sal",
+        "calories": 0
+      },
+      {
+        "name": "Pimienta Negra",
+        "calories": 5
+      }
+    ]
+  },
+  {
+    "name": "Pastel de Chocolate",
+    "ingredients": [
+      {
+        "name": "Chocolate",
+        "calories": 535
+      },
+      {
+        "name": "Azúcar",
+        "calories": 387
+      },
+      {
+        "name": "Harina",
+        "calories": 364
+      },
+      {
+        "name": "Mantequilla",
+        "calories": 102
+      },
+      {
+        "name": "Huevos",
+        "calories": 68
+      },
+      {
+        "name": "Leche",
+        "calories": 42
+      },
+      {
+        "name": "Polvo de Hornear",
+        "calories": 2
+      },
+      {
+        "name": "Sal",
+        "calories": 0
+      },
+      {
+        "name": "Vainilla",
+        "calories": 12
+      }
+    ]
+  },
+  {
+    "name": "Sopa de Lentejas",
+    "ingredients": [
+      {
+        "name": "Lentejas",
+        "calories": 230
+      },
+      {
+        "name": "Cebolla",
+        "calories": 47
+      },
+      {
+        "name": "Zanahoria",
+        "calories": 41
+      },
+      {
+        "name": "Apio",
+        "calories": 6
+      },
+      {
+        "name": "Ajo",
+        "calories": 4
+      },
+      {
+        "name": "Tomate",
+        "calories": 22
+      },
+      {
+        "name": "Caldo de Verduras",
+        "calories": 10
+      },
+      {
+        "name": "Aceite de Oliva",
+        "calories": 120
+      },
+      {
+        "name": "Comino",
+        "calories": 8
+      },
+      {
+        "name": "Pimienta Negra",
+        "calories": 5
+      },
+      {
+        "name": "Pimentón",
+        "calories": 8
+      },
+      {
+        "name": "Cilantro",
+        "calories": 1
+      },
+      {
+        "name": "Limón",
+        "calories": 17
+      },
+      {
+        "name": "Sal",
+        "calories": 0
+      }
+    ]
+  },
+  {
+    "name": "Enchiladas de Pollo",
+    "ingredients": [
+      {
+        "name": "Tortillas de Maíz",
+        "calories": 144
+      },
+      {
+        "name": "Pollo Desmenuzado",
+        "calories": 180
+      },
+      {
+        "name": "Cebolla",
+        "calories": 47
+      },
+      {
+        "name": "Queso Cheddar",
+        "calories": 381
+      },
+      {
+        "name": "Crema Agria",
+        "calories": 208
+      },
+      {
+        "name": "Salsa Roja",
+        "calories": 40
+      },
+      {
+        "name": "Aceitunas",
+        "calories": 115
+      },
+      {
+        "name": "Ajo",
+        "calories": 4
+      },
+      {
+        "name": "Sal",
+        "calories": 0
+      },
+      {
+        "name": "Pimienta Negra",
+        "calories": 5
+      },
+      {
+        "name": "Cilantro",
+        "calories": 1
+      }
+    ]
+  }
+]
