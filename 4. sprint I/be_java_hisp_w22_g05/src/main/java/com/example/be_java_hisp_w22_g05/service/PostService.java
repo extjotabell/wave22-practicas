@@ -36,12 +36,12 @@ public class PostService implements IPostService{
         if(postRepository.save(newPost) == null) throw new AlreadyExistsException("El producto con id "+product.getId()+" ya existe");
     }
 
-    Product mapProduct(ProductDto productDto){
+    private Product mapProduct(ProductDto productDto){
 
         return new Product(productDto.getProductId(), productDto.getProductName(), productDto.getType(), productDto.getBrand(), productDto.getColor(), productDto.getNotes());
     }
 
-    User getUser(int id){
+    private User getUser(int id){
         User user = userRepository.findUsersById(id);
 
         if(user == null) throw new NotFoundException("El usuario no existe");
