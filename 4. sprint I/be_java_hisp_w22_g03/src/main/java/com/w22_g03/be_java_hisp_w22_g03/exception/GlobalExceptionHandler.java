@@ -23,7 +23,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<?> handleBadRequestException(BadRequestException badRequestException){
-        return new ResponseEntity<>(badRequestException.getMessage(), HttpStatus.BAD_REQUEST);
+        ExceptionDTO exceptionDTO = new ExceptionDTO(badRequestException.getMessage());
+        return new ResponseEntity<>(exceptionDTO, HttpStatus.BAD_REQUEST);
     }
 
     @Override

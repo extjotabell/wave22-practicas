@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     public ResponseDTO startFollowing(int userId, int userIdToFollow){
         if (userId == userIdToFollow){
-            throw new BadRequestException("User can't add themselfs.");
+            throw new BadRequestException("User can't add themselves.");
         }
         User newFollower = userRepository.findById(userId);
         User userToFollow = userRepository.findById(userIdToFollow);
@@ -46,19 +46,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseDTO stopFollowing(int userId, int userIdToUnfollow){
         if (userId == userIdToUnfollow) {
-            throw new BadRequestException("User can't unfollow themselfs.");
+            throw new BadRequestException("User can't unfollow themselves.");
         }
-        User foller = userRepository.findById(userId);
+        User follower = userRepository.findById(userId);
         User userToUnfollow = userRepository.findById(userIdToUnfollow);
-        if (foller == null || userToUnfollow == null){
+        if (follower == null || userToUnfollow == null){
             throw new BadRequestException("User not found");
         }
-        if (!foller.getFollowed().contains(userToUnfollow)){
+        if (!follower.getFollowed().contains(userToUnfollow)){
             throw new BadRequestException("You are not a follower of this user.");
         }
 
-        userToUnfollow.popFollower(foller);
-        foller.popFollowed(userToUnfollow);
+        userToUnfollow.popFollower(follower);
+        follower.popFollowed(userToUnfollow);
         return new ResponseDTO(userId + " successfully unfollowed " + userIdToUnfollow);
     }
 
