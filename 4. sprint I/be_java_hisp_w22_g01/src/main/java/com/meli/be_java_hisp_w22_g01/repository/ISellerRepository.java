@@ -13,8 +13,5 @@ public interface ISellerRepository {
 
     Seller sumAFollower(int idFollower, int idSeller);
 
-    /*List<User> orderFollowerAsc(Seller seller);
-    List<User> orderFollowerDesc(Seller seller);
-*/
     List<User> getAllFollowers(Seller seller);
 }

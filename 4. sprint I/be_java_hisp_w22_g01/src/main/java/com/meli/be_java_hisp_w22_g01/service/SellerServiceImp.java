@@ -2,7 +2,6 @@ package com.meli.be_java_hisp_w22_g01.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w22_g01.dto.SellerDto;
-import com.meli.be_java_hisp_w22_g01.dto.UserDto;
 import com.meli.be_java_hisp_w22_g01.dto.response.CountFollowersDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.UserMiniDTO;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
@@ -14,7 +13,6 @@ import com.meli.be_java_hisp_w22_g01.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 

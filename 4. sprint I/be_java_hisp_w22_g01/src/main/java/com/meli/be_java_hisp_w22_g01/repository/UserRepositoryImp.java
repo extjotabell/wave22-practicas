@@ -1,10 +1,8 @@
 package com.meli.be_java_hisp_w22_g01.repository;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
 import com.meli.be_java_hisp_w22_g01.exceptions.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -74,5 +72,10 @@ public class UserRepositoryImp implements IUserRepository{
         User oldUser = this.findById(user_id);
         int indexPos = this.list_of_users.indexOf(oldUser);
         this.list_of_users.set(indexPos, user);
+    }
+
+    @Override
+    public List<Seller> getAllFolloweds(User user) {
+        return user.getFollowed();
     }
 }
