@@ -18,8 +18,8 @@ public class UserController {
 
     // US 0001
     @PostMapping("{userId}/follow/{userIdToFollow}")
-    public ResponseEntity<?> sumAFollower(@PathVariable int userId, @PathVariable int sellerId){
-        return ResponseEntity.status(HttpStatus.OK).body(sellerService.setAFollower(userId,sellerId));
+    public ResponseEntity<?> sumAFollower(@PathVariable int userId, @PathVariable int userIdToFollow){
+        return ResponseEntity.status(HttpStatus.OK).body(sellerService.setAFollower(userId,userIdToFollow));
     }
 
     // US 0002
