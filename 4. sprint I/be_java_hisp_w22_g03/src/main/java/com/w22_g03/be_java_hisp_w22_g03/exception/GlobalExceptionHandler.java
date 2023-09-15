@@ -1,6 +1,7 @@
 package com.w22_g03.be_java_hisp_w22_g03.exception;
 
 import com.w22_g03.be_java_hisp_w22_g03.dto.ExceptionDTO;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -16,13 +17,13 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<?> handleNotFoundException(NotFoundException notFoundException){
+    public ResponseEntity<?> handleNotFoundException(NotFoundException notFoundException) {
         ExceptionDTO exceptionDTO = new ExceptionDTO(notFoundException.getMessage());
         return new ResponseEntity<>(exceptionDTO, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<?> handleBadRequestException(BadRequestException badRequestException){
+    public ResponseEntity<?> handleBadRequestException(BadRequestException badRequestException) {
         return new ResponseEntity<>(badRequestException.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
@@ -44,5 +45,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.badRequest().body(exceptionDTO);
     }
 
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ExceptionDTO> handleConstraintViolationException(ConstraintViolationException constraintViolationException) {
+        ExceptionDTO exceptionDTO = new ExceptionDTO("Invalid order request");
+        return ResponseEntity.badRequest().body(exceptionDTO);
+    }
 
 }
