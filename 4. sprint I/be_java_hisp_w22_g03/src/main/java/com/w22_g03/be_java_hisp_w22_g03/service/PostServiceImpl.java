@@ -85,7 +85,7 @@ public class PostServiceImpl implements PostService {
     }
 
     private List<PostDTO> sortByDate(String order, List<PostDTO> postsDto) {
-        if(order.equals("order_asc")){
+        if(order.equals("date_asc")){
             return postsDto.stream().sorted(Comparator.comparing(PostDTO::getDate)).toList();
         }else{
             return postsDto.stream().sorted(Comparator.comparing(PostDTO::getDate).reversed()).toList();
