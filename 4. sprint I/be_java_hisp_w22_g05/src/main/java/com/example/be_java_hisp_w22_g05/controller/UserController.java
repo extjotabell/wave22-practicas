@@ -5,11 +5,7 @@ import com.example.be_java_hisp_w22_g05.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
@@ -29,8 +25,8 @@ public class UserController {
         return ResponseEntity.ok(userService.getNumberFollowers(userId));
     }
     @GetMapping("/{userId}/followed/list")
-    public ResponseEntity<?> getListOfUsersFollowedBy(@PathVariable int userId) {
-        return new ResponseEntity<>(userService.getListOfUsersFollowedBy(userId), HttpStatus.OK);
+    public ResponseEntity<?> getListOfUsersFollowedBy(@PathVariable int userId, @RequestParam(required = false) String order){
+        return new ResponseEntity<>(userService.getListOfUsersFollowedBy(userId, order), HttpStatus.OK);
     }
 
     @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
@@ -38,9 +34,9 @@ public class UserController {
         return new ResponseEntity<>(userService.unfollow(userId,userIdToUnfollow), HttpStatus.OK);
     }
 
-    @GetMapping("{userId}/followers/list")
-    public ResponseEntity<?> findUsersFollowingSeller(@PathVariable int userId){
-        return new ResponseEntity<>(userService.findUsersFollowingSeller(userId),HttpStatus.OK);
+    @GetMapping("/{userId}/followers/list")
+    public ResponseEntity<?> findUsersFollowingSeller(@PathVariable int userId, @RequestParam(required = false) String order){
+        return new ResponseEntity<>(userService.findUsersFollowingSeller(userId, order),HttpStatus.OK);
     }
 
 }
