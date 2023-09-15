@@ -7,5 +7,4 @@ import java.util.List;
 public interface IUserRepository {
     List<User> getAllUsers();
 
-    User getUserById(int userId);
 }
