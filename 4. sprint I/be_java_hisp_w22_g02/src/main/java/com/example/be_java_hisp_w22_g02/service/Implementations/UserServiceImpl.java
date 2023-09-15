@@ -47,13 +47,10 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public UserFollowDTO getFollowers(int id) {
-        ObjectMapper mapper = new ObjectMapper();
-        UserDto user = mapper.convertValue(this.userRepository.getFollowers(id), UserDto.class);
+        User user = userRepository.findById(id);
         if(user == null)
-            throw new NotFoundException("No existe ningun user con el id "+id);
-        UserFollowDTO userFollowDTO = new UserFollowDTO(user.getUserId(), user.getUserName());
-        userFollowDTO.setFollowers(user.getFollowers().stream().map(u -> new UserDto(u.getUserId(), u.getUserName(), u.getFollowers(), null, null)).toList());
-        return userFollowDTO;
+            throw new NotFoundException("User with id: " + id + " not found.");
+        return userFollowMapper.toDto(user);
     }
 
     public UserFollowDTO getFollowedUsersById(Integer id) {
