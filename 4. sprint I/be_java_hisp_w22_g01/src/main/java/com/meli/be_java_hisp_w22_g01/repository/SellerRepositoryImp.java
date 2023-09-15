@@ -105,6 +105,7 @@ public class SellerRepositoryImp implements ISellerRepository{
 
         Seller seller = findById(idSeller);
         seller.getFollowers().add(userRepo.findById(idFollower));
+        userRepo.getAllFolloweds(findById(idFollower)).add(findById(idSeller));
 
         return seller;
     }

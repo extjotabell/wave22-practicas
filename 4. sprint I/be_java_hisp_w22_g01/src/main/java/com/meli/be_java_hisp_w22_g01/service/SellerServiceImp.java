@@ -1,8 +1,8 @@
 package com.meli.be_java_hisp_w22_g01.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.meli.be_java_hisp_w22_g01.dto.SellerDto;
 import com.meli.be_java_hisp_w22_g01.dto.response.CountFollowersDTO;
+import com.meli.be_java_hisp_w22_g01.dto.response.FollowMessageDto;
 import com.meli.be_java_hisp_w22_g01.dto.response.UserMiniDTO;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
@@ -38,7 +38,7 @@ public class SellerServiceImp implements ISellerService{
     }
 
     @Override
-    public SellerDto setAFollower(int idFollower, int idSeller) {
+    public FollowMessageDto setAFollower(int idFollower, int idSeller) {
         Seller seller = sellerRepository.findById(idSeller);
         User user = userRepository.findById(idFollower);
 
@@ -50,7 +50,7 @@ public class SellerServiceImp implements ISellerService{
             sellerRepository.sumAFollower(idFollower,idSeller);
         }
 
-        return mapper.convertValue(seller,SellerDto.class);
+        return new FollowMessageDto("El user: " + idFollower + "comenzo a seguir a: " + idSeller );
     }
 
     @Override
