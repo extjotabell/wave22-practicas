@@ -1,5 +1,6 @@
 package bootcamp.socialMeli.controller;
 
+import bootcamp.socialMeli.dto.FollowedListDto;
 import bootcamp.socialMeli.dto.FollowersCountDto;
 import bootcamp.socialMeli.dto.FollowersListDto;
 import bootcamp.socialMeli.dto.NameOrderEnumDto;
@@ -8,6 +9,11 @@ import bootcamp.socialMeli.service.IUserService;
 import jakarta.annotation.Nullable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,6 +40,13 @@ public class UserController {
     {
         this.userService.followUser(userId, userIdToFollow);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
+    public ResponseEntity<?> removeUser(@PathVariable int userId, @PathVariable int userIdToUnfollow){
+        userService.removeFollower(userId, userIdToUnfollow);
+        return new ResponseEntity<>("Se dejó de seguir al usuario "+userIdToUnfollow, HttpStatus.OK);
     }
 
     // US 02
