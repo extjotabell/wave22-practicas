@@ -4,6 +4,7 @@ import com.example.be_java_hisp_w22_g02.entity.Post;
 import com.example.be_java_hisp_w22_g02.repository.Interfaces.IPostRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
 
@@ -23,7 +24,7 @@ public class PostRepositoryImpl implements IPostRepository {
 
     private void loadDataBase() throws IOException {
         File file;
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
         List<Post> posts;
 
         file = ResourceUtils.getFile("classpath:posts.json");
