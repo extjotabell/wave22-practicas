@@ -1,12 +1,17 @@
 package com.example.be_java_hisp_w22_g05.controller;
 
 import com.example.be_java_hisp_w22_g05.dto.PostDto;
-import com.example.be_java_hisp_w22_g05.repository.IPostRepository;
 import com.example.be_java_hisp_w22_g05.service.IPostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
@@ -18,6 +23,11 @@ public class PostController {
     public ResponseEntity<?> newPost(@RequestBody PostDto postDto){
         postService.save(postDto);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/followed/{userId}/list")
+    public ResponseEntity<?> getListPostsFromSellersFollowed(@PathVariable int userId){
+        return new ResponseEntity<List<PostDto>>(postService.getListPostsFromSellersFollowed(userId), HttpStatus.OK);
     }
 
 }
