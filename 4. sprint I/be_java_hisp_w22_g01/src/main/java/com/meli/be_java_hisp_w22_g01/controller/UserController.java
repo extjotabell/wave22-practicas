@@ -16,6 +16,19 @@ public class UserController {
     @Autowired
     ISellerService sellerService;
 
+    // US 0001
+    @PostMapping("{userId}/follow/{userIdToFollow}")
+    public ResponseEntity<?> sumAFollower(@PathVariable int userId, @PathVariable int sellerId){
+        return ResponseEntity.status(HttpStatus.OK).body(sellerService.setAFollower(userId,sellerId));
+    }
+
+    // US 0002
+    @GetMapping("/{userId}/followers/count")
+    public ResponseEntity<?> countFollowers (@PathVariable int userId) {
+        return ResponseEntity.status(HttpStatus.OK).body(sellerService.countFollowers(userId));
+    }
+
+    // US 0003
     @GetMapping("/{userId}/followers/list")
     public ResponseEntity<?> followersList(@PathVariable int userId,@RequestParam(required = false) String order) {
 
@@ -26,21 +39,13 @@ public class UserController {
         }
     }
 
-    @GetMapping("/{userId}/followers/count")
-    public ResponseEntity<?> countFollowers (@PathVariable int userId) {
-        return ResponseEntity.status(HttpStatus.OK).body(sellerService.countFollowers(userId));
-    }
-
-    @PostMapping("{userId}/follow/{userIdToFollow}")
-    public ResponseEntity<?> sumAFollower(@PathVariable int userId, @PathVariable int sellerId){
-        return ResponseEntity.status(HttpStatus.OK).body(sellerService.setAFollower(userId,sellerId));
-    }
-
+    // US 0004
     @GetMapping("/{userId}/followed/list")
     public ResponseEntity<?> getFollowedList(@PathVariable int userId){
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUserFollowedList(userId));
     }
 
+    // US 0007
     @PostMapping("{userId}/unfollow/{userIdToUnfollow}")
     public ResponseEntity<?> unfollowUser(@PathVariable int userId, @PathVariable int userIdToUnfollow){
         return ResponseEntity.status(HttpStatus.OK).body(userService.unfollow(userId, userIdToUnfollow));
