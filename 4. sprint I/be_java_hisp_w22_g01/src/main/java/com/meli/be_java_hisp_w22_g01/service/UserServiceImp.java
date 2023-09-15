@@ -25,6 +25,7 @@ public class UserServiceImp implements IUserService{
     IUserRepository userRepository;
     @Autowired
     ISellerRepository sellerRepository;
+    @Autowired
     ObjectMapper mapper;
 
     @Override
@@ -106,8 +107,12 @@ public class UserServiceImp implements IUserService{
             if (seller.isPresent()) {
                 userToEdit.get().getFollowed().remove(seller.get());
 
-                // Actualizar repositorio
+                // Actualizar repositorio UserRepository
                 userRepository.updateUser(userToEdit.get().getUser_id(), userToEdit.get());
+
+                // Buscar en el repositorio SellerRepository y actualizar los seguidores (followers) del vendedor
+                seller.get().getFollowers().remove(userToEdit.get());
+                sellerRepository.updateUser(seller.get().getUser_id(), seller.get());
                 return new UnfollowDTO("El usuario userId: " + userId + " ha dejado de seguir a userId: " + userIdToUnfollow);
             // Si el usuario no sigue al vendedor no se puede dejar de seguir y se lanza la siguiente excepción
             } else {

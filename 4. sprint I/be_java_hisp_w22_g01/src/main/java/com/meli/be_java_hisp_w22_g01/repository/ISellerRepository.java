@@ -12,6 +12,6 @@ public interface ISellerRepository {
     Seller findById(int seller_id);
 
     Seller sumAFollower(int idFollower, int idSeller);
-
+    void updateUser(int user_id, Seller seller);
     List<User> getAllFollowers(Seller seller);
 }

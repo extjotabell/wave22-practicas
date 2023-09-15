@@ -105,11 +105,19 @@ public class SellerRepositoryImp implements ISellerRepository{
 
         Seller seller = findById(idSeller);
         seller.getFollowers().add(userRepo.findById(idFollower));
+        userRepo.getAllFolloweds(findById(idFollower)).add(findById(idSeller));
 
         return seller;
     }
     @Override
     public List<User> getAllFollowers(Seller seller) {
         return seller.getFollowers();
+    }
+
+    @Override
+    public void updateUser(int user_id, Seller seller) {
+        Seller oldSeller = this.findById(user_id);
+        int indexPos = this.sellerList.indexOf(oldSeller);
+        this.sellerList.set(indexPos, seller);
     }
 }
