@@ -48,4 +48,11 @@ public class UserRepository implements IUserRepository {
     public List<User> findAllUsers() {
         return database;
     }
+
+    @Override
+    public User unfollow(User userFollower, User userFollowed) {
+        userFollower.getFollowed().remove(userFollowed);
+        userFollowed.getFollower().remove(userFollower);
+        return userFollower;
+    }
 }
