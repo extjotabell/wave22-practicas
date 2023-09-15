@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,8 @@ public class UserServiceImp implements IUserService{
 
     @Autowired
     IUserRepository userRepository;
+    @Autowired
+    ObjectMapper mapper;
 
     @Override
     public FollowedDTO getUserFollowedList(int user_id) {
@@ -35,7 +38,7 @@ public class UserServiceImp implements IUserService{
     /**
      * Punto 3
      * Obtine un listado de todos los usuarios que siguen a un determinado vendedor
-     * @param user_id
+     * @ param user_id
      * @return lista de seguidores de un vendedor
      */
     @Override
@@ -72,7 +75,7 @@ public class UserServiceImp implements IUserService{
     /**
      * Endpoint 7
      * Un usuario deja de seguir a otro en base al id de cada uno
-     * @param user_id, userIdToUnfollow
+     * @ param user_id, userIdToUnfollow
      * @return booleano para indicar si la operación fue exitosa o no
      **/
     @Override
@@ -108,7 +111,20 @@ public class UserServiceImp implements IUserService{
         } else {
             throw new NotFoundException("No se encontró el usuario a editar. userId: " + userId +" Recuerda que los vendedores no pueden seguir usuarios");
         }
+    }
 
-        //return false;
+    @Override
+    public List<FollowedDTO> orderFollowedsDto(int userId, String order) {
+        User user = userRepository.findById(userId);
+        List<Seller> followeds = userRepository.getAllFolloweds(user);
+        if (order.equals("name_asc")) {
+            followeds = followeds.stream()
+                    .sorted(Comparator.comparing(User::getUser_name)).toList();
+        }else if (order.equals("name_desc")){
+            followeds = followeds.stream()
+                    .sorted(Comparator.comparing(User::getUser_name, Comparator.reverseOrder()))
+                    .toList();
+        }
+        return followeds.stream().map(f -> mapper.convertValue(f, FollowedDTO.class)).toList();
     }
 }
