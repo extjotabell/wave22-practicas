@@ -14,7 +14,7 @@ public class User {
     private int user_id;
     private RolEnum rol;
     private String user_name;
-    private List<Post> postList;
+    private List<Integer> postList;
     private List<Integer> following;
     private List<Integer> followers;
 
