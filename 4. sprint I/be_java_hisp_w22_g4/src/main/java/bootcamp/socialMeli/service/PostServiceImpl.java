@@ -11,6 +11,7 @@ import bootcamp.socialMeli.repository.IProductRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -18,30 +19,25 @@ import java.util.stream.Collectors;
 @Service
 public class PostServiceImpl implements IPostService {
     private final IPostRepository postRepository;
+    private final IProductService productService;
 
-    public PostServiceImpl(IPostRepository postRepository) {
+    public PostServiceImpl(IPostRepository postRepository, IProductService productService) {
         this.postRepository = postRepository;
+        this.productService = productService;
     }
     ObjectMapper mapper = new ObjectMapper();
     @Override
     public List<PostDto> getAllPosts() {
         List<Post> postList = postRepository.getAllPost();
-        ProductDto productdto =
-                postList.stream().map(Post::getProduct).map(
-                        product ->
-                                new ProductDto(
-                                        product.getProduct_id(),
-                                        product.getProduct_name(),
-                                        product.getType(),
-                                        product.getBrand(),
-                                        product.getColor(),
-                                        product.getNotes()
-                                )
-                ).toList().stream().findFirst().orElse(null);
+        List<PostDto> postDtoList = new ArrayList<>();
 
-        return postList.stream()
-                .map(post -> new PostDto(post.getUser_id(), post.getPost_id(), post.getDate(), productdto, post.getCategory(), post.getPrice())).collect(Collectors.toList());
+        postList.forEach(post -> {
+                    ProductDto product = productService.getProductById(post.getProduct_id());
+                    new PostDto(post.getUser_id(), post.getPost_id(), post.getDate(), product, post.getCategory(), post.getPrice());
+                });
+        return postDtoList;
     }
+
 
     @Override
     public FollowedPostListDto getPostsByFollowedUsers(int userId) {
