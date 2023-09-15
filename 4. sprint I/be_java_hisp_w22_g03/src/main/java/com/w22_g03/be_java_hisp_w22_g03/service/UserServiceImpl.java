@@ -23,21 +23,20 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     public ResponseDTO startFollowing(int userId, int userIdToFollow){
+        if (userId == userIdToFollow){
+            throw new BadRequestException("User can't add themselfs.");
+        }
         User newFollower = userRepository.findById(userId);
         User userToFollow = userRepository.findById(userIdToFollow);
         if (newFollower == null || userToFollow == null){
             throw new BadRequestException("User not found.");
         }
         if (!userToFollow.isSeller()){
-            throw new BadRequestException("User is not vendor.");
+            throw new BadRequestException("User is not seller.");
         }
-        if (userToFollow == newFollower){
-            throw new BadRequestException("User can't add themselfs.");
+        if (newFollower.getFollowed().contains(userToFollow)){
+            throw new BadRequestException("User cant follow the same seller more than once.");
         }
-        if (userRepository.findFollower(userIdToFollow, userId) != null){
-            throw new BadRequestException("User cant follow the same vendor more than once.");
-        }
-
         userToFollow.addFollower(newFollower);
         newFollower.addFollowed(userToFollow);
         return new ResponseDTO(userId + " successfully followed " + userIdToFollow);
@@ -45,14 +44,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseDTO stopFollowing(int userId, int userIdToUnfollow){
-        User newFollower = userRepository.findById(userId);
+        if (userId == userIdToUnfollow) {
+            throw new BadRequestException("User can't unfollow themselfs.");
+        }
+        User foller = userRepository.findById(userId);
         User userToUnfollow = userRepository.findById(userIdToUnfollow);
-        if (newFollower == null || userToUnfollow == null){
+        if (foller == null || userToUnfollow == null){
             throw new BadRequestException("User not found");
         }
+        if (!foller.getFollowed().contains(userToUnfollow)){
+            throw new BadRequestException("You are not a follower of this user.");
+        }
 
-        userToUnfollow.popFollower(newFollower);
-        newFollower.popFollowed(userToUnfollow);
+        userToUnfollow.popFollower(foller);
+        foller.popFollowed(userToUnfollow);
         return new ResponseDTO(userId + " successfully unfollowed " + userIdToUnfollow);
     }
 
