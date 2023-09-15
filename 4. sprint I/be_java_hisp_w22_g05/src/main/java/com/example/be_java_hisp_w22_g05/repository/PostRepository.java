@@ -66,12 +66,4 @@ public class PostRepository implements IPostRepository {
     public Product getProduct(int id) {
         return productList.stream().filter(product -> product.getId() == id).findFirst().orElse(null);
     }
-
-    public boolean saveProduct(Product product){
-        if(getProduct(product.getId()) == null){
-            productList.add(product);
-            return true;
-        }
-        return false;
-    }
 }
