@@ -28,7 +28,7 @@ public class PostServiceImp implements IPostService{
     }
 
     @Override
-    public List<PostDto> orderByDate(String order) {
+    public List<PostDto> orderByDateFollowedSellers(String order) {
         List<PostDto> listaPostdeSeguidos = new ArrayList<>();
 
         if (order.equals("date_asc")){

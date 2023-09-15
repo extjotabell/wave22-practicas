@@ -50,7 +50,7 @@ public class SellerServiceImp implements ISellerService{
             sellerRepository.sumAFollower(idFollower,idSeller);
         }
 
-        return new FollowMessageDto("El user: " + idFollower + "comenzo a seguir a: " + idSeller );
+        return new FollowMessageDto("El user: " + idFollower + " comenzo a seguir a: " + idSeller );
     }
 
     @Override

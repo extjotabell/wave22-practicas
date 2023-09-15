@@ -7,5 +7,5 @@ import java.util.List;
 public interface IPostService {
     void createPost (PostDto postDto);
 
-    List<PostDto> orderByDate(String order);
+    List<PostDto> orderByDateFollowedSellers(String order);
 }
