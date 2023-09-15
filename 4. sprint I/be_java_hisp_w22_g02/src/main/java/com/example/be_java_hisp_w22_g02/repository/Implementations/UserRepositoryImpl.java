@@ -22,16 +22,18 @@ public class UserRepositoryImpl implements IUserRepository {
     }
 
     @Override
+    public User findById(Integer id) {
+        return dbUser.get(id);
+    }
+
+
+    @Override
     public void followUser(int userId, int userIdToFollow) {
         User user = dbUser.get(userId);
         User userToFollow = dbUser.get(userId);
         user.addFollower(userToFollow);
     }
 
-    @Override
-    public User getUser(int userId) {
-        return dbUser.get(userId);
-    }
 
     @Override
     public List<User> getAllUsers() {
@@ -56,8 +58,5 @@ public class UserRepositoryImpl implements IUserRepository {
         }
     }
 
-    @Override
-    public User findById(Long id) {
-        return dbUser.get(id);
-    }
+
 }
