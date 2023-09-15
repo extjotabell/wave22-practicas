@@ -9,11 +9,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
-import java.io.IOException;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,8 +21,29 @@ import java.util.Map;
 public class UserRepositoryImpl implements IUserRepository {
     private final Map<Integer, User> dbUser = new HashMap<>();
 
-    public UserRepositoryImpl() throws IOException {
+    public UserRepositoryImpl() {
         loadDataBase();
+    }
+
+    @Override
+    public User findById(Integer id) {
+        return dbUser.get(id);
+    }
+
+
+    @Override
+    public void followUser(int userId, int userIdToFollow) {
+        User user = dbUser.get(userId);
+        User userToFollow = dbUser.get(userId);
+        user.addFollower(userToFollow);
+    }
+
+
+    @Override
+    public List<User> getAllUsers() {
+        List<User> newList = new ArrayList<>();
+        dbUser.forEach((k,v) -> newList.add(v));
+        return newList;
     }
 
     private void loadDataBase(){
@@ -64,4 +84,5 @@ public class UserRepositoryImpl implements IUserRepository {
 
         return postsId;
     }
+
 }
