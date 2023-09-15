@@ -9,15 +9,35 @@ import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Repository
 public class UserRepositoryImpl implements IUserRepository {
-    private final Map<Long, User> dbUser = new HashMap<>();
+    private final Map<Integer, User> dbUser = new HashMap<>();
 
     public UserRepositoryImpl() {
         loadDataBase();
+    }
+
+    @Override
+    public void followUser(int userId, int userIdToFollow) {
+        User user = dbUser.get(userId);
+        User userToFollow = dbUser.get(userId);
+        user.addFollower(userToFollow);
+    }
+
+    @Override
+    public User getUser(int userId) {
+        return dbUser.get(userId);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        List<User> newList = new ArrayList<>();
+        dbUser.forEach((k,v) -> newList.add(v));
+        return newList;
     }
 
     private void loadDataBase(){
