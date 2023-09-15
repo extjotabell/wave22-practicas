@@ -8,6 +8,7 @@ import com.meli.be_java_hisp_w22_g01.dto.response.UserMiniDTO;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
 import com.meli.be_java_hisp_w22_g01.exceptions.NotFoundException;
+import com.meli.be_java_hisp_w22_g01.repository.ISellerRepository;
 import com.meli.be_java_hisp_w22_g01.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ public class UserServiceImp implements IUserService{
 
     @Autowired
     IUserRepository userRepository;
+    @Autowired
+    ISellerRepository sellerRepository;
 
     @Override
     public FollowedDTO getUserFollowedList(int user_id) {
@@ -41,22 +44,22 @@ public class UserServiceImp implements IUserService{
     @Override
     public UserFollowersListDTO FollowersList(int user_id) {
 
-        User usersById = userRepository.findById(user_id);
+        Seller sellerById = sellerRepository.findById(user_id);
         UserFollowersListDTO userFollowersList = new UserFollowersListDTO();
 
         // si hay lista de usuarios
-        userFollowersList.setUser_id(usersById.getUser_id());
-        userFollowersList.setUser_name(usersById.getUser_name());
+        userFollowersList.setUser_id(sellerById.getUser_id());
+        userFollowersList.setUser_name(sellerById.getUser_name());
 
         // Datos basicos de usuario
         List<UserMiniDTO> userDataList = new ArrayList<>();
-        List<Seller> userFollower = usersById.getFollowed();
+        List<User> userFollower = sellerById.getFollowers();
 
         if(!userFollower.isEmpty()){
-            for(Seller seller : userFollower){
+            for(User user : userFollower){
                 UserMiniDTO userData = new UserMiniDTO();
-                userData.setUser_id(seller.getUser_id());
-                userData.setUser_name(seller.getUser_name());
+                userData.setUser_id(user.getUser_id());
+                userData.setUser_name(user.getUser_name());
 
                 // agregando a lista de usuarios
                 userDataList.add(userData);
