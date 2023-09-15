@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class User {
     @JsonAlias({"user_id"})
-    private Long userId;
+    private int userId;
     @JsonAlias({"user_name"})
     private String userName;
     private List<User> followers = new ArrayList<>();

@@ -6,7 +6,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class FollowedPost {
+public class FollowedPostDTO {
     private int followedUserId;
     private Post post;
 }
