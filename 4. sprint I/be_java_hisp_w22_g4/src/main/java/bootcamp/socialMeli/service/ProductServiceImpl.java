@@ -26,4 +26,9 @@ public class ProductServiceImpl implements IProductService{
                 map(product -> mapper.convertValue(product, ProductDto.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public ProductDto getProductById(int productId) {
+        return null;
+    }
 }

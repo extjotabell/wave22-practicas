@@ -27,6 +27,11 @@ public class ProductRepositoryImpl implements IProductRepository{
         return productDatabase.values().stream().toList();
     }
 
+    @Override
+    public Product getProductById(int productId) {
+        return this.productDatabase.get(productId);
+    }
+
     private HashMap<Integer, Product> loadProducts(){
         List<Product> products = loadDataBase();
         HashMap<Integer, Product> productHashMap = new HashMap<>();

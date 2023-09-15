@@ -26,6 +26,12 @@ public class ProductController {
     }
 
     @GetMapping()
+    public ResponseEntity<List<ProductDto>> detProducts()
+    {
+        return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
+    }
+
+    @GetMapping("/users")
     public ResponseEntity<List<ProductDto>> getUsers()
     {
         return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
@@ -36,7 +42,6 @@ public class ProductController {
     {
         return new ResponseEntity<>(postService.getAllPosts(), HttpStatus.OK);
     }
-
     // US 06
     @GetMapping("/followed/{userId}/list")
     public ResponseEntity<FollowedPostListDto> getByFollowedUsers(@PathVariable int userId)

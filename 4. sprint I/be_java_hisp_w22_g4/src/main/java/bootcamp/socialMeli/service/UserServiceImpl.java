@@ -50,12 +50,12 @@ public class UserServiceImpl implements IUserService{
         User targetedUser = findUserById(userId);
 
         //Create list with followers
-        List<UserDto> followers = targetedUser.getFollowers().stream()
+        List<UserDto> followers = new ArrayList<>(targetedUser.getFollowers().stream()
                 .map(followerId -> {
                     User follower = findUserById(followerId);
                     return new UserDto(follower.getUser_id(), follower.getUser_name());
                 })
-                .toList();
+                .toList());
 
         //Create comparator to sort
         Comparator<UserDto> usernameComparator = Comparator.comparing(UserDto::getUser_name);
