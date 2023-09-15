@@ -1,10 +1,10 @@
 package com.meli.be_java_hisp_w22_g01.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.meli.be_java_hisp_w22_g01.dto.response.FollowedDTO;
-import com.meli.be_java_hisp_w22_g01.dto.response.UnfollowDTO;
-import com.meli.be_java_hisp_w22_g01.dto.response.UserFollowersListDTO;
-import com.meli.be_java_hisp_w22_g01.dto.response.UserMiniDTO;
+import com.meli.be_java_hisp_w22_g01.dto.PostDto;
+import com.meli.be_java_hisp_w22_g01.dto.ProductDto;
+import com.meli.be_java_hisp_w22_g01.dto.response.*;
+import com.meli.be_java_hisp_w22_g01.entity.Post;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
 import com.meli.be_java_hisp_w22_g01.exceptions.NotFoundException;
@@ -138,5 +138,38 @@ public class UserServiceImp implements IUserService{
                     .toList();
         }
         return followeds.stream().map(f -> mapper.convertValue(f, FollowedDTO.class)).toList();
+    }
+
+    @Override
+    public UserFollowedPostListDTO userFollowedPostList(int user_id) {
+
+        User user = userRepository.findById(user_id);
+        UserFollowedPostListDTO userFollowedPostListDTO = new UserFollowedPostListDTO();
+
+        List<Seller> sellerOfUser = user.getFollowed();
+        List<PostDto> listOfPost = new ArrayList<>();
+
+        // recorriendo lista de vendedores seguidos por el usuario
+        for(Seller seller: sellerOfUser){
+            // lista de post publicados por el vendedor
+            for(Post post: seller.getPosts()){
+
+                PostDto new_post = new PostDto();
+                new_post.setUser_id(post.getUser_id());
+                new_post.setPost_id(post.getPost_id());
+                new_post.setDate(post.getDate());
+                new_post.setProduct(mapper.convertValue(post.getProduct(), ProductDto.class));
+                new_post.setCategory(post.getCategory());
+                new_post.setPrice(post.getPrice());
+
+                listOfPost.add(new_post);
+
+            }
+        }
+
+        userFollowedPostListDTO.setUser_id(user_id);
+        userFollowedPostListDTO.setPosts(listOfPost);
+
+        return userFollowedPostListDTO;
     }
 }
