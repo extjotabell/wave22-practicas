@@ -6,6 +6,7 @@ import com.meli.be_java_hisp_w22_g01.dto.response.UserFollowersListDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.UserMiniDTO;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
+import com.meli.be_java_hisp_w22_g01.exceptions.NotFoundException;
 import com.meli.be_java_hisp_w22_g01.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,7 +83,7 @@ public class UserServiceImp implements IUserService{
                 .filter(u -> u.getUser_id() == userId)
                 .findFirst();
 
-        // si se encuentra el userId se modifica
+        // Si se encuentra el userId se modifica
         if (userToEdit.isPresent()){
 
             // Buscar el seller en la lista de seguidos (followed) del usuario
@@ -90,16 +91,23 @@ public class UserServiceImp implements IUserService{
                     .filter(s -> s.getUser_id() == userIdToUnfollow)
                     .findFirst();
 
-            // si el vendedor existe en la lista de seguidos del usuario removerlo
+            // Si el vendedor existe en la lista de seguidos del usuario removerlo
             if (seller.isPresent()) {
                 userToEdit.get().getFollowed().remove(seller.get());
 
                 // Actualizar repositorio
                 userRepository.updateUser(userToEdit.get().getUser_id(), userToEdit.get());
                 return true;
-
+            // Si el usuario no sigue al vendedor no se puede dejar de seguir y se lanza la siguiente excepción
+            } else {
+                throw new NotFoundException("El usuario userId: " + userId + " no sigue al vendedor userId: " + userIdToUnfollow);
             }
+
+        // Si no existe el usuario en la base de datos no se puede realizar la operación
+        } else {
+            throw new NotFoundException("No se encontró el usuario a editar. userId: " + userId +" Recuerda que los vendedores no pueden seguir usuarios");
         }
-        return false;
+
+        //return false;
     }
 }
