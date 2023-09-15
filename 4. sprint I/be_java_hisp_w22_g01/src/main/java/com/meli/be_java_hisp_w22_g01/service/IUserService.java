@@ -18,4 +18,6 @@ public interface IUserService {
     List<FollowedDTO> orderFollowedsDto(int userId, String order);
 
     UserFollowedPostListDTO userFollowedPostList(int user_id);
+
+    UserFollowedPostListDTO orderByDateFollowedSellers(int id, String order);
 }

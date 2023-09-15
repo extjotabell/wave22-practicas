@@ -45,17 +45,5 @@ public class PostServiceImp implements IPostService{
         postRepository.addPost(post);
     }
 
-    @Override
-    public List<PostDto> orderByDateFollowedSellers(String order) {
-        List<PostDto> listaPostdeSeguidos = new ArrayList<>();
 
-        if (order.equals("date_asc")){
-            return listaPostdeSeguidos.stream().sorted(Comparator.comparing(PostDto::getDate))
-                    .collect(Collectors.toList());
-        }else if(order.equals("date_desc")){
-            return listaPostdeSeguidos.stream().sorted(Comparator.comparing(PostDto::getDate).reversed())
-                    .collect(Collectors.toList());
-        }
-        return null;
-    }
 }
