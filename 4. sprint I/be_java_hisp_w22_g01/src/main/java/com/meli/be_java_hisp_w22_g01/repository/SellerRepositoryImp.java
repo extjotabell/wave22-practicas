@@ -3,6 +3,7 @@ package com.meli.be_java_hisp_w22_g01.repository;
 import com.meli.be_java_hisp_w22_g01.entity.Post;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -12,7 +13,8 @@ import java.util.List;
 public class SellerRepositoryImp implements ISellerRepository{
 
     private List<Seller> sellerList = new ArrayList<>();
-    private UserRepositoryImp userRepo;
+    @Autowired
+    private IUserRepository userRepo;
 
     public SellerRepositoryImp() {
 
