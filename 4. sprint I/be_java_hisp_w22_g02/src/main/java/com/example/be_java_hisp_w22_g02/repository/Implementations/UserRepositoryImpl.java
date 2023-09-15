@@ -61,5 +61,9 @@ public class UserRepositoryImpl implements IUserRepository {
         }
     }
 
+    @Override
+    public User getFollowers(int id) {
+        return findById(id);
+    }
 
 }
