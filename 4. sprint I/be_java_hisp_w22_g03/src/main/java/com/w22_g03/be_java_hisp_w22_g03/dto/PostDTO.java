@@ -23,6 +23,7 @@ public class PostDTO {
     private Long userId;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
+    @NotNull
     private LocalDate date;
 
     @Valid
@@ -35,8 +36,4 @@ public class PostDTO {
     @NotNull
     private Double price;
 
-    @JsonProperty("has_promo")
-    private boolean hasPromo;
-
-    private double discount;
 }

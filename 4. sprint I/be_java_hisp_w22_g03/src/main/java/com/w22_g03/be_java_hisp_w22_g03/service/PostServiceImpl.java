@@ -22,18 +22,14 @@ import java.util.Objects;
 @AllArgsConstructor
 public class PostServiceImpl implements PostService {
 
-    @Autowired
     private PostRepository postRepository;
 
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Override
     public PostDTO addPost(PostDTO postDTO) {
 
-        User user = userRepository.findById(postDTO.getUserId());
-        if (Objects.isNull(user)) {
-            throw new NotFoundException("User not found");
-        }
+        User user = userService.findById(postDTO.getUserId());
 
         Post post = mapPostDtoToPost(postDTO, user);
         post.setPostId(this.postRepository.countPosts() + 1);
@@ -45,7 +41,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public UserFollowedSellersPostsDTO getFollowedUsersPostsById(long userId) {
-        User user = userRepository.findById(userId);
+        User user = userService.findById(userId);
         List<Post> twoWeekOldPostsBySeller = postRepository.findTwoWeekOldPostsFromFollowedByUser(user);
 
         return mapPostsToUserFollowedSellersPostsDto(twoWeekOldPostsBySeller, userId);

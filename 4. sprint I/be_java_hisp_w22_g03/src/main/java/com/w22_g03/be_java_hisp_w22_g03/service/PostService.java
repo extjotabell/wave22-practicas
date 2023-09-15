@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface PostService {
 
-    PostDTO addPost(@RequestBody PostDTO postDTO);
+    PostDTO addPost(PostDTO postDTO);
 
     UserFollowedSellersPostsDTO  getFollowedUsersPostsById(long userId);
 

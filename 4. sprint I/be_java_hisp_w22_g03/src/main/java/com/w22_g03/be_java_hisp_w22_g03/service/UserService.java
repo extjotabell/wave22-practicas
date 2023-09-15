@@ -1,6 +1,7 @@
 package com.w22_g03.be_java_hisp_w22_g03.service;
 
 import com.w22_g03.be_java_hisp_w22_g03.dto.*;
+import com.w22_g03.be_java_hisp_w22_g03.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,5 +16,7 @@ public interface UserService {
     FollowedDTO getFollowed(int userId, String order);
 
     NumberOfFollowersDTO getNumberOfFollowers(int userId);
+
+    User findById(long userId);
 
 }

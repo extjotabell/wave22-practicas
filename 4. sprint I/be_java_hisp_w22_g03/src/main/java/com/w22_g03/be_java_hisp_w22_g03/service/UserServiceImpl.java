@@ -13,6 +13,7 @@ import com.w22_g03.be_java_hisp_w22_g03.model.User;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -102,5 +103,14 @@ public class UserServiceImpl implements UserService {
             followedDTOS.add(new UserDTO(u.getUserId(),u.getUsername()));
         }
         return FollowedDTO.buildFollowedDTO(new UserDTO(user.getUserId(),user.getUsername()),followedDTOS);
+    }
+
+    @Override
+    public User findById(long userId) {
+        User user = userRepository.findById(userId);
+        if(Objects.isNull(user)){
+            throw new NotFoundException("User not found");
+        }
+        return user;
     }
 }
