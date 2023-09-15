@@ -10,8 +10,11 @@ import org.springframework.util.ResourceUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class PostRepositoryImpl implements IPostRepository{
@@ -62,7 +65,13 @@ public class PostRepositoryImpl implements IPostRepository{
     }
 
     @Override
-    public List<Post> getPostsByFollowedUsers(int userId) {
-        return null;
+    public List<Post> getPostsByUserId(int userId) {
+        return this.postsDatabase.values().stream().filter(p -> p.getUser_id() == userId).collect(Collectors.toList());
+    }
+
+    public List<Post> getLatestPostsByUserId(int userId)
+    {
+        return this.postsDatabase.values().stream().filter(p ->
+                p.getUser_id() == userId && p.getDate().isAfter(LocalDate.now().minusWeeks(2))).collect(Collectors.toList());
     }
 }
