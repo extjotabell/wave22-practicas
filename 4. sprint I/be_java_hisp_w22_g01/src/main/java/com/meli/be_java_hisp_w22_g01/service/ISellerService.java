@@ -11,4 +11,6 @@ public interface ISellerService {
     SellerDto setAFollower(int idFollower, int idSeller);
     List<UserMiniDTO> orderFollowersDto(int userId, String order);
 
+
+
 }
