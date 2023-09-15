@@ -16,4 +16,6 @@ public interface UserRepository {
     List<User> findFollowed(int userId);
 
     Post savePost(Post post);
+
+    List<User> findAll();
 }

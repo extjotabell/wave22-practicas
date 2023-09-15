@@ -1,6 +1,7 @@
 package com.w22_g03.be_java_hisp_w22_g03.controller;
 
 import com.w22_g03.be_java_hisp_w22_g03.dto.PostDTO;
+import com.w22_g03.be_java_hisp_w22_g03.dto.UserFollowedSellersPostsDTO;
 import com.w22_g03.be_java_hisp_w22_g03.service.PostService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
@@ -21,13 +22,13 @@ public class PostController {
     private PostService postService;
 
     @PostMapping("/post")
-    public ResponseEntity<PostDTO> addPost(@RequestBody PostDTO postDTO) {
+    public ResponseEntity<PostDTO> addPost(@RequestBody @Valid PostDTO postDTO) {
         return ResponseEntity.ok(postService.addPost(postDTO));
     }
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<List<PostDTO>> getFollowedUsersPostsById(@PathVariable long userId,
-                                                                   @RequestParam(required = false) @Pattern(regexp = "^date_(asc|desc)$") String order) {
+    public ResponseEntity<UserFollowedSellersPostsDTO> getFollowedUsersPostsById(@PathVariable long userId,
+                                                                                 @RequestParam(required = false) @Pattern(regexp = "^date_(asc|desc)$") String order) {
         if(Objects.nonNull(order)){
             return ResponseEntity.ok(this.postService.getFollowedUsersPostsById(userId, order));
         }else {

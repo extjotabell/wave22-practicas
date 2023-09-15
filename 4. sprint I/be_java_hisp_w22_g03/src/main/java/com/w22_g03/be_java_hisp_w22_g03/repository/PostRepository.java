@@ -10,4 +10,7 @@ public interface PostRepository {
     Post savePost(Post post);
 
     List<Post> findTwoWeekOldPostsFromFollowedByUser(User user);
+
+    long countPosts();
 }
+

@@ -19,11 +19,15 @@ public class ProductDTO {
     @NotBlank
     private String name;
 
+    @NotBlank
     private String type;
 
+    @NotBlank
     private String brand;
 
+    @NotBlank
     private String color;
 
+    @NotBlank
     private String notes;
 }

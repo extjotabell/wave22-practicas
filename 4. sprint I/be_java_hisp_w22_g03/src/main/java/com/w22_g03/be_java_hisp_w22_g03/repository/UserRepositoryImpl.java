@@ -56,10 +56,13 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public Post savePost(Post post) {
         User userPosting = findById(post.getUser().getUserId());
-        if (userPosting == null)
-            throw new NotFoundException("The user trying to post does not exist");
 
         userPosting.getPosts().add(post);
         return post;
+    }
+
+    @Override
+    public List<User> findAll() {
+        return this.users;
     }
 }

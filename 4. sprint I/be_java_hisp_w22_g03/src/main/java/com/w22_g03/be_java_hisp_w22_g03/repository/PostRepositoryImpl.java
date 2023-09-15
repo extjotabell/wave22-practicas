@@ -27,4 +27,9 @@ public class PostRepositoryImpl implements PostRepository {
                 .filter(p -> p.getDate().isAfter(LocalDate.now().minusDays(14)))
                 .toList();
     }
+
+    @Override
+    public long countPosts() {
+        return this.userRepository.findAll().stream().mapToLong(user -> user.getPosts().size()).sum();
+    }
 }

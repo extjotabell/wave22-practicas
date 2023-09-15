@@ -1,7 +1,8 @@
 package com.w22_g03.be_java_hisp_w22_g03.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.w22_g03.be_java_hisp_w22_g03.dto.PostDTO;
+import com.w22_g03.be_java_hisp_w22_g03.dto.ProductDTO;
+import com.w22_g03.be_java_hisp_w22_g03.dto.UserFollowedSellersPostsDTO;
 import com.w22_g03.be_java_hisp_w22_g03.exception.NotFoundException;
 import com.w22_g03.be_java_hisp_w22_g03.model.Post;
 import com.w22_g03.be_java_hisp_w22_g03.model.Product;
@@ -34,34 +35,64 @@ public class PostServiceImpl implements PostService {
             throw new NotFoundException("User not found");
         }
 
-        ModelMapper mapper = new ModelMapper();
-//        ObjectMapper mapper = new ObjectMapper();
-//        Post post = mapper.convertValue(postDTO, Post.class);
-
-        Post post = mapper.map(postDTO, Post.class);
-//        post.setProduct(mapper.convertValue(postDTO.getProduct(), Product.class));
-        post.setProduct(mapper.map(postDTO.getProduct(), Product.class));
-        post.setUser(user);
+        Post post = mapPostDtoToPost(postDTO, user);
+        post.setPostId(this.postRepository.countPosts() + 1);
 
         this.postRepository.savePost(post);
+        postDTO.setPostId(post.getPostId());
         return postDTO;
     }
 
     @Override
-    public List<PostDTO> getFollowedUsersPostsById(long userId) {
+    public UserFollowedSellersPostsDTO getFollowedUsersPostsById(long userId) {
         User user = userRepository.findById(userId);
-        ObjectMapper mapper = new ObjectMapper();
-        List<Post> twoWeekOldPostsBySellerV2 = postRepository.findTwoWeekOldPostsFromFollowedByUser(user);
-        return twoWeekOldPostsBySellerV2.stream().map(p -> mapper.convertValue(p, PostDTO.class)).toList();
+        List<Post> twoWeekOldPostsBySeller = postRepository.findTwoWeekOldPostsFromFollowedByUser(user);
+
+        return mapPostsToUserFollowedSellersPostsDto(twoWeekOldPostsBySeller, userId);
+    }
+
+    private UserFollowedSellersPostsDTO mapPostsToUserFollowedSellersPostsDto(List<Post> twoWeekOldPostsBySeller, long userId) {
+        UserFollowedSellersPostsDTO userFollowedSellersPostsDTO = new UserFollowedSellersPostsDTO();
+
+        userFollowedSellersPostsDTO.setUserId(userId);
+        userFollowedSellersPostsDTO.setPosts(
+                twoWeekOldPostsBySeller.stream()
+                .map(this::mapPostToPostDto)
+                .toList());
+
+        return userFollowedSellersPostsDTO;
+    }
+
+    private Post mapPostDtoToPost(PostDTO postDTO, User user) {
+        ModelMapper mapper = new ModelMapper();
+        Post post = mapper.map(postDTO, Post.class);
+        post.setProduct(mapper.map(postDTO.getProduct(), Product.class));
+        post.setUser(user);
+        return post;
+    }
+
+    private  PostDTO mapPostToPostDto(Post post) {
+        ModelMapper mapper = new ModelMapper();
+        PostDTO postDto = mapper.map(post, PostDTO.class);
+        postDto.setProduct(mapper.map(post.getProduct(), ProductDTO.class));
+        postDto.setUserId(post.getUser().getUserId());
+        return postDto;
     }
 
     @Override
-    public List<PostDTO> getFollowedUsersPostsById(long userId, String order) {
-        List<PostDTO> posts = getFollowedUsersPostsById(userId);
+    public UserFollowedSellersPostsDTO getFollowedUsersPostsById(long userId, String order) {
+        UserFollowedSellersPostsDTO postsDto = getFollowedUsersPostsById(userId);
+
+        postsDto.setPosts(sortByDate(order, postsDto.getPosts()));
+
+        return postsDto;
+    }
+
+    private List<PostDTO> sortByDate(String order, List<PostDTO> postsDto) {
         if(order.equals("order_asc")){
-            return posts.stream().sorted(Comparator.comparing(PostDTO::getDate)).toList();
+            return postsDto.stream().sorted(Comparator.comparing(PostDTO::getDate)).toList();
         }else{
-            return posts.stream().sorted(Comparator.comparing(PostDTO::getDate).reversed()).toList();
+            return postsDto.stream().sorted(Comparator.comparing(PostDTO::getDate).reversed()).toList();
         }
     }
 }
