@@ -1,5 +1,6 @@
 package com.example.be_java_hisp_w22_g02.dto.response;
 
+import com.example.be_java_hisp_w22_g02.entity.UserFollow;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +18,5 @@ import java.util.List;
 public class UserFollowedDTO {
     private int userId;
     private String userName;
-    private List<UserDto> followers = new ArrayList<>();
-    private List<UserDto> followed = new ArrayList<>();
+    private List<UserFollow> followed = new ArrayList<>();
 }
