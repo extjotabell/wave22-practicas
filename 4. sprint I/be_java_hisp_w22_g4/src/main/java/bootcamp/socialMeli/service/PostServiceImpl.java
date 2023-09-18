@@ -6,14 +6,12 @@ import bootcamp.socialMeli.exception.BadRequestException;
 import bootcamp.socialMeli.exception.NotFoundException;
 import bootcamp.socialMeli.repository.IPostRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,7 +41,7 @@ public class PostServiceImpl implements IPostService {
 
 
     @Override
-    public FollowedPostListDto getPostsByFollowedUsers(int userId, OrderListEnum order) {
+    public FollowedPostListDto getPostsByFollowedUsers(int userId, ProductOrderListEnum order) {
         //Getting each followed user id
         List<Integer> userFollowedId = userService.findUserById(userId).getFollowing();
         List<PostDto> postDtoList = new ArrayList<>();
@@ -71,7 +69,7 @@ public class PostServiceImpl implements IPostService {
             });
         });
 
-        if(order == OrderListEnum.asc) return new FollowedPostListDto(
+        if(order == ProductOrderListEnum.asc) return new FollowedPostListDto(
                 userId, postDtoList.stream().sorted(Comparator.comparing(PostDto::getDate)).
                 collect(Collectors.toList()));
 

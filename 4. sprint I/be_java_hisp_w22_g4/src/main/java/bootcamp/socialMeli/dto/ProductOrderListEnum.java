@@ -1,6 +1,6 @@
 package bootcamp.socialMeli.dto;
 
-public enum OrderListEnum {
+public enum ProductOrderListEnum {
     asc,
     desc
 }
