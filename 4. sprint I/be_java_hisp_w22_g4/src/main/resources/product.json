@@ -1,0 +1,90 @@
+[
+  {
+      "product_id": 1,
+      "product_name": "Silla Gamer",
+      "type": "Gamer",
+      "brand": "Racer",
+      "color": "negro",
+      "notes": "Edicion especial"
+  },
+  {
+    "product_id": 2,
+    "product_name": "Mouse",
+    "type": "Gamer",
+    "brand": "Logitech",
+    "color": "rosa",
+    "notes": "Inalambrico"
+  },
+  {
+    "product_id": 3,
+    "product_name": "Billetera",
+    "type": "Cuero",
+    "brand": "XL",
+    "color": "azul",
+    "notes": "Con brillo"
+  },
+  {
+    "product_id": 4,
+    "product_name": "Cartera",
+    "type": "Tela",
+    "brand": "XL",
+    "color": "Violeta",
+    "notes": "Tipo mochila"
+  },
+  {
+    "product_id": 5,
+    "product_name": "Remera",
+    "type": "Algodon",
+    "brand": "Adidas",
+    "color": "Azul y blanca",
+    "notes": "Edicion mundial"
+  },
+  {
+    "product_id": 6,
+    "product_name": "Campera",
+    "type": "Piloto",
+    "brand": "Puma",
+    "color": "Rosa",
+    "notes": "Impermeable"
+  },
+  {
+    "product_id": 7,
+    "product_name": "Televisor",
+    "type": "Smart",
+    "brand": "Sansumg",
+    "color": "negro",
+    "notes": "Full 8K"
+  },
+  {
+    "product_id": 8,
+    "product_name": "Aspiradora",
+    "type": "Robot",
+    "brand": "Motorola",
+    "color": "Celeste",
+    "notes": "G plus"
+  },
+  {
+    "product_id": 9,
+    "product_name": "Lampara",
+    "type": "Velador",
+    "brand": "LuzSol",
+    "color": "Dorado",
+    "notes": "Luz calida"
+  },
+  {
+    "product_id": 10,
+    "product_name": "Celular",
+    "type": "Celular",
+    "brand": "Samsung",
+    "color": "Negro",
+    "notes": "Samsung S22"
+  },
+  {
+    "product_id": 11,
+    "product_name": "Celular",
+    "type": "Celular",
+    "brand": "Samsung",
+    "color": "Gris",
+    "notes": "Samsung A50"
+  }
+]
