@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class PostDTO {
 
     @JsonProperty("post_id")
-    private long postId;
+    private Long postId;
 
     @JsonProperty("user_id")
     @NotNull

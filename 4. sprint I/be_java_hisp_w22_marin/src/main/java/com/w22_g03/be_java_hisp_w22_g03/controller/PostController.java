@@ -2,6 +2,7 @@ package com.w22_g03.be_java_hisp_w22_g03.controller;
 
 import com.w22_g03.be_java_hisp_w22_g03.dto.PostDTO;
 import com.w22_g03.be_java_hisp_w22_g03.dto.GetPostPromoDTO;
+import com.w22_g03.be_java_hisp_w22_g03.dto.PromoPostDTO;
 import com.w22_g03.be_java_hisp_w22_g03.dto.UserFollowedSellersPostsDTO;
 import com.w22_g03.be_java_hisp_w22_g03.service.PostService;
 import jakarta.validation.Valid;
@@ -39,6 +40,11 @@ public class PostController {
     @GetMapping("/promo-post/count")
     public ResponseEntity<GetPostPromoDTO> getPostPromoByID(@RequestParam("user_id") long userId) {
         return ResponseEntity.ok(postService.getPostWithPromo(userId));
+    }
+
+    @PostMapping("/promo-post")
+    public ResponseEntity<PromoPostDTO> addPromoInProduct(@RequestBody @Valid PromoPostDTO promoPostDTO) {
+        return ResponseEntity.ok(postService.addPostWithPromo(promoPostDTO));
     }
 
 }

@@ -15,6 +15,6 @@ public class GetPostPromoDTO {
     @JsonProperty("user_name")
     private String username;
 
-    @JsonProperty("followers_count")
+    @JsonProperty("promo_products_count")
     private long countPost;
 }

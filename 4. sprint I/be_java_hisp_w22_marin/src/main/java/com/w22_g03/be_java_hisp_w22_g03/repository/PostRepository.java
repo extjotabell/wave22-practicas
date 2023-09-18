@@ -14,5 +14,7 @@ public interface PostRepository {
     long countPosts();
 
     long countPostsPromo(User user);
+
+    //Post updatePromoInPost(Post post);
 }
 

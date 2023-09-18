@@ -1,9 +1,7 @@
 package com.w22_g03.be_java_hisp_w22_g03.service;
 
-import com.w22_g03.be_java_hisp_w22_g03.dto.PostDTO;
-import com.w22_g03.be_java_hisp_w22_g03.dto.GetPostPromoDTO;
-import com.w22_g03.be_java_hisp_w22_g03.dto.ProductDTO;
-import com.w22_g03.be_java_hisp_w22_g03.dto.UserFollowedSellersPostsDTO;
+import com.w22_g03.be_java_hisp_w22_g03.dto.*;
+import com.w22_g03.be_java_hisp_w22_g03.exception.NotFoundException;
 import com.w22_g03.be_java_hisp_w22_g03.model.Post;
 import com.w22_g03.be_java_hisp_w22_g03.model.Product;
 import com.w22_g03.be_java_hisp_w22_g03.model.User;
@@ -90,6 +88,26 @@ public class PostServiceImpl implements PostService {
         User user = userService.findById(userId);
         long countPosts = postRepository.countPostsPromo(user);
         return new GetPostPromoDTO(user.getUserId(), user.getUsername(), countPosts);
+    }
+
+    @Override
+    public PromoPostDTO addPostWithPromo(PromoPostDTO promoPostDTO) {
+        User user = userService.findById(promoPostDTO.getUserId());
+
+        Post post = mapPromoPostDtoToPost(promoPostDTO, user);
+        post.setPostId(this.postRepository.countPosts() + 1);
+
+        this.postRepository.savePost(post);
+        promoPostDTO.setPostId(post.getPostId());
+        return promoPostDTO;
+    }
+
+    private Post mapPromoPostDtoToPost(PromoPostDTO postDTO, User user) {
+        ModelMapper mapper = new ModelMapper();
+        Post post = mapper.map(postDTO, Post.class);
+        post.setProduct(mapper.map(postDTO.getProduct(), Product.class));
+        post.setUser(user);
+        return post;
     }
 
     private List<PostDTO> sortByDate(String order, List<PostDTO> postsDto) {
