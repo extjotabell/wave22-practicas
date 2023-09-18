@@ -2,12 +2,14 @@ package com.meli.be_java_hisp_w22_g01.repository;
 
 import com.meli.be_java_hisp_w22_g01.entity.Post;
 import com.meli.be_java_hisp_w22_g01.entity.Product;
+import com.meli.be_java_hisp_w22_g01.entity.PromoPost;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Optional;
 import java.util.Random;
 
 @Repository
@@ -50,8 +52,10 @@ public class PostRepositoryImp implements IPostRepository {
     @Override
     public Post getPostById(int postId) {
         for (Post post : this.posts) {
-            if (post.getPost_id() == postId) {
-                return post;
+            if (post instanceof PromoPost) {
+                return (PromoPost) post; // Si es PromoPost, devolvemos un PromoPost
+            } else {
+                return post; // Si es un objeto Post se devuelve este
             }
         }
         return null;
@@ -78,5 +82,20 @@ public class PostRepositoryImp implements IPostRepository {
     @Override
     public void deletePost(int postId) {
         this.posts.removeIf(post -> post.getPost_id() == postId);
+    }
+
+    @Override
+    public Boolean checkProductInPromo(int productId) {
+        Optional<Post> post = this.posts.stream()
+                .filter(p -> p.getProduct().getProduct_id() == productId)
+                .filter(p -> p instanceof PromoPost)
+                .findFirst();
+
+        if (post.isPresent()){
+            PromoPost promo = (PromoPost) post.get();
+            System.out.println(promo);
+            return promo.getHas_promo();
+        }
+        return false;
     }
 }

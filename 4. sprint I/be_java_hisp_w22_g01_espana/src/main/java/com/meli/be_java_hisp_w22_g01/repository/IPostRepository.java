@@ -1,5 +1,6 @@
 package com.meli.be_java_hisp_w22_g01.repository;
 
+import com.meli.be_java_hisp_w22_g01.dto.PromoPostDto;
 import com.meli.be_java_hisp_w22_g01.entity.Post;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface IPostRepository {
     void updatePost(int postId, Post updatedPost);
 
     void deletePost(int postId);
+
+    Boolean checkProductInPromo(int productId);
 }
