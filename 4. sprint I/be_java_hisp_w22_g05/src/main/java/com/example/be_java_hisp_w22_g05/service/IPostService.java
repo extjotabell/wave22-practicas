@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IPostService {
 
-    void save(PostDto postDto);
+    void saveNewPost(PostDto postDto);
 
     List<PostDto> getListPostsFromSellersFollowed(int userId, String order);
 

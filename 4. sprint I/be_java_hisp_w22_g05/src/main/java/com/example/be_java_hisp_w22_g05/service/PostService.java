@@ -35,7 +35,7 @@ public class PostService implements IPostService {
     Jackson2ObjectMapperBuilder mapperBuilder;
 
     @Override
-    public void save(PostDto postDto) {
+    public void saveNewPost(PostDto postDto) {
         User user = getUser(postDto.getUserId());
 
         Product product = mapProduct(postDto.getProduct());
@@ -56,7 +56,7 @@ public class PostService implements IPostService {
     private User getUser(int id) {
         User user = userRepository.findUsersById(id);
 
-        if (user == null) throw new NotFoundException("El usuario no existe");
+        if (user == null) throw new NotFoundException("El usuario " + id +  " no existe");
         return user;
     }
 
@@ -75,8 +75,8 @@ public class PostService implements IPostService {
 
         // Obtain list of posts from sellers
         List<Post> postList = postRepository.findPostAll().stream()
-                .filter(post -> sellersId.contains(post.getUser().getId()))
                 .filter(x -> ChronoUnit.DAYS.between(x.getDate(), LocalDate.now()) <= 14)
+                .filter(post -> sellersId.contains(post.getUser().getId()))
                 .toList();
 
         if (postList.isEmpty()) {

@@ -11,6 +11,4 @@ public interface IPostRepository {
     List<Post> findPostAll();
 
     Post save(Post post);
-
-    Product getProduct(int id);
 }
