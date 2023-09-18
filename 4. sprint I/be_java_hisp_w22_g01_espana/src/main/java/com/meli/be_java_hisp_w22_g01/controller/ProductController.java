@@ -34,4 +34,9 @@ public class ProductController {
         }
     }
 
+    // US 0010 - Nuevo producto en promoción
+    @PostMapping("/promo-post")
+    public ResponseEntity<?> newPromoPost(@RequestBody PromoPostDto promoPostDto){
+        return null;
+    }
 }
