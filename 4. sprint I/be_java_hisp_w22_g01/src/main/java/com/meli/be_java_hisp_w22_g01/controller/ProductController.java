@@ -3,19 +3,18 @@ package com.meli.be_java_hisp_w22_g01.controller;
 import com.meli.be_java_hisp_w22_g01.dto.PostDto;
 import com.meli.be_java_hisp_w22_g01.service.IPostService;
 import com.meli.be_java_hisp_w22_g01.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/products")
+@RequiredArgsConstructor
 public class ProductController {
 
-    @Autowired
-    IPostService postService;
-    @Autowired
-    IUserService userService;
+    private final IPostService postService;
+    private final IUserService userService;
 
     @PostMapping("/post")
     public ResponseEntity<?> createPost(@RequestBody PostDto postDto) {

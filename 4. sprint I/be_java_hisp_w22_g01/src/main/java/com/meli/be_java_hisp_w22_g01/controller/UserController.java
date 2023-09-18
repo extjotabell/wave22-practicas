@@ -2,19 +2,18 @@ package com.meli.be_java_hisp_w22_g01.controller;
 
 import com.meli.be_java_hisp_w22_g01.service.IUserService;
 import com.meli.be_java_hisp_w22_g01.service.ISellerService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    IUserService userService;
-    @Autowired
-    ISellerService sellerService;
+    private final IUserService userService;
+    private final ISellerService sellerService;
 
     // US 0001
     @PostMapping("{userId}/follow/{userIdToFollow}")

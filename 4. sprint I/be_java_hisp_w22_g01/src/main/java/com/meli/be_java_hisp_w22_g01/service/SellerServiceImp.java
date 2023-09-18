@@ -3,29 +3,25 @@ package com.meli.be_java_hisp_w22_g01.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w22_g01.dto.response.CountFollowersDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.FollowMessageDto;
-import com.meli.be_java_hisp_w22_g01.dto.response.UserMiniDTO;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
 import com.meli.be_java_hisp_w22_g01.exceptions.BadRequestException;
 import com.meli.be_java_hisp_w22_g01.exceptions.NotFoundException;
 import com.meli.be_java_hisp_w22_g01.repository.ISellerRepository;
 import com.meli.be_java_hisp_w22_g01.repository.IUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class SellerServiceImp implements ISellerService{
 
-    @Autowired
-    ISellerRepository sellerRepository;
-    @Autowired
-    IUserRepository userRepository;
-
-    @Autowired
-    ObjectMapper mapper;
+    private final ISellerRepository sellerRepository;
+    private final IUserRepository userRepository;
+    private final ObjectMapper mapper;
     @Override
     public CountFollowersDTO countFollowers(int userId) {
         Seller seller = sellerRepository.findById(userId);
