@@ -12,6 +12,8 @@ public interface IUserService {
 
     FollowersListDto getFollowersList(int userId, NameOrderEnumDto nameOrder);
 
+    FollowedListDto getFollowingList(int userId, NameOrderEnumDto nameOrder);
+
     FollowersCountDto getFollowersCount(int userId);
 
     User findUserById(int userId);

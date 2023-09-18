@@ -15,12 +15,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Validated
 public class PostServiceImpl implements IPostService {
     private final IPostRepository postRepository;
     private final IProductService productService;
     private final IUserService userService;
-    ObjectMapper mapper = new ObjectMapper();
 
     public PostServiceImpl(IPostRepository postRepository, IProductService productService,IUserService userService ) {
         this.postRepository = postRepository;
@@ -43,7 +41,7 @@ public class PostServiceImpl implements IPostService {
     @Override
     public FollowedPostListDto getPostsByFollowedUsers(int userId, ProductOrderListEnum order) {
         //Getting each followed user id
-        List<Integer> userFollowedId = userService.findUserById(userId).getFollowing();
+        List<Integer> userFollowedId = userService.findUserById(userId).getFollowed();
         List<PostDto> postDtoList = new ArrayList<>();
 
         userFollowedId.forEach(idUser ->
@@ -69,7 +67,7 @@ public class PostServiceImpl implements IPostService {
             });
         });
 
-        if(order == ProductOrderListEnum.asc) return new FollowedPostListDto(
+        if(order == ProductOrderListEnum.date_asc) return new FollowedPostListDto(
                 userId, postDtoList.stream().sorted(Comparator.comparing(PostDto::getDate)).
                 collect(Collectors.toList()));
 

@@ -22,29 +22,26 @@ public class ProductController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<ProductDto>> getProducts()
-    {
-        return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
-    }
-
-    @GetMapping("/users")
-    public ResponseEntity<List<ProductDto>> getUsers()
+    public ResponseEntity<List<ProductDto>> getAllProducts()
     {
         return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
     }
 
     @GetMapping("/posts")
-    public ResponseEntity<List<PostDto>> getPosts()
+    public ResponseEntity<List<PostDto>> getAllPosts()
     {
         return new ResponseEntity<>(postService.getAllPosts(), HttpStatus.OK);
     }
+
     // US 06
+    // us 09
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<FollowedPostListDto> getByFollowedUsers(@PathVariable int userId, @RequestParam(required = false) ProductOrderListEnum order)
+    public ResponseEntity<FollowedPostListDto> getPostsByFollowedUsers(@PathVariable int userId, @RequestParam(required = false) ProductOrderListEnum order)
     {
         return new ResponseEntity<>(postService.getPostsByFollowedUsers(userId, order), HttpStatus.OK);
     }
 
+    // US 05
     @PostMapping("/addPost")
     public ResponseEntity<String> addPost(@Valid @RequestBody PostDto postDto)
     {

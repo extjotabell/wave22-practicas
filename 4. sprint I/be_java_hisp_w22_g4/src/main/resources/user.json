@@ -3,31 +3,31 @@
     "user_id" : 1,
     "rol" : "COMPRADOR",
     "user_name" : "Diego",
-    "following" : [ 6,10]
+    "followed" : [ 6,10]
   },
   {
     "user_id" : 2,
     "rol" : "COMPRADOR",
     "user_name" : "Florencia",
-    "following" : [ 7,8,10]
+    "followed" : [ 7,8,10]
   },
   {
     "user_id" : 3,
     "rol" : "COMPRADOR",
     "user_name" : "Sergio",
-    "following" : [ 9,6]
+    "followed" : [ 9,6]
   },
   {
     "user_id" : 4,
     "rol" : "COMPRADOR",
     "user_name" : "Matia",
-    "following" : [9]
+    "followed" : [9]
   },
   {
     "user_id" : 5,
     "rol" : "COMPRADOR",
     "user_name" : "Soledad",
-    "following" : [ 6,7,8]
+    "followed" : [ 6,7,8]
   },
   {
     "user_id" : 6,
@@ -35,7 +35,7 @@
     "user_name" : "Jesica",
     "postList": [ 1,2],
     "followers" : [ 1,10],
-    "following" : [ 7,8]
+    "followed" : [ 7,8]
   },
   {
     "user_id" : 7,
@@ -43,14 +43,14 @@
     "user_name" : "Daniel",
     "postList": [ 4,7],
     "followers" : [ 2,6,10],
-    "following" : [ 9,10]
+    "followed" : [ 9,10]
   },
   {
     "user_id" : 8,
     "rol" : "VENDEDOR",
     "user_name" : "Hugo",
     "postList": [ 53,3],
-    "followers" : [ 2,6]
+    "followed" : [ 2,6]
   },
   {
     "user_id" : 9,
@@ -58,7 +58,7 @@
     "user_name" : "Rosa",
     "postList": [ 90,65],
     "followers" : [ 3,4,7],
-    "following" : [ 10]
+    "followed" : [ 10]
   }
 ,
   {
@@ -67,6 +67,6 @@
     "user_name" : "Hector",
     "postList": [ 100],
     "followers" : [ 1,2,7,10],
-    "following" : [ 6,7]
+    "followed" : [ 6,7]
   }
 ]

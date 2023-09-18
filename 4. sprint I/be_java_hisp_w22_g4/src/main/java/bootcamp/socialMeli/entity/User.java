@@ -15,12 +15,12 @@ public class User {
     private RolEnum rol;
     private String user_name;
     private List<Integer> postList;
-    private List<Integer> following;
+    private List<Integer> followed;
     private List<Integer> followers;
 
-    public List<Integer> getFollowing() {
-        if (following == null) return new ArrayList<>();
-        return following;
+    public List<Integer> getFollowed() {
+        if (followed == null) return new ArrayList<>();
+        return followed;
     }
 
     public List<Integer> getFollowers() {
@@ -33,7 +33,7 @@ public class User {
     }
 
     public boolean isFollowing(int userId){
-        return following.stream().anyMatch(id -> id == userId);
+        return followed.stream().anyMatch(id -> id == userId);
     }
 
 }

@@ -1,6 +1,6 @@
 package bootcamp.socialMeli.dto;
 
 public enum ProductOrderListEnum {
-    asc,
-    desc
+    date_asc,
+    date_desc
 }

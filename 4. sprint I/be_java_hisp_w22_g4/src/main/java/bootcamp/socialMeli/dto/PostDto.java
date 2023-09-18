@@ -20,7 +20,6 @@ import java.time.LocalDate;
 public class PostDto {
     @Min(value = 1, message = "Se debe ingresar un id usuario")
     private int user_id;
-    @Min(value = 1, message = "Se debe ingresar un id posteo")
     private int post_id;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @JsonDeserialize(using = LocalDateDeserializer.class)
