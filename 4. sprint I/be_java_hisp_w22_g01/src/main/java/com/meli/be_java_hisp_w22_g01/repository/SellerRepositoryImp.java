@@ -24,8 +24,10 @@ public class SellerRepositoryImp implements ISellerRepository{
         List<Post> posts1 = new ArrayList<>();
         posts1.add(postRepository.getPostById(1));
 
+
         List<Post> posts2 = new ArrayList<>();
         posts2.add(postRepository.getPostById(2));
+        posts2.add(postRepository.getPostById(7));
 
         List<Post> posts3 = new ArrayList<>();
         posts3.add(postRepository.getPostById(1));

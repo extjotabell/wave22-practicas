@@ -36,6 +36,9 @@ public class PostRepositoryImp implements IPostRepository {
             Post post = new Post(idUser, this.nextPostId++, LocalDate.now(), product, category, price);
             this.posts.add(post);
         }
+         Product producto1= new Product(10,"Sillon","silla","sillon","rojo","nuevo");
+         Post post1= new Post(2,7,LocalDate.of(2023,9,5),producto1,2,10000);
+         this.posts.add(post1);
 
     }
 

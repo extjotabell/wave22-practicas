@@ -1,5 +1,6 @@
 package com.meli.be_java_hisp_w22_g01.service;
 
+import com.meli.be_java_hisp_w22_g01.dto.PostDto;
 import com.meli.be_java_hisp_w22_g01.dto.response.FollowedDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.UnfollowDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.UserFollowedPostListDTO;
@@ -19,5 +20,5 @@ public interface IUserService {
 
     UserFollowedPostListDTO userFollowedPostList(int user_id);
 
-    UserFollowedPostListDTO orderByDateFollowedSellers(int id, String order);
+    List<PostDto> orderByDateFollowedSellers(int id, String order);
 }

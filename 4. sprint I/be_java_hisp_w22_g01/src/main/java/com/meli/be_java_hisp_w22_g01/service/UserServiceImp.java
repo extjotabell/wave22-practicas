@@ -177,17 +177,21 @@ public class UserServiceImp implements IUserService{
         return userFollowedPostListDTO;
     }
     @Override
-    public UserFollowedPostListDTO orderByDateFollowedSellers(int id, String order) {
+    public List<PostDto> orderByDateFollowedSellers(int id, String order) {
+        UserFollowedPostListDTO lista = userFollowedPostList(id);
+        List<PostDto> posts = lista.getPosts();
 
-         UserFollowedPostListDTO lista = userFollowedPostList(id);
-
-        if (order.equals("date_asc")){
-            lista.getPosts().sort(Comparator.comparing(PostDto::getDate));
-
-        } else if(order.equals("date_desc")){
-            lista.getPosts().sort(Comparator.comparing(PostDto::getDate, Collections.reverseOrder()));
+        if (order.equals("date_asc")) {
+            return posts.stream()
+                    .sorted(Comparator.comparing(PostDto::getDate))
+                    .toList();
+        } else if (order.equals("date_desc")) {
+            return posts.stream()
+                    .sorted(Comparator.comparing(PostDto::getDate).reversed())
+                    .toList();
         }
-        return lista;
+
+        return posts;
     }
 
 }

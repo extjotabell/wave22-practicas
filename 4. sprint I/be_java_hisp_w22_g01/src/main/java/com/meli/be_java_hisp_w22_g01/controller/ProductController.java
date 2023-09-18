@@ -18,19 +18,19 @@ public class ProductController {
     IUserService userService;
 
     @PostMapping("/post")
-    public ResponseEntity<?> createPost (@RequestBody PostDto postDto){
+    public ResponseEntity<?> createPost(@RequestBody PostDto postDto) {
         postService.createPost(postDto);
         return ResponseEntity.status(HttpStatus.OK).build();
 
     }
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<?> followedList(@PathVariable int userId){
-        return new ResponseEntity<>(userService.userFollowedPostList(userId),HttpStatus.OK);
-    }
+    public ResponseEntity<?> followedList(@PathVariable int userId, @RequestParam(required = false) String order) {
 
-    @GetMapping("/products/followed/{userId}/list")
-    public ResponseEntity<?> followedListByOrder(@PathVariable int userId,@RequestParam String order){
-        return new ResponseEntity<>(userService.orderByDateFollowedSellers(userId,order),HttpStatus.OK);
+        if (order == null) {
+            return new ResponseEntity<>(userService.userFollowedPostList(userId), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(userService.orderByDateFollowedSellers(userId, order), HttpStatus.OK);
+        }
     }
 }
