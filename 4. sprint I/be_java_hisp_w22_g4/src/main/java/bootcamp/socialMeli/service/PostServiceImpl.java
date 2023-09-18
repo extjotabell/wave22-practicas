@@ -81,10 +81,6 @@ public class PostServiceImpl implements IPostService {
     @Override
     public String addPost(PostDto postDto) {
         int idNewPost;
-        try{
-        if(postDto.getUser_id() == 0 || postDto.getProduct().getProduct_id() == 0 ||  postDto.getDate() == null || postDto.getPrice() == 0){
-            throw new BadRequestException("Datos incompletos");
-        }
         Post post = new Post(postDto.getPost_id(),
                 postDto.getUser_id(),
                 postDto.getDate(),
@@ -94,11 +90,7 @@ public class PostServiceImpl implements IPostService {
         idNewPost = postRepository.addPost(post);
         productService.addProducto(postDto.getProduct());
 
-    }
-    catch(NullPointerException e){
-        throw new BadRequestException("Datos incompletos");
-    }
-return "Se agrego exitosamente un nuevo post con el numero : " + idNewPost;
+        return "Se agrego exitosamente un nuevo post con el numero : " + idNewPost;
         //Returning the sorted list ordered by the latest post
     }
 }

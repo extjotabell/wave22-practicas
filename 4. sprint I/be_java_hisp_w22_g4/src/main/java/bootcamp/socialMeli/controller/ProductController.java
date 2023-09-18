@@ -3,6 +3,7 @@ package bootcamp.socialMeli.controller;
 import bootcamp.socialMeli.dto.*;
 import bootcamp.socialMeli.service.IPostService;
 import bootcamp.socialMeli.service.IProductService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,7 +46,7 @@ public class ProductController {
     }
 
     @PostMapping("/addPost")
-    public ResponseEntity<String> addPost( @RequestBody PostDto postDto)
+    public ResponseEntity<String> addPost(@Valid @RequestBody PostDto postDto)
     {
         return new ResponseEntity<>(postService.addPost(postDto), HttpStatus.OK);
     }
