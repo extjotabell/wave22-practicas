@@ -61,6 +61,7 @@ public class UserRepositoryImpl implements IUserRepository {
     }
 
     @Override
+
     public List<FollowedPostDTO> getFollowedPostLasTwoWeeks(int id) {
         User user = dbUser.get(id);
         List<User> followed = user.getFollowed();
@@ -82,6 +83,7 @@ public class UserRepositoryImpl implements IUserRepository {
 
         Comparator<FollowedPostDTO> comparatorAsc = (f1, f2) -> f2.getPost().getDate()
                 .compareTo(f1.getPost().getDate());
+
         Collections.sort(followedPostDTOS,comparatorAsc);
 
         return followedPostDTOS;
@@ -90,16 +92,21 @@ public class UserRepositoryImpl implements IUserRepository {
     @Override
     public List<FollowedPostDTO> getFollowedPostLasTwoWeeksOrd(int userId, String order) {
         List<FollowedPostDTO> followedPostDTOS = getFollowedPostLasTwoWeeks(userId);
-        if(order.equals("date_asc")){
+        if (order.equals("date_asc")) {
             Comparator<FollowedPostDTO> comparatorAsc = (f1, f2) -> f1.getPost().getDate()
                     .compareTo(f2.getPost().getDate());
-            Collections.sort(followedPostDTOS,comparatorAsc);
-        }else{
+            Collections.sort(followedPostDTOS, comparatorAsc);
+        } else {
             Comparator<FollowedPostDTO> comparatorAsc = (f1, f2) -> f2.getPost().getDate()
                     .compareTo(f1.getPost().getDate());
-            Collections.sort(followedPostDTOS,comparatorAsc);
+            Collections.sort(followedPostDTOS, comparatorAsc);
         }
         return followedPostDTOS;
+
+    }
+    public User getFollowers ( int id){
+        return findById(id);
+
     }
 
 }

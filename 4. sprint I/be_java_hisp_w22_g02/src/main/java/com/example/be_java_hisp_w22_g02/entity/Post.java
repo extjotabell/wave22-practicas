@@ -5,15 +5,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Post {
     private int postId;
+    private int user_id;
     private LocalDate date;
-    private String category;
-    private Double price;
     private Product product;
+    private int category;
+    private double price;
 }
 
