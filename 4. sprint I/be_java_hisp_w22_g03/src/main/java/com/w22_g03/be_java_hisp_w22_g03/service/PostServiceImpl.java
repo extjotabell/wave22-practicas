@@ -41,6 +41,10 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public UserFollowedSellersPostsDTO getFollowedUsersPostsById(long userId) {
+        return this.getFollowedUsersPostsById(userId, "date_desc");
+    }
+
+    public UserFollowedSellersPostsDTO getAllFollowedUsersPostsById(long userId) {
         User user = userService.findById(userId);
         List<Post> twoWeekOldPostsBySeller = postRepository.findTwoWeekOldPostsFromFollowedByUser(user);
 
@@ -77,7 +81,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public UserFollowedSellersPostsDTO getFollowedUsersPostsById(long userId, String order) {
-        UserFollowedSellersPostsDTO postsDto = getFollowedUsersPostsById(userId);
+        UserFollowedSellersPostsDTO postsDto = getAllFollowedUsersPostsById(userId);
 
         postsDto.setPosts(sortByDate(order, postsDto.getPosts()));
 
