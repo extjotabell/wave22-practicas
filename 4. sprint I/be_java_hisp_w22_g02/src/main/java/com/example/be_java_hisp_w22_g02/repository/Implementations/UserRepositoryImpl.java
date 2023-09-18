@@ -3,6 +3,7 @@ package com.example.be_java_hisp_w22_g02.repository.Implementations;
 import com.example.be_java_hisp_w22_g02.dto.response.FollowedPostDTO;
 import com.example.be_java_hisp_w22_g02.entity.Post;
 import com.example.be_java_hisp_w22_g02.entity.User;
+import com.example.be_java_hisp_w22_g02.entity.UserFollow;
 import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,10 +34,19 @@ public class UserRepositoryImpl implements IUserRepository {
     public void followUser(int userId, int userIdToFollow) {
         User user = dbUser.get(userId);
         User userToFollow = dbUser.get(userIdToFollow);
+<<<<<<< HEAD
         if(!user.getFollowed().contains(userToFollow))
             user.addFollowed(userToFollow);
         if(!userToFollow.getFollowers().contains(user))
             userToFollow.addFollower(user);
+=======
+        UserFollow userFollow = new UserFollow(user.getUserId(), user.getUserName());
+        UserFollow userFollowToFollow = new UserFollow(userToFollow.getUserId(), userToFollow.getUserName());
+        if(!user.getFollowed().contains(userFollowToFollow))
+            user.addFollowed(userFollowToFollow);
+        if(!userToFollow.getFollowers().contains(userFollow))
+            userToFollow.addFollower(userFollow);
+>>>>>>> 4bb2cd7c06e507a4204bc51257c96f965f11be12
     }
 
 

@@ -270,25 +270,16 @@
     "followers": [
       {
         "user_id": 27,
-        "user_name": "danielito",
-        "followers": [],
-        "followed": [],
-        "posts": []
+        "user_name": "danielito"
       },
       {
         "user_id": 26,
-        "user_name": "sofia_mtz",
-        "followers": [],
-        "followed": [],
-        "posts": []
+        "user_name": "sofia_mtz"
       }
     ],
     "followed": [{
       "user_id": 26,
-      "user_name": "sofia_mtz",
-      "followers": [],
-      "followed": [],
-      "posts": []
+      "user_name": "sofia_mtz"
     }],
     "posts": []
   },
