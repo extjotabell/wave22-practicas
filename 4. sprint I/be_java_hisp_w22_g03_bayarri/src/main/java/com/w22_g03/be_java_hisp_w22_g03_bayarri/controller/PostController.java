@@ -3,6 +3,7 @@ package com.w22_g03.be_java_hisp_w22_g03_bayarri.controller;
 import com.w22_g03.be_java_hisp_w22_g03_bayarri.dto.*;
 import com.w22_g03.be_java_hisp_w22_g03_bayarri.service.PostService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -39,5 +40,9 @@ public class PostController {
         return ResponseEntity.ok(postService.addPost(promoPostDTO));
     }
 
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<NumberOfPromoPostDTO> countPromoPostBySeller(@RequestParam(value = "user_id") @Min(0) long userId){
+        return ResponseEntity.ok(postService.countPromoPostBySeller(userId));
+    }
 
 }

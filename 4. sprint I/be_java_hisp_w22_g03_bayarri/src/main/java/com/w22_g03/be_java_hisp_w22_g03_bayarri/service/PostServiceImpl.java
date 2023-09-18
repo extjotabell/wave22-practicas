@@ -51,7 +51,20 @@ public class PostServiceImpl implements PostService {
         return postsDto;
     }
 
-    private UserFollowedSellersPostsDTO mapPostsToUserFollowedSellersPostsDto(List<Post> twoWeekOldPostsBySeller, long userId) {
+    @Override
+    public NumberOfPromoPostDTO countPromoPostBySeller(long userId) {
+        User user = userService.findById(userId);
+        return NumberOfPromoPostDTO.builder()
+                .userId(user.getUserId())
+                .username(user.getUsername())
+                .quantity(user.getPosts().stream()
+                        .filter(Post::isHasPromo)
+                        .count()
+                )
+                .build();
+    }
+
+    private UserFollowedSellersPostsDTO toUserFollowedSellersPostsDTO(List<Post> twoWeekOldPostsBySeller, long userId) {
         UserFollowedSellersPostsDTO userFollowedSellersPostsDTO = new UserFollowedSellersPostsDTO();
 
         userFollowedSellersPostsDTO.setUserId(userId);
