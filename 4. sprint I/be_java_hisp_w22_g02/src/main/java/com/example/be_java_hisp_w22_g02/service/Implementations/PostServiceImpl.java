@@ -5,6 +5,7 @@ import com.example.be_java_hisp_w22_g02.dto.response.FollowedPostDTO;
 import com.example.be_java_hisp_w22_g02.dto.response.TwoWeeksPostDTO;
 import com.example.be_java_hisp_w22_g02.entity.Post;
 
+import com.example.be_java_hisp_w22_g02.exception.NotFoundException;
 import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
 import com.example.be_java_hisp_w22_g02.service.Interfaces.IPostService;
 import lombok.AllArgsConstructor;
@@ -41,6 +42,9 @@ public class PostServiceImpl implements IPostService {
     public TwoWeeksPostDTO getLastTwoWeeksPostByUser(int userId, String order) {
         List<FollowedPostDTO> followedPostDTOS;
 
+        if(userRepository.findById(userId) == null){
+            throw new NotFoundException("Error: el id ingresado no existe");
+        }
         if(order != null){
             followedPostDTOS = userRepository.getFollowedPostLasTwoWeeksOrd(userId, order);
         }else{
