@@ -45,4 +45,9 @@ public class PostController {
         return ResponseEntity.ok(postService.countPromoPostBySeller(userId));
     }
 
+    @GetMapping("/promo-post/list")
+    public ResponseEntity<PromoPostByUserDTO> getPromoPostBySeller(@RequestParam("user_id") @Min(0) long userId){
+        return ResponseEntity.ok(postService.getPromoPostBySeller(userId));
+    }
+
 }

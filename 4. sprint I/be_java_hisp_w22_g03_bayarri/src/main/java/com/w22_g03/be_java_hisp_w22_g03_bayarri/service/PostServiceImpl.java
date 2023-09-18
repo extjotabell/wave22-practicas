@@ -38,12 +38,6 @@ public class PostServiceImpl implements PostService {
         return this.getFollowedUsersPostsById(userId, "date_desc");
     }
 
-    public UserFollowedSellersPostsDTO getAllFollowedUsersPostsById(long userId) {
-        User user = userService.findById(userId);
-        List<Post> twoWeekOldPostsBySeller = postRepository.findTwoWeekOldPostsFromFollowedByUser(user);
-        return toUserFollowedSellersPostsDTO(twoWeekOldPostsBySeller, userId);
-    }
-
     @Override
     public UserFollowedSellersPostsDTO getFollowedUsersPostsById(long userId, String order) {
         UserFollowedSellersPostsDTO postsDto = getAllFollowedUsersPostsById(userId);
@@ -62,6 +56,22 @@ public class PostServiceImpl implements PostService {
                         .count()
                 )
                 .build();
+    }
+
+    @Override
+    public PromoPostByUserDTO getPromoPostBySeller(long userId) {
+        User user = userService.findById(userId);
+        PromoPostByUserDTO promoPostByUserDTO = new PromoPostByUserDTO();
+        promoPostByUserDTO.setUserId(userId);
+        promoPostByUserDTO.setUsername(user.getUsername());
+        promoPostByUserDTO.setPosts(postRepository.findPromoPostByUser(user).stream().map(this::toPromoPostDTO).toList());
+        return promoPostByUserDTO;
+    }
+
+    private UserFollowedSellersPostsDTO getAllFollowedUsersPostsById(long userId) {
+        User user = userService.findById(userId);
+        List<Post> twoWeekOldPostsBySeller = postRepository.findTwoWeekOldPostsFromFollowedByUser(user);
+        return toUserFollowedSellersPostsDTO(twoWeekOldPostsBySeller, userId);
     }
 
     private UserFollowedSellersPostsDTO toUserFollowedSellersPostsDTO(List<Post> twoWeekOldPostsBySeller, long userId) {
@@ -88,7 +98,9 @@ public class PostServiceImpl implements PostService {
     private Post toPost(PostDTO postDTO, User user) {
         ModelMapper mapper = new ModelMapper();
         Post post = mapper.map(postDTO, Post.class);
-        post.setProduct(mapper.map(postDTO.getProduct(), Product.class));
+        Product product = mapper.map(postDTO.getProduct(), Product.class);
+        product.setPost(post);
+        post.setProduct(product);
         post.setUser(user);
         return post;
     }
@@ -101,20 +113,12 @@ public class PostServiceImpl implements PostService {
         return postDto;
     }
 
-    @Override
-    public UserFollowedSellersPostsDTO getFollowedUsersPostsById(long userId, String order) {
-        UserFollowedSellersPostsDTO postsDto = getFollowedUsersPostsById(userId);
-
-        postsDto.setPosts(sortByDate(order, postsDto.getPosts()));
-
-        return postsDto;
+    private PostDTO toPromoPostDTO(Post post) {
+        ModelMapper mapper = new ModelMapper();
+        PostDTO postDto = mapper.map(post, PromoPostDTO.class);
+        postDto.setProduct(mapper.map(post.getProduct(), ProductDTO.class));
+        postDto.setUserId(post.getUser().getUserId());
+        return postDto;
     }
 
-    private List<PostDTO> sortByDate(String order, List<PostDTO> postsDto) {
-        if(order.equals("date_asc")){
-            return postsDto.stream().sorted(Comparator.comparing(PostDTO::getDate)).toList();
-        }else{
-            return postsDto.stream().sorted(Comparator.comparing(PostDTO::getDate).reversed()).toList();
-        }
-    }
 }

@@ -25,11 +25,18 @@ public class PostRepositoryImpl implements PostRepository {
         return followed.stream()
                 .flatMap(f -> f.getPosts().stream())
                 .filter(p -> p.getDate().isAfter(LocalDate.now().minusDays(14)))
+                .filter(p -> !p.isHasPromo())
                 .toList();
     }
 
     @Override
     public long countPosts() {
         return this.userRepository.findAll().stream().mapToLong(user -> user.getPosts().size()).sum();
+    }
+
+    public List<Post> findPromoPostByUser(User user){
+        return user.getPosts().stream()
+                .filter(Post::isHasPromo)
+                .toList();
     }
 }
