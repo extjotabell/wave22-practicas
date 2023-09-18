@@ -5,12 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PostPromoDTO {
+public class GetPostPromoDTO {
     @JsonProperty("user_id")
     private long userId;
 

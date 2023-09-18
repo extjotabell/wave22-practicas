@@ -1,8 +1,7 @@
 package com.w22_g03.be_java_hisp_w22_g03.controller;
 
-import com.w22_g03.be_java_hisp_w22_g03.dto.NumberOfFollowersDTO;
 import com.w22_g03.be_java_hisp_w22_g03.dto.PostDTO;
-import com.w22_g03.be_java_hisp_w22_g03.dto.PostPromoDTO;
+import com.w22_g03.be_java_hisp_w22_g03.dto.GetPostPromoDTO;
 import com.w22_g03.be_java_hisp_w22_g03.dto.UserFollowedSellersPostsDTO;
 import com.w22_g03.be_java_hisp_w22_g03.service.PostService;
 import jakarta.validation.Valid;
@@ -12,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -39,7 +37,7 @@ public class PostController {
     }
 
     @GetMapping("/promo-post/count")
-    public ResponseEntity<PostPromoDTO> getPostPromoByID(@RequestParam("user_id") long userId) {
+    public ResponseEntity<GetPostPromoDTO> getPostPromoByID(@RequestParam("user_id") long userId) {
         return ResponseEntity.ok(postService.getPostWithPromo(userId));
     }
 

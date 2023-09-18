@@ -1,7 +1,7 @@
 package com.w22_g03.be_java_hisp_w22_g03.service;
 
 import com.w22_g03.be_java_hisp_w22_g03.dto.PostDTO;
-import com.w22_g03.be_java_hisp_w22_g03.dto.PostPromoDTO;
+import com.w22_g03.be_java_hisp_w22_g03.dto.GetPostPromoDTO;
 import com.w22_g03.be_java_hisp_w22_g03.dto.ProductDTO;
 import com.w22_g03.be_java_hisp_w22_g03.dto.UserFollowedSellersPostsDTO;
 import com.w22_g03.be_java_hisp_w22_g03.model.Post;
@@ -86,10 +86,10 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostPromoDTO getPostWithPromo(long userId) {
+    public GetPostPromoDTO getPostWithPromo(long userId) {
         User user = userService.findById(userId);
         long countPosts = postRepository.countPostsPromo(user);
-        return new PostPromoDTO(user.getUserId(), user.getUsername(), countPosts);
+        return new GetPostPromoDTO(user.getUserId(), user.getUsername(), countPosts);
     }
 
     private List<PostDTO> sortByDate(String order, List<PostDTO> postsDto) {
