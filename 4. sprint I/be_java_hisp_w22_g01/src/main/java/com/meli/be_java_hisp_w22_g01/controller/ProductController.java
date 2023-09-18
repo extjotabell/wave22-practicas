@@ -33,5 +33,4 @@ public class ProductController {
             return new ResponseEntity<>(userService.orderByDateFollowedSellers(userId, order), HttpStatus.OK);
         }
     }
-
 }

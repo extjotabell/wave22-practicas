@@ -3,6 +3,7 @@ package com.meli.be_java_hisp_w22_g01.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w22_g01.dto.PostDto;
 import com.meli.be_java_hisp_w22_g01.dto.ProductDto;
+import com.meli.be_java_hisp_w22_g01.dto.UserDto;
 import com.meli.be_java_hisp_w22_g01.dto.response.*;
 import com.meli.be_java_hisp_w22_g01.entity.Post;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
@@ -125,18 +126,33 @@ public class UserServiceImp implements IUserService{
     }
 
     @Override
-    public List<FollowedDTO> orderFollowedsDto(int userId, String order) {
-        User user = userRepository.findById(userId);
-        List<Seller> followeds = userRepository.getAllFolloweds(user);
+    public FollowedDTO orderFollowedsDto(int userId, String order) {
+        FollowedDTO followedsDto = getUserFollowedList(userId);
+        List<UserMiniDTO> followed = followedsDto.getFollowed();
         if (order.equals("name_asc")) {
-            followeds = followeds.stream()
-                    .sorted(Comparator.comparing(User::getUser_name)).toList();
+            followedsDto.setFollowed(followed.stream()
+                    .sorted(Comparator.comparing(UserMiniDTO::getUser_name)).toList());
         }else if (order.equals("name_desc")){
-            followeds = followeds.stream()
-                    .sorted(Comparator.comparing(User::getUser_name, Comparator.reverseOrder()))
-                    .toList();
+            followedsDto.setFollowed(followed.stream()
+                    .sorted(Comparator.comparing(UserMiniDTO::getUser_name, Comparator.reverseOrder()))
+                    .toList());
         }
-        return followeds.stream().map(f -> mapper.convertValue(f, FollowedDTO.class)).toList();
+        return followedsDto;
+    }
+
+    @Override
+    public UserFollowersListDTO orderFollowersDto(int userId, String order) {
+        UserFollowersListDTO followersDto = FollowersList(userId);
+        List<UserMiniDTO> followers = followersDto.getFollowers();
+        if (order.equals("name_asc")) {
+            followersDto.setFollowers(followers.stream()
+                    .sorted(Comparator.comparing(UserMiniDTO::getUser_name)).toList());
+        }else if (order.equals("name_desc")){
+            followersDto.setFollowers(followers.stream()
+                    .sorted(Comparator.comparing(UserMiniDTO::getUser_name, Comparator.reverseOrder()))
+                    .toList());
+        }
+        return followersDto;
     }
 
     @Override

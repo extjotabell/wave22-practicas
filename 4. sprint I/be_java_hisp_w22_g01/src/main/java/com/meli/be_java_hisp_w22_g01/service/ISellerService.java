@@ -9,8 +9,4 @@ import java.util.List;
 public interface ISellerService {
     CountFollowersDTO countFollowers(int userId);
     FollowMessageDto setAFollower(int idFollower, int idSeller);
-    List<UserMiniDTO> orderFollowersDto(int userId, String order);
-
-
-
 }
