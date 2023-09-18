@@ -98,17 +98,20 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void unfollowUser(Integer userId, Integer userIdToUnfollow) {
+    public void unfollowUser(int userId, int userIdToUnfollow) {
         User mainUser = userRepository.findById(userId);
         User targetUserToUnfollow = userRepository.findById(userIdToUnfollow);
-        UserFollow finalTargetUserToUnfollow = userFollowMapper.toDto(targetUserToUnfollow);
+
         if (mainUser == null) {
             throw new NotFoundException("User with id: " + userId + " not found.");
         } else if (targetUserToUnfollow == null) {
             throw new NotFoundException("User with id: " + userIdToUnfollow + " not found.");
+        } else {
+            List<UserFollow> userFollowedList = mainUser.getFollowed();
+            List<UserFollow> userFollowersList = targetUserToUnfollow.getFollowers();
+            deleteUserFromList(userFollowedList, getUserFollowById(userFollowedList,userIdToUnfollow));
+            deleteUserFromList(userFollowersList, getUserFollowById(userFollowersList, userId));
         }
-        List<UserFollow> userFollowers = mainUser.getFollowers();
-        deleteUserFromList(userFollowers, finalTargetUserToUnfollow);
     }
 
     public UserFollowedDTO getFollowedUsersById(Integer id) {
@@ -123,6 +126,16 @@ public class UserServiceImpl implements IUserService {
     public boolean existsUser(int userId) {
         User user = userRepository.findById(userId);
         return user != null;
+    }
+
+    public UserFollow getUserFollowById(List<UserFollow> users, int id) {
+        UserFollow userFounded = null;
+        for (UserFollow u: users) {
+            if(u.getUserId() == id) {
+                userFounded = u;
+            }
+        }
+        return userFounded;
     }
 
     private void deleteUserFromList(List<UserFollow> users, UserFollow user) {
