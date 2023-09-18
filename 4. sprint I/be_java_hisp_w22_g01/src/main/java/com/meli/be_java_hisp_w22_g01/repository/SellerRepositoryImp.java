@@ -103,13 +103,10 @@ public class SellerRepositoryImp implements ISellerRepository{
     }
 
     @Override
-    public Seller sumAFollower(int idFollower, int idSeller) {
-
+    public void addFollower(int idFollower, int idSeller) {
         Seller seller = findById(idSeller);
         seller.getFollowers().add(userRepo.findById(idFollower));
-        userRepo.getAllFolloweds(userRepo.findById(idFollower)).add(findById(idSeller));
-
-        return seller;
+        userRepo.getAllFollows(userRepo.findById(idFollower)).add(findById(idSeller));
     }
     @Override
     public List<User> getAllFollowers(Seller seller) {

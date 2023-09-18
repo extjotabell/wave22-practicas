@@ -46,7 +46,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.OK).body(userService.getUserFollowedList(userId));
         } else{
             // US 0008-2
-            return ResponseEntity.status(HttpStatus.OK).body(userService.orderFollowedsDto(userId,order));
+            return ResponseEntity.status(HttpStatus.OK).body(userService.orderFollowsDto(userId,order));
         }
     }
 

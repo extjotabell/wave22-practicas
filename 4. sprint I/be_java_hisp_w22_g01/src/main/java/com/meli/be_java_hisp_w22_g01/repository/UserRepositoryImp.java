@@ -75,7 +75,7 @@ public class UserRepositoryImp implements IUserRepository{
     }
 
     @Override
-    public List<Seller> getAllFolloweds(User user) {
+    public List<Seller> getAllFollows(User user) {
         return user.getFollowed();
     }
 }

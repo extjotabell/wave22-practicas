@@ -12,9 +12,6 @@ import com.meli.be_java_hisp_w22_g01.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class SellerServiceImp implements ISellerService{
@@ -47,7 +44,7 @@ public class SellerServiceImp implements ISellerService{
         if(seller.getFollowers().contains(user)){
             throw new BadRequestException("Ya es seguidor de ese seller");
         }else{
-            sellerRepository.sumAFollower(idFollower,idSeller);
+            sellerRepository.addFollower(idFollower,idSeller);
         }
 
         return new FollowMessageDto("El user: " + idFollower + " comenzo a seguir a: " + idSeller );

@@ -122,7 +122,7 @@ public class UserServiceImp implements IUserService{
     }
 
     @Override
-    public FollowedDTO orderFollowedsDto(int userId, String order) {
+    public FollowedDTO orderFollowsDto(int userId, String order) {
         FollowedDTO followedsDto = getUserFollowedList(userId);
         List<UserMiniDTO> followed = followedsDto.getFollowed();
         if (order.equals("name_asc")) {

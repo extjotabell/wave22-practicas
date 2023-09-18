@@ -7,5 +7,4 @@ import java.util.List;
 public interface IPostService {
     void createPost (PostDto postDto);
 
-
 }

@@ -10,5 +10,5 @@ public interface IUserRepository {
     List<User> getAll ();
     User findById(int user_id);
     void updateUser(int user_id, User user);
-    List<Seller> getAllFolloweds(User user);
+    List<Seller> getAllFollows(User user);
 }
