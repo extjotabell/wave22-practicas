@@ -62,6 +62,12 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void followUser(int userId, int userIdToFollow) {
+        if(!existsUser(userId))
+            throw new NotFoundException("User with id: " + userId + " not found.");
+        if(!existsUser(userIdToFollow))
+            throw new NotFoundException("User with id: " + userIdToFollow + " not found.");
+        if(userId == userIdToFollow)
+            throw new BadRequestException("User ids can't be the same");
         userRepository.followUser(userId, userIdToFollow);
     }
 
