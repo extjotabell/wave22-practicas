@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostDto {
+public class PromoPostDto {
     @Min(value = 1, message = "Se debe ingresar un id usuario")
     private int user_id;
     private int post_id;
@@ -32,4 +32,6 @@ public class PostDto {
     private int category;
     @DecimalMin(value = "1", message = "Se debe ingresar un precio")
     private double price;
+    private boolean has_promo;
+    private double discount;
 }

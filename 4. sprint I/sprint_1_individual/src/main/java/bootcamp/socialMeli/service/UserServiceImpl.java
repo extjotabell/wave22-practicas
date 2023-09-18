@@ -130,10 +130,20 @@ public class UserServiceImpl implements IUserService{
         Comparator<UserDto> usernameComparator = Comparator.comparing(UserDto::getUser_name);
 
         // Sort depending parameter input
-        if(criteria == NameOrderEnumDto.name_desc){
+        if (criteria == NameOrderEnumDto.name_desc) {
             listToSort.sort(usernameComparator.reversed());
         } else {
             listToSort.sort(usernameComparator);
         }
+    }
+
+    @Override
+    public void addPostIdToUser(int userId, int postId){
+        userRepository.addPostIdToUser(findUserById(userId), postId);
+    }
+
+    @Override
+    public String getUserNameById(int userId) {
+        return findUserById(userId).getUser_name();
     }
 }

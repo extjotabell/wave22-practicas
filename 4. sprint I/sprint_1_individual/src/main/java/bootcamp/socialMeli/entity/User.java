@@ -36,4 +36,8 @@ public class User {
         return followed.stream().anyMatch(id -> id == userId);
     }
 
+    public void addPostId(int postId) {
+        postList.add(postId);
+    }
+
 }

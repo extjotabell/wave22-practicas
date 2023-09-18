@@ -75,4 +75,11 @@ public class UserRepositoryImpl implements IUserRepository{
         user.getFollowed().add(userToFollow.getUser_id());
         userToFollow.getFollowers().add(user.getUser_id());
     }
+
+    @Override
+    public void addPostIdToUser(User user, int postId) {
+        user.addPostId(postId);
+    }
+
+
 }

@@ -20,4 +20,8 @@ public interface IUserService {
 
     void followUser(Integer userId, Integer userIdToFollow);
 
+    void addPostIdToUser(int userId, int postId);
+
+    String getUserNameById(int userId);
+
 }
