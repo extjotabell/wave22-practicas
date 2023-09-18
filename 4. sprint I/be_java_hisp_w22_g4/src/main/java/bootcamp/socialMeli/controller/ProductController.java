@@ -1,11 +1,9 @@
 package bootcamp.socialMeli.controller;
 
-import bootcamp.socialMeli.dto.DiscountedPostDto;
-import bootcamp.socialMeli.dto.FollowedPostListDto;
-import bootcamp.socialMeli.dto.PostDto;
-import bootcamp.socialMeli.dto.ProductDto;
+import bootcamp.socialMeli.dto.*;
 import bootcamp.socialMeli.service.IPostService;
 import bootcamp.socialMeli.service.IProductService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,34 +22,32 @@ public class ProductController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<ProductDto>> getProducts()
-    {
-        return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
-    }
-
-    @GetMapping("/users")
-    public ResponseEntity<List<ProductDto>> getUsers()
+    public ResponseEntity<List<ProductDto>> getAllProducts()
     {
         return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
     }
 
     @GetMapping("/posts")
-    public ResponseEntity<List<PostDto>> getPosts()
+    public ResponseEntity<List<PostDto>> getAllPosts()
     {
         return new ResponseEntity<>(postService.getAllPosts(), HttpStatus.OK);
     }
+
     // US 06
+    // us 09
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<FollowedPostListDto> getByFollowedUsers(@PathVariable int userId)
+    public ResponseEntity<FollowedPostListDto> getPostsByFollowedUsers(@PathVariable int userId, @RequestParam(required = false) ProductOrderListEnum order)
     {
-        return new ResponseEntity<>(postService.getPostsByFollowedUsers(userId), HttpStatus.OK);
+        return new ResponseEntity<>(postService.getPostsByFollowedUsers(userId, order), HttpStatus.OK);
     }
 
+    // US 05
     @PostMapping("/addPost")
-    public ResponseEntity<String> addPost( @RequestBody DiscountedPostDto postDto)
+    public ResponseEntity<String> addPost(@Valid @RequestBody PostDto postDto)
     {
         return new ResponseEntity<>(postService.addPost(postDto), HttpStatus.OK);
     }
+
 
 
 }

@@ -57,13 +57,10 @@ public class UserRepositoryImpl implements IUserRepository{
     }
 
     @Override
-    public Optional<User> removeFollower(int userId, int userIdToUnfollow)  {
+    public User removeFollower(User user, User userToUnfollow)  {
 
-        Optional<User> user = Optional.ofNullable(usersDatabase.get(userId));
-        Optional<User> userToUnfollow = Optional.ofNullable(usersDatabase.get(userIdToUnfollow));
-
-        user.get().getFollowing().removeIf(followedId -> followedId == userIdToUnfollow);
-        userToUnfollow.get().getFollowers().removeIf(followerId -> followerId == userId);
+        user.getFollowed().removeIf(followedId -> followedId == userToUnfollow.getUser_id());
+        userToUnfollow.getFollowers().removeIf(followerId -> followerId == user.getUser_id());
 
         return user;
     }
@@ -75,7 +72,7 @@ public class UserRepositoryImpl implements IUserRepository{
 
     @Override
     public void addFollower(User user, User userToFollow) {
-        user.getFollowing().add(userToFollow.getUser_id());
+        user.getFollowed().add(userToFollow.getUser_id());
         userToFollow.getFollowers().add(user.getUser_id());
     }
 }

@@ -86,12 +86,16 @@ public class PostRepositoryImpl implements IPostRepository{
 
     @Override
     public int addPost(Post post) {
-        User userPost = userRepository.findUserById(post.getUser_id()).get();
-        List<Integer> listidPost = userPost.getPostList();
-        Collections.reverse(listidPost);
-        int IdPostNew = listidPost.get(0)+1;
-        postsDatabase.put(IdPostNew, post);
-        listidPost.add(IdPostNew);
-        return IdPostNew;
+        int idPostNew=0;
+        User userPost = userRepository.findUserById(post.getUser_id()).orElse(null);
+        if(userPost!=null){
+            List<Integer> listidPost = new ArrayList<>(postsDatabase.keySet().stream().toList());
+            Collections.sort(listidPost);
+            idPostNew = listidPost.get(listidPost.size()-1)+1;
+            post.setPost_id(idPostNew);
+            postsDatabase.put(idPostNew, post);
+            listidPost.add(idPostNew);
+        }
+        return idPostNew;
     }
 }
