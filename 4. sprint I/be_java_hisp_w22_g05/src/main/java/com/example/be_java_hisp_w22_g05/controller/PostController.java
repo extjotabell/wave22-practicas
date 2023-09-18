@@ -21,7 +21,7 @@ public class PostController {
 
     @PostMapping("/post")
     public ResponseEntity<?> newPost(@RequestBody PostDto postDto){
-        postService.save(postDto);
+        postService.saveNewPost(postDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

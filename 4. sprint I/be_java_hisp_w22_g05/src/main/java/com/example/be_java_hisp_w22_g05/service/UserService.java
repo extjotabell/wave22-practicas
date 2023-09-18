@@ -26,11 +26,10 @@ public class UserService implements IUserService {
     private final IUserRepository userRepository;
 
     @Override
-
-    public UserFollowedDto follow(int followerId, int userToFollowId) {
+    public UserFollowedDto followUser(int followerId, int userToFollowId) {
         //Validations
         if (followerId == userToFollowId){
-            throw new FollowException("User cant follow himsef!");
+            throw new FollowException("El usuario no puede seguirse a si mismo!");
         }
         //Search Users
         User follower = userRepository.findUsersById(followerId);
@@ -38,10 +37,10 @@ public class UserService implements IUserService {
 
         //Validations
         if(follower == null || userToFollow == null){
-            throw new NotFoundException("User not found!");
+            throw new NotFoundException("Uno de los usuarios no existe");
         }
         if(follower.getFollowed().contains(userToFollow)){
-            throw new FollowException("User already follow!");
+            throw new FollowException("El usuario " + followerId + " ya sigue al usuario " + userToFollowId);
         }
 
         //Follow
@@ -55,7 +54,7 @@ public class UserService implements IUserService {
     public UserNumberFollowersDto getNumberFollowers(int userId) {
         User user = userRepository.findUsersById(userId);
         if (user == null) {
-            throw new NotFoundException(String.format("User with id %d not found", userId));
+            throw new NotFoundException("Usuario " + userId + " no encontrado");
         }
         return new UserNumberFollowersDto(userId, user.getName(), user.getFollower().size());
     }
@@ -63,7 +62,7 @@ public class UserService implements IUserService {
     public UserFollowedDto getListOfUsersFollowedBy(Integer id, String order){
         User user = userRepository.findUsersById(id);
         if(user == null){
-            throw new NotFoundException("No se encontró el usuario especificado");
+            throw new NotFoundException("No se encontró el usuario " + id);
         }
         UserFollowedDto userFollowedDto = new UserFollowedDto();
         userFollowedDto.setId(user.getId());
@@ -77,7 +76,7 @@ public class UserService implements IUserService {
         return userFollowedDto;
     }
 
-    public UserFollowedDto unfollow(int userId, int userIdToUnfollow) {
+    public UserFollowedDto unfollowUser(int userId, int userIdToUnfollow) {
         User userFollower = userRepository.findUsersById(userId);
         if(userFollower == null){
             throw new NotFoundException("No se encontro el usuario " + userId);
@@ -98,7 +97,7 @@ public class UserService implements IUserService {
     public UserFollowersDto findUsersFollowingSeller(int userId, String order) {
         User user = userRepository.findUsersById(userId);
         if (user == null) {
-            throw new NotFoundException("No se encontró el usuario especificado");
+            throw new NotFoundException("No se encontró el usuario " + userId);
         }
 
         List<UserDto> userDtos = user.getFollower()

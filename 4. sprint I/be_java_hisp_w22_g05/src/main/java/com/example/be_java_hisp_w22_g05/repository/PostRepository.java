@@ -50,8 +50,9 @@ public class PostRepository implements IPostRepository {
 
     @Override
     public Post save(Post post) {
+
         //Verifica que no exista un producto con ese id
-        if(getProduct(post.getProduct().getId()) != null) return null;
+        if(productExists(post.getProduct().getId())) return null;
 
         //Setea el id del post y lo agrega a la lista
         post.setId(idCounter);
@@ -62,8 +63,7 @@ public class PostRepository implements IPostRepository {
         return post;
     }
 
-    @Override
-    public Product getProduct(int id) {
-        return productList.stream().filter(product -> product.getId() == id).findFirst().orElse(null);
+    private boolean productExists(int id) {
+        return productList.stream().anyMatch(product -> product.getId() == id);
     }
 }
