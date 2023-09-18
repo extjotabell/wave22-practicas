@@ -5,8 +5,10 @@ import com.example.be_java_hisp_w22_g02.dto.response.UserDto;
 import com.example.be_java_hisp_w22_g02.dto.response.UserFollowedDTO;
 import com.example.be_java_hisp_w22_g02.dto.response.UserFollowerDTO;
 import com.example.be_java_hisp_w22_g02.entity.User;
+import com.example.be_java_hisp_w22_g02.entity.UserFollow;
 import com.example.be_java_hisp_w22_g02.exception.IsEmptyException;
 import com.example.be_java_hisp_w22_g02.exception.NotFoundException;
+import com.example.be_java_hisp_w22_g02.mapper.UserFollowMapper;
 import com.example.be_java_hisp_w22_g02.mapper.UserFollowedMapper;
 import com.example.be_java_hisp_w22_g02.mapper.UserFollowerMapper;
 import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
@@ -25,6 +27,7 @@ public class UserServiceImpl implements IUserService {
     private final IUserRepository userRepository;
     private final UserFollowedMapper userFollowedMapper;
     private final UserFollowerMapper userFollowerMapper;
+    private final UserFollowMapper userFollowMapper;
     private final ObjectMapper mapper;
 
 
@@ -72,13 +75,14 @@ public class UserServiceImpl implements IUserService {
     public void unfollowUser(Integer userId, Integer userIdToUnfollow) {
         User mainUser = userRepository.findById(userId);
         User targetUserToUnfollow = userRepository.findById(userIdToUnfollow);
+        UserFollow finalUser = userFollowMapper.toDto(targetUserToUnfollow);
         if (mainUser == null) {
             throw new NotFoundException("User with id: " + userId + " not found.");
         } else if (targetUserToUnfollow == null) {
             throw new NotFoundException("User with id: " + userIdToUnfollow + " not found.");
         }
-        List<User> userFollowers = mainUser.getFollowers();
-        deleteUserFromList(userFollowers, targetUserToUnfollow);
+        List<UserFollow> userFollowers = mainUser.getFollowers();
+        deleteUserFromList(userFollowers, finalUser);
     }
 
     public UserFollowedDTO getFollowedUsersById(Integer id) {
@@ -95,7 +99,7 @@ public class UserServiceImpl implements IUserService {
         return user != null;
     }
 
-    private void deleteUserFromList(List<User> users, User user) {
+    private void deleteUserFromList(List<UserFollow> users, UserFollow user) {
         if(users.isEmpty()) {
             throw new IsEmptyException("Error. List is empty.");
         } else {
