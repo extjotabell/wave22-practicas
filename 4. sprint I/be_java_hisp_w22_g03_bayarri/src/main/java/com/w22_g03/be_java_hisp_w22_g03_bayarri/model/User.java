@@ -1,16 +1,16 @@
 package com.w22_g03.be_java_hisp_w22_g03_bayarri.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class User {
 
     private long userId;
@@ -23,14 +23,11 @@ public class User {
 
     private List<User> followers;
 
-    public boolean isSeller(){
-        if (!posts.isEmpty()){
-            return true;
-        }
-        return false;
+    public boolean isSeller() {
+        return !posts.isEmpty();
     }
 
-    public void addFollower(User follower){
+    public void addFollower(User follower) {
         followers.add(follower);
     }
 
