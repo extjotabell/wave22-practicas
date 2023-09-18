@@ -3,9 +3,11 @@ package com.example.be_java_hisp_w22_g02.service.Implementations;
 
 import com.example.be_java_hisp_w22_g02.dto.response.FollowedPostDTO;
 import com.example.be_java_hisp_w22_g02.dto.response.TwoWeeksPostDTO;
+import com.example.be_java_hisp_w22_g02.dto.response.UserDTO;
 import com.example.be_java_hisp_w22_g02.entity.Post;
 
 import com.example.be_java_hisp_w22_g02.exception.NotFoundException;
+import com.example.be_java_hisp_w22_g02.entity.User;
 import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
 import com.example.be_java_hisp_w22_g02.service.Interfaces.IPostService;
 import lombok.AllArgsConstructor;
@@ -61,6 +63,7 @@ public class PostServiceImpl implements IPostService {
         if(dto == null || !valid(dto)){
             throw new BadRequestException("Los campos ingresados no son válidos");
         }
+        userService.addUserPost(mapper.convertValue(dto, Post.class), dto.getUserId());
         return mapper.convertValue(postRepository.save(mapper.convertValue(dto, Post.class)), PostDTO.class);
     }
 

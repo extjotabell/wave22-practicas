@@ -6,6 +6,7 @@ import com.example.be_java_hisp_w22_g02.dto.response.UserDTO;
 import com.example.be_java_hisp_w22_g02.dto.response.UserFollowerDTO;
 
 import com.example.be_java_hisp_w22_g02.dto.response.UserFollowedDTO;
+import com.example.be_java_hisp_w22_g02.entity.Post;
 
 
 import java.util.List;
@@ -28,4 +29,5 @@ public interface IUserService {
     TotalFollowersDto getTotalFollowersByUserId(int userId);
 
     void unfollowUser(int userId, int userIdToUnfollow);
+    void addUserPost(Post post, Integer userId);
 }

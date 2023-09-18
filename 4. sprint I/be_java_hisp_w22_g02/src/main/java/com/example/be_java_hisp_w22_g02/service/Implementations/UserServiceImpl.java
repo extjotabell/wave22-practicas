@@ -1,6 +1,8 @@
 package com.example.be_java_hisp_w22_g02.service.Implementations;
 
+import com.example.be_java_hisp_w22_g02.dto.request.PostDTO;
 import com.example.be_java_hisp_w22_g02.dto.response.UserDTO;
+import com.example.be_java_hisp_w22_g02.entity.Post;
 import com.example.be_java_hisp_w22_g02.exception.BadRequestException;
 import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
 import com.example.be_java_hisp_w22_g02.service.Interfaces.IUserService;
@@ -189,4 +191,11 @@ public class UserServiceImpl implements IUserService {
             throw new BadRequestException("The sorting order "+order+" doesn't exist.");
     }
 
+    public void addUserPost(Post post, Integer userId){
+        UserDTO userDTO = getUser(userId);
+        userDTO.getPosts().add(post);
+
+        User entity = userRepository.findById(userId);
+        entity.getPosts().add(post);
+    }
 }

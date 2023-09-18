@@ -23,7 +23,6 @@ public class PostController {
 
     IPostService postService;
 
-
     @GetMapping("/products/followed/{userId}/list")
     public ResponseEntity<?> getLastTwoWeeksPostByUserFollowed(@PathVariable int userId, @RequestParam(required = false) String order) {
 
