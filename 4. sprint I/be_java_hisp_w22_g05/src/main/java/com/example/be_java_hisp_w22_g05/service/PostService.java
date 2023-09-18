@@ -85,17 +85,18 @@ public class PostService implements IPostService {
 
         //Aca ordenamos
         if (order != null && order.equals("date_asc")) {
-            return postList.stream()
-                    .filter(Objects::nonNull).sorted((x, y) -> x.getDate().compareTo(y.getDate()))
-                    .map(postMapper::toPostDTO)
-                    .collect(Collectors.toList());
+            return orderList(postList, true);
         } else {
-            return postList.stream()
-                    .filter(Objects::nonNull).sorted((x, y) -> y.getDate().compareTo(x.getDate()))
-                    .map(postMapper::toPostDTO)
-                    .collect(Collectors.toList());
+            return orderList(postList, false);
         }
 
+    }
+
+    private List<PostDto> orderList(List<Post> posts, boolean isAsc) {
+        return posts.stream()
+                .filter(Objects::nonNull).sorted((x, y) -> isAsc ? x.getDate().compareTo(y.getDate()) : y.getDate().compareTo(x.getDate()))
+                .map(postMapper::toPostDTO)
+                .collect(Collectors.toList());
     }
 
 }
