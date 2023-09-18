@@ -50,9 +50,16 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public User unfollow(User userFollower, User userFollowed) {
-        userFollower.getFollowed().remove(userFollowed);
-        userFollowed.getFollower().remove(userFollower);
-        return userFollower;
+    public User unfollow(User follower, User followed) {
+        follower.getFollowed().remove(followed);
+        followed.getFollower().remove(follower);
+        return follower;
+    }
+
+    @Override
+    public User follow(User follower, User userToFollow) {
+        follower.getFollowed().add(userToFollow);
+        userToFollow.getFollower().add(follower);
+        return follower;
     }
 }

@@ -45,8 +45,7 @@ public class UserService implements IUserService {
         }
 
         //Follow
-        follower.getFollowed().add(userToFollow);
-        userToFollow.getFollower().add(follower);
+        follower = userRepository.follow(follower,userToFollow);
         
         return new UserFollowedDto(follower.getId(),follower.getName(),follower.getFollowed().stream()
                 .map(user -> new UserDto(user.getId(), user.getName()))
