@@ -34,19 +34,14 @@ public class UserRepositoryImpl implements IUserRepository {
     public void followUser(int userId, int userIdToFollow) {
         User user = dbUser.get(userId);
         User userToFollow = dbUser.get(userIdToFollow);
-<<<<<<< HEAD
-        if(!user.getFollowed().contains(userToFollow))
-            user.addFollowed(userToFollow);
-        if(!userToFollow.getFollowers().contains(user))
-            userToFollow.addFollower(user);
-=======
+
         UserFollow userFollow = new UserFollow(user.getUserId(), user.getUserName());
         UserFollow userFollowToFollow = new UserFollow(userToFollow.getUserId(), userToFollow.getUserName());
         if(!user.getFollowed().contains(userFollowToFollow))
             user.addFollowed(userFollowToFollow);
         if(!userToFollow.getFollowers().contains(userFollow))
             userToFollow.addFollower(userFollow);
->>>>>>> 4bb2cd7c06e507a4204bc51257c96f965f11be12
+
     }
 
 
@@ -77,23 +72,24 @@ public class UserRepositoryImpl implements IUserRepository {
 
     public List<FollowedPostDTO> getFollowedPostLasTwoWeeks(int id) {
         User user = dbUser.get(id);
-        List<User> followed = user.getFollowed();
+        List<UserFollow> followed = user.getFollowed();
 
         List<FollowedPostDTO> followedPostDTOS = new ArrayList<>();
 
         LocalDate today = LocalDate.now();
         LocalDate lastTwoWeeks = today.minus(2, ChronoUnit.WEEKS);
 
-        for (User u : followed) {
-            for (Post p : u.getPosts()) {
-                if ((p.getDate().isAfter(lastTwoWeeks) || p.getDate().isEqual(lastTwoWeeks)) &&
-                        (p.getDate().isBefore(today) || p.getDate().isEqual(today))) {
+                for (UserFollow u: followed) {
+                    User userFollow = findById(u.getUserId());
+                    for (Post p: userFollow.getPosts()) {
+                        if ((p.getDate().isAfter(lastTwoWeeks) || p.getDate().isEqual(lastTwoWeeks)) &&
+                                (p.getDate().isBefore(today) || p.getDate().isEqual(today))) {
 
-                    followedPostDTOS.add(new FollowedPostDTO(u.getUserId(),p));
+                            followedPostDTOS.add(new FollowedPostDTO(u.getUserId(),p));
+                        }
+                    }
                 }
-            }
-        }
-
+                
         Comparator<FollowedPostDTO> comparatorAsc = (f1, f2) -> f2.getPost().getDate()
                 .compareTo(f1.getPost().getDate());
 

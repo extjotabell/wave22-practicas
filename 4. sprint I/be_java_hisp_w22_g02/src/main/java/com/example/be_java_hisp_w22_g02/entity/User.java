@@ -24,11 +24,7 @@ public class User {
         followers.add(follower);
     }
 
-<<<<<<< HEAD
-    public void addFollowed(User f) {
-=======
     public void addFollowed(UserFollow f) {
->>>>>>> 4bb2cd7c06e507a4204bc51257c96f965f11be12
         followed.add(f);
     }
 }
