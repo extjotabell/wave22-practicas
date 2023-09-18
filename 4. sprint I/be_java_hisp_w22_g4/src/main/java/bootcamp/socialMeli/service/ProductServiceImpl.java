@@ -38,4 +38,10 @@ public class ProductServiceImpl implements IProductService{
                 product.getColor(),
                 product.getNotes());
     }
+
+    @Override
+    public void addProducto(ProductDto productDto) {
+        Product product = mapper.convertValue(productDto, Product.class);
+        productRepository.addProducto(product);
+    }
 }

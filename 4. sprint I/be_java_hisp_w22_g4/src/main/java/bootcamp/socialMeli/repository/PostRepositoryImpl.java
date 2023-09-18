@@ -12,16 +12,20 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Collectors;
 
 @Repository
 public class PostRepositoryImpl implements IPostRepository{
 
     HashMap<Integer, Post> postsDatabase;
+    private final IUserRepository userRepository;
 
-    public PostRepositoryImpl() {
+
+    public PostRepositoryImpl(IUserRepository userRepository) {
+        this.userRepository = userRepository;
         this.postsDatabase = this.loadPosts();
     }
 
@@ -65,6 +69,11 @@ public class PostRepositoryImpl implements IPostRepository{
     }
 
     @Override
+    public List<Post> getPostsByFollowedUsers(int userId) {
+        return null;
+    }
+
+    @Override
     public List<Post> getPostsByUserId(int userId) {
         return this.postsDatabase.values().stream().filter(p -> p.getUser_id() == userId).collect(Collectors.toList());
     }
@@ -73,5 +82,16 @@ public class PostRepositoryImpl implements IPostRepository{
     {
         return this.postsDatabase.values().stream().filter(p ->
                 p.getUser_id() == userId && p.getDate().isAfter(LocalDate.now().minusWeeks(2))).collect(Collectors.toList());
+    }
+
+    @Override
+    public int addPost(Post post) {
+        User userPost = userRepository.findUserById(post.getUser_id()).get();
+        List<Integer> listidPost = userPost.getPostList();
+        Collections.reverse(listidPost);
+        int IdPostNew = listidPost.get(0)+1;
+        postsDatabase.put(IdPostNew, post);
+        listidPost.add(IdPostNew);
+        return IdPostNew;
     }
 }

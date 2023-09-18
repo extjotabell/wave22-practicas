@@ -1,9 +1,6 @@
 package bootcamp.socialMeli.service;
 
-import bootcamp.socialMeli.dto.FollowersCountDto;
-import bootcamp.socialMeli.dto.FollowersListDto;
-import bootcamp.socialMeli.dto.NameOrderEnumDto;
-import bootcamp.socialMeli.dto.UserDto;
+import bootcamp.socialMeli.dto.*;
 import bootcamp.socialMeli.entity.User;
 
 import java.util.List;
@@ -18,4 +15,5 @@ public interface IUserService {
     User findUserById(int userId);
 
     void followUser(Integer userId, Integer userIdToFollow);
+
 }

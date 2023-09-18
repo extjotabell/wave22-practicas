@@ -1,5 +1,6 @@
 package bootcamp.socialMeli.controller;
 
+import bootcamp.socialMeli.dto.DiscountedPostDto;
 import bootcamp.socialMeli.dto.FollowedPostListDto;
 import bootcamp.socialMeli.dto.PostDto;
 import bootcamp.socialMeli.dto.ProductDto;
@@ -7,10 +8,7 @@ import bootcamp.socialMeli.service.IPostService;
 import bootcamp.socialMeli.service.IProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -48,4 +46,11 @@ public class ProductController {
     {
         return new ResponseEntity<>(postService.getPostsByFollowedUsers(userId), HttpStatus.OK);
     }
+
+    @PostMapping("/addPost")
+    public ResponseEntity<String> AddPost( @RequestBody DiscountedPostDto postDto)
+    {
+        return new ResponseEntity<>(postService.addPost(postDto), HttpStatus.OK);
+    }
+
 }
