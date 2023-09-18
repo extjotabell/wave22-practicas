@@ -41,7 +41,6 @@ public class UserRepositoryImpl implements IUserRepository {
             user.addFollowed(userFollowToFollow);
         if(!userToFollow.getFollowers().contains(userFollow))
             userToFollow.addFollower(userFollow);
-
     }
 
 

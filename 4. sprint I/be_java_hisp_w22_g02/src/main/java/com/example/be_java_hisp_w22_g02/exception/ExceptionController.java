@@ -28,6 +28,12 @@ public class ExceptionController {
         return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(IsEmptyException.class)
+    public ResponseEntity<Object> handleHttpMessageNotReadable(IsEmptyException e) {
+        ExceptionDto exceptionDto = new ExceptionDto(e.getMessage());
+        return new ResponseEntity<>(exceptionDto, HttpStatus.CONFLICT);
+
+    }
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<Object> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex) {
         ExceptionDto exceptionDto = new ExceptionDto("Formato inválido: " + ex.getMessage());
