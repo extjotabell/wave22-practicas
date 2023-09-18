@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7c5d359c-2e4a-4181-bf83-cf3bcfae31a4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/BeJavaHispW22G4Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/controller/ProductController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/controller/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/dto/DiscountedPostDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/dto/ExceptionDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/dto/FollowedListDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/dto/FollowedPostListDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/dto/FollowersCountDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/dto/FollowersListDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/dto/NameOrderEnumDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/dto/PostDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/dto/PostsByUserDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/dto/ProductDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/dto/ProductOrderListEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/dto/PromoCounterDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/dto/UserDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/entity/Post.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/entity/Product.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/entity/RolEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/entity/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/exception/BadRequestException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/exception/ExceptionConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/exception/NotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/repository/IPostRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/repository/IProductRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/repository/IUserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/repository/PostRepositoryImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/repository/ProductRepositoryImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/repository/UserRepositoryImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/service/IPostService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/service/IProductService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/service/IUserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/service/PostServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/service/ProductServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bootcamp/socialMeli/service/UserServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Sprints.postman_collection.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/post.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/product.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/user.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/bootcamp/socialMeli/BeJavaHispW22G4ApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2VOyRgOoYqYlDqpKxPZP7uN9Yco" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;pio__luciana&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/srecayte/Develop/wave22-practicas/4. sprint I/be_java_hisp_w22_g4&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;3cce07865a8f8a73affff7abd6d622c1&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="BeJavaHispW22G4Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="be_java_hisp_w22_g4" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="bootcamp.socialMeli.BeJavaHispW22G4Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7c5d359c-2e4a-4181-bf83-cf3bcfae31a4" name="Changes" comment="" />
+      <created>1694721419153</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1694721419153</updated>
+      <workItem from="1694721421095" duration="83000" />
+      <workItem from="1694721507050" duration="5197000" />
+      <workItem from="1694786016507" duration="2132000" />
+      <workItem from="1694788157747" duration="5448000" />
+      <workItem from="1694793617380" duration="13527000" />
+      <workItem from="1695037375127" duration="785000" />
+      <workItem from="1695038843827" duration="1362000" />
+      <workItem from="1695040280363" duration="3000" />
+      <workItem from="1695040306258" duration="376000" />
+      <workItem from="1695041170932" duration="2766000" />
+      <workItem from="1695043946809" duration="259000" />
+      <workItem from="1695044209771" duration="834000" />
+      <workItem from="1695048570134" duration="6873000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
