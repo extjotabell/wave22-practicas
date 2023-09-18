@@ -2,6 +2,7 @@ package com.meli.be_java_hisp_w22_g01.controller;
 
 import com.meli.be_java_hisp_w22_g01.dto.PostDto;
 import com.meli.be_java_hisp_w22_g01.dto.PromoPostDto;
+import com.meli.be_java_hisp_w22_g01.dto.response.CreatePromoPostDTO;
 import com.meli.be_java_hisp_w22_g01.service.IPostService;
 import com.meli.be_java_hisp_w22_g01.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,9 @@ public class ProductController {
     @PostMapping("/promo-post")
     public ResponseEntity<?> newPromoPost(@RequestBody PromoPostDto promoPostDto){
         postService.createPromoPost(promoPostDto);
-        return ResponseEntity.status(HttpStatus.OK).body("Post en promoción creado");
+        CreatePromoPostDTO createPromoPostDTO = new CreatePromoPostDTO();
+        createPromoPostDTO.setMessage("Post en promoción creado");
+        return ResponseEntity.status(HttpStatus.OK).body(createPromoPostDTO);
     }
 
     // US 0011 - Obtener la cantidad de productos en promoción de un determinado vendedor

@@ -70,6 +70,7 @@ public class PostServiceImp implements IPostService{
         postRepository.addPost(promoPost);
     }
 
+    // US 0011
     @Override
     public CountPromoPostDTO countPromoPost(int user_id) {
         List<Post> posts = postRepository.getAllPosts();
