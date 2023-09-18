@@ -1,0 +1,21 @@
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/RedireccionPostServlet")
+public class RedireccionPostServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        // Procesa la solicitud POST aquí
+
+        // Después de procesar la solicitud POST, determina la nueva URL
+        String nuevaURL = "https://www.ejemplo.com/pagina-destino";
+
+        // Realiza una redirección con una respuesta de redirección HTTP
+        response.setStatus(HttpServletResponse.SC_SEE_OTHER);
+        response.setHeader("Location", nuevaURL);
+    }
+}
