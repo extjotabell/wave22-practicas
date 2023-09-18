@@ -1,7 +1,6 @@
 package com.w22_g03.be_java_hisp_w22_g03_bayarri.controller;
 
-import com.w22_g03.be_java_hisp_w22_g03_bayarri.dto.PostDTO;
-import com.w22_g03.be_java_hisp_w22_g03_bayarri.dto.UserFollowedSellersPostsDTO;
+import com.w22_g03.be_java_hisp_w22_g03_bayarri.dto.*;
 import com.w22_g03.be_java_hisp_w22_g03_bayarri.service.PostService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
@@ -34,5 +33,11 @@ public class PostController {
             return ResponseEntity.ok(this.postService.getFollowedUsersPostsById(userId));
         }
     }
+
+    @PostMapping("/promo-post")
+    public ResponseEntity<PostDTO> addPromoPost(@RequestBody @Valid PromoPostDTO promoPostDTO) {
+        return ResponseEntity.ok(postService.addPost(promoPostDTO));
+    }
+
 
 }
