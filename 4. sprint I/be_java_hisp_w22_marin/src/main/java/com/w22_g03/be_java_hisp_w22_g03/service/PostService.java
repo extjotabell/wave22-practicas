@@ -1,6 +1,7 @@
 package com.w22_g03.be_java_hisp_w22_g03.service;
 
 import com.w22_g03.be_java_hisp_w22_g03.dto.PostDTO;
+import com.w22_g03.be_java_hisp_w22_g03.dto.PostPromoDTO;
 import com.w22_g03.be_java_hisp_w22_g03.dto.UserFollowedSellersPostsDTO;
 import com.w22_g03.be_java_hisp_w22_g03.model.Post;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,4 +15,6 @@ public interface PostService {
     UserFollowedSellersPostsDTO  getFollowedUsersPostsById(long userId);
 
     UserFollowedSellersPostsDTO getFollowedUsersPostsById(long userId, String order);
+
+    PostPromoDTO getPostWithPromo(long userId);
 }

@@ -12,5 +12,7 @@ public interface PostRepository {
     List<Post> findTwoWeekOldPostsFromFollowedByUser(User user);
 
     long countPosts();
+
+    long countPostsPromo(User user);
 }
 

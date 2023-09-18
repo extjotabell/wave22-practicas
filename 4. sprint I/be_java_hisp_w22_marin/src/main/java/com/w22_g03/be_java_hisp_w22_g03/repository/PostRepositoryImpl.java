@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class PostRepositoryImpl implements PostRepository {
@@ -31,5 +32,12 @@ public class PostRepositoryImpl implements PostRepository {
     @Override
     public long countPosts() {
         return this.userRepository.findAll().stream().mapToLong(user -> user.getPosts().size()).sum();
+    }
+
+
+    @Override
+    public long countPostsPromo(User user) {
+        List<Post> posts = user.getPosts();
+        return posts.stream().filter(Post::isHasPromo).count();
     }
 }
