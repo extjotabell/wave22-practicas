@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface IPostService {
     List<PostDto> getAllPosts();
-    FollowedPostListDto getPostsByFollowedUsers(int userId);
+    FollowedPostListDto getPostsByFollowedUsers(int userId, String order);
     String addPost(PostDto postDto);
 }

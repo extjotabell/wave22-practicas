@@ -42,9 +42,9 @@ public class ProductController {
     }
     // US 06
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<FollowedPostListDto> getByFollowedUsers(@PathVariable int userId)
+    public ResponseEntity<FollowedPostListDto> getByFollowedUsers(@PathVariable int userId, @RequestParam(required = false) String order)
     {
-        return new ResponseEntity<>(postService.getPostsByFollowedUsers(userId), HttpStatus.OK);
+        return new ResponseEntity<>(postService.getPostsByFollowedUsers(userId, order), HttpStatus.OK);
     }
 
     @PostMapping("/addPost")

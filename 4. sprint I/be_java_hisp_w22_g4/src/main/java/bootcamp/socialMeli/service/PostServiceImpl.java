@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,36 +46,46 @@ public class PostServiceImpl implements IPostService {
 
 
     @Override
-    public FollowedPostListDto getPostsByFollowedUsers(int userId) {
-        //Getting each followed user id
-        List<Integer> userFollowedId = userService.findUserById(userId).getFollowing();
-        List<PostDto> postDtoList = new ArrayList<>();
-
-        userFollowedId.forEach(u ->
+    public FollowedPostListDto getPostsByFollowedUsers(int userId, String order) {
+        //Validate order value
+        if (order != null && order.equals("asc") || order != null && order.equals("desc") || order == null)
         {
-            List<Post> post = postRepository.getLatestPostsByUserId(u);
-            post.forEach(x -> {
-                ProductDto productDto = productService.getProductById(x.getProduct_id());
+            //Getting each followed user id
+            List<Integer> userFollowedId = userService.findUserById(userId).getFollowing();
+            List<PostDto> postDtoList = new ArrayList<>();
 
-                postDtoList.add(new PostDto(
-                        x.getUser_id(),
-                        x.getPost_id(),
-                        x.getDate(),
-                        new ProductDto(
-                                productDto.getProduct_id(),
-                                productDto.getProduct_name(),
-                                productDto.getType(),
-                                productDto.getBrand(),
-                                productDto.getColor(),
-                                productDto.getNotes()
-                        ),
-                        x.getCategory(),
-                        x.getPrice()));
+            userFollowedId.forEach(postId ->
+            {
+                List<Post> post = postRepository.getLatestPostsByUserId(postId);
+                post.forEach(x -> {
+                    ProductDto productDto = productService.getProductById(x.getProduct_id());
+
+                    postDtoList.add(new PostDto(
+                            x.getUser_id(),
+                            x.getPost_id(),
+                            x.getDate(),
+                            new ProductDto(
+                                    productDto.getProduct_id(),
+                                    productDto.getProduct_name(),
+                                    productDto.getType(),
+                                    productDto.getBrand(),
+                                    productDto.getColor(),
+                                    productDto.getNotes()
+                            ),
+                            x.getCategory(),
+                            x.getPrice()));
+                });
             });
-        });
-        return new FollowedPostListDto(
-                userId, postDtoList.stream().sorted((date1, date2) -> date2.getDate().compareTo(date1.getDate())).
-                collect(Collectors.toList()));
+
+            if(Objects.equals(order, "asc")) return new FollowedPostListDto(
+                    userId, postDtoList.stream().sorted(Comparator.comparing(PostDto::getDate)).
+                    collect(Collectors.toList()));
+
+            return new FollowedPostListDto(
+                    userId, postDtoList.stream().sorted((date1, date2) -> date2.getDate().compareTo(date1.getDate())).
+                    collect(Collectors.toList()));
+        }
+        throw new BadRequestException("El ordenamiento debe ser asc o desc.");
     }
 
     @Override
