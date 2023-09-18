@@ -48,9 +48,10 @@ public class ProductController {
     }
 
     @PostMapping("/addPost")
-    public ResponseEntity<String> AddPost( @RequestBody DiscountedPostDto postDto)
+    public ResponseEntity<String> addPost( @RequestBody DiscountedPostDto postDto)
     {
         return new ResponseEntity<>(postService.addPost(postDto), HttpStatus.OK);
     }
+
 
 }
