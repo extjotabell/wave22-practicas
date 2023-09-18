@@ -1,7 +1,6 @@
 package com.w22_g03.be_java_hisp_w22_g03.service;
 
 import com.w22_g03.be_java_hisp_w22_g03.dto.*;
-import com.w22_g03.be_java_hisp_w22_g03.exception.NotFoundException;
 import com.w22_g03.be_java_hisp_w22_g03.model.Post;
 import com.w22_g03.be_java_hisp_w22_g03.model.Product;
 import com.w22_g03.be_java_hisp_w22_g03.model.User;
@@ -10,6 +9,8 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -101,6 +102,26 @@ public class PostServiceImpl implements PostService {
         promoPostDTO.setPostId(post.getPostId());
         return promoPostDTO;
     }
+
+    @Override
+    public GetPromoPostDetailDTO getPostWithPromoById(long userId) {
+        User user = userService.findById(userId);
+        List<Post> postsWithPromo = postRepository.getPostsWithPromo(user);
+        List<PostDTO> postDTOs = mapPromoPostDetailToDTO(postsWithPromo);
+        return new GetPromoPostDetailDTO(user.getUserId(), user.getUsername(), postDTOs);
+    }
+
+    private List<PostDTO> mapPromoPostDetailToDTO(List<Post> postsWithPromo){
+        List<PostDTO> postDTOs = new ArrayList<>();
+        ModelMapper mapper = new ModelMapper();
+        for (Post post : postsWithPromo) {
+            PostDTO postDTO = mapper.map(post, PostDTO.class);
+            postDTOs.add(postDTO);
+        }
+        return postDTOs;
+
+    }
+
 
     private Post mapPromoPostDtoToPost(PromoPostDTO postDTO, User user) {
         ModelMapper mapper = new ModelMapper();

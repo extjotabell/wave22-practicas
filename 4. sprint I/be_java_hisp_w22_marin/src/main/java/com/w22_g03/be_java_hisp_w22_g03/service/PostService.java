@@ -1,9 +1,6 @@
 package com.w22_g03.be_java_hisp_w22_g03.service;
 
-import com.w22_g03.be_java_hisp_w22_g03.dto.PostDTO;
-import com.w22_g03.be_java_hisp_w22_g03.dto.GetPostPromoDTO;
-import com.w22_g03.be_java_hisp_w22_g03.dto.PromoPostDTO;
-import com.w22_g03.be_java_hisp_w22_g03.dto.UserFollowedSellersPostsDTO;
+import com.w22_g03.be_java_hisp_w22_g03.dto.*;
 
 public interface PostService {
 
@@ -16,4 +13,6 @@ public interface PostService {
     GetPostPromoDTO getPostWithPromo(long userId);
     
     PromoPostDTO addPostWithPromo(PromoPostDTO updatePostDTO);
+
+    GetPromoPostDetailDTO getPostWithPromoById(long userId);
 }

@@ -41,4 +41,9 @@ public class PostRepositoryImpl implements PostRepository {
         return posts.stream().filter(Post::isHasPromo).count();
     }
 
+    @Override
+    public List<Post> getPostsWithPromo(User user) {
+        return user.getPosts().stream().filter(Post::isHasPromo).toList();
+    }
+
 }

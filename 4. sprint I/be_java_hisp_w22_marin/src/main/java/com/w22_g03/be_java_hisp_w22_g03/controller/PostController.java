@@ -1,9 +1,6 @@
 package com.w22_g03.be_java_hisp_w22_g03.controller;
 
-import com.w22_g03.be_java_hisp_w22_g03.dto.PostDTO;
-import com.w22_g03.be_java_hisp_w22_g03.dto.GetPostPromoDTO;
-import com.w22_g03.be_java_hisp_w22_g03.dto.PromoPostDTO;
-import com.w22_g03.be_java_hisp_w22_g03.dto.UserFollowedSellersPostsDTO;
+import com.w22_g03.be_java_hisp_w22_g03.dto.*;
 import com.w22_g03.be_java_hisp_w22_g03.service.PostService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
@@ -45,6 +42,11 @@ public class PostController {
     @PostMapping("/promo-post")
     public ResponseEntity<PromoPostDTO> addPromoInProduct(@RequestBody @Valid PromoPostDTO promoPostDTO) {
         return ResponseEntity.ok(postService.addPostWithPromo(promoPostDTO));
+    }
+
+    @GetMapping("/promo-post/list")
+    public ResponseEntity<GetPromoPostDetailDTO> productsDetailWithPromoById(@RequestParam("user_id") long userId) {
+        return ResponseEntity.ok(postService.getPostWithPromoById(userId));
     }
 
 }
