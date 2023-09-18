@@ -17,6 +17,6 @@ import java.util.List;
 public class UserFollowDTO {
     private int userId;
     private String userName;
-    private List<UserFollowDTO> followers = new ArrayList<>();
-    private List<UserFollowerDTO> followed = new ArrayList<>();
+    private List<UserDTO> followers = new ArrayList<>();
+    private List<UserDTO> followed = new ArrayList<>();
 }
