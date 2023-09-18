@@ -32,8 +32,11 @@ public class UserRepositoryImpl implements IUserRepository {
     @Override
     public void followUser(int userId, int userIdToFollow) {
         User user = dbUser.get(userId);
-        User userToFollow = dbUser.get(userId);
-        user.addFollower(userToFollow);
+        User userToFollow = dbUser.get(userIdToFollow);
+        if(!user.getFollowed().contains(userToFollow))
+            user.addFollowed(userToFollow);
+        if(!userToFollow.getFollowers().contains(user))
+            userToFollow.addFollower(user);
     }
 
 

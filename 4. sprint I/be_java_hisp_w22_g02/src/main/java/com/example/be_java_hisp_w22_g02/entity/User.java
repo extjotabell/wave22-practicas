@@ -23,4 +23,8 @@ public class User {
     public void addFollower(User follower) {
         followers.add(follower);
     }
+
+    public void addFollowed(User f) {
+        followed.add(f);
+    }
 }

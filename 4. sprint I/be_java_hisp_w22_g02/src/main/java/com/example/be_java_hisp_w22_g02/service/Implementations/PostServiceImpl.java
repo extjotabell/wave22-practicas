@@ -61,7 +61,7 @@ public class PostServiceImpl implements IPostService {
     }
 
     private boolean valid(PostDTO dto){
-        return !isValidInt(dto.getUser_id()) || !userService.existsUser(dto.getUser_id()) || !isValidInt(dto.getCategory())
+        return !isValidInt(dto.getUserId()) || !userService.existsUser(dto.getUserId()) || !isValidInt(dto.getCategory())
                 || !isValidDouble(dto.getPrice()) || dto.getProduct() == null;
     }
 
