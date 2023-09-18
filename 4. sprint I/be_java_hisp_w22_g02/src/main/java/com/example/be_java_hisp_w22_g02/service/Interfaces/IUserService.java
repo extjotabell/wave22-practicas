@@ -27,5 +27,5 @@ public interface IUserService {
 
     TotalFollowersDto getTotalFollowersByUserId(int userId);
 
-    void unfollowUser(Integer userId, Integer userIdToUnfollow);
+    void unfollowUser(int userId, int userIdToUnfollow);
 }
