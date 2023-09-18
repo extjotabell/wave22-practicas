@@ -44,7 +44,7 @@ public class PostService implements IPostService {
         LocalDate postDate = LocalDate.parse(postDto.getDate(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
         Post newPost;
-        if (postDto.getHasPromo() == true){
+        if (postDto.getHasPromo()!= null && postDto.getHasPromo() == true){
             if (postDto.getDiscount() == null) throw new NotFoundException();
             newPost = new Post(postDto.getId(), postDate, postDto.getCategory(), user, product, postDto.getPrice()*(1-postDto.getDiscount()), postDto.getHasPromo(), postDto.getDiscount());
         }else {
