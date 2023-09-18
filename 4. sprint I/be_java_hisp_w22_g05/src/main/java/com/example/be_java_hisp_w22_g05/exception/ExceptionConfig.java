@@ -21,7 +21,7 @@ public class ExceptionConfig {
 
     @ExceptionHandler(AlreadyExistsException.class)
     public ResponseEntity<ExceptionDto> alreadyExistsException(AlreadyExistsException e){
-        return new ResponseEntity<>(new ExceptionDto(e.getMessage()), HttpStatus.CONFLICT);
+        return new ResponseEntity<>(new ExceptionDto(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
     
     //Ultima Exception
@@ -30,6 +30,4 @@ public class ExceptionConfig {
         System.out.println(e.getMessage());
         return new ResponseEntity<>(new ExceptionDto("Unexpected Error"), HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
-
 }

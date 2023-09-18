@@ -7,6 +7,7 @@ import com.example.be_java_hisp_w22_g05.entity.Product;
 import com.example.be_java_hisp_w22_g05.entity.User;
 import com.example.be_java_hisp_w22_g05.exception.AlreadyExistsException;
 import com.example.be_java_hisp_w22_g05.exception.NotFoundException;
+import com.example.be_java_hisp_w22_g05.mapper.PostMapper;
 import com.example.be_java_hisp_w22_g05.repository.IPostRepository;
 import com.example.be_java_hisp_w22_g05.repository.IUserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,9 +26,10 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class PostService implements IPostService{
+public class PostService implements IPostService {
     private final IPostRepository postRepository;
     private final IUserRepository userRepository;
+    private final PostMapper postMapper;
 
     @Autowired
     Jackson2ObjectMapperBuilder mapperBuilder;
@@ -42,23 +44,24 @@ public class PostService implements IPostService{
 
         Post newPost = new Post(postDto.getId(), postDate, postDto.getCategory(), user, product, postDto.getPrice(), postDto.getHasPromo(), postDto.getDiscount());
 
-        if(postRepository.save(newPost) == null) throw new AlreadyExistsException("El producto con id "+product.getId()+" ya existe");
+        if (postRepository.save(newPost) == null)
+            throw new AlreadyExistsException("El producto con id " + product.getId() + " ya existe");
     }
 
-    private Product mapProduct(ProductDto productDto){
+    private Product mapProduct(ProductDto productDto) {
 
         return new Product(productDto.getProductId(), productDto.getProductName(), productDto.getType(), productDto.getBrand(), productDto.getColor(), productDto.getNotes());
     }
 
-    private User getUser(int id){
+    private User getUser(int id) {
         User user = userRepository.findUsersById(id);
 
-        if(user == null) throw new NotFoundException("El usuario no existe");
+        if (user == null) throw new NotFoundException("El usuario no existe");
         return user;
     }
 
 
-    public List<PostDto> getListPostsFromSellersFollowed(int userId, String order){
+    public List<PostDto> getListPostsFromSellersFollowed(int userId, String order) {
 
         ObjectMapper objectMapper = mapperBuilder.build();
 
@@ -72,28 +75,27 @@ public class PostService implements IPostService{
 
         // Obtain list of posts from sellers
         List<Post> postList = postRepository.findPostAll().stream()
-                .filter(post ->  sellersId.contains(post.getUser().getId()))
+                .filter(post -> sellersId.contains(post.getUser().getId()))
                 .filter(x -> ChronoUnit.DAYS.between(x.getDate(), LocalDate.now()) <= 14)
                 .toList();
 
-        if (postList.isEmpty()){
+        if (postList.isEmpty()) {
             throw new NotFoundException("No se encontró ningún post");
         }
 
         //Aca ordenamos
-        if(order != null && order.equals("date_asc")){
+        if (order != null && order.equals("date_asc")) {
             return postList.stream()
                     .filter(Objects::nonNull).sorted((x, y) -> x.getDate().compareTo(y.getDate()))
-                    .map(p -> objectMapper.convertValue(p, PostDto.class))
+                    .map(postMapper::toPostDTO)
                     .collect(Collectors.toList());
-        }else{
+        } else {
             return postList.stream()
                     .filter(Objects::nonNull).sorted((x, y) -> y.getDate().compareTo(x.getDate()))
-                    .map(p -> objectMapper.convertValue(p, PostDto.class))
+                    .map(postMapper::toPostDTO)
                     .collect(Collectors.toList());
         }
 
     }
-
 
 }
