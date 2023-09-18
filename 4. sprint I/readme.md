@@ -1,18 +1,6 @@
 
 # Sprint 1 Team 1
 
-Integrantes 🤼‍♀️:
--
-- Camila Soledad Lemos
-- Emmanuel Felipe Paiva
-- Gonzalo España Herrrera
-- Nicolas Salvo
-- Belen Santochi
-- Valentina Gottelli
-
-
-
-
 ## Objetivo 🎯
 
 Mercado Libre planea un crecimiento continuo y tiene como objetivo introducir innovadoras herramientas para compradores y vendedores el próximo año, con el lanzamiento de una versión Beta llamada "SocialMeli". Esta plataforma permitirá a los compradores seguir a sus vendedores favoritos y mantenerse al tanto de sus actualizaciones. Para lograrlo, se han identificado requerimientos que se abordarán en equipos de trabajo debido a su complejidad y la proximidad de la fecha de lanzamiento.
@@ -77,6 +65,16 @@ Endpoints:
 - 8.a: /users/{UserID}/followers/list?order=name_asc
 
 - 8.b: /users/{UserID}/followed/list?order=name_asc 
+
+
+Integrantes 🤼‍♀️:
+-
+- Camila Soledad Lemos
+- Emmanuel Felipe Paiva
+- Gonzalo España Herrrera
+- Nicolas Salvo
+- Belen Santochi
+- Valentina Gottelli
 
 
 ## Cierre y agradecimientos ❇
