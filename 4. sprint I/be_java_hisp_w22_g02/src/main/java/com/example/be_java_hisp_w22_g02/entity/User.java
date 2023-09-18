@@ -10,7 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class User {
-
     @JsonAlias({"user_id"})
     private int userId;
 

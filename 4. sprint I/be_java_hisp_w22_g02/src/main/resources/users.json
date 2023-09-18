@@ -201,10 +201,12 @@
         "user_name": "sofia_mtz"
       }
     ],
-    "followed": [{
-      "user_id": 26,
-      "user_name": "sofia_mtz"
-    }],
+    "followed": [
+      {
+        "user_id": 26,
+        "user_name": "sofia_mtz"
+      }
+    ],
     "posts": []
   },
   {

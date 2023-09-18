@@ -1,33 +1,58 @@
 package com.example.be_java_hisp_w22_g02.service.Implementations;
 
+import com.example.be_java_hisp_w22_g02.dto.response.UserDTO;
+import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
+import com.example.be_java_hisp_w22_g02.service.Interfaces.IUserService;
+
+
+
 import com.example.be_java_hisp_w22_g02.dto.response.TotalFollowersDto;
-import com.example.be_java_hisp_w22_g02.dto.response.UserDto;
 import com.example.be_java_hisp_w22_g02.dto.response.UserFollowedDTO;
 import com.example.be_java_hisp_w22_g02.dto.response.UserFollowerDTO;
+
 import com.example.be_java_hisp_w22_g02.entity.User;
 import com.example.be_java_hisp_w22_g02.entity.UserFollow;
 import com.example.be_java_hisp_w22_g02.exception.IsEmptyException;
 import com.example.be_java_hisp_w22_g02.exception.NotFoundException;
 import com.example.be_java_hisp_w22_g02.mapper.UserFollowMapper;
-import com.example.be_java_hisp_w22_g02.mapper.UserFollowedMapper;
-import com.example.be_java_hisp_w22_g02.mapper.UserFollowerMapper;
-import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
-import com.example.be_java_hisp_w22_g02.service.Interfaces.IUserService;
+
+
+
+
 import lombok.AllArgsConstructor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
+
+import com.example.be_java_hisp_w22_g02.mapper.UserFollowerMapper;
+
+import com.example.be_java_hisp_w22_g02.mapper.UserMapper;
+
+import com.example.be_java_hisp_w22_g02.mapper.UserFollowedMapper;
+
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 
-@Service
 @AllArgsConstructor
+@Service
 public class UserServiceImpl implements IUserService {
 
     private final IUserRepository userRepository;
-    private final UserFollowedMapper userFollowedMapper;
-    private final UserFollowerMapper userFollowerMapper;
+
+
     private final UserFollowMapper userFollowMapper;
+
+
+    private final UserFollowerMapper userFollowerMapper;
+
+
+    private final UserMapper userMapper;
+
+
+    private final UserFollowedMapper userFollowedMapper;
+
     private final ObjectMapper mapper;
 
 
@@ -37,18 +62,19 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public UserDto getUser(int userId) {
-        if (existsUser(userId))
-            return mapper.convertValue(userRepository.findById(userId), UserDto.class);
+
+    public UserDTO getUser(int userId) {
+        if(existsUser(userId))
+            return userMapper.toDto(userRepository.findById(userId));
         else
             throw new NotFoundException("No existe el usuario");
     }
 
     @Override
-    public List<UserDto> getAllUsers() {
+    public List<UserDTO> getAllUsers() {
         return userRepository.getAllUsers()
                 .stream()
-                .map(u -> mapper.convertValue(u, UserDto.class))
+                .map(u -> mapper.convertValue(u, UserDTO.class))
                 .toList();
     }
 
