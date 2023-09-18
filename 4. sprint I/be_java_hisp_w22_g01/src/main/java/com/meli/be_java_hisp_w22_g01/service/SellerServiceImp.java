@@ -56,20 +56,4 @@ public class SellerServiceImp implements ISellerService{
 
         return new FollowMessageDto("El user: " + idFollower + " comenzo a seguir a: " + idSeller );
     }
-
-    @Override
-    public List<UserMiniDTO> orderFollowersDto(int userId, String order) {
-        List<User> followers;
-        Seller seller = sellerRepository.findById(userId);
-        followers = sellerRepository.getAllFollowers(seller);
-        if (order.equals("name_asc")) {
-            followers = followers.stream()
-                    .sorted(Comparator.comparing(User::getUser_name)).toList();
-        }else if (order.equals("name_desc")){
-            followers = followers.stream()
-                    .sorted(Comparator.comparing(User::getUser_name, Comparator.reverseOrder()))
-                    .toList();
-        }
-        return followers.stream().map(f -> mapper.convertValue(f, UserMiniDTO.class)).toList();
-    }
 }
