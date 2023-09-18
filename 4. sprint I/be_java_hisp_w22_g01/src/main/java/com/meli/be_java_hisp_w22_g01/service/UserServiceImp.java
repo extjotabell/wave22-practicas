@@ -3,7 +3,6 @@ package com.meli.be_java_hisp_w22_g01.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w22_g01.dto.PostDto;
 import com.meli.be_java_hisp_w22_g01.dto.ProductDto;
-import com.meli.be_java_hisp_w22_g01.dto.UserDto;
 import com.meli.be_java_hisp_w22_g01.dto.response.*;
 import com.meli.be_java_hisp_w22_g01.entity.Post;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
@@ -11,22 +10,19 @@ import com.meli.be_java_hisp_w22_g01.entity.User;
 import com.meli.be_java_hisp_w22_g01.exceptions.NotFoundException;
 import com.meli.be_java_hisp_w22_g01.repository.ISellerRepository;
 import com.meli.be_java_hisp_w22_g01.repository.IUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImp implements IUserService{
 
-    @Autowired
-    IUserRepository userRepository;
-    @Autowired
-    ISellerRepository sellerRepository;
-    @Autowired
-    ObjectMapper mapper;
+    private final IUserRepository userRepository;
+    private final ISellerRepository sellerRepository;
+    private final ObjectMapper mapper;
 
     @Override
     public FollowedDTO getUserFollowedList(int user_id) {

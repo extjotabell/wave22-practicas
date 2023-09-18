@@ -9,7 +9,7 @@ import com.meli.be_java_hisp_w22_g01.exceptions.NotFoundException;
 import com.meli.be_java_hisp_w22_g01.repository.IPostRepository;
 import com.meli.be_java_hisp_w22_g01.repository.IProductRepository;
 import com.meli.be_java_hisp_w22_g01.repository.ISellerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,19 +18,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class PostServiceImp implements IPostService{
 
-    @Autowired
-    IPostRepository postRepository;
-
-    @Autowired
-    IProductRepository productRepository;
-
-    @Autowired
-    ISellerRepository sellerRepository;
-
-    @Autowired
-    ObjectMapper mapper;
+    private final IPostRepository postRepository;
+    private final IProductRepository productRepository;
+    private final ISellerRepository sellerRepository;
+    private final ObjectMapper mapper;
     @Override
     public void createPost(PostDto postDto) {
         Post post = mapper.convertValue(postDto, Post.class);
