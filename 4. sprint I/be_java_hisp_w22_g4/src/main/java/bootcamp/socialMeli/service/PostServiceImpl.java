@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Validated
 public class PostServiceImpl implements IPostService {
     private final IPostRepository postRepository;
     private final IProductService productService;
@@ -76,23 +77,26 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public String addPost(DiscountedPostDto postDto) {
+    public String addPost(PostDto postDto) {
+        int idNewPost;
+        try{
         if(postDto.getUser_id() == 0 || postDto.getProduct().getProduct_id() == 0 ||  postDto.getDate() == null || postDto.getPrice() == 0){
             throw new BadRequestException("Datos incompletos");
         }
-       @Valid Post post = new Post(postDto.getPost_id(),
+        Post post = new Post(postDto.getPost_id(),
                 postDto.getUser_id(),
                 postDto.getDate(),
                 postDto.getProduct().getProduct_id(),
                 postDto.getCategory(),
-                postDto.getPrice(),
-                postDto.isHas_promo(),
-                postDto.getDiscount());
-        int idNewPost = postRepository.addPost(post);
+                postDto.getPrice(),false,0);
+        idNewPost = postRepository.addPost(post);
         productService.addProducto(postDto.getProduct());
-        return "Se agrego exitosamente un nuevo post con el numero : " + idNewPost;
+
     }
-
+    catch(NullPointerException e){
+        throw new BadRequestException("Datos incompletos");
+    }
+return "Se agrego exitosamente un nuevo post con el numero : " + idNewPost;
         //Returning the sorted list ordered by the latest post
-
+    }
 }
