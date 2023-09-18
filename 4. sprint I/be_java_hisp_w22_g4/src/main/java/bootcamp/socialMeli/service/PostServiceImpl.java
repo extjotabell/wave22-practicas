@@ -32,14 +32,13 @@ public class PostServiceImpl implements IPostService {
     @Override
     public List<PostDto> getAllPosts() {
         List<Post> postList = postRepository.getAllPost();
-        if (postList.isEmpty()) throw new NotFoundException("No se encontraron posts");
-        List<PostDto> postDtoList = new ArrayList<>();
+        if (postList.isEmpty()) throw new NotFoundException("No se encontraron posts en el sistema.");
 
-        postList.forEach(post -> {
-                    ProductDto product = productService.getProductById(post.getProduct_id());
-                    postDtoList.add(new PostDto(post.getUser_id(), post.getPost_id(), post.getDate(), product, post.getCategory(), post.getPrice()));
-                });
-        return postDtoList;
+        return postList.stream().map(post ->
+        {
+            ProductDto product = productService.getProductById(post.getProduct_id());
+            return new PostDto(post.getUser_id(), post.getPost_id(), post.getDate(), product, post.getCategory(), post.getPrice());
+        }).collect(Collectors.toList());
     }
 
 

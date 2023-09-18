@@ -94,6 +94,20 @@ public class UserServiceImpl implements IUserService{
 
         return new FollowersListDto(targetedUser.getUser_id(), targetedUser.getUser_name(), followers);
     }
+    // US 07
+    @Override
+    public UserDto removeFollower(int userId, int userIdToUnfollow) {
+        if(userId != userIdToUnfollow){
+            User user = findUserById(userId);
+            User userToFollow = findUserById(userIdToUnfollow);
+            if(!user.getFollowing().contains(userToFollow.getUser_id())){
+                throw  new BadRequestException("No sigue al usuario seleccionado");
+            }
+            return objectMapper.convertValue(userRepository.removeFollower(userId, userIdToUnfollow).get(), UserDto.class);
+        }else{
+            throw new BadRequestException("Los ids enviados son iguales");
+        }
+    }
 
     // General use
     @Override
@@ -101,9 +115,5 @@ public class UserServiceImpl implements IUserService{
         return userRepository.findUserById(userId).orElseThrow(
                 () -> new NotFoundException("User with ID #" + userId + " not found")
         );
-
-
     }
-
-
 }
