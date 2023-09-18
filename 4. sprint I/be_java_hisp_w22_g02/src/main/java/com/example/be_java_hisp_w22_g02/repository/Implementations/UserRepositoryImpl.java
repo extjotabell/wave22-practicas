@@ -112,9 +112,5 @@ public class UserRepositoryImpl implements IUserRepository {
         return followedPostDTOS;
 
     }
-    public User getFollowers ( int id){
-        return findById(id);
-
-    }
 
 }

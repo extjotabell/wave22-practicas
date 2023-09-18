@@ -17,7 +17,6 @@ import org.springframework.stereotype.Repository;
 
 
 public interface IUserRepository {
-    User getFollowers(int id);
     User findById(Integer id);
 
     void followUser(int userId, int userIdToFollow);

@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface IUserService {
 
-    UserFollowedDTO getFollowedUsersById(Integer id);
+    UserFollowedDTO getFollowedUsersById(Integer id, String order);
 
     void followUser(int userId, int userIdToFollow);
 
@@ -23,7 +23,7 @@ public interface IUserService {
 
     List<UserDTO> getAllUsers();
 
-    UserFollowerDTO getFollowers(int id);
+    UserFollowerDTO getFollowers(int id, String order);
 
     TotalFollowersDto getTotalFollowersByUserId(int userId);
 

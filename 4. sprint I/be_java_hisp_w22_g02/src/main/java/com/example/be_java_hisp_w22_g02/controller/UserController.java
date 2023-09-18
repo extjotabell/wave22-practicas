@@ -23,13 +23,13 @@ public class UserController {
     }
 
     @GetMapping("/{userId}/followers/list")
-    public ResponseEntity<?> getFollowers(@PathVariable int userId) {
-        return new ResponseEntity<>(userService.getFollowers(userId), HttpStatus.OK);
+    public ResponseEntity<?> getFollowers(@PathVariable int userId, @RequestParam(required = false) String order) {
+        return new ResponseEntity<>(userService.getFollowers(userId, order), HttpStatus.OK);
     }
 
     @GetMapping("/{userId}/followed/list")
-    public ResponseEntity<UserFollowedDTO> getFollowedUser(@PathVariable Integer userId) {
-        UserFollowedDTO userFollowedDTO = userService.getFollowedUsersById(userId);
+    public ResponseEntity<UserFollowedDTO> getFollowedUser(@PathVariable Integer userId, @RequestParam(required = false) String order) {
+        UserFollowedDTO userFollowedDTO = userService.getFollowedUsersById(userId, order);
         return new ResponseEntity<>(userFollowedDTO, HttpStatusCode.valueOf(200));
     }
     @GetMapping("/{userId}/followers/count")

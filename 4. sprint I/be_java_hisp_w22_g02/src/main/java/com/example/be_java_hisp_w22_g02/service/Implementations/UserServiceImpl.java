@@ -1,6 +1,7 @@
 package com.example.be_java_hisp_w22_g02.service.Implementations;
 
 import com.example.be_java_hisp_w22_g02.dto.response.UserDTO;
+import com.example.be_java_hisp_w22_g02.exception.BadRequestException;
 import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
 import com.example.be_java_hisp_w22_g02.service.Interfaces.IUserService;
 
@@ -32,7 +33,10 @@ import com.example.be_java_hisp_w22_g02.mapper.UserFollowedMapper;
 
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 @AllArgsConstructor
@@ -79,10 +83,14 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public UserFollowerDTO getFollowers(int id) {
+    public UserFollowerDTO getFollowers(int id, String order) {
         User user = userRepository.findById(id);
         if (user == null)
             throw new NotFoundException("User with id: " + id + " not found.");
+        if(order != null){
+            User sortedFollowers = sortingFollowers(user, order);
+            return userFollowerMapper.toDto(sortedFollowers);
+        }
         return userFollowerMapper.toDto(user);
     }
 
@@ -111,10 +119,13 @@ public class UserServiceImpl implements IUserService {
         deleteUserFromList(userFollowers, finalTargetUserToUnfollow);
     }
 
-    public UserFollowedDTO getFollowedUsersById(Integer id) {
+    public UserFollowedDTO getFollowedUsersById(Integer id, String order) {
         User userFounded = userRepository.findById(id);
         if (userFounded == null) {
             throw new NotFoundException("User with id: " + id + " not found.");
+        } else if (order != null) {
+            User sortedFollowers = sortingFollowed(userFounded, order);
+            return userFollowedMapper.toDto(sortedFollowers);
         } else {
             return userFollowedMapper.toDto(userFounded);
         }
@@ -131,6 +142,32 @@ public class UserServiceImpl implements IUserService {
         } else {
             users.remove(user);
         }
+    }
+
+    private User sortingFollowers(User user, String order){
+        sortingByNameValidation(order);
+        if(Objects.equals(order, "name_asc")){
+            user.setFollowers(user.getFollowers().stream().sorted(Comparator.comparing(UserFollow::getUserName)).collect(Collectors.toList()));
+        }
+        else{
+            user.setFollowers(user.getFollowers().stream().sorted(Comparator.comparing(UserFollow::getUserName).reversed()).collect(Collectors.toList()));
+        }
+        return user;
+    }
+
+    private User sortingFollowed(User user, String order){
+        sortingByNameValidation(order);
+        if(Objects.equals(order, "name_asc")){
+            user.setFollowed(user.getFollowed().stream().sorted(Comparator.comparing(UserFollow::getUserName)).collect(Collectors.toList()));
+        }
+        else{
+            user.setFollowed(user.getFollowed().stream().sorted(Comparator.comparing(UserFollow::getUserName).reversed()).collect(Collectors.toList()));
+        }
+        return user;
+    }
+    private void sortingByNameValidation(String order){
+        if(order != null && !order.equals("name_asc") && !order.equals("name_desc"))
+            throw new BadRequestException("The sorting order "+order+" doesn't exist.");
     }
 
 }
