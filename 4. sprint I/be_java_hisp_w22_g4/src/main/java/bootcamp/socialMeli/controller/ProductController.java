@@ -1,9 +1,6 @@
 package bootcamp.socialMeli.controller;
 
-import bootcamp.socialMeli.dto.DiscountedPostDto;
-import bootcamp.socialMeli.dto.FollowedPostListDto;
-import bootcamp.socialMeli.dto.PostDto;
-import bootcamp.socialMeli.dto.ProductDto;
+import bootcamp.socialMeli.dto.*;
 import bootcamp.socialMeli.service.IPostService;
 import bootcamp.socialMeli.service.IProductService;
 import org.springframework.http.HttpStatus;
@@ -42,7 +39,7 @@ public class ProductController {
     }
     // US 06
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<FollowedPostListDto> getByFollowedUsers(@PathVariable int userId, @RequestParam(required = false) String order)
+    public ResponseEntity<FollowedPostListDto> getByFollowedUsers(@PathVariable int userId, @RequestParam(required = false) OrderListEnum order)
     {
         return new ResponseEntity<>(postService.getPostsByFollowedUsers(userId, order), HttpStatus.OK);
     }
