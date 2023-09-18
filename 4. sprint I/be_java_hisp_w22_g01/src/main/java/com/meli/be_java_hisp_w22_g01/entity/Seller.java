@@ -14,4 +14,8 @@ import java.util.List;
 public class Seller extends User{
     List<Post> posts;
     List<User> followers;
+
+    public void addPost(Post post) {
+        posts.add(post);
+    }
 }

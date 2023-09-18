@@ -11,6 +11,6 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PromoDTO extends ProductDto{
+public class PromoDTO extends PostDto {
     private double discount;
 }

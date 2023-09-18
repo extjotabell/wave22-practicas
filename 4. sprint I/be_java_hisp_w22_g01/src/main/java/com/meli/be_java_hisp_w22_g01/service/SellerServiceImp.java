@@ -1,8 +1,10 @@
 package com.meli.be_java_hisp_w22_g01.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w22_g01.dto.response.CountFollowersDTO;
+import com.meli.be_java_hisp_w22_g01.dto.response.CountPromotionsDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.FollowMessageDto;
+import com.meli.be_java_hisp_w22_g01.entity.Post;
+import com.meli.be_java_hisp_w22_g01.entity.PromoPost;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
 import com.meli.be_java_hisp_w22_g01.exceptions.BadRequestException;
@@ -12,13 +14,15 @@ import com.meli.be_java_hisp_w22_g01.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class SellerServiceImp implements ISellerService{
 
     private final ISellerRepository sellerRepository;
     private final IUserRepository userRepository;
-    private final ObjectMapper mapper;
     @Override
     public CountFollowersDTO countFollowers(int userId) {
         Seller seller = sellerRepository.findById(userId);
@@ -48,5 +52,17 @@ public class SellerServiceImp implements ISellerService{
         }
 
         return new FollowMessageDto("El user: " + idFollower + " comenzo a seguir a: " + idSeller );
+    }
+
+    @Override
+    public CountPromotionsDTO countProductsInPromotion(int userId) {
+        Seller seller = sellerRepository.findById(userId);
+
+        if(seller == null) {
+            throw new NotFoundException("No se encontró el vendedor con id: " + userId);
+        }
+
+        List<Post> postInPromo = seller.getPosts().stream().filter(post -> post instanceof PromoPost).toList();
+        return new CountPromotionsDTO(userId,seller.getUser_name(),postInPromo.size());
     }
 }

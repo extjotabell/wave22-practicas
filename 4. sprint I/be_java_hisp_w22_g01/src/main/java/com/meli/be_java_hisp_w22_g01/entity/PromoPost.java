@@ -1,12 +1,12 @@
 package com.meli.be_java_hisp_w22_g01.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-public class Promotion extends Product{
+public class PromoPost extends Post{
     private double discount;
 }

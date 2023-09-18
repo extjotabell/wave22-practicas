@@ -1,7 +1,9 @@
 package com.meli.be_java_hisp_w22_g01.controller;
 
 import com.meli.be_java_hisp_w22_g01.dto.PostDto;
+import com.meli.be_java_hisp_w22_g01.dto.PromoDTO;
 import com.meli.be_java_hisp_w22_g01.service.IPostService;
+import com.meli.be_java_hisp_w22_g01.service.ISellerService;
 import com.meli.be_java_hisp_w22_g01.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,7 @@ public class ProductController {
 
     private final IPostService postService;
     private final IUserService userService;
+    private final ISellerService sellerService;
 
     @PostMapping("/post")
     public ResponseEntity<?> createPost(@RequestBody PostDto postDto) {
@@ -34,8 +37,13 @@ public class ProductController {
     }
 
     @PostMapping("/promo-post")
-    public ResponseEntity<?> createPromo(@RequestBody PostDto postDto) {
-        postService.createPost(postDto);
+    public ResponseEntity<?> createPromo(@RequestBody PromoDTO promoDTO) {
+        postService.createPost(promoDTO);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<?> countProductsInPromotion(@RequestParam int userId) {
+        return new ResponseEntity<>(sellerService.countProductsInPromotion(userId), HttpStatus.OK);
     }
 }
