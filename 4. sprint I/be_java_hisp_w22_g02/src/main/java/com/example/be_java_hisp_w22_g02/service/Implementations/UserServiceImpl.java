@@ -75,14 +75,14 @@ public class UserServiceImpl implements IUserService {
     public void unfollowUser(Integer userId, Integer userIdToUnfollow) {
         User mainUser = userRepository.findById(userId);
         User targetUserToUnfollow = userRepository.findById(userIdToUnfollow);
-        UserFollow finalUser = userFollowMapper.toDto(targetUserToUnfollow);
+        UserFollow finalTargetUserToUnfollow = userFollowMapper.toDto(targetUserToUnfollow);
         if (mainUser == null) {
             throw new NotFoundException("User with id: " + userId + " not found.");
         } else if (targetUserToUnfollow == null) {
             throw new NotFoundException("User with id: " + userIdToUnfollow + " not found.");
         }
         List<UserFollow> userFollowers = mainUser.getFollowers();
-        deleteUserFromList(userFollowers, finalUser);
+        deleteUserFromList(userFollowers, finalTargetUserToUnfollow);
     }
 
     public UserFollowedDTO getFollowedUsersById(Integer id) {
