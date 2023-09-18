@@ -22,8 +22,8 @@ public class PostMapper {
 
     private ProductDto toProductDTO(Product product){
         return ProductDto.builder()
-                .productId(product.getId())
-                .productName(product.getName())
+                .id(product.getId())
+                .name(product.getName())
                 .type(product.getType())
                 .brand(product.getBrand())
                 .color(product.getColor())

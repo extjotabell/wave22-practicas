@@ -50,7 +50,7 @@ public class PostService implements IPostService {
 
     private Product mapProduct(ProductDto productDto) {
 
-        return new Product(productDto.getProductId(), productDto.getProductName(), productDto.getType(), productDto.getBrand(), productDto.getColor(), productDto.getNotes());
+        return new Product(productDto.getId(), productDto.getName(), productDto.getType(), productDto.getBrand(), productDto.getColor(), productDto.getNotes());
     }
 
     private User getUser(int id) {
