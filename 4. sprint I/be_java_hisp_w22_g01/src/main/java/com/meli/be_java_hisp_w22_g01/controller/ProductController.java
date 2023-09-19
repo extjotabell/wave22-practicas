@@ -32,4 +32,14 @@ public class ProductController {
             return new ResponseEntity<>(userService.orderByDateFollowedSellers(userId, order), HttpStatus.OK);
         }
     }
+
+    @GetMapping("/post")
+    public ResponseEntity<?> getPost(){
+        return new ResponseEntity<>(postService.getAllpost(),HttpStatus.OK);
+    }
+
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<?> coutPromoPost(@RequestParam int user_id){
+        return new ResponseEntity<>(postService.countPromosByUser(user_id), HttpStatus.OK);
+    }
 }

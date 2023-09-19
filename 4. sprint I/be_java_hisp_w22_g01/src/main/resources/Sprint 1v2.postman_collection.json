@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "ff079129-2374-4a83-a02d-2354bb9f731b",
+		"_postman_id": "b702ef8a-e708-417d-9e5d-8b6ea003d9f3",
 		"name": "Sprint 1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29768204"
+		"_exporter_id": "29694903"
 	},
 	"item": [
 		{
@@ -21,6 +21,32 @@
 							"",
 							"// pm.environment.set(\"userId\", \"6\");",
 							"// pm.environment.set(\"userIdToFollow\", \"2\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Response status code is 400', function () {",
+							"    pm.expect(pm.response.code).to.equal(400);",
+							"})",
+							"",
+							"pm.test('Response has the required field - message', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.message).to.exist.and.to.be.a('string');",
+							"})",
+							"",
+							"pm.test('Message is a non-empty string', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData.message).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, 'Message should not be empty');",
+							"})",
+							"",
+							"pm.test('Response time is in an acceptable range', function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"})"
 						],
 						"type": "text/javascript"
 					}
@@ -57,6 +83,32 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Response status code is 400', function () {",
+							"    pm.expect(pm.response.code).to.equal(400);",
+							"})",
+							"",
+							"pm.test('Response has the required fields', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.message).to.exist;",
+							"})",
+							"",
+							"pm.test('Message is a non-empty string', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, 'Value should not be empty');",
+							"})",
+							"",
+							"pm.test('Response time is in acceptable range', function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -90,6 +142,42 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 404\", function () {",
+							"  pm.expect(pm.response.code).to.equal(404);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required field - message\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.message).to.exist;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Message is a non-empty string\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.message).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is in an acceptable range\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify user ID and follower ID in request URL\", function () {",
+							"  pm.expect(pm.request.url).to.match(/\\/users\\/\\d+\\/follow\\/\\d+$/);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -120,6 +208,33 @@
 						"exec": [
 							"pm.environment.set(\"userId\", \"4\");",
 							"pm.environment.set(\"userIdToFollow\", \"2\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Response status code is 400', function () {",
+							"    pm.expect(pm.response.code).to.equal(400);",
+							"})",
+							"",
+							"pm.test('Response has the required field - message', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.message).to.exist.and.to.be.a('string');",
+							"})",
+							"",
+							"pm.test('Message is a non-empty string', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, 'Value should not be empty');",
+							"})",
+							"",
+							"pm.test('Response time is in an acceptable range', function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"})"
 						],
 						"type": "text/javascript"
 					}
@@ -157,6 +272,44 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"user_id is a non-negative integer\", function () {",
+							"  const responseData = pm.response.json();",
+							"",
+							"  pm.expect(responseData.user_id).to.be.a('number').and.to.be.at.least(0);",
+							"});",
+							"",
+							"",
+							"pm.test(\"User name should be a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.user_name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Followers count is a non-negative integer\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.followers).to.be.a('number');",
+							"    pm.expect(responseData.followers).to.be.at.least(0, \"Followers count should be non-negative\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -186,6 +339,45 @@
 					"script": {
 						"exec": [
 							"pm.environment.set(\"userId\", \"11\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 404\", function () {",
+							"  pm.expect(pm.response.code).to.equal(404);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required field - message\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData.message).to.exist.and.to.be.a('string');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Message is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.message).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the count field is not present in the response\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.count).to.not.exist;",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -223,6 +415,52 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate user_id and user_name fields in the response\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.user_id).to.exist.and.to.be.a('number');",
+							"    pm.expect(responseData.user_name).to.exist.and.to.be.a('string');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the 'followers' array is present and contains at least one element\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.followers).to.exist.and.to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate user_id and user_name fields in each follower object\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.followers).to.be.an('array');",
+							"    ",
+							"    responseData.followers.forEach(function(follower) {",
+							"        pm.expect(follower).to.be.an('object');",
+							"        pm.expect(follower.user_id).to.exist.and.to.be.a('number');",
+							"        pm.expect(follower.user_name).to.exist.and.to.be.a('string');",
+							"    });",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -252,6 +490,44 @@
 					"script": {
 						"exec": [
 							"pm.environment.set(\"userId\", \"6\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 404\", function () {",
+							"    pm.expect(pm.response.code).to.equal(404);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required field - message\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.message).to.exist;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Message is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.message).to.be.a(\"string\").and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the 'followers' array is not present in the response\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.followers).to.not.exist;",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -294,7 +570,32 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							""
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate user_id and user_name fields in the response\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.user_id).to.exist.and.to.be.a('number');",
+							"    pm.expect(responseData.user_name).to.exist.and.to.be.a('string');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the 'followed' array is present and contains at least one element\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.followed).to.exist.and.to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -328,6 +629,46 @@
 						"exec": [
 							"// pm.environment.set(\"userId\", \"1\");",
 							"pm.environment.set(\"userId\", \"11\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required field - message\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData.message).to.exist;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Message is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the response does not contain any user data\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData).to.not.have.property('user');",
+							"",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -382,6 +723,34 @@
 		},
 		{
 			"name": "US 0005 - Error: Usuario inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Response status code is 404', function () {",
+							"    pm.expect(pm.response.code).to.equal(404);",
+							"})",
+							"",
+							"pm.test('Response has the required field - message', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData.message).to.exist.and.to.be.a('string');",
+							"})",
+							"",
+							"pm.test('Message is a non-empty string', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, 'Value should not be empty');",
+							"})",
+							"",
+							"pm.test('Response time is less than 500ms', function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -421,6 +790,32 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate user_id field in the response\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.user_id).to.exist.and.to.be.a('number', \"user_id should be a number\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the posts array in the response\", function () {",
+							"  const responseData = pm.response.json();",
+							"",
+							"  pm.expect(responseData.posts).to.exist;",
+							"  pm.expect(responseData.posts).to.be.an('array');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -455,6 +850,44 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 404\", function () {",
+							"    pm.expect(pm.response.code).to.equal(404);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required field - message\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.message).to.exist.and.to.be.a('string');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Message is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is in an acceptable range\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify response format\", function () {",
+							"  pm.expect(pm.response.code).to.equal(404);",
+							"  pm.expect(pm.response.json()).to.be.an('object');",
+							"  pm.expect(pm.response.json().message).to.exist;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -481,6 +914,16 @@
 			"name": "US 0007 - Dejar de seguir un usuario",
 			"event": [
 				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"userId\", \"4\");",
+							"pm.environment.set(\"userIdToUnfollow\", \"2\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
 					"listen": "test",
 					"script": {
 						"exec": [
@@ -490,17 +933,26 @@
 							"// En la URL de la solicitud, utiliza las variables de entorno",
 							"var url = `localhost:8080/users/${pm.environment.get(\"userId\")}/unfollow/${pm.environment.get(\"userIdToUnfollow\")}`;",
 							"",
-							"console.log(\"URL:\", url);"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"pm.environment.set(\"userId\", \"4\");",
-							"pm.environment.set(\"userIdToUnfollow\", \"2\");"
+							"console.log(\"URL:\", url);",
+							"pm.test('Response status code is 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test('Response has the required field \\'message\\'', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.message).to.exist;",
+							"})",
+							"",
+							"pm.test('The message is a non-empty string', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, 'Value should not be empty');",
+							"})",
+							"",
+							"pm.test('Response time is less than 500ms', function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"})"
 						],
 						"type": "text/javascript"
 					}
@@ -529,6 +981,16 @@
 			"name": "US 0007 - Error: Dejar de seguir a un usuario que no sigue",
 			"event": [
 				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"userId\", \"4\");",
+							"pm.environment.set(\"userIdToUnfollow\", \"2\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
 					"listen": "test",
 					"script": {
 						"exec": [
@@ -538,17 +1000,38 @@
 							"// En la URL de la solicitud, utiliza las variables de entorno",
 							"var url = `localhost:8080/users/${pm.environment.get(\"userId\")}/unfollow/${pm.environment.get(\"userIdToUnfollow\")}`;",
 							"",
-							"console.log(\"URL:\", url);"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"pm.environment.set(\"userId\", \"4\");",
-							"pm.environment.set(\"userIdToUnfollow\", \"2\");"
+							"console.log(\"URL:\", url);",
+							"pm.test(\"Response status code is 404\", function () {",
+							"    pm.expect(pm.response.code).to.equal(404);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has required field 'message'\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.message).to.exist;",
+							"});",
+							"",
+							"",
+							"pm.test(\"The 'message' field is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify request URL pattern\", function () {",
+							"  const expectedPattern = /localhost:8080\\/users\\/\\d+\\/unfollow\\/\\d+/;",
+							"  const requestUrl = pm.request.url;",
+							"",
+							"  pm.expect(requestUrl).to.match(expectedPattern);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -583,6 +1066,39 @@
 							"pm.environment.set(\"userId\", \"1\");",
 							"// pm.environment.set(\"userId\", \"2\");",
 							"// pm.environment.set(\"userId\", \"3\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"user_id is a non-negative integer\", function () {",
+							"  const responseData = pm.response.json();",
+							"",
+							"  pm.expect(responseData.user_id).to.exist.and.to.be.a('number');",
+							"  pm.expect(responseData.user_id).to.satisfy((id) => id >= 0, \"user_id should be a non-negative integer\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"user_name is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.user_name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Followers array is present and contains at least one element\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.followers).to.exist.and.to.be.an('array').that.is.not.empty;",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -636,6 +1152,49 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"user_id is a non-negative integer\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.user_id).to.exist.and.to.be.a('number');",
+							"    pm.expect(responseData.user_id).to.be.at.least(0);",
+							"});",
+							"",
+							"",
+							"pm.test(\"user_name is a non-empty string\", function () {",
+							"  const responseData = pm.response.json();",
+							"",
+							"  pm.expect(responseData.user_name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Followed is an array with at least one element\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.followed).to.exist.and.to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Each element in the followed array has a non-negative user_id\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.followed).to.be.an('array');",
+							"    responseData.followed.forEach(function (followedUser) {",
+							"        pm.expect(followedUser.user_id).to.be.a('number').and.to.be.at.least(0);",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -686,6 +1245,34 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate user_id field\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData.user_id).to.exist;",
+							"    pm.expect(responseData.user_id).to.be.a('number');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify the presence of 'posts' array and its length\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.posts).to.exist;",
+							"    pm.expect(responseData.posts).to.be.an('array');",
+							"    pm.expect(responseData.posts.length).to.equal(1);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -718,6 +1305,79 @@
 							"value": "NoExiste",
 							"disabled": true
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 0010 - Dar de alta una nueva publicación Con Promo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 1,\n    \"date\": \"19-09-2023\",\n    \"product\": {\n        \"product_id\": 3,\n        \"product_name\": \"Mesa Ratonera\",\n        \"type\": \"Mueble\",\n        \"brand\": \"Roi Muebles\",\n        \"color\": \"Brown\",\n        \"notes\": \"News Models\"\n    },\n    \"category\": 40,\n    \"price\": 1900.00,\n    \"promo\":{\n        \"discount\": 45,\n        \"date\" : \"23-09-2023\"\n    }\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/products/post",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 0011- cantidad de productos en promoción de un determinado vendedor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/products/promo-post/count?user_id=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post",
+						"count"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 00XX - Obtener todos los post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/products/post",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"post"
 					]
 				}
 			},

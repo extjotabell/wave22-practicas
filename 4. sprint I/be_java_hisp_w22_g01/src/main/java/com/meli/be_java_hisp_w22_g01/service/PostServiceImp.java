@@ -2,6 +2,7 @@ package com.meli.be_java_hisp_w22_g01.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w22_g01.dto.PostDto;
+import com.meli.be_java_hisp_w22_g01.dto.response.SellerPromoDTO;
 import com.meli.be_java_hisp_w22_g01.entity.Post;
 import com.meli.be_java_hisp_w22_g01.entity.Product;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
@@ -36,8 +37,36 @@ public class PostServiceImp implements IPostService{
         if(product == null) {
             productRepository.save(post.getProduct());
         }
+
         postRepository.addPost(post);
     }
 
+    @Override
+    public List<Post> getAllpost(){
+        return postRepository.getAllPosts();
+    }
+
+    @Override
+    public SellerPromoDTO countPromosByUser(int user_id) {
+
+        List<Post> posts = postRepository.getAllPosts();
+        SellerPromoDTO sellerPromo = new SellerPromoDTO();
+
+        Seller seller = sellerRepository.findById(user_id);
+        if(seller == null){
+            throw new NotFoundException("No existe el vendedor con id: "+ user_id);
+        }
+
+        sellerPromo.setUser_id(seller.getUser_id());
+        sellerPromo.setUser_name(seller.getUser_name());
+
+        for(Post post : posts){
+            if(post.getUser_id() == user_id && post.getPromo() != null){
+                sellerPromo.setPromo_products_count(sellerPromo.getPromo_products_count() + 1);
+            }
+        }
+
+        return sellerPromo;
+    }
 
 }

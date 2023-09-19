@@ -17,4 +17,6 @@ public interface IUserService {
     UserFollowedPostListDTO userFollowedPostList(int user_id);
 
     UserFollowedPostListDTO orderByDateFollowedSellers(int id, String order);
+
+
 }
