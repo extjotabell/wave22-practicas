@@ -1,7 +1,6 @@
 package com.example.be_java_hisp_w22_g02.entity;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,8 +20,5 @@ public class Post {
     private Product product;
     private int category;
     private double price;
-    @JsonProperty("has_promo")
-    private boolean hasPromo;
-    private double discount;
 }
 
