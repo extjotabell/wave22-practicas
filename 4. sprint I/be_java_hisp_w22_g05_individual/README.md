@@ -7,7 +7,7 @@ La fecha de lanzamiento se aproxima, por lo cual es necesaria la presentación d
 
 ## Definiciones de equipo
 Levantar el proyecto en IntelliJ y ejecutar la clase BeJavaHispW22G05Application.
-Una vez levantada la API. Utilizar la colección "Grupo 5 Pruebas.postman_collection.json" ubicada en la carpeta resources y probar usando las requests definidas allí.
+Una vez levantada la API. Utilizar la colección "Grupo5PruebasIndividual.postman_collection.json" ubicada en la carpeta resources y probar usando las requests definidas allí.
 
 ## Endpoints
 ##### US 0001: Poder realizar la acción de “Follow” (seguir) a un determinado vendedor.
@@ -74,6 +74,13 @@ Responsable: Facundo Janeiro
 
 POST
 - /products/promo-post/count?user_id={userId}
+
+Responsable: Facundo Janeiro
+
+##### US 0012: Obtener un listado de todos los productos en promoción de un determinado vendedor
+
+POST
+- /products/promo-post/list?user_id={userId}
 
 Responsable: Facundo Janeiro
 
