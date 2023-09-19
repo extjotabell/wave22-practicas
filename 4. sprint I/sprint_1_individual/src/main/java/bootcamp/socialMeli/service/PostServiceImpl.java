@@ -2,13 +2,10 @@ package bootcamp.socialMeli.service;
 
 import bootcamp.socialMeli.dto.*;
 import bootcamp.socialMeli.entity.Post;
-import bootcamp.socialMeli.exception.BadRequestException;
 import bootcamp.socialMeli.exception.NotFoundException;
 import bootcamp.socialMeli.repository.IPostRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -17,11 +14,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements IPostService {
+
+    private final ObjectMapper objectMapper;
     private final IPostRepository postRepository;
     private final IProductService productService;
     private final IUserService userService;
 
-    public PostServiceImpl(IPostRepository postRepository, IProductService productService,IUserService userService ) {
+    public PostServiceImpl(ObjectMapper objectMapper, IPostRepository postRepository, IProductService productService, IUserService userService ) {
+        this.objectMapper = objectMapper;
         this.postRepository = postRepository;
         this.productService = productService;
         this.userService = userService;
@@ -36,9 +36,7 @@ public class PostServiceImpl implements IPostService {
 
     private PostDto toPostDto(Post post) {
         ProductDto productDto = productService.getProductById(post.getProduct_id());
-        ModelMapper modelMapper = new ModelMapper();
-        PostDto postDto = modelMapper.map(post, PostDto.class);
-        System.out.println("POST DTO CONVERTIDO >>>>> " + postDto);
+        PostDto postDto = objectMapper.convertValue(post, PostDto.class);
         postDto.setProduct(productDto);
         return postDto;
     }
@@ -104,9 +102,8 @@ public class PostServiceImpl implements IPostService {
         List<PromoPostDto> promoPostDtos = new ArrayList<>();
 
         for (Post userPromoPost : userPromoPosts) {
-            ModelMapper modelMapper = new ModelMapper();
             ProductDto userProductPostDto = productService.getProductById(userPromoPost.getProduct_id());
-            PromoPostDto promoPostDto = modelMapper.map(userPromoPost, PromoPostDto.class);
+            PromoPostDto promoPostDto = objectMapper.convertValue(userPromoPost, PromoPostDto.class);
             promoPostDto.setProduct(userProductPostDto);
             promoPostDtos.add(promoPostDto);
         }

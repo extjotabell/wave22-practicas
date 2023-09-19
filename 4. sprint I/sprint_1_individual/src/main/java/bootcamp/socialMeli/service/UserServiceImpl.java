@@ -68,19 +68,13 @@ public class UserServiceImpl implements IUserService{
         // Get main user object
         User targetedUser = findUserById(userId);
 
-        //Create list with followers
-        List<UserDto> followers = new ArrayList<>(targetedUser.getFollowers()
-                .stream()
-                .map(followerId -> {
-                    User follower = findUserById(followerId);
-                    return new UserDto(follower.getUser_id(), follower.getUser_name());
-                })
-                .toList());
+        // Create list with followers
+        List<UserDto> followers = getUserDtos(targetedUser.getFollowers());
 
         // Sort depending on parameter input
         sortUserDtoList(followers, nameOrder);
 
-        return new FollowersListDto(targetedUser.getUser_id(), targetedUser.getUser_name(), followers);
+        return new FollowersListDto(userId, targetedUser.getUser_name(), followers);
     }
 
     // US 04
@@ -88,17 +82,25 @@ public class UserServiceImpl implements IUserService{
     @Override
     public FollowedListDto getFollowingList(int userId, NameOrderEnumDto nameOrder) {
         User targetedUser = findUserById(userId);
-        List<UserDto> followed = new ArrayList<>();
-        for (int idFollowed : targetedUser.getFollowed()){
-            User userFollowed = findUserById(idFollowed);
-            UserDto userDto = new UserDto(userFollowed.getUser_id(), userFollowed.getUser_name());
-            followed.add(userDto);
-        }
+
+        // Create list with followed
+        List<UserDto> followed = getUserDtos(targetedUser.getFollowed());
 
         // Sort depending on parameter input
         sortUserDtoList(followed, nameOrder);
 
         return new FollowedListDto(userId, targetedUser.getUser_name(), followed);
+    }
+
+    private List<UserDto> getUserDtos(List<Integer> usersIdsList) {
+        // Return list with followed UserDTO
+        return new ArrayList<>(usersIdsList
+                .stream()
+                .map(userId -> {
+                    User user = findUserById(userId);
+                    return new UserDto(user.getUser_id(), user.getUser_name());
+                })
+                .toList());
     }
 
     // US 07
