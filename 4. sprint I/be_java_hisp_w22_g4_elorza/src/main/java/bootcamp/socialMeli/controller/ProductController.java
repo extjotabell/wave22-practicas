@@ -53,7 +53,7 @@ public class ProductController {
     public ResponseEntity<String> addPromoPost(@RequestBody PostDto promoPost){
         return new ResponseEntity<>(postService.addPromoPost(promoPost), HttpStatus.OK);
     }
-
+po 
     // US 11
     @GetMapping("/promo-post/count")
     public ResponseEntity<PromoCountDto> getPromoPostCount(@RequestParam int user_id){
