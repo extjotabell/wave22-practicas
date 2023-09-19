@@ -83,7 +83,12 @@ La colección de postman se encuentra en la carpeta /resources en formato json.
 
 ✅ GET /products/followed/{userId}/list?order --> Gonzalo Messina
 
-## Postman Collection 
+# Postman Testing 🟠
 
-Se adjuntan en la carpeta /resources
+Dentro de la carpeta resources se encuentra el archivo "Social Meli - Grupo 2.postman_collection" el cual contiene la coleccion de Postman donde se realizan las pruebas. 
+
+<img width="1672" alt="image" src="https://github.com/extjotabell/wave22-practicas/assets/143105901/3d6d3cf5-1c17-4d41-9d51-04d938adedcf">
+
+Ruta: wave22-practicas/4. sprint I/be_java_hisp_w22_g01/src/main/resources/Social Meli - Grupo 2.postman_collection.json
+
 
