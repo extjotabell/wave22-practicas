@@ -1,6 +1,8 @@
 package com.example.be_java_hisp_w22_g05.controller;
 
 import com.example.be_java_hisp_w22_g05.dto.PostDto;
+import com.example.be_java_hisp_w22_g05.dto.PostPromoCountDto;
+import com.example.be_java_hisp_w22_g05.dto.UserPostPromoDto;
 import com.example.be_java_hisp_w22_g05.service.IPostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,5 +30,29 @@ public class PostController {
     @GetMapping("/followed/{userId}/list")
     public ResponseEntity<?> getListPostsFromSellersFollowed(@PathVariable int userId,@RequestParam(required = false) String order){
         return new ResponseEntity<List<PostDto>>(postService.getListPostsFromSellersFollowed(userId, order), HttpStatus.OK);
+    }
+
+    //US 0010: Llevar a cabo la publicación de un nuevo producto en promoción
+    @PostMapping("/promo-post")
+    public ResponseEntity<?> newPromotion(@RequestBody PostDto postDto){
+        postService.saveNewPost(postDto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    //US 0011: Obtener la cantidad de productos en promoción de un determinado vendedor
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<?> getQuantityProductsPromoBySeller(@RequestParam int userId){
+        return new ResponseEntity<PostPromoCountDto>(postService.findQuantityProductsPromoBySeller(userId), HttpStatus.OK);
+    }
+
+    //US 0012: Obtener un listado de todos los productos en promoción de un determinado vendedor
+    @GetMapping("/promo-post/list")
+    public ResponseEntity<UserPostPromoDto> findListProductPromoSeller(@RequestParam int userId){
+        return new ResponseEntity<UserPostPromoDto>(postService.findListProductPromoSeller(userId), HttpStatus.OK);
+    }
+
+    @GetMapping
+    public  ResponseEntity<?> getAll(){
+        return new ResponseEntity<List<PostDto>>(postService.findPostAll(),HttpStatus.OK);
     }
 }

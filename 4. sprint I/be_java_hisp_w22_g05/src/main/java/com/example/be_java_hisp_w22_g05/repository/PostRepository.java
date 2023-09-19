@@ -57,7 +57,7 @@ public class PostRepository implements IPostRepository {
         //Setea el id del post y lo agrega a la lista
         post.setId(idCounter);
         database.add(post);
-
+        productList.add(post.getProduct());
         idCounter++;
 
         return post;
@@ -66,4 +66,5 @@ public class PostRepository implements IPostRepository {
     private boolean productExists(int id) {
         return productList.stream().anyMatch(product -> product.getId() == id);
     }
+
 }

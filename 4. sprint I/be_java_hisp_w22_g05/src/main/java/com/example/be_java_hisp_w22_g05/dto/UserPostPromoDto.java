@@ -8,14 +8,16 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
-@JsonPropertyOrder({"user_id", "user_name", "followers"})
-public class UserFollowersDto {
-    @JsonProperty("user_id")
-    private int id;
-    @JsonProperty("user_name")
-    private String userName;
-    private List<UserDto> followers;
+@JsonPropertyOrder({"user_id", "user_name", "posts"})
+public class UserPostPromoDto {
+
+        @JsonProperty("user_id")
+        private int userId;
+        @JsonProperty("user_name")
+        private String userName;
+        private List<PostDto> posts;
+
 }

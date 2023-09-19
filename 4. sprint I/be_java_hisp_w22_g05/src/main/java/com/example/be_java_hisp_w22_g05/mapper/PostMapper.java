@@ -17,6 +17,8 @@ public class PostMapper {
                 .category(post.getCategory())
                 .product(this.toProductDTO(post.getProduct()))
                 .price(post.getPrice())
+                .hasPromo(post.getHasPromo())
+                .discount(post.getDiscount())
                 .build();
     }
 
