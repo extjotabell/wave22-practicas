@@ -7,7 +7,7 @@
 - Emmanuel Schenoni
 - Iara Grisel Roldan
 - Julio Alvarez
-- Rodrigo Balliani
+- Rodrigo Baliani
 
 ## Enunciado 
 
@@ -65,7 +65,7 @@ La colección de postman se encuentra en la carpeta /resources en formato json.
 
 # Endpoints y responsables de su programación 🦾
 
-✅ POST /users/{userId}/follow/{userIdToFollow} --> 
+✅ POST /users/{userId}/follow/{userIdToFollow} --> Rodrigo Baliani
 
 ✅ GET /users/{userId}/followers/count --> Emmanuel Schenoni
 
