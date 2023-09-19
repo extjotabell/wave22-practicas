@@ -1,4 +1,5 @@
 package bootcamp.socialMeli.entity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Post {
     private int post_id;
     private int user_id;
@@ -29,4 +31,15 @@ public class Post {
     private boolean has_promo;
     private double discount;
 
+    private Post(int post_id, int user_id, LocalDate date, Product product, int category, double price, boolean has_promo, double discount)
+    {
+        this.post_id = post_id;
+        this.user_id = user_id;
+        this.date = date;
+        this.product_id = product.getProduct_id();
+        this.category = category;
+        this.price = price;
+        this.has_promo = has_promo;
+        this.discount = discount;
+    }
 }

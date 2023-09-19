@@ -1,6 +1,7 @@
 package bootcamp.socialMeli.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PostDto implements IPost {
     @Min(value = 1, message = "Se debe ingresar un id usuario")
     private int user_id;
@@ -33,41 +35,41 @@ public class PostDto implements IPost {
     private double price;
 
     @Override
-    public int get_user_id() {
+    public int user_id() {
         return user_id;
     }
 
     @Override
-    public int get_post_id() {
+    public int post_id() {
         return post_id;
     }
 
     @Override
-    public LocalDate get_date() {
+    public LocalDate date() {
         return date;
     }
 
     @Override
-    public ProductDto get_product() {
+    public ProductDto product() {
         return product;
     }
 
     @Override
-    public int get_category() {
+    public int category() {
         return category;
     }
 
     @Override
-    public double get_price() {
+    public double price() {
         return price;
     }
     @Override
-    public boolean get_has_promo() {
+    public boolean has_promo() {
         return false;
     }
 
     @Override
-    public double get_discount() {
+    public double discount() {
         return 0;
     }
 }

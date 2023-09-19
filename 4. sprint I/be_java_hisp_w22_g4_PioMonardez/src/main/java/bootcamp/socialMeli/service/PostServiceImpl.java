@@ -33,19 +33,11 @@ public class PostServiceImpl implements IPostService {
         List<Post> postList = postRepository.getAllPost();
         if (postList.isEmpty()) throw new NotFoundException("No se encontraron posts en el sistema.");
 
-        return postList.stream().map(this::getPostDto).collect(Collectors.toList());
-    }
-
-    private PostDto getPostDto(Post post)
-    {
-        ProductDto product = productService.getProductDtoById(post.getProduct_id());
-        return new PostDto(post.getUser_id(), post.getPost_id(), post.getDate(), product, post.getCategory(), post.getPrice());
-    }
-
-    private PromoPostDto getPromoPostDto(Post post)
-    {
-        ProductDto product = productService.getProductDtoById(post.getProduct_id());
-        return new PromoPostDto(post.getUser_id(), post.getPost_id(), post.getDate(), product, post.getCategory(), post.getPrice(), post.isHas_promo(), post.getDiscount());
+        return postList.stream().map(p -> {
+            PostDto post= mapper.convertValue(p, PostDto.class);
+            post.setProduct(productService.getProductDtoById(p.getProduct_id()));
+            return post;
+        }).collect(Collectors.toList());
     }
 
     @Override
@@ -57,44 +49,42 @@ public class PostServiceImpl implements IPostService {
         userFollowedId.forEach(idUser ->
         {
             List<Post> posts = postRepository.getLatestPostsByUserId(idUser);
-            posts.forEach(post -> {
-                postDtoList.add(this.getPostDto(post));
-            });
+
+            posts.stream().map(p -> {
+                PostDto post = mapper.convertValue(p, PostDto.class);
+                post.setProduct(productService.getProductDtoById(p.getProduct_id()));
+                postDtoList.add(post);
+
+                return post;
+            }).collect(Collectors.toList());
         });
 
         if (order == ProductOrderListEnum.date_asc) return new FollowedPostListDto(
-                userId, postDtoList.stream().sorted(Comparator.comparing(PostDto::get_date)).
+                userId, postDtoList.stream().sorted(Comparator.comparing(PostDto::date)).
                 collect(Collectors.toList()));
 
         return new FollowedPostListDto(
-                userId, postDtoList.stream().sorted((date1, date2) -> date2.get_date().compareTo(date1.get_date())).
+                userId, postDtoList.stream().sorted((date1, date2) -> date2.date().compareTo(date1.date())).
                 collect(Collectors.toList()));
     }
 
     @Override
     public String addPost(IPost post) {
         int newPostId;
-        User userExist = userService.findUserById(post.get_user_id());
+        User userExist = userService.findUserById(post.user_id());
 
         // If is the first post, change user RolEnum to VENDEDOR
         if(userExist.getRol() == RolEnum.COMPRADOR) userExist.setRol(RolEnum.VENDEDOR);
 
-        Post newPost = new Post(post.get_post_id(),
-                post.get_user_id(),
-                post.get_date(),
-                post.get_product().getProduct_id(),
-                post.get_category(),
-                post.get_price(),
-                post.get_has_promo(),
-                post.get_discount());
-        newPostId = postRepository.addPost(newPost);
+        Post newPost = mapper.convertValue(post, Post.class);
+        newPost.setProduct_id(post.product().getProduct_id());
+        newPostId  = postRepository.addPost(newPost);
 
-        Product product = productService.getProductById(post.get_product().getProduct_id());
-
-        // Check if product exists
+        // Check if product already exists
+        Product product = productService.getProductById(post.product().getProduct_id());
         if(product == null)
         {
-            productService.addProducto(post.get_product());
+            productService.addProducto(post.product());
         }
 
         return "Se agrego exitosamente un nuevo post con el id: " + newPostId;
@@ -104,6 +94,7 @@ public class PostServiceImpl implements IPostService {
     public PromoPostCountByUserDto getPromoPostCountByUser(int userId) {
         User user = userService.findUserById(userId);
         int promoPosts = postRepository.getPromoPostsCountByUser(userId);
+
         return new PromoPostCountByUserDto(userId, user.getUser_name(), promoPosts);
     }
 
@@ -113,12 +104,15 @@ public class PostServiceImpl implements IPostService {
         List<Post> postList = postRepository.getPostByUserId(userId, true);
         List<PromoPostDto> promoPostDtoList = new ArrayList<>();
 
-        postList.forEach(p ->
-        {
-            promoPostDtoList.add(this.getPromoPostDto(p));
-        });
+        postList.stream().map(p -> {
+            PromoPostDto post = mapper.convertValue(p, PromoPostDto.class);
+            post.setProduct(productService.getProductDtoById(p.getProduct_id()));
+            promoPostDtoList.add(post);
+            return post;
+        }).collect(Collectors.toList());
+
         return new PromoPostListByUserDto(userId, user.getUser_name(),
-                promoPostDtoList.stream().sorted(Comparator.comparing(PromoPostDto::get_date)).collect(Collectors.toList())
+                promoPostDtoList.stream().sorted(Comparator.comparing(PromoPostDto::date)).collect(Collectors.toList())
         );
     }
 }
