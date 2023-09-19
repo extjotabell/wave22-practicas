@@ -25,7 +25,6 @@ public class PostRepositoryImpl implements IPostRepository {
 
 
 
-
     private void loadDataBase(){
         File file;
         ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
@@ -60,4 +59,11 @@ public class PostRepositoryImpl implements IPostRepository {
         dbPost.put(post.getPostId(), post);
         return post;
     }
+
+    @Override
+    public List<Post> findPromoPostByUser(int userId) {
+        return findAllPosts().stream().filter(p -> p.isHasPromo() && p.getUserId() == userId).toList();
+    }
+
+
 }

@@ -1,7 +1,9 @@
 package com.example.be_java_hisp_w22_g02.service.Implementations;
 
 
+import com.example.be_java_hisp_w22_g02.dto.request.PostPromoDTO;
 import com.example.be_java_hisp_w22_g02.dto.response.FollowedPostDTO;
+import com.example.be_java_hisp_w22_g02.dto.response.PostPromoByUserDTO;
 import com.example.be_java_hisp_w22_g02.dto.response.TwoWeeksPostDTO;
 import com.example.be_java_hisp_w22_g02.dto.response.UserDTO;
 import com.example.be_java_hisp_w22_g02.entity.Post;
@@ -64,7 +66,21 @@ public class PostServiceImpl implements IPostService {
             throw new BadRequestException("Input fields are not valid");
         }
         userService.addUserPost(mapper.convertValue(dto, Post.class), dto.getUserId());
-        return mapper.convertValue(postRepository.save(mapper.convertValue(dto, Post.class)), PostDTO.class);
+        if(dto instanceof PostPromoDTO)
+            return mapper.convertValue(postRepository.save(mapper.convertValue(dto, Post.class)), PostPromoDTO.class);
+        else
+            return mapper.convertValue(postRepository.save(mapper.convertValue(dto, Post.class)), PostDTO.class);
+
+    }
+
+    @Override
+    public PostPromoByUserDTO countPostPromoByUser(int userId) {
+        if(!userService.existsUser(userId))
+            throw new NotFoundException("User with id: " + userId + " doesn't exist");
+        List<Post> posts = postRepository.findPromoPostByUser(userId);
+        if(posts.isEmpty())
+            throw new NotFoundException("User with id: " + userId + " doesn't has posts with promotions");
+        return new PostPromoByUserDTO(userId, userService.getUser(userId).getUserName(), posts.size());
     }
 
     private boolean valid(PostDTO dto){
