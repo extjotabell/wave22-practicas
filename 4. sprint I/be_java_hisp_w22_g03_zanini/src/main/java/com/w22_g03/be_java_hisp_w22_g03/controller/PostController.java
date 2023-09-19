@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @RestController
@@ -46,5 +46,16 @@ public class PostController {
     public ResponseEntity<?> getCountOfPromoProductByVendor(@RequestParam(name = "user_id") Long userId){
         return ResponseEntity.ok(postService.countOfPromoProductByVendor(userId));
     }
+
+    @GetMapping("/promo-post/list")
+    public ResponseEntity<?> getListOfPromoProductByVendor(@RequestParam(name = "user_id") Long userId){
+        return ResponseEntity.ok(postService.listOfPromoProductByVendor(userId));
+    }
+
+    //Endpoint sin finalizar para buscar productos en promocion donde se aplica cualquier filtro
+    //@GetMapping("/promo-post/listByFilter")
+    //public ResponseEntity<?> test(@RequestParam Map<String, String> params){
+    //    return ResponseEntity.ok(postService.promoProductsByFilter(params));
+    //}
 
 }
