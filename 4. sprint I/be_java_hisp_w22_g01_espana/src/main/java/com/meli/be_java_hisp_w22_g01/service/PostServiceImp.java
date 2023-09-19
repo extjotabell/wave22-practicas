@@ -79,6 +79,9 @@ public class PostServiceImp implements IPostService{
         int countPromos = postPromo.size();
 
         User seller = sellerRepository.findById(user_id);
+        if (seller == null){
+            throw new NotFoundException("El vendedor user_id: " + user_id + " no existe");
+        }
         String sellerName = seller.getUser_name();
 
         CountPromoPostDTO countPromoPostDTO = new CountPromoPostDTO();
@@ -94,6 +97,9 @@ public class PostServiceImp implements IPostService{
 
         List<Post> promoPosts = postRepository.getPromoPostSeller(user_id);
         User seller = sellerRepository.findById(user_id);
+        if (seller == null){
+            throw new NotFoundException("El vendedor user_id: " + user_id + " no existe");
+        }
         String sellerName = seller.getUser_name();
 
         PromoPostsSellerDTO promoPostsDTO = new PromoPostsSellerDTO();
