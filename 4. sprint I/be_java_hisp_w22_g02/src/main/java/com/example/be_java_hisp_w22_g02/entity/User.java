@@ -10,18 +10,21 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class User {
-
     @JsonAlias({"user_id"})
     private int userId;
 
     @JsonAlias({"user_name"})
     private String userName;
 
-    private List<User> followers = new ArrayList<>();
-    private List<User> followed = new ArrayList<>();
+    private List<UserFollow> followers = new ArrayList<>();
+    private List<UserFollow> followed = new ArrayList<>();
     private List<Post> posts = new ArrayList<>();
 
-    public void addFollower(User follower) {
+    public void addFollower(UserFollow follower) {
         followers.add(follower);
+    }
+
+    public void addFollowed(UserFollow f) {
+        followed.add(f);
     }
 }

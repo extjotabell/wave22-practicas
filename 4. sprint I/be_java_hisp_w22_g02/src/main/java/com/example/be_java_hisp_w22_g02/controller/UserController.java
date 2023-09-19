@@ -1,6 +1,6 @@
 package com.example.be_java_hisp_w22_g02.controller;
 
-import com.example.be_java_hisp_w22_g02.dto.response.UserFollowDTO;
+import com.example.be_java_hisp_w22_g02.dto.response.UserFollowedDTO;
 import com.example.be_java_hisp_w22_g02.service.Interfaces.IUserService;
 import org.springframework.http.HttpStatus;
 import lombok.AllArgsConstructor;
@@ -23,13 +23,24 @@ public class UserController {
     }
 
     @GetMapping("/{userId}/followers/list")
-    public ResponseEntity<?> getFollowers(@PathVariable int userId) {
-        return new ResponseEntity<>(userService.getFollowers(userId), HttpStatus.OK);
+    public ResponseEntity<?> getFollowers(@PathVariable int userId, @RequestParam(required = false) String order) {
+        return new ResponseEntity<>(userService.getFollowers(userId, order), HttpStatus.OK);
     }
 
     @GetMapping("/{userId}/followed/list")
-    public ResponseEntity<UserFollowDTO> getFollowedUser(@PathVariable Integer userId) {
-        UserFollowDTO userFollowDTO = userService.getFollowedUsersById(userId);
-        return new ResponseEntity<>(userFollowDTO, HttpStatusCode.valueOf(200));
+    public ResponseEntity<UserFollowedDTO> getFollowedUser(@PathVariable Integer userId, @RequestParam(required = false) String order) {
+        UserFollowedDTO userFollowedDTO = userService.getFollowedUsersById(userId, order);
+        return new ResponseEntity<>(userFollowedDTO, HttpStatusCode.valueOf(200));
     }
+    @GetMapping("/{userId}/followers/count")
+    public ResponseEntity<?> getFollowersCountByUserId(@PathVariable int userId){
+        return new ResponseEntity<>(userService.getTotalFollowersByUserId(userId), HttpStatus.OK);
+    }
+
+    @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
+    public ResponseEntity<?> unfollowUser(@PathVariable int userId, @PathVariable int userIdToUnfollow) {
+        userService.unfollowUser(userId, userIdToUnfollow);
+        return new ResponseEntity<>("User unfollowed succesfully.", HttpStatus.valueOf(200));
+    }
+
 }
