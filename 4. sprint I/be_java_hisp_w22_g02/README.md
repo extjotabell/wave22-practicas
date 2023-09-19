@@ -1,4 +1,4 @@
-<span style="color: yellow"> <h1>SocialMeli</h1></span>
+## SocialMeli 💛 🤝
 
 ## Equipo: 🚀
 
@@ -9,7 +9,7 @@
 - Julio Alvarez
 - Rodrigo Balliani
 
-## Enunciado
+## Enunciado 
 
 Mercado Libre sigue creciendo y para el año que viene  tiene como objetivo empezar a implementar una
 serie de herramientas que permitan a los compradores y vendedores tener una experiencia totalmente 
@@ -47,4 +47,43 @@ Por otra parte, dado que se pretende una buena experiencia de usuario con respec
 
 Un analista funcional llevó a cabo el relevamiento de los requerimientos técnicos funcionales y ha proporcionado la documentación que se cita a continuación para tener en cuenta a la hora de llevar a cabo el desarrollo correspondiente:
 
-[Especificación técnica funcional](https://docs.google.com/document/d/1Q-xGaOMPij-qk_gMvcN0Sk0isbCPqjJS/preview?usp=sharing&ouid=102053688598464604438&rtpof=true&sd=true) 
+[Especificación técnica funcional](https://docs.google.com/document/d/1Q-xGaOMPij-qk_gMvcN0Sk0isbCPqjJS/preview?usp=sharing&ouid=102053688598464604438&rtpof=true&sd=true)
+
+# Definiciones de Equipo 🤝
+
+Para correr la aplicación es necesaria una JDK 17 y Maven. 
+
+Ejecutar comando mvn i y luego ejecutar Run BeJavaHispW22G02Application. 
+
+Para las pruebas, se recomienda como primera medida seguir algunos usuarios usando el endpoint /users/{userId}/follow/{userIdToFollow}.
+
+Una vez que tenemos varios usuarios con los que jugar, podemos dar de alta publicaciones con el endpoint /products/post y verificar que el usuario tiene ese post en su lista de publicaciones. 
+
+A partir de esto podemos dejar de seguir usuarios, visualizar a quienes sigo y quienes me siguen, ver las publicaciones de mis seguidos, entre otras.
+
+La colección de postman se encuentra en la carpeta /resources en formato json.
+
+# Endpoints y responsables de su programación 🦾
+
+✅ POST /users/{userId}/follow/{userIdToFollow} --> 
+
+✅ GET /users/{userId}/followers/count --> 
+
+✅ GET /users/{userId}/followers/list --> 
+
+✅ GET /users/{userId}/followed/list --> 
+
+✅ POST /products/post --> Iara Roldán
+
+✅ GET /products/followed/{userId}/list --> 
+
+✅ POST /users/{userId}/unfollow/{userIdToUnfollow} -->
+
+✅ GET /users/{UserID}/followers/list?order --> 
+
+✅ GET /products/followed/{userId}/list?order --> 
+
+## Postman Collection 
+
+Se adjuntan en la carpeta /resources
+
