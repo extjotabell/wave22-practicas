@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostDto {
+public class PostDto implements IPost {
     @Min(value = 1, message = "Se debe ingresar un id usuario")
     private int user_id;
     private int post_id;
@@ -31,4 +31,43 @@ public class PostDto {
     private int category;
     @DecimalMin(value = "1", message = "Se debe ingresar un precio")
     private double price;
+
+    @Override
+    public int get_user_id() {
+        return user_id;
+    }
+
+    @Override
+    public int get_post_id() {
+        return post_id;
+    }
+
+    @Override
+    public LocalDate get_date() {
+        return date;
+    }
+
+    @Override
+    public ProductDto get_product() {
+        return product;
+    }
+
+    @Override
+    public int get_category() {
+        return category;
+    }
+
+    @Override
+    public double get_price() {
+        return price;
+    }
+    @Override
+    public boolean get_has_promo() {
+        return false;
+    }
+
+    @Override
+    public double get_discount() {
+        return 0;
+    }
 }

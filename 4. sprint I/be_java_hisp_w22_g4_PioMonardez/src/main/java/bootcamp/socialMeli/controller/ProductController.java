@@ -53,7 +53,7 @@ public class ProductController {
     @PostMapping("/promo-post")
     public ResponseEntity<String> addPromoPost(@Valid @RequestBody PromoPostDto promoPostDto)
     {
-        return new ResponseEntity<>(postService.addPromoPost(promoPostDto), HttpStatus.OK);
+        return new ResponseEntity<>(postService.addPost(promoPostDto), HttpStatus.OK);
     }
 
     // US 11

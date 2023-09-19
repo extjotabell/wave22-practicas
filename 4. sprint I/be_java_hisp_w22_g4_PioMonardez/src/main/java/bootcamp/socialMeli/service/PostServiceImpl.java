@@ -63,63 +63,41 @@ public class PostServiceImpl implements IPostService {
         });
 
         if (order == ProductOrderListEnum.date_asc) return new FollowedPostListDto(
-                userId, postDtoList.stream().sorted(Comparator.comparing(PostDto::getDate)).
+                userId, postDtoList.stream().sorted(Comparator.comparing(PostDto::get_date)).
                 collect(Collectors.toList()));
 
         return new FollowedPostListDto(
-                userId, postDtoList.stream().sorted((date1, date2) -> date2.getDate().compareTo(date1.getDate())).
+                userId, postDtoList.stream().sorted((date1, date2) -> date2.get_date().compareTo(date1.get_date())).
                 collect(Collectors.toList()));
     }
 
     @Override
-    public String addPost(PostDto postDto) {
+    public String addPost(IPost post) {
         int newPostId;
-        User userExist = userService.findUserById(postDto.getUser_id());
+        User userExist = userService.findUserById(post.get_user_id());
+
+        // If is the first post, change user RolEnum to VENDEDOR
         if(userExist.getRol() == RolEnum.COMPRADOR) userExist.setRol(RolEnum.VENDEDOR);
 
-        Post post = new Post(postDto.getPost_id(),
-                postDto.getUser_id(),
-                postDto.getDate(),
-                postDto.getProduct().getProduct_id(),
-                postDto.getCategory(),
-                postDto.getPrice(),false,0);
-        newPostId = postRepository.addPost(post);
+        Post newPost = new Post(post.get_post_id(),
+                post.get_user_id(),
+                post.get_date(),
+                post.get_product().getProduct_id(),
+                post.get_category(),
+                post.get_price(),
+                post.get_has_promo(),
+                post.get_discount());
+        newPostId = postRepository.addPost(newPost);
 
-        Product product = productService.getProductById(postDto.getProduct().getProduct_id());
+        Product product = productService.getProductById(post.get_product().getProduct_id());
 
         // Check if product exists
         if(product == null)
         {
-            productService.addProducto(postDto.getProduct());
+            productService.addProducto(post.get_product());
         }
 
-        return "Se agrego exitosamente un nuevo post con el numero : " + newPostId;
-    }
-
-    @Override
-    public String addPromoPost(PromoPostDto promoPostDto) {
-        int newPostId;
-        User userExist = userService.findUserById(promoPostDto.getUser_id());
-        if(userExist.getRol() == RolEnum.COMPRADOR) userExist.setRol(RolEnum.VENDEDOR);
-
-        Post post = new Post(promoPostDto.getPost_id(),
-                promoPostDto.getUser_id(),
-                promoPostDto.getDate(),
-                promoPostDto.getProduct().getProduct_id(),
-                promoPostDto.getCategory(),
-                promoPostDto.getPrice(),
-                promoPostDto.isHas_promo(),
-                promoPostDto.getDiscount());
-        newPostId = postRepository.addPost(post);
-        Product product = productService.getProductById(promoPostDto.getProduct().getProduct_id());
-
-        // Check if product exists
-        if(product == null)
-        {
-            productService.addProducto(promoPostDto.getProduct());
-        }
-
-        return "Se agrego exitosamente un nuevo post con el numero : " + newPostId;
+        return "Se agrego exitosamente un nuevo post con el id: " + newPostId;
     }
 
     @Override
@@ -140,7 +118,7 @@ public class PostServiceImpl implements IPostService {
             promoPostDtoList.add(this.getPromoPostDto(p));
         });
         return new PromoPostListByUserDto(userId, user.getUser_name(),
-                promoPostDtoList.stream().sorted(Comparator.comparing(PromoPostDto::getDate)).collect(Collectors.toList())
+                promoPostDtoList.stream().sorted(Comparator.comparing(PromoPostDto::get_date)).collect(Collectors.toList())
         );
     }
 }
