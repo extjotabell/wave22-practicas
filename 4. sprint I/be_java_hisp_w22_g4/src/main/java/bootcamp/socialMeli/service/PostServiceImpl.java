@@ -103,4 +103,11 @@ public class PostServiceImpl implements IPostService {
 
         return new PromoCountDto(user.getUser_id(), user.getUser_name(), postRepository.getPromoPostCount(userId));
     }
+
+    @Override
+    public PostsByUserDto getPromoPosts(int userId) {
+        User user = userService.findUserById(userId);
+        List<PostDto> postDtoList = postRepository.getPostWithPromo(userId).stream().map(post -> mapper.convertValue(post, PostDto.class)).collect(Collectors.toList());
+        return new PostsByUserDto(user.getUser_id(), user.getUser_name(), postDtoList);
+    }
 }

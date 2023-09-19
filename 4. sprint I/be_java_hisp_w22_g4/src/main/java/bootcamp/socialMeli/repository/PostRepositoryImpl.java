@@ -90,6 +90,10 @@ public class PostRepositoryImpl implements IPostRepository{
                 p.getUser_id() == userId && p.getDate().isAfter(LocalDate.now().minusWeeks(2))).collect(Collectors.toList());
     }
 
+    public List<Post> getPostWithPromo(int userId){
+        return postsDatabase.values().stream().filter(Post::getHas_promo).collect(Collectors.toList());
+    }
+
     @Override
     public Post addPost(Post post) {
 

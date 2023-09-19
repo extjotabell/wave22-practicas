@@ -55,9 +55,15 @@ public class ProductController {
     }
 
     // US 11
-    @GetMapping("/promo-post/count?user_id={userId}")
-    public ResponseEntity<PromoCountDto> getPromoPostCount(@RequestParam int userId){
-        return new ResponseEntity<>(postService.getPromoPostCount(userId), HttpStatus.OK);
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<PromoCountDto> getPromoPostCount(@RequestParam int user_id){
+        return new ResponseEntity<>(postService.getPromoPostCount(user_id), HttpStatus.OK);
+    }
+
+    //US 12
+    @GetMapping("/promo-post/list")
+    public ResponseEntity<PostsByUserDto> getPromoPosts(@RequestParam int user_id){
+        return new ResponseEntity<>(postService.getPromoPosts(user_id), HttpStatus.OK);
     }
 
 }
