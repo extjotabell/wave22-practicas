@@ -50,4 +50,10 @@ public class ProductController {
     public ResponseEntity<?> countPromoPostSelle(@RequestParam int userId){
         return ResponseEntity.status(HttpStatus.FOUND).body(postService.countPromoPost(userId));
     }
+
+    // US 0012 - Obtener un listado de todos los productos en promoción de un determinado vendedor
+    @GetMapping("/promo-post/list")
+    public ResponseEntity<?> getPromoPostSeller(@RequestParam int userId){
+        return ResponseEntity.status(HttpStatus.FOUND).body(postService.getPromoPostSeller(userId));
+    }
 }

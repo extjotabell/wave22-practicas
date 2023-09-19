@@ -98,4 +98,12 @@ public class PostRepositoryImp implements IPostRepository {
         }
         return false;
     }
+
+    @Override
+    public List<Post> getPromoPostSeller(int sellerId) {
+        return posts.stream()
+                .filter(p-> p.getUser_id() == sellerId)
+                .filter(p-> p instanceof PromoPost)
+                .toList();
+    }
 }

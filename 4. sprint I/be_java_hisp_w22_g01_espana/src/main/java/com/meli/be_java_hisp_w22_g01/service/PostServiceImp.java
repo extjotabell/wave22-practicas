@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w22_g01.dto.PostDto;
 import com.meli.be_java_hisp_w22_g01.dto.PromoPostDto;
 import com.meli.be_java_hisp_w22_g01.dto.response.CountPromoPostDTO;
+import com.meli.be_java_hisp_w22_g01.dto.response.PromoPostsSellerDTO;
 import com.meli.be_java_hisp_w22_g01.entity.*;
 import com.meli.be_java_hisp_w22_g01.exceptions.NotFoundException;
 import com.meli.be_java_hisp_w22_g01.repository.IPostRepository;
@@ -35,6 +36,7 @@ public class PostServiceImp implements IPostService{
 
     @Autowired
     ObjectMapper mapper;
+    // A createPost se le incorpora la opción de agregar post tipo PromoPost
     @Override
     public void createPost(PostDto postDto) {
         Post post = mapper.convertValue(postDto, Post.class);
@@ -89,5 +91,21 @@ public class PostServiceImp implements IPostService{
         countPromoPostDTO.setPromo_products_count(countPromos);
 
         return countPromoPostDTO;
+    }
+
+    @Override
+    public PromoPostsSellerDTO getPromoPostSeller(int user_id) {
+
+        List<Post> promoPosts = postRepository.getPromoPostSeller(user_id);
+        User seller = sellerRepository.findById(user_id);
+        String sellerName = seller.getUser_name();
+
+        PromoPostsSellerDTO promoPostsDTO = new PromoPostsSellerDTO();
+
+        promoPostsDTO.setPosts(promoPosts);
+        promoPostsDTO.setUser_id(user_id);
+        promoPostsDTO.setUser_name(sellerName);
+
+        return promoPostsDTO;
     }
 }
