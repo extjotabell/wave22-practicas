@@ -28,7 +28,7 @@ public class ProductServiceImpl implements IProductService{
     }
 
     @Override
-    public ProductDto getProductDtoById(int productId) {
+    public ProductDto getProductById(int productId) {
         Product product = productRepository.getProductById(productId);
         if (product == null) throw new NotFoundException("No se encontro producto para el id solicitado.");
         return new ProductDto(
@@ -38,11 +38,6 @@ public class ProductServiceImpl implements IProductService{
                 product.getBrand(),
                 product.getColor(),
                 product.getNotes());
-    }
-
-    @Override
-    public Product getProductById(int productId) {
-        return productRepository.getProductById(productId);
     }
 
     @Override
