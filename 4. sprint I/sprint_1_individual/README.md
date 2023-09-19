@@ -5,7 +5,7 @@ Api de proyecto grupal para el Bootcamp Java que permite seguir usuarios en la p
 
 Abrir el archivo pom.xml en intellij para levantar el servidor, las pruebas se pueden realizar con postman con la siguiente coleccion:
 
-Endpoints
+## Endpoints
 
 • Post - /users/{userId}/follow/{userIdToFollow}
 
@@ -59,9 +59,17 @@ Integrantes
 
 • Tatiana Elorza
 
+# Agregado individual
 
+US 10: POST /promo-post
 
-Agradecimientos 
+US 11: GET /promo-post/count
+
+### Bonus
+
+US 12: GET /promo-post/list
+
+# Agradecimientos 
 
 A messi y la scaloneta ⭐⭐⭐
 
