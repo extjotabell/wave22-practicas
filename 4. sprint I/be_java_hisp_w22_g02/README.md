@@ -75,13 +75,13 @@ La colección de postman se encuentra en la carpeta /resources en formato json.
 
 ✅ POST /products/post --> Iara Roldán
 
-✅ GET /products/followed/{userId}/list --> 
+✅ GET /products/followed/{userId}/list --> Gonzalo Messina
 
 ✅ POST /users/{userId}/unfollow/{userIdToUnfollow} --> Julio Alvarez
 
 ✅ GET /users/{UserID}/followers/list?order --> 
 
-✅ GET /products/followed/{userId}/list?order --> 
+✅ GET /products/followed/{userId}/list?order --> Gonzalo Messina
 
 ## Postman Collection 
 
