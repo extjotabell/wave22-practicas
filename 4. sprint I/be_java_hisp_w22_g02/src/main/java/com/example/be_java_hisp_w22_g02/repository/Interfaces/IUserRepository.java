@@ -1,5 +1,6 @@
 package com.example.be_java_hisp_w22_g02.repository.Interfaces;
 
+import com.example.be_java_hisp_w22_g02.dto.request.PostDTO;
 import com.example.be_java_hisp_w22_g02.dto.response.FollowedPostDTO;
 import com.example.be_java_hisp_w22_g02.entity.Post;
 import org.springframework.stereotype.Repository;
@@ -26,4 +27,5 @@ public interface IUserRepository {
     public List<FollowedPostDTO> getFollowedPostLasTwoWeeks(int id);
 
     List<FollowedPostDTO> getFollowedPostLasTwoWeeksOrd(int userId, String order);
+    Integer getTotalPromoCount(int userId);
 }

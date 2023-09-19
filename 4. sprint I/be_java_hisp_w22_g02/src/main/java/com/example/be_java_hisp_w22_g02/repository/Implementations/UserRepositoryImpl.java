@@ -112,4 +112,13 @@ public class UserRepositoryImpl implements IUserRepository {
 
     }
 
+    @Override
+    public Integer getTotalPromoCount(int userId) {
+        return (int) findById(userId)
+                .getPosts()
+                .stream()
+                .filter(Post::isHasPromo)
+                .count();
+    }
+
 }

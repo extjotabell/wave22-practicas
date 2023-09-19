@@ -79,7 +79,7 @@ public class UserServiceImpl implements IUserService {
         if(existsUser(userId))
             return userMapper.toDto(userRepository.findById(userId));
         else
-            throw new NotFoundException("No existe el usuario");
+            throw new NotFoundException("No such user for id: " + userId);
     }
 
     @Override

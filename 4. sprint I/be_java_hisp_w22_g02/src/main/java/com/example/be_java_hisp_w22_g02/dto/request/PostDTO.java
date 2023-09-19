@@ -2,6 +2,7 @@ package com.example.be_java_hisp_w22_g02.dto.request;
 
 import com.example.be_java_hisp_w22_g02.entity.Product;
 import com.fasterxml.jackson.annotation.JsonAlias;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,4 +27,7 @@ public class PostDTO {
     private int category;
     @DecimalMin("1.0")
     private double price;
+    @JsonAlias({"has_promo"})
+    private boolean hasPromo;
+    private double discount;
 }
