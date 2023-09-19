@@ -13,6 +13,9 @@ Se plantea creación de una API Rest que permita:
 - Dar de alta una nueva publicación.
 - Obtener un listado de las publicaciones realizadas en las últimas dos semanas, por los vendedores que un usuario sigue (para esto tener en cuenta ordenamiento por fecha, publicaciones más recientes primero).
 - Poder realizar la acción de “Unfollow” (dejar de seguir) a un determinado vendedor.
+- Llevar a cabo la publicación de un nuevo producto en promoción
+- Obtener la cantidad de productos en promoción de un determinado vendedor
+- Obtener un listado de todos los productos en promoción de un determinado vendedor
 
 Por otra parte, dado que se pretende una buena experiencia de usuario con respecto a la forma de presentación de los resultados de cada consulta, se necesita que los mismos puedan ser ordenados mediante cualquiera de los siguientes criterios: 
 Alfabético Ascendente y Descendente
@@ -40,6 +43,10 @@ La coleccion de Postman para utilizar mas facilmente los endpoints del pryecto s
 - GET /products/followed/{userId}/list (Renzo y Agustin)
 - GET /products/followed/{userId}/list?order=date_asc (Renzo y Agustin)
 - GET /products/followed/{userId}/list?order=date_desc (Renzo y Agustin)
+
+- POST /products/promo-post (Renzo)
+- GET /products/promo-post/count?user_id={userId} (Renzo)
+- GET /products/promo-post/list?user_id={userId} (Renzo)
 
 ## Integrantes
 - Gaspar Zanini

@@ -19,13 +19,13 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<?> handleNotFoundException(NotFoundException notFoundException) {
+    public ResponseEntity<ExceptionDTO> handleNotFoundException(NotFoundException notFoundException) {
         ExceptionDTO exceptionDTO = new ExceptionDTO(notFoundException.getMessage());
         return new ResponseEntity<>(exceptionDTO, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<?> handleBadRequestException(BadRequestException badRequestException){
+    public ResponseEntity<ExceptionDTO> handleBadRequestException(BadRequestException badRequestException){
         ExceptionDTO exceptionDTO = new ExceptionDTO(badRequestException.getMessage());
         return new ResponseEntity<>(exceptionDTO, HttpStatus.BAD_REQUEST);
     }
