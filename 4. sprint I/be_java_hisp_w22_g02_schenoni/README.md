@@ -84,9 +84,9 @@ La colección de postman se encuentra en la carpeta /resources en formato json.
 
 ✅ GET /products/followed/{userId}/list?order --> Gonzalo Messina
 
-✅ POST /products/post --> Emmanuel Schenoni
+✅ POST /products/promo-post --> Emmanuel Schenoni
 
-✅ GET /products/followed/{userId}/list --> Emmanuel Schenoni
+✅ GET /products/promo-post/count?user_id={userId} --> Emmanuel Schenoni
 
 
 ## Postman Collection 
