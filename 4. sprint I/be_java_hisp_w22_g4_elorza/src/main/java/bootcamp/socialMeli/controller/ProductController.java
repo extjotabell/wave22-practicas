@@ -48,6 +48,22 @@ public class ProductController {
         return new ResponseEntity<>(postService.addPost(postDto), HttpStatus.OK);
     }
 
+    // US 10
+    @PostMapping("/promo-post")
+    public ResponseEntity<String> addPromoPost(@RequestBody PostDto promoPost){
+        return new ResponseEntity<>(postService.addPromoPost(promoPost), HttpStatus.OK);
+    }
 
+    // US 11
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<PromoCountDto> getPromoPostCount(@RequestParam int user_id){
+        return new ResponseEntity<>(postService.getPromoPostCount(user_id), HttpStatus.OK);
+    }
+
+    //US 12
+    @GetMapping("/promo-post/list")
+    public ResponseEntity<PostsByUserDto> getPromoPosts(@RequestParam int user_id){
+        return new ResponseEntity<>(postService.getPromoPosts(user_id), HttpStatus.OK);
+    }
 
 }

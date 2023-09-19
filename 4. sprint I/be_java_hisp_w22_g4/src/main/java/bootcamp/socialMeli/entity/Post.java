@@ -23,10 +23,10 @@ public class Post {
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate date;
-    private Product product;
+    private int product_id;
     private int category;
     private double price;
-    private Boolean has_promo;
-    private Double discount;
+    private boolean has_promo;
+    private double discount;
 
 }

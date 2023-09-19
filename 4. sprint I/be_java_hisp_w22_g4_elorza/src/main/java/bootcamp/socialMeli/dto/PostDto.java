@@ -1,6 +1,8 @@
 package bootcamp.socialMeli.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
@@ -9,14 +11,17 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PostDto {
     @Min(value = 1, message = "Se debe ingresar un id usuario")
     private int user_id;
@@ -31,4 +36,8 @@ public class PostDto {
     private int category;
     @DecimalMin(value = "1", message = "Se debe ingresar un precio")
     private double price;
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
+    private Boolean has_promo = false;
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
+    private Double discount = 0.0;
 }
