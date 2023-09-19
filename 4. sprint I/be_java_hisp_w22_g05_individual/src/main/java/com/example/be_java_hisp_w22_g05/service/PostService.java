@@ -1,8 +1,6 @@
 package com.example.be_java_hisp_w22_g05.service;
 
-import com.example.be_java_hisp_w22_g05.dto.PostDto;
-import com.example.be_java_hisp_w22_g05.dto.PostNumberPromoDto;
-import com.example.be_java_hisp_w22_g05.dto.ProductDto;
+import com.example.be_java_hisp_w22_g05.dto.*;
 import com.example.be_java_hisp_w22_g05.entity.Post;
 import com.example.be_java_hisp_w22_g05.entity.Product;
 import com.example.be_java_hisp_w22_g05.entity.User;
@@ -111,6 +109,23 @@ public class PostService implements IPostService {
             throw new NotFoundException("No se encontraron Posts con descuento");
         }
         return  new PostNumberPromoDto(user.getId(),user.getName(),sizePromoPost);
+    }
+
+    @Override
+    public UserPromoPostsDto getPromoPosts(Integer userId) {
+        User user = getUser(userId);
+
+        List<Post> userPromoPosts = postRepository.findPostAllByUserId(userId).stream()
+                .filter(post -> post.getHasPromo())
+                .toList();
+
+        if (userPromoPosts.isEmpty()) throw new NotFoundException("No se encontraron Posts en promocion");
+
+        List<PostDto> postDtos = userPromoPosts.stream()
+                .map(postMapper::toPostDTO)
+                .collect(Collectors.toList());
+
+        return new UserPromoPostsDto(user.getId(), user.getName(), postDtos);
     }
 
     private List<PostDto> orderList(List<Post> posts, boolean isAsc) {

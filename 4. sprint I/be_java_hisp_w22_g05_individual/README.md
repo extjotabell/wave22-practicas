@@ -63,6 +63,20 @@ GET
 
 Trabajado en grupo.
 
+##### US 0010: Llevar a cabo la publicación de un nuevo producto en promoción
+
+POST
+- /products/promo-post
+
+Responsable: Facundo Janeiro
+
+##### US 0011: Obtener la cantidad de productos en promoción de un determinado vendedor
+
+POST
+- /products/promo-post/count?user_id={userId}
+
+Responsable: Facundo Janeiro
+
 ## Integrantes
 - Cecilia Morlacchi
 - Facundo Hermida
