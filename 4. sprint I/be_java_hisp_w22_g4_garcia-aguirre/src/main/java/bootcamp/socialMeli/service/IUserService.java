@@ -15,9 +15,12 @@ public interface IUserService {
     FollowedListDto getFollowingList(int userId, NameOrderEnumDto nameOrder);
 
     FollowersCountDto getFollowersCount(int userId);
-
-    User findUserById(int userId);
-
+    
     void followUser(Integer userId, Integer userIdToFollow);
 
+    void addPostToUser(User owner, int postId);
+
+    String getUserName(Integer userId);
+
+    User findUserById(int userId);
 }

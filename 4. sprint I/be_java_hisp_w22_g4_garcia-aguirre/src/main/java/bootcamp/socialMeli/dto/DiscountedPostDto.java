@@ -1,32 +1,39 @@
 package bootcamp.socialMeli.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import jakarta.annotation.Nullable;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDate;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class DiscountedPostDto {
-    private int user_id;
-    private int post_id;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
-    private LocalDate date;
-    private ProductDto product;
-    private int category;
-    private double price;
-    private boolean has_promo;
-    private double discount;
+@EqualsAndHashCode(callSuper = true)
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+public class DiscountedPostDto extends PostDto {
+    @NotNull(message = "Test")
+    private Boolean has_promo;
+
+    @NotNull(message = "Test")
+    private Double discount;
+
+    public DiscountedPostDto(int user_id, int post_id, LocalDate date, ProductDto product, int category, double price, Boolean has_promo, Double discount) {
+        super(user_id, post_id, date, product, category, price);
+        this.has_promo = has_promo;
+        this.discount = discount;
+    }
+
+    public Boolean getHas_promo() {
+        return has_promo;
+    }
+
+    public void setHas_promo(Boolean has_promo) {
+        this.has_promo = has_promo;
+    }
+
+    public Double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
+    }
 }

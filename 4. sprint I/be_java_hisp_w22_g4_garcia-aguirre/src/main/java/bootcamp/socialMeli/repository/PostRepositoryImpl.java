@@ -1,7 +1,6 @@
 package bootcamp.socialMeli.repository;
 
 import bootcamp.socialMeli.entity.Post;
-import bootcamp.socialMeli.entity.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Repository;
@@ -11,10 +10,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.lang.reflect.Array;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
@@ -85,17 +83,29 @@ public class PostRepositoryImpl implements IPostRepository{
     }
 
     @Override
-    public int addPost(Post post) {
-        int idPostNew=0;
-        User userPost = userRepository.findUserById(post.getUser_id()).orElse(null);
-        if(userPost!=null){
-            List<Integer> listidPost = new ArrayList<>(postsDatabase.keySet().stream().toList());
-            Collections.sort(listidPost);
-            idPostNew = listidPost.get(listidPost.size()-1)+1;
-            post.setPost_id(idPostNew);
-            postsDatabase.put(idPostNew, post);
-            listidPost.add(idPostNew);
-        }
-        return idPostNew;
+    public Integer getPromoCountByUserId(Integer userId) {
+        return this.postsDatabase
+                .values()
+                .stream()
+                .filter(post -> post.getUser_id() == userId && post.isHas_promo())
+                .toList()
+                .size();
+    }
+
+    @Override
+    public List<Post> getPromoPostsByUser(Integer userId) {
+        return this.postsDatabase
+                .values()
+                .stream()
+                .filter(post -> post.getUser_id() == userId && post.isHas_promo())
+                .toList();
+    }
+
+    @Override
+    public Integer addPost(Post post) {
+        Integer newId = Collections.max(this.postsDatabase.keySet()) + 1;
+        post.setPost_id(newId);
+        postsDatabase.put(newId, post);
+        return newId;
     }
 }

@@ -1,15 +1,13 @@
 package bootcamp.socialMeli.entity;
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import lombok.NonNull;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
@@ -29,4 +27,12 @@ public class Post {
     private boolean has_promo;
     private double discount;
 
+    public Post(int post_id, int user_id, LocalDate date, int product_id, int category, double price) {
+        this.post_id = post_id;
+        this.user_id = user_id;
+        this.date = date;
+        this.product_id = product_id;
+        this.category = category;
+        this.price = price;
+    }
 }

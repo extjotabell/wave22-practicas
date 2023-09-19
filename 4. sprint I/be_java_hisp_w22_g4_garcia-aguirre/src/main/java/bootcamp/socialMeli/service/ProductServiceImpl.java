@@ -13,9 +13,10 @@ import java.util.stream.Collectors;
 @Service
 public class ProductServiceImpl implements IProductService{
     private final IProductRepository productRepository;
-    ObjectMapper mapper = new ObjectMapper();
-    public ProductServiceImpl(IProductRepository productRepository) {
+    private final ObjectMapper objectMapper;
+    public ProductServiceImpl(IProductRepository productRepository, ObjectMapper objectMapper) {
         this.productRepository = productRepository;
+        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -23,26 +24,23 @@ public class ProductServiceImpl implements IProductService{
         List<Product> productList = productRepository.getAllProduct();
         if (productList.isEmpty()) throw new NotFoundException("No se encontraron productos en el sistema.");
         return productList.stream().
-                map(product -> mapper.convertValue(product, ProductDto.class))
+                map(product -> objectMapper.convertValue(product, ProductDto.class))
                 .collect(Collectors.toList());
     }
 
     @Override
     public ProductDto getProductById(int productId) {
-        Product product = productRepository.getProductById(productId);
-        if (product == null) throw new NotFoundException("No se encontro producto para el id solicitado.");
-        return new ProductDto(
-                product.getProduct_id(),
-                product.getProduct_name(),
-                product.getType(),
-                product.getBrand(),
-                product.getColor(),
-                product.getNotes());
+        Product product = productRepository.getProductById(productId)
+                .orElseThrow(
+                        () -> new NotFoundException("No se encontro producto para el id solicitado.")
+                );
+
+        return objectMapper.convertValue(product, ProductDto.class);
     }
 
     @Override
     public void addProducto(ProductDto productDto) {
-        Product product = mapper.convertValue(productDto, Product.class);
+        Product product = objectMapper.convertValue(productDto, Product.class);
         productRepository.addProducto(product);
     }
 }

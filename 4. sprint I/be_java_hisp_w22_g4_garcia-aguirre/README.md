@@ -3,9 +3,16 @@
 
 Api de proyecto grupal para el Bootcamp Java que permite seguir usuarios en la plataforma Social Meli, crear publicaciones y ver las publicaciones creadas por otros usuarios de la plataforma.
 
-Abrir el archivo pom.xml en intellij para levantar el servidor, las pruebas se pueden realizar con postman con la siguiente coleccion:
+## Instrucciones
+Abrir el archivo pom.xml en intellij para levantar el servidor, las pruebas se pueden realizar con postman con la coleccion ubicada en el directorio **resources**
 
-Endpoints
+### Endpoints Individuales:
+
+- POST: `/products/promo-post`
+- GET: `/products/promo-post/count?user_id={user_id}`
+- GET: `/products/promo-post/list?user_id={user_id}`
+
+### Endpoints Grupales:
 
 • Post - /users/{userId}/follow/{userIdToFollow}
 

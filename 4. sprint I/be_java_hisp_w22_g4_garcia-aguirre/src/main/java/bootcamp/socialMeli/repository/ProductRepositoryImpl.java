@@ -1,7 +1,6 @@
 package bootcamp.socialMeli.repository;
 
 import bootcamp.socialMeli.entity.Product;
-import bootcamp.socialMeli.entity.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Repository;
@@ -10,9 +9,9 @@ import org.springframework.util.ResourceUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ProductRepositoryImpl implements IProductRepository{
@@ -28,8 +27,8 @@ public class ProductRepositoryImpl implements IProductRepository{
     }
 
     @Override
-    public Product getProductById(int productId) {
-        return this.productDatabase.get(productId);
+    public Optional<Product> getProductById(int productId) {
+        return Optional.of(this.productDatabase.get(productId));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package bootcamp.socialMeli.repository;
 
+import bootcamp.socialMeli.entity.RolEnum;
 import bootcamp.socialMeli.entity.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -74,5 +75,11 @@ public class UserRepositoryImpl implements IUserRepository{
     public void addFollower(User user, User userToFollow) {
         user.getFollowed().add(userToFollow.getUser_id());
         userToFollow.getFollowers().add(user.getUser_id());
+    }
+
+    @Override
+    public void addPostToUser(User owner, int postId) {
+        owner.setRol(RolEnum.VENDEDOR);
+        owner.getPostList().add(postId);
     }
 }
