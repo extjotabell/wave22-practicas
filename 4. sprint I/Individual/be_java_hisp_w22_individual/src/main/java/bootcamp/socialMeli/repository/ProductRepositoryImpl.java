@@ -1,5 +1,6 @@
 package bootcamp.socialMeli.repository;
 
+import bootcamp.socialMeli.dto.ProductDto;
 import bootcamp.socialMeli.entity.Product;
 import bootcamp.socialMeli.entity.User;
 import com.fasterxml.jackson.core.type.TypeReference;

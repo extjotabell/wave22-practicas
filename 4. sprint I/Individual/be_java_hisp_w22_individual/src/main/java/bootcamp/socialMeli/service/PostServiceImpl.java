@@ -2,6 +2,8 @@ package bootcamp.socialMeli.service;
 
 import bootcamp.socialMeli.dto.*;
 import bootcamp.socialMeli.entity.Post;
+import bootcamp.socialMeli.entity.Product;
+import bootcamp.socialMeli.entity.User;
 import bootcamp.socialMeli.exception.BadRequestException;
 import bootcamp.socialMeli.exception.NotFoundException;
 import bootcamp.socialMeli.repository.IPostRepository;
@@ -90,5 +92,49 @@ public class PostServiceImpl implements IPostService {
 
         return "Se agrego exitosamente un nuevo post con el numero : " + idNewPost;
         //Returning the sorted list ordered by the latest post
+    }
+
+    @Override
+    public String addPostPromo(DiscountedPostDto promoDto) {
+        int idNewPost;
+        Post post = new Post(promoDto.getPost_id(),
+                promoDto.getUser_id(),
+                promoDto.getDate(),
+                promoDto.getProduct().getProduct_id(),
+                promoDto.getCategory(),
+                promoDto.getPrice(),
+                promoDto.isHas_promo(),
+                promoDto.getDiscount());
+        idNewPost = postRepository.addPost(post);
+        productService.addProducto(promoDto.getProduct());
+
+        return "Se agrego exitosamente un nuevo post con el numero : " + idNewPost;
+        //Returning the sorted list ordered by the latest post
+    }
+
+    @Override
+    public PostPromoCantDto getCantPostPromo(int userId) {
+        User userDate = userService.findUserById(userId);
+        int cantPostPromo= postRepository.getPostsPromoByUserId(userId).size();
+        return new PostPromoCantDto(userId,userDate.getUser_name(),cantPostPromo);
+    }
+
+    @Override
+    public PostPromoDto getPostPromo(int userId) {
+        User userDate = userService.findUserById(userId);
+        List<Post> postList = postRepository.getPostsPromoByUserId(userId);
+        List<DiscountedPostDto> discountedPostDtoList = new ArrayList<>();
+        for (Post x : postList) {
+            ProductDto productDto = productService.getProductById(x.getProduct_id());
+            discountedPostDtoList.add(new DiscountedPostDto(x.getUser_id(),
+                    x.getPost_id(),
+                    x.getDate(),
+                    productDto,
+                    x.getCategory(),
+                    x.getPrice(),
+                    x.isHas_promo(),
+                    x.getDiscount()));
+        }
+        return new PostPromoDto(userId,userDate.getUser_name(),discountedPostDtoList);
     }
 }

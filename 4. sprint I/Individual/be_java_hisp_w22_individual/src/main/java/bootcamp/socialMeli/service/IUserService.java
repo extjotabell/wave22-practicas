@@ -9,15 +9,10 @@ public interface IUserService {
 
     List<UserDto> getAllUsers();
     UserDto removeFollower(int userId, int userIdToUnfollow);
-
     FollowersListDto getFollowersList(int userId, NameOrderEnumDto nameOrder);
-
     FollowedListDto getFollowingList(int userId, NameOrderEnumDto nameOrder);
-
     FollowersCountDto getFollowersCount(int userId);
-
     User findUserById(int userId);
-
     void followUser(Integer userId, Integer userIdToFollow);
 
 }

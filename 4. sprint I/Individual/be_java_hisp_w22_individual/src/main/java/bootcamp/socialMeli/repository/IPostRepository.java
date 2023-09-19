@@ -10,5 +10,6 @@ public interface IPostRepository {
     List<Post> getPostsByFollowedUsers(int userId);
     int addPost(Post post);
     List<Post> getPostsByUserId(int userId);
+    List<Post> getPostsPromoByUserId(int userId);
     List<Post> getLatestPostsByUserId(int userId);
 }

@@ -2,6 +2,7 @@ package bootcamp.socialMeli.repository;
 
 import bootcamp.socialMeli.entity.Post;
 import bootcamp.socialMeli.entity.User;
+import bootcamp.socialMeli.exception.NotFoundException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Repository;
@@ -78,6 +79,11 @@ public class PostRepositoryImpl implements IPostRepository{
         return this.postsDatabase.values().stream().filter(p -> p.getUser_id() == userId).collect(Collectors.toList());
     }
 
+    @Override
+    public List<Post> getPostsPromoByUserId(int userId) {
+        return this.postsDatabase.values().stream().filter(p -> p.getUser_id() == userId && p.isHas_promo()).collect(Collectors.toList());
+    }
+
     public List<Post> getLatestPostsByUserId(int userId)
     {
         return this.postsDatabase.values().stream().filter(p ->
@@ -87,15 +93,17 @@ public class PostRepositoryImpl implements IPostRepository{
     @Override
     public int addPost(Post post) {
         int idPostNew=0;
-        User userPost = userRepository.findUserById(post.getUser_id()).orElse(null);
-        if(userPost!=null){
-            List<Integer> listidPost = new ArrayList<>(postsDatabase.keySet().stream().toList());
-            Collections.sort(listidPost);
-            idPostNew = listidPost.get(listidPost.size()-1)+1;
-            post.setPost_id(idPostNew);
-            postsDatabase.put(idPostNew, post);
-            listidPost.add(idPostNew);
-        }
+        User userPost = userRepository.findUserById(post.getUser_id())
+                                      .orElseThrow(() -> new NotFoundException("User with ID #" + post.getUser_id() + " not found"));
+
+
+        List<Integer> listidPost = new ArrayList<>(postsDatabase.keySet().stream().toList());
+        Collections.sort(listidPost);
+        idPostNew = listidPost.get(listidPost.size()-1)+1;
+        post.setPost_id(idPostNew);
+        postsDatabase.put(idPostNew, post);
+        listidPost.add(idPostNew);
+
         return idPostNew;
     }
 }

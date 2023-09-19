@@ -1,7 +1,9 @@
 package bootcamp.socialMeli.service;
 
 import bootcamp.socialMeli.dto.ProductDto;
+import bootcamp.socialMeli.entity.Post;
 import bootcamp.socialMeli.entity.Product;
+import bootcamp.socialMeli.entity.User;
 import bootcamp.socialMeli.exception.NotFoundException;
 import bootcamp.socialMeli.repository.IProductRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,6 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class ProductServiceImpl implements IProductService{
     private final IProductRepository productRepository;
+
     ObjectMapper mapper = new ObjectMapper();
     public ProductServiceImpl(IProductRepository productRepository) {
         this.productRepository = productRepository;
