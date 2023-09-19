@@ -1,6 +1,7 @@
 package com.meli.be_java_hisp_w22_g01.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,4 +19,6 @@ public class Post {
     private Product product;
     private int category;
     private double price;
+    private boolean has_promo;
+    private double discount;
 }

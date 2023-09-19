@@ -14,4 +14,6 @@ public interface IPostRepository {
     void updatePost(int postId, Post updatedPost);
 
     void deletePost(int postId);
+
+    List<Post> findByIdSeller(int userId);
 }

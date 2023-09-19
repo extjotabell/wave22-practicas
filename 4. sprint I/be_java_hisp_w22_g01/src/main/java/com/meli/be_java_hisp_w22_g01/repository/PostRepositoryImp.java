@@ -12,7 +12,7 @@ import java.util.Random;
 
 @Repository
 public class PostRepositoryImp implements IPostRepository {
-    private List<Post> posts = new ArrayList<>();
+    private final List<Post> posts = new ArrayList<>();
     private int nextPostId = 1;
 
     public PostRepositoryImp() {
@@ -33,11 +33,11 @@ public class PostRepositoryImp implements IPostRepository {
             // Número random para el precio
             int price = random.nextInt(3000) + 1;
 
-            Post post = new Post(idUser, this.nextPostId++, LocalDate.now(), product, category, price);
+            Post post = new Post(idUser, this.nextPostId++, LocalDate.now(), product, category, price,false,0);
             this.posts.add(post);
         }
          Product producto1= new Product(10,"Sillon","silla","sillon","rojo","nuevo");
-         Post post1= new Post(2,7,LocalDate.of(2023,9,5),producto1,2,10000);
+         Post post1= new Post(2,7,LocalDate.of(2023,9,5),producto1,2,10000,false,0);
          this.posts.add(post1);
 
     }
@@ -78,5 +78,10 @@ public class PostRepositoryImp implements IPostRepository {
     @Override
     public void deletePost(int postId) {
         this.posts.removeIf(post -> post.getPost_id() == postId);
+    }
+
+    @Override
+    public List<Post> findByIdSeller(int userId) {
+        return this.posts.stream().filter(p-> p.getUser_id() == userId).toList();
     }
 }

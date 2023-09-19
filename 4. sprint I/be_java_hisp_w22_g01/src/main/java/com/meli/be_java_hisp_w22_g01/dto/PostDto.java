@@ -2,6 +2,7 @@ package com.meli.be_java_hisp_w22_g01.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,4 +20,6 @@ public class PostDto {
     private ProductDto product;
     private int category;
     private double price;
+    private boolean has_promo=false;
+    private double discount=0;
 }
