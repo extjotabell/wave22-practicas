@@ -8,7 +8,8 @@ public interface IPostRepository {
     List<Post> getAllPost();
     Post getPostById(int postId);
     List<Post> getPostsByFollowedUsers(int userId);
-    int addPost(Post post);
+    Post addPost(Post post);
     List<Post> getPostsByUserId(int userId);
+    int getPromoPostCount(int userId);
     List<Post> getLatestPostsByUserId(int userId);
 }

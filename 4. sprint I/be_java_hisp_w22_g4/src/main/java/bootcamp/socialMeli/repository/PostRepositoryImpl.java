@@ -78,6 +78,12 @@ public class PostRepositoryImpl implements IPostRepository{
         return this.postsDatabase.values().stream().filter(p -> p.getUser_id() == userId).collect(Collectors.toList());
     }
 
+    @Override
+    public int getPromoPostCount(int userId) {
+
+        return (int) postsDatabase.values().stream().filter(Post::getHas_promo).count();
+    }
+
     public List<Post> getLatestPostsByUserId(int userId)
     {
         return this.postsDatabase.values().stream().filter(p ->
@@ -85,17 +91,14 @@ public class PostRepositoryImpl implements IPostRepository{
     }
 
     @Override
-    public int addPost(Post post) {
-        int idPostNew=0;
-        User userPost = userRepository.findUserById(post.getUser_id()).orElse(null);
-        if(userPost!=null){
-            List<Integer> listidPost = new ArrayList<>(postsDatabase.keySet().stream().toList());
-            Collections.sort(listidPost);
-            idPostNew = listidPost.get(listidPost.size()-1)+1;
-            post.setPost_id(idPostNew);
-            postsDatabase.put(idPostNew, post);
-            listidPost.add(idPostNew);
-        }
-        return idPostNew;
+    public Post addPost(Post post) {
+
+        List<Integer> postIdsList = new ArrayList<>(postsDatabase.keySet().stream().toList());
+        Collections.sort(postIdsList);
+        int idNewPost = postIdsList.get(postIdsList.size()-1)+1;
+        post.setPost_id(idNewPost);
+        postsDatabase.put(idNewPost,post);
+
+        return post;
     }
 }
