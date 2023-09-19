@@ -8,6 +8,7 @@ import com.meli.be_java_hisp_w22_g01.entity.Post;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
 import com.meli.be_java_hisp_w22_g01.exceptions.NotFoundException;
+import com.meli.be_java_hisp_w22_g01.repository.IPostRepository;
 import com.meli.be_java_hisp_w22_g01.repository.ISellerRepository;
 import com.meli.be_java_hisp_w22_g01.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +25,7 @@ public class UserServiceImp implements IUserService{
     private final IUserRepository userRepository;
     private final ISellerRepository sellerRepository;
     private final ObjectMapper mapper;
+    private final IPostRepository postRepository;
 
     @Override
     public FollowedDTO getUserFollowedList(int user_id) {
@@ -150,43 +153,20 @@ public class UserServiceImp implements IUserService{
         }
         return followersDto;
     }
-
     @Override
     public UserFollowedPostListDTO userFollowedPostList(int user_id) {
-
         User user = userRepository.findById(user_id);
-        UserFollowedPostListDTO userFollowedPostListDTO = new UserFollowedPostListDTO();
-
-        List<Seller> sellerOfUser = user.getFollowed();
-        List<PostDto> listOfPost = new ArrayList<>();
 
         LocalDate limitDateOfPost = LocalDate.now().minusDays(14);
 
+        List<Integer> sellersIds = user.getFollowed().stream().map(User::getUser_id).toList();
+        List<PostDto> listOfPosts = postRepository.getAllPosts().stream()
+                .filter(post -> sellersIds.contains(post.getUser_id()))
+                .filter(post -> limitDateOfPost.isBefore(post.getDate()))
+                .map(post -> mapper.convertValue(post, PostDto.class))
+                .toList();
 
-        // recorriendo lista de vendedores seguidos por el usuario
-        for(Seller seller: sellerOfUser){
-            // lista de post publicados por el vendedor
-            for(Post post: seller.getPosts()){
-
-                // si la fecha del post esta dentro de las 2 semanas
-                if(limitDateOfPost.compareTo(post.getDate()) < 0){
-                    PostDto new_post = new PostDto();
-                    new_post.setUser_id(post.getUser_id());
-                    new_post.setPost_id(post.getPost_id());
-                    new_post.setDate(post.getDate());
-                    new_post.setProduct(mapper.convertValue(post.getProduct(), ProductDto.class));
-                    new_post.setCategory(post.getCategory());
-                    new_post.setPrice(post.getPrice());
-
-                    listOfPost.add(new_post);
-                }
-            }
-        }
-
-        userFollowedPostListDTO.setUser_id(user_id);
-        userFollowedPostListDTO.setPosts(listOfPost);
-
-        return userFollowedPostListDTO;
+        return new UserFollowedPostListDTO(user_id, listOfPosts);
     }
     @Override
     public UserFollowedPostListDTO orderByDateFollowedSellers(int id, String order) {
