@@ -51,6 +51,7 @@ Endpoints:
 - 9: /products/followed/{userId}/list?order=date_asc
 - 10: /products/promo-post
 - 11: /products/promo-post/count?user_id={userId}
+- 12: /products/promo-post/list?user_id={userId}
 
 Nicolas:
 Endpoints:
