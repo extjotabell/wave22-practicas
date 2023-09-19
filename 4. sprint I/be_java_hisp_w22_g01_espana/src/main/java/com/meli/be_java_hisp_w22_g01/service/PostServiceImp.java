@@ -75,13 +75,9 @@ public class PostServiceImp implements IPostService{
     // US 0011
     @Override
     public CountPromoPostDTO countPromoPost(int user_id) {
-        List<Post> posts = postRepository.getAllPosts();
-        List<Post> postPromo = posts.stream()
-                .filter(p -> p.getUser_id() == user_id)
-                .filter(p -> p instanceof PromoPost)
-                .toList();
-
+        List<Post> postPromo = postRepository.getPromoPostSeller(user_id);
         int countPromos = postPromo.size();
+
         User seller = sellerRepository.findById(user_id);
         String sellerName = seller.getUser_name();
 
