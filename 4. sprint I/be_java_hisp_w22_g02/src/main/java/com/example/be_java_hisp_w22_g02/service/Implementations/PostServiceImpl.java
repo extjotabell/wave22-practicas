@@ -49,12 +49,7 @@ public class PostServiceImpl implements IPostService {
         if(userRepository.findById(userId) == null){
             throw new NotFoundException("Error: el id ingresado no existe");
         }
-        if(order != null){
-            followedPostDTOS = userRepository.getFollowedPostLasTwoWeeksOrd(userId, order);
-        }else{
-            followedPostDTOS = userRepository.getFollowedPostLasTwoWeeks(userId);
-        }
-
+        followedPostDTOS = userRepository.getFollowedPostLasTwoWeeks(userId,order);
         TwoWeeksPostDTO twoWeeksPostDTO = new TwoWeeksPostDTO(userId,followedPostDTOS);
 
         return twoWeeksPostDTO;

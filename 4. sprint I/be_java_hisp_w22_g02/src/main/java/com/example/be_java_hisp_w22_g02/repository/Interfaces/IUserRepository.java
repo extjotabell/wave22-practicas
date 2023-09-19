@@ -23,7 +23,6 @@ public interface IUserRepository {
 
     List<User> getAllUsers();
 
-    public List<FollowedPostDTO> getFollowedPostLasTwoWeeks(int id);
+    public List<FollowedPostDTO> getFollowedPostLasTwoWeeks(int id,String order);
 
-    List<FollowedPostDTO> getFollowedPostLasTwoWeeksOrd(int userId, String order);
 }

@@ -69,7 +69,7 @@ public class UserRepositoryImpl implements IUserRepository {
 
     @Override
 
-    public List<FollowedPostDTO> getFollowedPostLasTwoWeeks(int id) {
+    public List<FollowedPostDTO> getFollowedPostLasTwoWeeks(int id, String order) {
         User user = dbUser.get(id);
         List<UserFollow> followed = user.getFollowed();
 
@@ -89,22 +89,13 @@ public class UserRepositoryImpl implements IUserRepository {
                     }
                 }
 
-        return orderPostByDate(followedPostDTOS,"date_desc");
+        return orderPostByDate(followedPostDTOS,order);
 
     }
 
-    @Override
-    public List<FollowedPostDTO> getFollowedPostLasTwoWeeksOrd(int userId, String order) {
-        List<FollowedPostDTO> followedPostDTOS = getFollowedPostLasTwoWeeks(userId);
-        if(order.equals("date_desc")){
-            return followedPostDTOS;
-        }
-        return orderPostByDate(followedPostDTOS,"date_asc");
-
-    }
 
     private List<FollowedPostDTO> orderPostByDate(List<FollowedPostDTO> postList, String order) {
-        if (order.equals("date_asc")) {
+        if (order.equals("date_asc") || order == null) {
             Comparator<FollowedPostDTO> comparatorAsc = (f1, f2) -> f1.getPost().getDate()
                     .compareTo(f2.getPost().getDate());
             Collections.sort(postList, comparatorAsc);
