@@ -69,7 +69,7 @@ La colección de postman se encuentra en la carpeta /resources en formato json.
 
 ✅ GET /users/{userId}/followers/count --> Emmanuel Schenoni
 
-✅ GET /users/{userId}/followers/list --> 
+✅ GET /users/{userId}/followers/list --> Magui Cagna
 
 ✅ GET /users/{userId}/followed/list --> Julio Alvarez
 
@@ -79,7 +79,7 @@ La colección de postman se encuentra en la carpeta /resources en formato json.
 
 ✅ POST /users/{userId}/unfollow/{userIdToUnfollow} --> Julio Alvarez
 
-✅ GET /users/{UserID}/followers/list?order --> 
+✅ GET /users/{UserID}/followers/list?order --> Magui Cagna
 
 ✅ GET /products/followed/{userId}/list?order --> Gonzalo Messina
 
