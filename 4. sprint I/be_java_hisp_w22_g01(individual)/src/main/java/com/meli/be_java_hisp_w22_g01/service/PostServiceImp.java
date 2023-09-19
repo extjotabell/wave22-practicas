@@ -41,6 +41,13 @@ public class PostServiceImp implements IPostService{
             productRepository.save(post.getProduct());
         }
         postRepository.addPost(post);
+        int id = postRepository.getAllPosts().size();
+        post.setPost_id(id);
+        List<Post> newPost = seller.getPosts();
+        newPost.add(post);
+
+        seller.setPosts(newPost);
+        sellerRepository.updateUser(seller.getUser_id(), seller);
     }
 
     @Override
