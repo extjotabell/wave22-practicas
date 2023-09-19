@@ -8,30 +8,59 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Repository
 public class UserRepositoryImpl implements IUserRepository {
-    private final Map<Long, User> dbUser = new HashMap<>();
+    private final Map<Integer, User> dbUser = new HashMap<>();
 
-    public UserRepositoryImpl() throws IOException {
+    public UserRepositoryImpl() {
         loadDataBase();
     }
 
-    private void loadDataBase() throws IOException {
+    @Override
+    public User findById(Integer id) {
+        return dbUser.get(id);
+    }
+
+
+    @Override
+    public void followUser(int userId, int userIdToFollow) {
+        User user = dbUser.get(userId);
+        User userToFollow = dbUser.get(userId);
+        user.addFollower(userToFollow);
+    }
+
+
+    @Override
+    public List<User> getAllUsers() {
+        List<User> newList = new ArrayList<>();
+        dbUser.forEach((k,v) -> newList.add(v));
+        return newList;
+    }
+
+    private void loadDataBase(){
         File file;
         ObjectMapper objectMapper = new ObjectMapper();
         List<User> users;
-
-        file = ResourceUtils.getFile("classpath:users.json");
-        users = objectMapper.readValue(file, new TypeReference<List<User>>() {
-        });
-
-        for (User user: users) {
-            dbUser.put(user.getUserId(), user);
+        try {
+            file = ResourceUtils.getFile("classpath:users.json");
+            users = objectMapper.readValue(file, new TypeReference<List<User>>(){});
+            for (User user : users) {
+                dbUser.put(user.getUserId(), user);
+            }
+            System.out.println("Database User loaded successfully...");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+
+    @Override
+    public User getFollowers(int id) {
+        return findById(id);
+    }
+
 }
