@@ -49,4 +49,9 @@ public class PostController {
         return ResponseEntity.ok(postService.getPostWithPromoById(userId));
     }
 
+    @GetMapping("/recommended")
+    public ResponseEntity<UserFollowedSellersPostsDTO> productsRecommended(@RequestParam("user_id") long userId) {
+        return ResponseEntity.ok(postService.getPostRecommendedByID(userId));
+    }
+
 }

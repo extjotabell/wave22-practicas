@@ -9,10 +9,7 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -109,6 +106,34 @@ public class PostServiceImpl implements PostService {
         List<Post> postsWithPromo = postRepository.getPostsWithPromo(user);
         List<PostDTO> postDTOs = mapPromoPostDetailToDTO(postsWithPromo);
         return new GetPromoPostDetailDTO(user.getUserId(), user.getUsername(), postDTOs);
+    }
+
+    @Override
+    public UserFollowedSellersPostsDTO getPostRecommendedByID(long userId) {
+        User user = userService.findById(userId);
+        List<User> follows = user.getFollowed();
+        List<Post> postRecommended = new ArrayList<>();
+
+        for (User userFollow : follows) {
+            List<User> followersOfUserFollow = userFollow.getFollowed();
+            if(!followersOfUserFollow.isEmpty()) {
+                User followed = followersOfUserFollow.get(0);
+                List<Post> userFollowPosts = followed.getPosts();
+
+                if (!userFollowPosts.isEmpty()) {
+                    Post postToAdd = userFollowPosts.get(0);
+
+                    if (!postRecommended.contains(postToAdd)) {
+                        postRecommended.add(postToAdd);
+                    }
+
+                    if (postRecommended.size() == 10) {
+                        break;
+                    }
+                }
+            }
+        }
+        return new UserFollowedSellersPostsDTO(user.getUserId(), mapPromoPostDetailToDTO(postRecommended));
     }
 
     private List<PostDTO> mapPromoPostDetailToDTO(List<Post> postsWithPromo){

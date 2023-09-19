@@ -15,4 +15,6 @@ public interface PostService {
     PromoPostDTO addPostWithPromo(PromoPostDTO updatePostDTO);
 
     GetPromoPostDetailDTO getPostWithPromoById(long userId);
+
+    UserFollowedSellersPostsDTO getPostRecommendedByID(long userId);
 }
