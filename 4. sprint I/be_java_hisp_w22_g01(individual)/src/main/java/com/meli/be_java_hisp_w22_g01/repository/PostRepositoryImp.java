@@ -1,7 +1,6 @@
 package com.meli.be_java_hisp_w22_g01.repository;
 
 import com.meli.be_java_hisp_w22_g01.entity.Post;
-import com.meli.be_java_hisp_w22_g01.entity.PostDiscount;
 import com.meli.be_java_hisp_w22_g01.entity.Product;
 import org.springframework.stereotype.Repository;
 
@@ -35,11 +34,11 @@ public class PostRepositoryImp implements IPostRepository {
             // Número random para el precio
             int price = random.nextInt(3000) + 1;
 
-            Post post = new Post(idUser, this.nextPostId++, LocalDate.now(), product, category, price );
+            Post post = new Post(idUser, this.nextPostId++, LocalDate.now(), product, category, price ,false,0);
             this.posts.add(post);
         }
          Product producto1= new Product(10,"Sillon","silla","sillon","rojo","nuevo");
-         Post post1= new Post(2,7,LocalDate.of(2023,9,5),producto1,2,10000);
+         Post post1= new Post(2,7,LocalDate.of(2023,9,5),producto1,2,10000,false,0);
          this.posts.add(post1);
 
     }
@@ -62,6 +61,8 @@ public class PostRepositoryImp implements IPostRepository {
     @Override
     public void addPost(Post post) {
         post.setPost_id(this.nextPostId++);
+        post.setHas_promo(false);
+        post.setDiscount(0);
         this.posts.add(post);
     }
 
@@ -83,15 +84,16 @@ public class PostRepositoryImp implements IPostRepository {
     }
 
     @Override
-    public void addPostWithDiscount(PostDiscount post) {
+    public void addPostWithDiscount(Post post) {
         post.setPost_id(this.nextPostId++);
+        post.setHas_promo(true);
         this.posts.add(post);
     }
 
     @Override
     public long productsWithDiscount(int userId) {
         return posts.stream()
-                .filter(post -> post instanceof PostDiscount)
+                .filter(Post::isHas_promo)
                 .filter(post -> post.getUser_id() == userId)
                 .count();
 
@@ -99,12 +101,13 @@ public class PostRepositoryImp implements IPostRepository {
 
     @Override
     public List<Post> getProductsDiscount(int id) {
-        List<Post> postDiscountList = new ArrayList<>();
+        List<Post> postDiscount = new ArrayList<>();
 
-        postDiscountList = posts.stream().filter(post -> post.getPost_id() == id)
-                .filter(post -> post instanceof PostDiscount)
+        postDiscount = posts.stream()
+                .filter(post -> post.getUser_id() == id)
+                .filter(Post::isHas_promo)
                 .collect(Collectors.toList());
 
-        return postDiscountList;
+        return postDiscount;
     }
 }

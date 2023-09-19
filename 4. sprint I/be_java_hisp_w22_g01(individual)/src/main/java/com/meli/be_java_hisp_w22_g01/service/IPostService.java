@@ -3,6 +3,7 @@ package com.meli.be_java_hisp_w22_g01.service;
 import com.meli.be_java_hisp_w22_g01.dto.PostDiscountDto;
 import com.meli.be_java_hisp_w22_g01.dto.PostDto;
 import com.meli.be_java_hisp_w22_g01.dto.response.CountDiscountPostDto;
+import com.meli.be_java_hisp_w22_g01.dto.response.PostsDiscountByUserDto;
 
 import java.util.List;
 
@@ -12,5 +13,7 @@ public interface IPostService {
     void createPostWithDiscount(PostDiscountDto postDiscountDto);
 
     CountDiscountPostDto countDiscount(int userId);
+
+    PostsDiscountByUserDto getPostsWithDiscount(int userId);
 
 }

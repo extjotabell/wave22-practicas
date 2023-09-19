@@ -44,4 +44,9 @@ public class ProductController {
     public ResponseEntity<?> getCountProductsDiscount(@RequestParam int user_id){
         return new ResponseEntity<>(postService.countDiscount(user_id), HttpStatus.OK);
     }
+
+    @GetMapping("/promo-post/list")
+    public ResponseEntity<?> getProductsDiscount(@RequestParam int user_id){
+        return new ResponseEntity<>(postService.getPostsWithDiscount(user_id),HttpStatus.OK);
+    }
 }

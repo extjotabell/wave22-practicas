@@ -3,21 +3,21 @@ package com.meli.be_java_hisp_w22_g01.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w22_g01.dto.PostDiscountDto;
 import com.meli.be_java_hisp_w22_g01.dto.PostDto;
+import com.meli.be_java_hisp_w22_g01.dto.ProductDto;
 import com.meli.be_java_hisp_w22_g01.dto.response.CountDiscountPostDto;
+import com.meli.be_java_hisp_w22_g01.dto.response.PostsDiscountByUserDto;
 import com.meli.be_java_hisp_w22_g01.entity.Post;
-import com.meli.be_java_hisp_w22_g01.entity.PostDiscount;
 import com.meli.be_java_hisp_w22_g01.entity.Product;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.exceptions.BadRequestException;
-import com.meli.be_java_hisp_w22_g01.exceptions.NotFoundException;
 import com.meli.be_java_hisp_w22_g01.repository.IPostRepository;
 import com.meli.be_java_hisp_w22_g01.repository.IProductRepository;
 import com.meli.be_java_hisp_w22_g01.repository.ISellerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,7 +45,7 @@ public class PostServiceImp implements IPostService{
 
     @Override
     public void createPostWithDiscount(PostDiscountDto postDiscountDto) {
-        PostDiscount post = mapper.convertValue(postDiscountDto, PostDiscount.class);
+        Post post = mapper.convertValue(postDiscountDto, Post.class);
         Seller seller = sellerRepository.findById(post.getUser_id());
         if(seller == null){
             throw new BadRequestException("No existe el vendedor con id: " + post.getUser_id());
@@ -67,6 +67,34 @@ public class PostServiceImp implements IPostService{
         response.setPromo_products_count(postRepository.productsWithDiscount(userId));
 
         return response;
+    }
+
+    @Override
+    public PostsDiscountByUserDto getPostsWithDiscount(int userId) {
+        List<Post> posts = postRepository.getProductsDiscount(userId);
+        PostsDiscountByUserDto result = new PostsDiscountByUserDto();
+
+        List<PostDiscountDto> postsDis = posts.stream()
+                .map(post -> {
+                    PostDiscountDto postDto = new PostDiscountDto();
+                    postDto.setPost_id(post.getPost_id());
+                    postDto.setProduct(mapper.convertValue(post.getProduct(), ProductDto.class));
+                    postDto.setUser_id(userId);
+                    postDto.setDate(post.getDate());
+                    postDto.setPrice(post.getPrice());
+                    postDto.setCategory(post.getCategory());
+                    postDto.setDiscount(post.getDiscount());
+                    postDto.setHas_promo(post.isHas_promo());
+                    return postDto;
+                })
+                .toList();
+
+        result.setUser_id(userId);
+        result.setUser_name(sellerRepository.findById(userId).getUser_name());
+        result.setPosts(postsDis);
+
+        return result;
+
     }
 
 
