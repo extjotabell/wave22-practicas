@@ -14,9 +14,9 @@ La API se ejecuta desde el archivo BeJavaHispW22G01Application, el cual contiene
 
 ### Como se hacen las pruebas:
 
-Dentro de la carpeta resource se encuentra el archivo "Sprint 1v2.postman_collection" el cual contiene la coleccion de PostMan donde se realizan las pruebas.
+Dentro de la carpeta resource se encuentra el archivo "Sprint 1 v4.postman_collection" el cual contiene la coleccion de PostMan donde se realizan las pruebas.
 
-Ruta: wave22-practicas/4. sprint I/be_java_hisp_w22_g01/src/main/resources/Sprint 1v2.postman_collection.json
+Ruta: wave22-practicas/4. sprint I/be_java_hisp_w22_g01/src/main/resources/Sprint 1 v4.postman_collection.json
 
 En el PostMan se importa este json y se encontraran los distintos casos de prueba:
 
@@ -55,7 +55,8 @@ Endpoints:
 - 4: /users/{userId}/followed/list
 Individuales:
 - 10: /products/promo-post
-- 11: /products/promo-post/count?user_id={userId} 
+- 11: /products/promo-post/count?user_id={userId}
+- 12: /products/promo-post/list
 
 Gonzalo:
 Endpoints:

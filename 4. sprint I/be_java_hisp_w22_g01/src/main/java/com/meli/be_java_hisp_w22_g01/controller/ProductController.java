@@ -19,6 +19,7 @@ public class ProductController {
     private final IUserService userService;
     private final ISellerService sellerService;
 
+    // US_0005
     @PostMapping("/post")
     public ResponseEntity<?> createPost(@RequestBody PostDto postDto) {
         postService.createPost(postDto);
@@ -26,26 +27,32 @@ public class ProductController {
 
     }
 
+    // US_0006
     @GetMapping("/followed/{userId}/list")
     public ResponseEntity<?> followedList(@PathVariable int userId, @RequestParam(required = false) String order) {
 
         if (order == null) {
             return new ResponseEntity<>(userService.userFollowedPostList(userId), HttpStatus.OK);
         } else {
+            // US_0009
             return new ResponseEntity<>(userService.orderByDateFollowedSellers(userId, order), HttpStatus.OK);
         }
     }
 
+    // US_0010
     @PostMapping("/promo-post")
     public ResponseEntity<?> createPromo(@RequestBody PromoDTO promoDTO) {
         postService.createPost(promoDTO);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    // US_0011
     @GetMapping("/promo-post/count")
     public ResponseEntity<?> countProductsInPromotion(@RequestParam int userId) {
         return new ResponseEntity<>(sellerService.countProductsInPromotion(userId), HttpStatus.OK);
     }
+
+    // US_0012
     @GetMapping("/promo-post/list")
     public ResponseEntity<?> listProductsInPromotion(@RequestParam int userId) {
         return new ResponseEntity<>(sellerService.getProductsInPromotion(userId), HttpStatus.OK);
