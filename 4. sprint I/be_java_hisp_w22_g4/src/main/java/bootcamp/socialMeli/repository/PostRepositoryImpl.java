@@ -74,6 +74,11 @@ public class PostRepositoryImpl implements IPostRepository{
     }
 
     @Override
+    public List<Post> getPostByUserId(int userId, boolean hasPromo) {
+        return this.postsDatabase.values().stream().filter(p -> p.getUser_id() == userId && p.isHas_promo() == hasPromo).collect(Collectors.toList());
+    }
+
+    @Override
     public List<Post> getPostsByUserId(int userId) {
         return this.postsDatabase.values().stream().filter(p -> p.getUser_id() == userId).collect(Collectors.toList());
     }
@@ -81,21 +86,26 @@ public class PostRepositoryImpl implements IPostRepository{
     public List<Post> getLatestPostsByUserId(int userId)
     {
         return this.postsDatabase.values().stream().filter(p ->
-                p.getUser_id() == userId && p.getDate().isAfter(LocalDate.now().minusWeeks(2))).collect(Collectors.toList());
+                p.getUser_id() == userId && !p.isHas_promo() && p.getDate().isAfter(LocalDate.now().minusWeeks(2))).collect(Collectors.toList());
+    }
+
+    @Override
+    public int getPromoPostsCountByUser(int userId) {
+        return this.postsDatabase.values().stream().filter(p ->
+                p.getUser_id() ==userId && p.isHas_promo()).toList().size();
     }
 
     @Override
     public int addPost(Post post) {
-        int idPostNew=0;
-        User userPost = userRepository.findUserById(post.getUser_id()).orElse(null);
-        if(userPost!=null){
-            List<Integer> listidPost = new ArrayList<>(postsDatabase.keySet().stream().toList());
-            Collections.sort(listidPost);
-            idPostNew = listidPost.get(listidPost.size()-1)+1;
-            post.setPost_id(idPostNew);
-            postsDatabase.put(idPostNew, post);
-            listidPost.add(idPostNew);
-        }
-        return idPostNew;
+        int newPostId=0;
+
+        List<Integer> listidPost = new ArrayList<>(postsDatabase.keySet().stream().toList());
+        Collections.sort(listidPost);
+        newPostId = listidPost.get(listidPost.size()-1)+1;
+        post.setPost_id(newPostId);
+        postsDatabase.put(newPostId, post);
+        listidPost.add(newPostId);
+
+        return newPostId;
     }
 }
