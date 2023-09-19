@@ -56,9 +56,6 @@ public class PostRepository implements IPostRepository {
         if(productExists(post.getProduct().getId())) return null;
         productList.add(post.getProduct());
 
-        System.out.println(post.getHasPromo());
-        System.out.println(post.getDiscount());
-
         //Setea el id del post y lo agrega a la lista
         post.setId(idCounter);
         database.add(post);

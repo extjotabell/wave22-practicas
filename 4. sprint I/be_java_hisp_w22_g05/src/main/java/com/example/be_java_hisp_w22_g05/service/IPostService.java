@@ -1,6 +1,7 @@
 package com.example.be_java_hisp_w22_g05.service;
 
 import com.example.be_java_hisp_w22_g05.dto.PostDto;
+import com.example.be_java_hisp_w22_g05.dto.QuantityPromoPostDto;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface IPostService {
 
     List<PostDto> getListPostsFromSellersFollowed(int userId, String order);
 
-    int getQttyOfPromProdsBySellerService(int userId);
+    QuantityPromoPostDto getQttyOfPromProdsBySellerService(int userId);
 
     List<PostDto> getListOfPromProdsBySellerService(int userId);
 }

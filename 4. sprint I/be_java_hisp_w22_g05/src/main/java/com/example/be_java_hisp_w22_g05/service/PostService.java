@@ -2,6 +2,7 @@ package com.example.be_java_hisp_w22_g05.service;
 
 import com.example.be_java_hisp_w22_g05.dto.PostDto;
 import com.example.be_java_hisp_w22_g05.dto.ProductDto;
+import com.example.be_java_hisp_w22_g05.dto.QuantityPromoPostDto;
 import com.example.be_java_hisp_w22_g05.entity.Post;
 import com.example.be_java_hisp_w22_g05.entity.Product;
 import com.example.be_java_hisp_w22_g05.entity.User;
@@ -108,10 +109,11 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public int getQttyOfPromProdsBySellerService(int userId) {
+    public QuantityPromoPostDto getQttyOfPromProdsBySellerService(int userId) {
 
         if(userRepository.findUsersById(userId) == null) throw new NotFoundException("No existe ningún vendedor con el id: " + userId);
 
+        User user = getUser(userId);
         // Get a list of posts from a seller
         List<Post> postList = postRepository.findPostsByUserID(userId);
 
@@ -122,7 +124,7 @@ public class PostService implements IPostService {
 
         if(promoPostsList.isEmpty()) throw new NotFoundException("No se encontró ningún post con productos en promocion para el usuario con id: " + userId);
 
-        return promoPostsList.size();
+        return new QuantityPromoPostDto(user.getId(), user.getName(), promoPostsList.size());
     }
 
     @Override
