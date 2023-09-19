@@ -12,15 +12,13 @@ import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
 import com.meli.be_java_hisp_w22_g01.exceptions.BadRequestException;
 import com.meli.be_java_hisp_w22_g01.exceptions.NotFoundException;
-import com.meli.be_java_hisp_w22_g01.repository.IPostRepository;
+// import com.meli.be_java_hisp_w22_g01.repository.IPostRepository;
 import com.meli.be_java_hisp_w22_g01.repository.ISellerRepository;
 import com.meli.be_java_hisp_w22_g01.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -29,7 +27,7 @@ public class SellerServiceImp implements ISellerService{
     private final ISellerRepository sellerRepository;
     private final IUserRepository userRepository;
     private final ObjectMapper mapper;
-    private final IPostRepository postRepository;
+    // private final IPostRepository postRepository;
     @Override
     public CountFollowersDTO countFollowers(int userId) {
         Seller seller = sellerRepository.findById(userId);
