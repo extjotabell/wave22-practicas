@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PostPromoDTO extends PostDTO {
 
-    @JsonProperty("has_promo")
+    @JsonAlias({"has_promo"})
     private boolean hasPromo;
     private double discount;
 }

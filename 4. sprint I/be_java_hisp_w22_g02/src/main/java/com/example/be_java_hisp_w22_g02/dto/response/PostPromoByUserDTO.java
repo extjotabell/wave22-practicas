@@ -1,20 +1,21 @@
 package com.example.be_java_hisp_w22_g02.dto.response;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.example.be_java_hisp_w22_g02.dto.request.PostPromoDTO;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 public class PostPromoByUserDTO {
 
-    @JsonAlias("user_id")
+    @JsonProperty("user_id")
     private int userId;
-    @JsonAlias("user_name")
+    @JsonProperty("user_name")
     private String userName;
-    @JsonAlias("promo_products_count")
-    private int promoProductsCount;
-
+    private List<PostPromoDTO> posts;
 }
