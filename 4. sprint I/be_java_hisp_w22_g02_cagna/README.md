@@ -83,6 +83,14 @@ La colección de postman se encuentra en la carpeta /resources en formato json.
 
 ✅ GET /products/followed/{userId}/list?order --> Gonzalo Messina
 
+# Para la parte individual
+
+✅ POST /products/promo-post
+
+✅ GET /products/promo-post/count?user_id={userId}
+
+✅ GET /products/promo-post/list?user_id={userId}
+
 # Postman Testing 🟠
 
 Dentro de la carpeta resources se encuentra el archivo "Social Meli - Grupo 2.postman_collection" el cual contiene la coleccion de Postman donde se realizan las pruebas de los US grupales e individuales. 
