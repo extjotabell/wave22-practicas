@@ -26,5 +26,12 @@
     "posts": [],
     "followed": [],
     "followers": []
+  },
+  {
+    "userId": 4,
+    "username":"Matias",
+    "posts": [],
+    "followed": [],
+    "followers": []
   }
 ]
