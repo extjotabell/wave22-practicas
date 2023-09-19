@@ -36,7 +36,6 @@ public class PostDTO {
     @NotNull
     private Double price;
 
-
     private boolean hasPromo;
 
     private double discount;

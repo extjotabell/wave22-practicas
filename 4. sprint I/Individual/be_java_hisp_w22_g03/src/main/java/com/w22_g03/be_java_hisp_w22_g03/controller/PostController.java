@@ -40,7 +40,7 @@ public class PostController {
 
     @GetMapping("promo-post/count")
     public ResponseEntity<NumbersOfPromosDTO> getCountOfPromoProducts(@RequestParam long user_Id){
-        return ResponseEntity.ok(postService.CountPostsWithDiscounts(user_Id));
+        return ResponseEntity.ok(postService.countPostsWithDiscounts(user_Id));
     }
 
     @GetMapping("promo-post/list")

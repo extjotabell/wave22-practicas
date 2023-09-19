@@ -17,7 +17,8 @@ public interface PostService {
 
     UserFollowedSellersPostsDTO getFollowedUsersPostsById(long userId, String order);
 
-    NumbersOfPromosDTO CountPostsWithDiscounts(long id);
+    NumbersOfPromosDTO countPostsWithDiscounts(long id);
+
     ProductsInPromoDTO getPostsInPromo(long userId);
 
 }

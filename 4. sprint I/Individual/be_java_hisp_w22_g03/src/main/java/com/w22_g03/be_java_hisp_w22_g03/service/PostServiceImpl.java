@@ -103,7 +103,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public NumbersOfPromosDTO CountPostsWithDiscounts(long id) {
+    public NumbersOfPromosDTO countPostsWithDiscounts(long id) {
+
         NumbersOfPromosDTO responseDto = new NumbersOfPromosDTO();
         User user = userService.findById(id);
         if(postRepository.countPostsWithDiscounts(id)!=0){
