@@ -63,6 +63,18 @@ GET
 
 Trabajado en grupo.
 
+##### US 0010: Llevar a cabo la publicación de un nuevo producto en promoción
+
+POST /products/promo-post
+
+Individual.
+
+##### US 0011: Obtener la cantidad de productos en promoción de un determinado vendedor
+
+GET /products/promo-post/count?user_id={userId}
+
+Individual.
+
 ## Integrantes
 - Cecilia Morlacchi
 - Facundo Hermida
