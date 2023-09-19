@@ -37,6 +37,8 @@ Emmanuel:
 Endpoints 
 - 3: /users/{userId}/followers/list
 - 6: /products/followed/{userId}/list
+- 10: /products/post ( individual )
+- 11: /products/promo-post/count?user_id=1 ( individual )
 
 Belen:
 Endpoints:
