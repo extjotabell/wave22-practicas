@@ -5,6 +5,7 @@ import com.meli.be_java_hisp_w22_g01.dto.PostDto;
 import com.meli.be_java_hisp_w22_g01.entity.Post;
 import com.meli.be_java_hisp_w22_g01.entity.Product;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
+import com.meli.be_java_hisp_w22_g01.exceptions.BadRequestException;
 import com.meli.be_java_hisp_w22_g01.exceptions.NotFoundException;
 import com.meli.be_java_hisp_w22_g01.repository.IPostRepository;
 import com.meli.be_java_hisp_w22_g01.repository.IProductRepository;
@@ -30,7 +31,7 @@ public class PostServiceImp implements IPostService{
         Post post = mapper.convertValue(postDto, Post.class);
         Seller seller = sellerRepository.findById(post.getUser_id());
         if(seller == null){
-            throw new NotFoundException("No existe el vendedor con id: "+ post.getUser_id());
+            throw new BadRequestException("No existe el vendedor con id: "+ post.getUser_id());
         }
         Product product = productRepository.getById(post.getProduct().getProduct_id());
         if(product == null) {
