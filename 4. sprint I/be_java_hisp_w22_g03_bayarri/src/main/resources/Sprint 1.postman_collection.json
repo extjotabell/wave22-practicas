@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"02-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"05-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -328,6 +328,89 @@
 						{
 							"key": "order",
 							"value": "date_asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Promo Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"05-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000,\n  \"has_promo\" : true,\n  \"discount\" : 50\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/products/promo-post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Count Promo Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/promo-post/count?user_id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post",
+						"count"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Promo Post By User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/promo-post/list?user_id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post",
+						"list"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "1"
 						}
 					]
 				}
