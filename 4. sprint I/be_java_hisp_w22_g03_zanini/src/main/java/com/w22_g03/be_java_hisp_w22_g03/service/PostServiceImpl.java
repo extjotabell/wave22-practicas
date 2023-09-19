@@ -1,8 +1,6 @@
 package com.w22_g03.be_java_hisp_w22_g03.service;
 
-import com.w22_g03.be_java_hisp_w22_g03.dto.PostDTO;
-import com.w22_g03.be_java_hisp_w22_g03.dto.ProductDTO;
-import com.w22_g03.be_java_hisp_w22_g03.dto.UserFollowedSellersPostsDTO;
+import com.w22_g03.be_java_hisp_w22_g03.dto.*;
 import com.w22_g03.be_java_hisp_w22_g03.exception.NotFoundException;
 import com.w22_g03.be_java_hisp_w22_g03.model.Post;
 import com.w22_g03.be_java_hisp_w22_g03.model.Product;
@@ -40,6 +38,29 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public PromoPostDTO addPromoPost(PromoPostDTO promoPostDTO) {
+        User user = userService.findById(promoPostDTO.getUserId());
+        Post post = mapPromoPostDtoToPost(promoPostDTO, user);
+        post.setPostId(this.postRepository.countPosts() + 1);
+        this.postRepository.savePost(post);
+        promoPostDTO.setPostId(post.getPostId());
+        return promoPostDTO;
+    }
+
+    @Override
+    public NumberOfPromoProductsDTO countOfPromoProductByVendor(Long userId) {
+        User user = userService.findById(userId);
+        int countOfPromoProducts = countPromoProductsByVendor(user.getPosts());
+        return NumberOfPromoProductsDTO.buildNumberOfPromoProductsDTO(user, countOfPromoProducts);
+    }
+
+    private int countPromoProductsByVendor(List<Post> posts){
+        int count = 0;
+        for (Post post : posts) if (post.isHasPromo()) count+=1;
+        return count;
+    }
+
+    @Override
     public UserFollowedSellersPostsDTO getFollowedUsersPostsById(long userId) {
         return this.getFollowedUsersPostsById(userId, "date_desc");
     }
@@ -67,6 +88,14 @@ public class PostServiceImpl implements PostService {
         ModelMapper mapper = new ModelMapper();
         Post post = mapper.map(postDTO, Post.class);
         post.setProduct(mapper.map(postDTO.getProduct(), Product.class));
+        post.setUser(user);
+        return post;
+    }
+
+    private Post mapPromoPostDtoToPost(PromoPostDTO promoPostDTO, User user) {
+        ModelMapper mapper = new ModelMapper();
+        Post post = mapper.map(promoPostDTO, Post.class);
+        post.setProduct(mapper.map(promoPostDTO.getProduct(), Product.class));
         post.setUser(user);
         return post;
     }

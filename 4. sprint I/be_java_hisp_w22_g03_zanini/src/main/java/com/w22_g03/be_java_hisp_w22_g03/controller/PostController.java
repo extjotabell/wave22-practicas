@@ -1,6 +1,7 @@
 package com.w22_g03.be_java_hisp_w22_g03.controller;
 
 import com.w22_g03.be_java_hisp_w22_g03.dto.PostDTO;
+import com.w22_g03.be_java_hisp_w22_g03.dto.PromoPostDTO;
 import com.w22_g03.be_java_hisp_w22_g03.dto.UserFollowedSellersPostsDTO;
 import com.w22_g03.be_java_hisp_w22_g03.service.PostService;
 import jakarta.validation.Valid;
@@ -26,6 +27,11 @@ public class PostController {
         return ResponseEntity.ok(postService.addPost(postDTO));
     }
 
+    @PostMapping("/promo-post")
+    public ResponseEntity<PromoPostDTO> addPost(@RequestBody @Valid PromoPostDTO promoPostDTO) {
+        return ResponseEntity.ok(postService.addPromoPost(promoPostDTO));
+    }
+
     @GetMapping("/followed/{userId}/list")
     public ResponseEntity<UserFollowedSellersPostsDTO> getFollowedUsersPostsById(@PathVariable long userId,
                                                                                  @RequestParam(required = false) @Pattern(regexp = "^date_(asc|desc)$") String order) {
@@ -34,6 +40,11 @@ public class PostController {
         }else {
             return ResponseEntity.ok(this.postService.getFollowedUsersPostsById(userId));
         }
+    }
+
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<?> getCountOfPromoProductByVendor(@RequestParam(name = "user_id") Long userId){
+        return ResponseEntity.ok(postService.countOfPromoProductByVendor(userId));
     }
 
 }
