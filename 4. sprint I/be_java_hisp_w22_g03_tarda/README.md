@@ -41,6 +41,10 @@ La coleccion de Postman para utilizar mas facilmente los endpoints del pryecto s
 - GET /products/followed/{userId}/list?order=date_asc (Rezno y Agustin)
 - GET /products/followed/{userId}/list?order=date_desc (Rezno y Agustin)
 
+- POST /products/promo-post
+- GET /products/promo-post/count?user_id={userId}
+- GET /products/promo-post/list?user_id={userId}
+
 ## Integrantes
 - Gaspar Zanini
 - Lucas Espinosa

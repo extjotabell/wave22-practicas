@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "8f98fe98-80f1-4c73-aa0c-49db504bf26b",
+		"_postman_id": "72728c49-cac7-4af5-b814-97f6f07862f4",
 		"name": "Sprint 1",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29307478"
 	},
 	"item": [
 		{
@@ -19,18 +20,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "http://localhost:8080/products/post",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"products",
-						"post"
-					]
-				}
+				"url": "http://localhost:8080/products/post"
 			},
 			"response": []
 		},
@@ -39,20 +29,7 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/users/0/follow/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"0",
-						"follow",
-						"1"
-					]
-				}
+				"url": "http://localhost:8080/users/0/follow/1"
 			},
 			"response": []
 		},
@@ -61,20 +38,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/users/1/followers/count",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"1",
-						"followers",
-						"count"
-					]
-				}
+				"url": "http://localhost:8080/users/1/followers/count"
 			},
 			"response": []
 		},
@@ -83,20 +47,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/users/1/followers/list",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"1",
-						"followers",
-						"list"
-					]
-				}
+				"url": "http://localhost:8080/users/1/followers/list"
 			},
 			"response": []
 		},
@@ -161,20 +112,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/users/0/followed/list",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"0",
-						"followed",
-						"list"
-					]
-				}
+				"url": "http://localhost:8080/users/0/followed/list"
 			},
 			"response": []
 		},
@@ -239,20 +177,7 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/users/0/unfollow/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"0",
-						"unfollow",
-						"1"
-					]
-				}
+				"url": "http://localhost:8080/users/0/unfollow/1"
 			},
 			"response": []
 		},
@@ -289,20 +214,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/products/followed/0/list",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"products",
-						"followed",
-						"0",
-						"list"
-					]
-				}
+				"url": "http://localhost:8080/products/followed/0/list"
 			},
 			"response": []
 		},
@@ -331,6 +243,59 @@
 						}
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add promo-post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 1,\n    \"date\": \"29-04-2021\",\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50,\n    \"has_promo\": true,\n    \"discount\": 0.5\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/promo-post"
+			},
+			"response": []
+		},
+		{
+			"name": "Count Promo Posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/promo-post/count?user_id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post",
+						"count"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Promo Posts",
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		}
