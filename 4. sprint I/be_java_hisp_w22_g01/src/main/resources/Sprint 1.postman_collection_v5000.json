@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "ff079129-2374-4a83-a02d-2354bb9f731b",
+		"_postman_id": "f4fd0584-2102-45e0-bcbb-61d5319d8c61",
 		"name": "Sprint 1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29768204"
+		"_exporter_id": "29541502"
 	},
 	"item": [
 		{
-			"name": "US 0001 - Seguir a un vendedor",
+			"name": "US 0001 - ✅: Seguir a un vendedor",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -46,7 +46,7 @@
 			"response": []
 		},
 		{
-			"name": "US 0001 - Error: Seguir a un vendedor inexistente",
+			"name": "US 0001 - 🚫: Seguir a un vendedor inexistente",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -79,7 +79,7 @@
 			"response": []
 		},
 		{
-			"name": "US 0001 - Error: No existe el usuario",
+			"name": "US 0001 - 🚫: No existe el usuario",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -112,7 +112,7 @@
 			"response": []
 		},
 		{
-			"name": "US 0001 - Error: Ya sigue al vendedor",
+			"name": "US 0001 - 🚫: Ya sigue al vendedor",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -145,7 +145,7 @@
 			"response": []
 		},
 		{
-			"name": "US 0002 - Obtener el resultado de la cantidad de usuarios que siguen a un determinado vendedor",
+			"name": "US 0002 - ✅: Obtener el resultado de la cantidad de usuarios que siguen a un determinado vendedor",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -179,7 +179,7 @@
 			"response": []
 		},
 		{
-			"name": "US 0002 - Error: Usuario inexistente",
+			"name": "US 0002 - 🚫: Usuario inexistente",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -211,7 +211,7 @@
 			"response": []
 		},
 		{
-			"name": "US 0003 - Obtener todos los usuarios que siguen a un vendedor",
+			"name": "US 0003 - ✅: Obtener todos los usuarios que siguen a un vendedor",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -245,7 +245,7 @@
 			"response": []
 		},
 		{
-			"name": "US 0003 - Error el usuario no existe",
+			"name": "US 0003 - 🚫: Usuario inexistente",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -277,7 +277,7 @@
 			"response": []
 		},
 		{
-			"name": "US 0004 - Vendedores seguidos por el usuario",
+			"name": "US 0004 - ✅: Vendedores seguidos por el usuario",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -320,7 +320,7 @@
 			"response": []
 		},
 		{
-			"name": "US 0004 - Error: Usuario inexistente o no vendedor",
+			"name": "US 0004 - 🚫: Usuario inexistente o no vendedor",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -353,7 +353,7 @@
 			"response": []
 		},
 		{
-			"name": "US 0005 - Dar de alta una nueva publicación",
+			"name": "US 0005 - ✅: Dar de alta una nueva publicación",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -381,7 +381,7 @@
 			"response": []
 		},
 		{
-			"name": "US 0005 - Error: Usuario inexistente",
+			"name": "US 0005 - 🚫: Usuario inexistente",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -409,7 +409,7 @@
 			"response": []
 		},
 		{
-			"name": "US 0006 - Obtener las publicaciónes",
+			"name": "US 0006 - ✅: Obtener las publicaciónes",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -444,7 +444,7 @@
 			"response": []
 		},
 		{
-			"name": "US 0006 - Error: Vendedor no existente",
+			"name": "US 0006 - 🚫: Vendedor no existente",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -478,7 +478,7 @@
 			"response": []
 		},
 		{
-			"name": "US 0007 - Dejar de seguir un usuario",
+			"name": "US 0007 - ✅: Dejar de seguir un usuario",
 			"event": [
 				{
 					"listen": "test",
@@ -526,7 +526,7 @@
 			"response": []
 		},
 		{
-			"name": "US 0007 - Error: Dejar de seguir a un usuario que no sigue",
+			"name": "US 0007 - 🚫: Dejar de seguir a un usuario que no sigue",
 			"event": [
 				{
 					"listen": "test",
@@ -574,7 +574,7 @@
 			"response": []
 		},
 		{
-			"name": "US 0008 -  (Usuarios) Ordenamiento alfabético ascendente y descendente FOLLOWER",
+			"name": "US 0008 - ✅: Ordenamiento alfabético ascendente y descendente FOLLOWER",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -624,7 +624,7 @@
 			"response": []
 		},
 		{
-			"name": "US 0008 -  (Usuarios) Ordenamiento alfabético ascendente y descendente FOLLOWED",
+			"name": "US 0008 - ✅: Ordenamiento alfabético ascendente y descendente FOLLOWED",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -674,7 +674,7 @@
 			"response": []
 		},
 		{
-			"name": "US 0009 -  (Productos) Ordenamiento alfabético ascendente y descendente",
+			"name": "US 0009 - ✅: Ordenamiento alfabético ascendente y descendente",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -717,6 +717,271 @@
 							"key": "order",
 							"value": "NoExiste",
 							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 0010 - ✅: Publicación de un nuevo producto en promoción",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 1,\n    \"date\": \"16-09-2023\",\n    \"product\": {\n        \"product_id\": 3,\n        \"product_name\": \"Producto en promo\",\n        \"type\": \"Genérico\",\n        \"brand\": \"El Genérico\",\n        \"color\": \"Transparente\",\n        \"notes\": \"Reloaded III\"\n    },\n    \"category\": 100,\n    \"has_promo\": true,\n    \"price\": 1000,\n    \"discount\": 0.5\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/products/promo-post",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 0010 - ✅: Publicación de un nuevo producto sin promo",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 1,\n    \"date\": \"16-09-2023\",\n    \"product\": {\n        \"product_id\": 3,\n        \"product_name\": \"Producto en promo\",\n        \"type\": \"Genérico\",\n        \"brand\": \"El Genérico\",\n        \"color\": \"Transparente\",\n        \"notes\": \"Reloaded III\"\n    },\n    \"category\": 100,\n    \"price\": 1000\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/products/promo-post",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 0010 - 🚫: Vendedor inexistente",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 123,\n    \"date\": \"16-09-2023\",\n    \"product\": {\n        \"product_id\": 3,\n        \"product_name\": \"Producto en promo\",\n        \"type\": \"Genérico\",\n        \"brand\": \"El Genérico\",\n        \"color\": \"Transparente\",\n        \"notes\": \"Reloaded III\"\n    },\n    \"category\": 100,\n    \"price\": 1000,\n    \"has_promo\": true,\n    \"discount\": 0.5\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/products/promo-post",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 0011 - ✅: Obtener la cantidad de publicaciones en promoción de un vendedor",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/products/promo-post/count?userId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post",
+						"count"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 0011 -  🚫 Vendedor inexistente",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/products/promo-post/count?userId=123",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post",
+						"count"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 0012 -  ✅: Listar todos los productos en promoción de un vendedor",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/products/promo-post/list?userId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post",
+						"list"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 0012-  🚫: Vendedor inexistente",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/products/promo-post/list?userId=123",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post",
+						"list"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "123"
 						}
 					]
 				}
