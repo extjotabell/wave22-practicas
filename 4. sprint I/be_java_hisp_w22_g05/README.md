@@ -71,3 +71,77 @@ Trabajado en grupo.
 - Maximiliano Leiva
 - Nahuel Filippa
 - Randy Mendoza
+
+---
+
+---
+## Trabajo Individual
+
+### US 0010: Llevar a cabo la publicación de un nuevo producto en promoción
+**POST** /products/promo-post
+
+**PAYLOAD:**
+```
+{
+    "user_id": 234,
+    "date": "29-04-2021",
+    "product": {
+        "product_id": 1,
+        "product_name": "Silla Gamer",
+        "type": "Gamer",
+        "brand": "Racer",
+        "color": "Red & Black",
+        "notes": "Special Edition"
+    },
+    "category": 100,
+    "price": 1500.50,
+    "has_promo": true,
+    "discount": 0.25
+}
+```
+
+### US 0011: Obtener la cantidad de productos en promoción de un determinado vendedor
+**GET:**  /products/promo-post/count?user_id={userId}
+
+**RESPONSE:**
+
+```
+{
+   "user_id" : 234,
+   "user_name": "vendedor1",
+   "promo_products_count": 23
+}
+
+```
+
+### US 0012: Obtener un listado de todos los productos en promoción de un determinado vendedor 
+
+**GET:** /products/promo-post/list?user_id={userId}
+
+```
+{
+    "user_id": 234,
+    "user_name": "vendedor1",
+    "posts": [
+        {
+            “user_id”: 234
+            "post_id": 18,
+            "date": "29-04-2021",
+            "product": {
+                "product_id": 1,
+                "product_name": "Silla Gamer",
+                "type": "Gamer",
+                "brand": "Racer",
+                "color": "Red & Black",
+                "notes": "Special Edition"
+            },
+            "category": "100",
+            "price": 15000.50,
+            "has_promo": true,
+            "discount": 0.25
+        }
+    ]
+}
+
+```
+Hice el del ejemplo propuesto

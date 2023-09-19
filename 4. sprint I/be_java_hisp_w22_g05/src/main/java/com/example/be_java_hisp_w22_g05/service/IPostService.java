@@ -10,8 +10,6 @@ public interface IPostService {
 
     List<PostDto> getListPostsFromSellersFollowed(int userId, String order);
 
-    void saveNewPromoPost(PostDto postDto);
-
     int getQttyOfPromProdsBySellerService(int userId);
 
     List<PostDto> getListOfPromProdsBySellerService(int userId);

@@ -43,7 +43,14 @@ public class PostService implements IPostService {
 
         LocalDate postDate = LocalDate.parse(postDto.getDate(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
-        Post newPost = new Post(postDto.getId(), postDate, postDto.getCategory(), user, product, postDto.getPrice(), postDto.getHasPromo(), postDto.getDiscount());
+        Post newPost;
+
+        if (postDto.getHasPromo()!= null && postDto.getHasPromo() == true){
+            if (postDto.getDiscount() == null) throw new NotFoundException();
+            newPost = new Post(postDto.getId(), postDate, postDto.getCategory(), user, product, postDto.getPrice()*(1-postDto.getDiscount()), postDto.getHasPromo(), postDto.getDiscount());
+        }else {
+            newPost = new Post(postDto.getId(), postDate, postDto.getCategory(), user, product, postDto.getPrice(), false, 0.0);
+        }
 
         if (postRepository.save(newPost) == null)
             throw new AlreadyExistsException("El producto con id " + product.getId() + " ya existe");
@@ -101,15 +108,9 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public void saveNewPromoPost(PostDto postDto) {
-
-        if(!postDto.getHasPromo()) throw new BadRequestException("No se puede agregar el producto con id: " + postDto.getId() + ", porque no es un producto en promocion");
-
-        saveNewPost(postDto);
-    }
-
-    @Override
     public int getQttyOfPromProdsBySellerService(int userId) {
+
+        if(userRepository.findUsersById(userId) == null) throw new NotFoundException("No existe ningún vendedor con el id: " + userId);
 
         // Get a list of posts from a seller
         List<Post> postList = postRepository.findPostsByUserID(userId);
@@ -126,6 +127,9 @@ public class PostService implements IPostService {
 
     @Override
     public List<PostDto> getListOfPromProdsBySellerService(int userId) {
+
+        if(userRepository.findUsersById(userId) == null) throw new NotFoundException("No existe ningún vendedor con id: " + userId);
+
         // Get a list of posts from a seller
         List<Post> postList = postRepository.findPostsByUserID(userId);
 

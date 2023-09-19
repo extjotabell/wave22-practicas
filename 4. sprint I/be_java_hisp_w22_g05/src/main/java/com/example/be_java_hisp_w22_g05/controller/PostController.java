@@ -32,17 +32,17 @@ public class PostController {
 
     @PostMapping("/promo-post")
     public ResponseEntity<?> newPromoPost(@RequestBody PostDto postDto){
-        postService.saveNewPromoPost(postDto);
+        postService.saveNewPost(postDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/promo-post/count")
-    public ResponseEntity<?> getQuantityOfPromoProductsBySeller(@RequestParam int userId){
+    public ResponseEntity<?> getQuantityOfPromoProductsBySeller(@RequestParam("user_id") int userId){
         return ResponseEntity.ok(postService.getQttyOfPromProdsBySellerService(userId));
     }
 
     @GetMapping("/promo-post/list")
-    public ResponseEntity<?> getListOfPromoProductsBySeller(@RequestParam int userId){
+    public ResponseEntity<?> getListOfPromoProductsBySeller(@RequestParam("user_id") int userId){
         return ResponseEntity.ok(postService.getListOfPromProdsBySellerService(userId));
     }
 }

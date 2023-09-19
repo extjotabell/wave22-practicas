@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 
 @Repository
 public class PostRepository implements IPostRepository {
-    private List<Post> database = new ArrayList<>();
-    private List<Product> productList = new ArrayList<>();
+    private final List<Post> database = new ArrayList<>();
+    private final List<Product> productList = new ArrayList<>();
 
     //Arranca en 4 ya que existen 3 posts. Si se borran estos, debe arrancar en 0
     int idCounter = 4;
@@ -54,6 +54,10 @@ public class PostRepository implements IPostRepository {
 
         //Verifica que no exista un producto con ese id
         if(productExists(post.getProduct().getId())) return null;
+        productList.add(post.getProduct());
+
+        System.out.println(post.getHasPromo());
+        System.out.println(post.getDiscount());
 
         //Setea el id del post y lo agrega a la lista
         post.setId(idCounter);
