@@ -86,7 +86,7 @@ public class PostRepositoryImpl implements IPostRepository{
     public List<Post> getLatestPostsByUserId(int userId)
     {
         return this.postsDatabase.values().stream().filter(p ->
-                p.getUser_id() == userId && !p.isHas_promo() && p.getDate().isAfter(LocalDate.now().minusWeeks(2))).collect(Collectors.toList());
+                p.getUser_id() == userId && p.getDate().isAfter(LocalDate.now().minusWeeks(2))).collect(Collectors.toList());
     }
 
     @Override

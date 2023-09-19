@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "68be747f-56bc-4a3b-a737-d018c25d8960",
+		"_postman_id": "21d97c1a-a57b-4af6-b494-f27f127b7fa3",
 		"name": "Sprints",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29333264"
+		"_exporter_id": "29813520"
 	},
 	"item": [
 		{
@@ -154,7 +154,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/products/followed/6/list?order=date_desc",
+							"raw": "http://localhost:8080/products/followed/1/list?order=date_desc",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -163,7 +163,7 @@
 							"path": [
 								"products",
 								"followed",
-								"6",
+								"1",
 								"list"
 							],
 							"query": [
@@ -256,6 +256,89 @@
 							"port": "8080",
 							"path": [
 								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US10 - addPromoPost",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 6,\n    \"date\": \"2023-09-18\",\n    \"product\": {\n        \"product_id\": 100,\n        \"product_name\": \"Auriculares Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Redragon\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 600.50,\n    \"has_promo\": true,\n    \"discount\": 0.25\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/promo-post",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"promo-post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US11- getPromoPostByUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/promo-post/count?user_id=6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"promo-post",
+								"count"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US12 - getPromoPostListByUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/promo-post/list?user_id=6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"promo-post",
+								"list"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "6"
+								}
 							]
 						}
 					},
