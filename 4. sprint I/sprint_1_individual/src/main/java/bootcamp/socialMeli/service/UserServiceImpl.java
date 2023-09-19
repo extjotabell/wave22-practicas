@@ -104,7 +104,7 @@ public class UserServiceImpl implements IUserService{
     // US 07
     @Override
     public UserDto removeFollower(int userId, int userIdToUnfollow) {
-        if(userId != userIdToUnfollow){
+        if (userId != userIdToUnfollow) {
             User user = findUserById(userId);
             User userToUnfollow = findUserById(userIdToUnfollow);
 

@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PromoPostDto {
+public class PromoPostDto implements IPostDto {
     @Min(value = 1, message = "Se debe ingresar un id usuario")
     private int user_id;
     private int post_id;
@@ -34,4 +34,14 @@ public class PromoPostDto {
     private double price;
     private boolean has_promo;
     private double discount;
+
+    @Override
+    public boolean has_promo() {
+        return has_promo;
+    }
+
+    @Override
+    public double discount() {
+        return discount;
+    }
 }

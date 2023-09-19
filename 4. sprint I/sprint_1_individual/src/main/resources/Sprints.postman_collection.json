@@ -234,23 +234,11 @@
 				},
 				{
 					"name": "US11 - getPromoPostCountByUser",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"user_id\": 7,\n    \"date\": \"2023-09-18\",\n    \"product\": {\n        \"product_id\": 10,\n        \"product_name\": \"iPhone 8\",\n        \"type\": \"Technology\",\n        \"brand\": \"Apple\",\n        \"color\": \"Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 80,\n    \"price\": 1500.50,\n    \"has_promo\": true,\n    \"discount\": 0.1\n}\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/products/promo-post/count?user_id=7",
+							"raw": "http://localhost:8080/products/promo-post/count?userId=7",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -263,7 +251,7 @@
 							],
 							"query": [
 								{
-									"key": "user_id",
+									"key": "userId",
 									"value": "7"
 								}
 							]
@@ -273,23 +261,11 @@
 				},
 				{
 					"name": "US12 - getPromoPostListByUser",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"user_id\": 7,\n    \"date\": \"2023-09-18\",\n    \"product\": {\n        \"product_id\": 10,\n        \"product_name\": \"iPhone 8\",\n        \"type\": \"Technology\",\n        \"brand\": \"Apple\",\n        \"color\": \"Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 80,\n    \"price\": 1500.50,\n    \"has_promo\": true,\n    \"discount\": 0.1\n}\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/products/promo-post/list?user_id=7",
+							"raw": "http://localhost:8080/products/promo-post/list?userId=7",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -302,7 +278,7 @@
 							],
 							"query": [
 								{
-									"key": "user_id",
+									"key": "userId",
 									"value": "7"
 								}
 							]

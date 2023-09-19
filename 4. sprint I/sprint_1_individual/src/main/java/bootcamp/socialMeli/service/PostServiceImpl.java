@@ -38,6 +38,7 @@ public class PostServiceImpl implements IPostService {
         ProductDto productDto = productService.getProductById(post.getProduct_id());
         ModelMapper modelMapper = new ModelMapper();
         PostDto postDto = modelMapper.map(post, PostDto.class);
+        System.out.println("POST DTO CONVERTIDO >>>>> " + postDto);
         postDto.setProduct(productDto);
         return postDto;
     }
@@ -67,37 +68,21 @@ public class PostServiceImpl implements IPostService {
                 collect(Collectors.toList()));
     }
 
-    @Override
-    public void addPost(PostDto postDto) {
-        Post post = new Post(postDto.getPost_id(),
-                postDto.getUser_id(),
-                postDto.getDate(),
-                postDto.getProduct().getProduct_id(),
-                postDto.getCategory(),
-                postDto.getPrice(),
-                false,
-                0);
-        int idNewPost = postRepository.addPost(post);
-
-        productService.addProducto(postDto.getProduct());
-        userService.addPostIdToUser(postDto.getUser_id(), idNewPost);
-    }
-
     // US 05 & US 10
     @Override
-    public void addPromoPost(PromoPostDto promoPostDto) {
-        Post post = new Post(promoPostDto.getPost_id(),
-                promoPostDto.getUser_id(),
-                promoPostDto.getDate(),
-                promoPostDto.getProduct().getProduct_id(),
-                promoPostDto.getCategory(),
-                promoPostDto.getPrice(),
-                promoPostDto.isHas_promo(),
-                promoPostDto.getDiscount());
+    public void addPost(IPostDto iPostDto) {
+        Post post = new Post(iPostDto.getPost_id(),
+                iPostDto.getUser_id(),
+                iPostDto.getDate(),
+                iPostDto.getProduct().getProduct_id(),
+                iPostDto.getCategory(),
+                iPostDto.getPrice(),
+                iPostDto.has_promo(),
+                iPostDto.discount());
         int idNewPost = postRepository.addPost(post);
 
-        productService.addProducto(promoPostDto.getProduct());
-        userService.addPostIdToUser(promoPostDto.getUser_id(), idNewPost);;
+        productService.addProducto(iPostDto.getProduct());
+        userService.addPostIdToUser(iPostDto.getUser_id(), idNewPost);;
     }
 
     // US 11
@@ -120,7 +105,10 @@ public class PostServiceImpl implements IPostService {
 
         for (Post userPromoPost : userPromoPosts) {
             ModelMapper modelMapper = new ModelMapper();
-            promoPostDtos.add(modelMapper.map(userPromoPost, PromoPostDto.class));
+            ProductDto userProductPostDto = productService.getProductById(userPromoPost.getProduct_id());
+            PromoPostDto promoPostDto = modelMapper.map(userPromoPost, PromoPostDto.class);
+            promoPostDto.setProduct(userProductPostDto);
+            promoPostDtos.add(promoPostDto);
         }
 
         return new PromoProductsListDto(userId, userService.getUserNameById(userId), promoPostDtos);
