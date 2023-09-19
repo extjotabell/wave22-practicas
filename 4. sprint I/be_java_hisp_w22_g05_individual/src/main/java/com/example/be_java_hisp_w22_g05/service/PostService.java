@@ -121,11 +121,9 @@ public class PostService implements IPostService {
 
         if (userPromoPosts.isEmpty()) throw new NotFoundException("No se encontraron Posts en promocion");
 
-        List<PostDto> postDtos = userPromoPosts.stream()
+        return new UserPromoPostsDto(user.getId(), user.getName(), userPromoPosts.stream()
                 .map(postMapper::toPostDTO)
-                .collect(Collectors.toList());
-
-        return new UserPromoPostsDto(user.getId(), user.getName(), postDtos);
+                .collect(Collectors.toList()));
     }
 
     private List<PostDto> orderList(List<Post> posts, boolean isAsc) {
