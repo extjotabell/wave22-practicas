@@ -67,7 +67,7 @@ La colección de postman se encuentra en la carpeta /resources en formato json.
 
 ✅ POST /users/{userId}/follow/{userIdToFollow} --> 
 
-✅ GET /users/{userId}/followers/count --> 
+✅ GET /users/{userId}/followers/count --> Emmanuel Schenoni
 
 ✅ GET /users/{userId}/followers/list --> 
 
