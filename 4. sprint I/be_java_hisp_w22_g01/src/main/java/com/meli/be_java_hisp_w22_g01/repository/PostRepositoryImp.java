@@ -56,7 +56,6 @@ public class PostRepositoryImp implements IPostRepository {
         }
         return null;
     }
-
     @Override
     public void addPost(Post post) {
         post.setPost_id(this.nextPostId++);

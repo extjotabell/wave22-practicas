@@ -14,4 +14,5 @@ public interface ISellerRepository {
     void addFollower(int idFollower, int idSeller);
     void updateUser(int user_id, Seller seller);
     List<User> getAllFollowers(Seller seller);
+
 }

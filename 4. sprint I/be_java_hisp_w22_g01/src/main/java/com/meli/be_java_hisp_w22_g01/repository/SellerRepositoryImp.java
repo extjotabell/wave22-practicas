@@ -118,5 +118,6 @@ public class SellerRepositoryImp implements ISellerRepository{
         Seller oldSeller = this.findById(user_id);
         int indexPos = this.sellerList.indexOf(oldSeller);
         this.sellerList.set(indexPos, seller);
+        System.out.println(seller.getPosts());
     }
 }

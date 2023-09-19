@@ -12,10 +12,7 @@ import com.meli.be_java_hisp_w22_g01.repository.ISellerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -37,6 +34,15 @@ public class PostServiceImp implements IPostService{
             productRepository.save(post.getProduct());
         }
         postRepository.addPost(post);
+        int id = postRepository.getAllPosts().size();
+        post.setPost_id(id);
+        List<Post> newPost = seller.getPosts();
+        newPost.add(post);
+
+        seller.setPosts(newPost);
+        sellerRepository.updateUser(seller.getUser_id(), seller);
+
+
     }
 
 

@@ -1,5 +1,6 @@
 package com.meli.be_java_hisp_w22_g01.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
