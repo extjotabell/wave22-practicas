@@ -46,19 +46,9 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements IUserService {
 
     private final IUserRepository userRepository;
-
-
-    private final UserFollowMapper userFollowMapper;
-
-
     private final UserFollowerMapper userFollowerMapper;
-
-
     private final UserMapper userMapper;
-
-
     private final UserFollowedMapper userFollowedMapper;
-
     private final ObjectMapper mapper;
 
 
@@ -79,7 +69,7 @@ public class UserServiceImpl implements IUserService {
         if(existsUser(userId))
             return userMapper.toDto(userRepository.findById(userId));
         else
-            throw new NotFoundException("No existe el usuario");
+            throw new NotFoundException("There's no user for id: "+userId);
     }
 
     @Override
@@ -187,7 +177,7 @@ public class UserServiceImpl implements IUserService {
         return user;
     }
     private void sortingByNameValidation(String order){
-        if(order != null && !order.equals("name_asc") && !order.equals("name_desc"))
+        if(!order.equals("name_asc") && !order.equals("name_desc"))
             throw new BadRequestException("The sorting order "+order+" doesn't exist.");
     }
 

@@ -191,30 +191,8 @@
   {
     "user_id": 28,
     "user_name": "catalina_11",
-    "followers": [
-      {
-        "user_id": 29,
-        "user_name": "ricardo_mtz"
-      },
-      {
-        "user_id": 27,
-        "user_name": "danielito"
-      },
-      {
-        "user_id": 26,
-        "user_name": "sofia_mtz"
-      }
-    ],
-    "followed": [
-      {
-        "user_id": 26,
-        "user_name": "sofia_mtz"
-      },
-      {
-        "user_id": 30,
-        "user_name": "andrea_22"
-      }
-    ],
+    "followers": [],
+    "followed": [],
     "posts": []
   },
   {

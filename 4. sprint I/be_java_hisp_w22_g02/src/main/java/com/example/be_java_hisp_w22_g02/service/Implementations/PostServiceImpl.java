@@ -45,7 +45,7 @@ public class PostServiceImpl implements IPostService {
         List<FollowedPostDTO> followedPostDTOS;
 
         if(userRepository.findById(userId) == null){
-            throw new NotFoundException("Error: el id ingresado no existe");
+            throw new NotFoundException("Error: the id does not exist");
         }
         if(order != null){
             followedPostDTOS = userRepository.getFollowedPostLasTwoWeeksOrd(userId, order);
@@ -61,7 +61,7 @@ public class PostServiceImpl implements IPostService {
     @Override
     public PostDTO addNewPost(PostDTO dto) {
         if(dto == null || !valid(dto)){
-            throw new BadRequestException("Los campos ingresados no son válidos");
+            throw new BadRequestException("Input fields are not valid");
         }
         userService.addUserPost(mapper.convertValue(dto, Post.class), dto.getUserId());
         return mapper.convertValue(postRepository.save(mapper.convertValue(dto, Post.class)), PostDTO.class);

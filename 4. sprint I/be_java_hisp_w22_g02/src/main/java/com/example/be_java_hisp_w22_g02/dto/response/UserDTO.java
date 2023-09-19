@@ -16,10 +16,8 @@ import java.util.List;
 public class UserDTO {
     @JsonAlias({"user_id"})
     private int userId;
-
     @JsonAlias({"user_name"})
     private String userName;
-
     private List<UserFollowDTO> followers = new ArrayList<>();
     private List<UserFollowDTO> followed = new ArrayList<>();
     private List<Post> posts = new ArrayList<>();
