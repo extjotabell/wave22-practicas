@@ -4,6 +4,8 @@ import com.meli.obtenerdiploma.model.StudentDTO;
 import com.meli.obtenerdiploma.model.SubjectDTO;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -18,14 +20,15 @@ public class ObtenerDiplomaService implements IObtenerDiplomaService {
         return rq;
     }
 
-    private String getGreetingMessage(String studentName, Double average) {
+    private String getGreetingMessage(String studentName, BigDecimal average) {
         return "El alumno " + studentName + " ha obtenido un promedio de " + new DecimalFormat("#.##").format(average)
-                + ((average > 9) ? ". Felicitaciones!" : ". Puedes mejorar.");
+                + ((average.doubleValue() > 9) ? ". Felicitaciones!" : ". Puedes mejorar.");
     }
 
-    private Double calculateAverage(List<SubjectDTO> scores) {
+    private BigDecimal calculateAverage(List<SubjectDTO> scores) {
         return scores.stream()
-                .reduce(0D, (partialSum, score)  -> partialSum + score.getScore(), Double::sum)
-                / scores.size();
+                .map(s -> BigDecimal.valueOf(s.getScore()))
+                .reduce(BigDecimal::add).orElseGet(() -> BigDecimal.ZERO).divide(BigDecimal.valueOf(scores.size()), 2, RoundingMode.HALF_UP);
+
     }
 }
