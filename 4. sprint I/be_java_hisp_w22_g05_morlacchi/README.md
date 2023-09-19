@@ -71,3 +71,23 @@ Trabajado en grupo.
 - Maximiliano Leiva
 - Nahuel Filippa
 - Randy Mendoza
+
+## Trabajo Individual
+
+##### US 0010: Llevar a cabo la publicación de un nuevo producto en promoción
+POST /products/promo-post
+
+(Crea una publicacion en promocion desde el mismo metodo para crear una publicacion comun, y luego calcula el precio con el descuento aplicado.)
+
+##### US 0011: Obtener la cantidad de productos en promoción de un determinado vendedor
+GET /products/promo-post/count?user_id={userId}
+
+(Para poder realizar esto,se creo un DTO nuevo.)
+
+##### US 0012: Obtiene un listado de la cantidad de seguidores de cada vendedor, ordenados de manera descendente.
+GET /users/most-popular
+
+(Esta pensado en el marco para saber cual es el mejor vendedor o el que tiene mas posibilidades de realizar ventas.)
+***
+
+*Adicionalmente en el US0001 agregue un filtro para que solo se permita seguir a vendedores*

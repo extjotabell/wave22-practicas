@@ -103,7 +103,7 @@ public class PostService implements IPostService {
 
     @Override
     public SellerCountPostDto countPromo(int userId) {
-        long postBySeller = postRepository.findPostAll().stream().filter(p -> p.getUser().getId() == userId).count();
+        long postBySeller = postRepository.findPostAll().stream().filter(p -> p.getUser().getId() == userId && p.getHasPromo() == true).count();
         User seller = userRepository.findUsersById(userId);
         return new SellerCountPostDto(seller.getId(),seller.getName(), (int) postBySeller);
     }

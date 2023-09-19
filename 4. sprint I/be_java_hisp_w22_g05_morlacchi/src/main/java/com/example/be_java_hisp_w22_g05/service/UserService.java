@@ -4,9 +4,11 @@ import com.example.be_java_hisp_w22_g05.dto.UserDto;
 import com.example.be_java_hisp_w22_g05.dto.UserFollowedDto;
 import com.example.be_java_hisp_w22_g05.dto.UserFollowersDto;
 import com.example.be_java_hisp_w22_g05.dto.UserNumberFollowersDto;
+import com.example.be_java_hisp_w22_g05.entity.Post;
 import com.example.be_java_hisp_w22_g05.entity.User;
 import com.example.be_java_hisp_w22_g05.exception.FollowException;
 import com.example.be_java_hisp_w22_g05.exception.NotFoundException;
+import com.example.be_java_hisp_w22_g05.repository.IPostRepository;
 import com.example.be_java_hisp_w22_g05.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,7 @@ import java.util.List;
 public class UserService implements IUserService {
 
     private final IUserRepository userRepository;
+    private final IPostRepository postRepository;
 
     @Override
     public UserFollowedDto followUser(int followerId, int userToFollowId) {
@@ -42,7 +45,11 @@ public class UserService implements IUserService {
         if(follower.getFollowed().contains(userToFollow)){
             throw new FollowException("El usuario " + followerId + " ya sigue al usuario " + userToFollowId);
         }
-
+        Post userPost = postRepository.findPostAll().stream().filter(p-> p.getUser().getId() == userToFollowId).findFirst().orElse(null);
+        System.out.println(userPost);
+        if(userPost == null){
+            throw new NotFoundException("El usuario con id " + userToFollowId + " no es un vendedor.");
+        }
         //Follow
         follower = userRepository.follow(follower,userToFollow);
         
