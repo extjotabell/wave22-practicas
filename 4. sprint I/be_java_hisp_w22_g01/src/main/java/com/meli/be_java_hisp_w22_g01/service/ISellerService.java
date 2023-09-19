@@ -1,9 +1,6 @@
 package com.meli.be_java_hisp_w22_g01.service;
 
-import com.meli.be_java_hisp_w22_g01.dto.response.CountFollowersDTO;
-import com.meli.be_java_hisp_w22_g01.dto.response.CountPromotionsDTO;
-import com.meli.be_java_hisp_w22_g01.dto.response.FollowMessageDto;
-import com.meli.be_java_hisp_w22_g01.dto.response.UserMiniDTO;
+import com.meli.be_java_hisp_w22_g01.dto.response.*;
 
 import java.util.List;
 
@@ -12,4 +9,6 @@ public interface ISellerService {
     FollowMessageDto setAFollower(int idFollower, int idSeller);
 
     CountPromotionsDTO countProductsInPromotion(int userId);
+
+    ListPromotionPostDTO getProductsInPromotion(int userId);
 }

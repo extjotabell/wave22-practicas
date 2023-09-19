@@ -46,4 +46,10 @@ public class ProductController {
     public ResponseEntity<?> countProductsInPromotion(@RequestParam int userId) {
         return new ResponseEntity<>(sellerService.countProductsInPromotion(userId), HttpStatus.OK);
     }
+    @GetMapping("/promo-post/list")
+    public ResponseEntity<?> listProductsInPromotion(@RequestParam int userId) {
+        return new ResponseEntity<>(sellerService.getProductsInPromotion(userId), HttpStatus.OK);
+    }
+
+
 }

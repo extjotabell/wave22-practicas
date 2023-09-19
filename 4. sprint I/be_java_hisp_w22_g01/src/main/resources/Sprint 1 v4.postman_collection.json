@@ -936,6 +936,118 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "US 0011 -  ✅: Listar todos los productos en promoción de un vendedor",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"userId\", \"6\");",
+							"// pm.environment.set(\"userId\", \"5\");",
+							"// pm.environment.set(\"userId\", \"4\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 1,\n    \"date\": \"16-09-2023\",\n    \"product\": {\n        \"product_id\": 3,\n        \"product_name\": \"Producto en promo\",\n        \"type\": \"Genérico\",\n        \"brand\": \"El Genérico\",\n        \"color\": \"Transparente\",\n        \"notes\": \"Reloaded III\"\n    },\n    \"category\": 100,\n    \"price\": 1000,\n    \"discount\": 0.5\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/products/promo-post/list?userId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post",
+						"list"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1"
+						},
+						{
+							"key": "order",
+							"value": "NoExiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 0011 -  🚫: Vendedor inexistente",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"userId\", \"6\");",
+							"// pm.environment.set(\"userId\", \"5\");",
+							"// pm.environment.set(\"userId\", \"4\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 1,\n    \"date\": \"16-09-2023\",\n    \"product\": {\n        \"product_id\": 3,\n        \"product_name\": \"Producto en promo\",\n        \"type\": \"Genérico\",\n        \"brand\": \"El Genérico\",\n        \"color\": \"Transparente\",\n        \"notes\": \"Reloaded III\"\n    },\n    \"category\": 100,\n    \"price\": 1000,\n    \"discount\": 0.5\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/products/promo-post/list?userId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post",
+						"list"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1"
+						},
+						{
+							"key": "order",
+							"value": "NoExiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [

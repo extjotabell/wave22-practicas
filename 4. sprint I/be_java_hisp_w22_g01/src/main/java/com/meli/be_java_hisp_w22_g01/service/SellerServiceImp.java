@@ -1,8 +1,11 @@
 package com.meli.be_java_hisp_w22_g01.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.meli.be_java_hisp_w22_g01.dto.PromoDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.CountFollowersDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.CountPromotionsDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.FollowMessageDto;
+import com.meli.be_java_hisp_w22_g01.dto.response.ListPromotionPostDTO;
 import com.meli.be_java_hisp_w22_g01.entity.Post;
 import com.meli.be_java_hisp_w22_g01.entity.PromoPost;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +27,7 @@ public class SellerServiceImp implements ISellerService{
 
     private final ISellerRepository sellerRepository;
     private final IUserRepository userRepository;
+    private final ObjectMapper mapper;
     @Override
     public CountFollowersDTO countFollowers(int userId) {
         Seller seller = sellerRepository.findById(userId);
@@ -64,5 +69,18 @@ public class SellerServiceImp implements ISellerService{
 
         List<Post> postInPromo = seller.getPosts().stream().filter(post -> post instanceof PromoPost).toList();
         return new CountPromotionsDTO(userId,seller.getUser_name(),postInPromo.size());
+    }
+
+    @Override
+    public ListPromotionPostDTO getProductsInPromotion(int userId) {
+        Seller seller = sellerRepository.findById(userId);
+
+        if(seller == null) {
+            throw new NotFoundException("No se encontró el vendedor con id: " + userId);
+        }
+
+        List<Post> postInPromo = seller.getPosts().stream().filter(post -> post instanceof PromoPost).toList();
+        List<PromoDTO> promoDTOS = postInPromo.stream().map(post -> mapper.convertValue(post, PromoDTO.class)).toList();
+        return new ListPromotionPostDTO(userId,seller.getUser_name(), promoDTOS);
     }
 }
