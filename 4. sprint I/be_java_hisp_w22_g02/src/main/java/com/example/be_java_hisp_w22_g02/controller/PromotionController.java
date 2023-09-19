@@ -6,12 +6,9 @@ import com.example.be_java_hisp_w22_g02.dto.response.PromotionListDTO;
 import com.example.be_java_hisp_w22_g02.service.Interfaces.IPromotionService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @AllArgsConstructor
