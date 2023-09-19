@@ -1,0 +1,618 @@
+{
+	"info": {
+		"_postman_id": "793eeed5-ee9a-402f-876a-9dc3b0a8b633",
+		"name": "Social Meli - Grupo 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "US 001 - Follow user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{SocialMeliURL}}/users/10/follow/3",
+					"host": [
+						"{{SocialMeliURL}}"
+					],
+					"path": [
+						"users",
+						"10",
+						"follow",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 001 -  ERROR - Wrong ids",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{SocialMeliURL}}/users/1/follow/{{userIdToFollow}}",
+					"host": [
+						"{{SocialMeliURL}}"
+					],
+					"path": [
+						"users",
+						"1",
+						"follow",
+						"{{userIdToFollow}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US002 - Followers count",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/10/followers/count",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"10",
+						"followers",
+						"count"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 002 - ERROR - User Id not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SocialMeliURL}}/users/260/followers/count",
+					"host": [
+						"{{SocialMeliURL}}"
+					],
+					"path": [
+						"users",
+						"260",
+						"followers",
+						"count"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 003 - Get Followers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SocialMeliURL}}/users/10/followers/list",
+					"host": [
+						"{{SocialMeliURL}}"
+					],
+					"path": [
+						"users",
+						"10",
+						"followers",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 004 - Get Followed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SocialMeliURL}}/users/10/followed/list",
+					"host": [
+						"{{SocialMeliURL}}"
+					],
+					"path": [
+						"users",
+						"10",
+						"followed",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 004/3 - ERROR - Wrong ids",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SocialMeliURL}}/users/280/followers/list",
+					"host": [
+						"{{SocialMeliURL}}"
+					],
+					"path": [
+						"users",
+						"280",
+						"followers",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 005 - Add new Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 3,\n    \"date\": \"2023-09-19\",\n    \"product\": {\n        \"product_id\": \"2\",\n        \"product_name\": \"Campera\",\n        \"type\": \"Sample Type\",\n        \"brand\": \"Sample Brand\",\n        \"color\": \"Sample Color\",\n        \"notes\": \"Sample Notes\",\n        \"quantity\": 5\n    },\n    \"category\": 3,\n    \"price\": 1999.0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{SocialMeliURL}}/products/post",
+					"host": [
+						"{{SocialMeliURL}}"
+					],
+					"path": [
+						"products",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 005 - ERROR - Wrong user id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": \"hola\",\n    \"date\": \"2023-09-13\",\n    \"product\": {\n        \"product_id\": \"2\",\n        \"product_name\": \"Sample Product\",\n        \"type\": \"Sample Type\",\n        \"brand\": \"Sample Brand\",\n        \"color\": \"Sample Color\",\n        \"notes\": \"Sample Notes\",\n        \"quantity\": 5\n    },\n    \"category\": 3,\n    \"price\": 1999.0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{SocialMeliURL}}/products/post",
+					"host": [
+						"{{SocialMeliURL}}"
+					],
+					"path": [
+						"products",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 006 - Post by followed users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"userId\", \"28\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SocialMeliURL}}/products/followed/10/list",
+					"host": [
+						"{{SocialMeliURL}}"
+					],
+					"path": [
+						"products",
+						"followed",
+						"10",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 007 - Unfollow user by an user id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"userId\", \"28\");",
+							"pm.environment.set(\"userIdToUnfollow\", \"1\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{SocialMeliURL}}/users/1/unfollow/20",
+					"host": [
+						"{{SocialMeliURL}}"
+					],
+					"path": [
+						"users",
+						"1",
+						"unfollow",
+						"20"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 007 - ERROR - Empty list",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{SocialMeliURL}}/users/10/unfollow/20",
+					"host": [
+						"{{SocialMeliURL}}"
+					],
+					"path": [
+						"users",
+						"10",
+						"unfollow",
+						"20"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 008 - Get Sorted Followers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"userId\", \"28\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SocialMeliURL}}/users/10/followers/list?order=name_asc",
+					"host": [
+						"{{SocialMeliURL}}"
+					],
+					"path": [
+						"users",
+						"10",
+						"followers",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "name_asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 008 - Get Sorted Followed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"userId\", \"28\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SocialMeliURL}}/users/10/followed/list?order=name_asc",
+					"host": [
+						"{{SocialMeliURL}}"
+					],
+					"path": [
+						"users",
+						"10",
+						"followed",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "name_asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 008 - ERROR - Incorrect order param",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"userId\", \"28\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SocialMeliURL}}/users/10/followers/list?order=asd",
+					"host": [
+						"{{SocialMeliURL}}"
+					],
+					"path": [
+						"users",
+						"10",
+						"followers",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "asd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 009 - Post by followed users in order",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SocialMeliURL}}/products/followed/10/list?order=date_asc",
+					"host": [
+						"{{SocialMeliURL}}"
+					],
+					"path": [
+						"products",
+						"followed",
+						"10",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "date_asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Promo Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 3,\n    \"date\": \"\",\n    \"product\": {\n        \"product_id\": \"2\",\n        \"product_name\": \"Cartera\",\n        \"type\": \"Sample Type\",\n        \"brand\": \"Sample Brand\",\n        \"color\": \"Sample Color\",\n        \"notes\": \"Sample Notes\",\n        \"quantity\": 5\n    },\n    \"category\": 3,\n    \"price\": 1999.0, \n    \"has_promo\": true, \n    \"discount\": 10.0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/products/promo-post",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get total promo count by user id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/products/promo-post/count?user_id=3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post",
+						"count"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all promo products by user id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/products/promo-post/list?user_id=3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post",
+						"list"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "userId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "SocialMeliURL",
+			"value": "localhost:8080"
+		},
+		{
+			"key": "userIdToFollow",
+			"value": "0",
+			"type": "string"
+		}
+	]
+}
