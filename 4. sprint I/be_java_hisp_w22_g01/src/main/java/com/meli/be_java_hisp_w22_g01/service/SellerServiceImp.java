@@ -12,6 +12,7 @@ import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
 import com.meli.be_java_hisp_w22_g01.exceptions.BadRequestException;
 import com.meli.be_java_hisp_w22_g01.exceptions.NotFoundException;
+import com.meli.be_java_hisp_w22_g01.repository.IPostRepository;
 import com.meli.be_java_hisp_w22_g01.repository.ISellerRepository;
 import com.meli.be_java_hisp_w22_g01.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ public class SellerServiceImp implements ISellerService{
     private final ISellerRepository sellerRepository;
     private final IUserRepository userRepository;
     private final ObjectMapper mapper;
+    private final IPostRepository postRepository;
     @Override
     public CountFollowersDTO countFollowers(int userId) {
         Seller seller = sellerRepository.findById(userId);
@@ -66,6 +68,14 @@ public class SellerServiceImp implements ISellerService{
         if(seller == null) {
             throw new NotFoundException("No se encontró el vendedor con id: " + userId);
         }
+
+        /*
+        Alternative way of obtaining with the post repository instead through a seller
+        List<Post> promoList = postRepository.getAllPosts().stream()
+                .filter(post -> post.getUser_id() == userId)
+                .filter(post -> post instanceof PromoPost)
+                .toList();
+        */
 
         List<Post> postInPromo = seller.getPosts().stream().filter(post -> post instanceof PromoPost).toList();
         return new CountPromotionsDTO(userId,seller.getUser_name(),postInPromo.size());
