@@ -53,6 +53,9 @@ Endpoints:
 Nicolas:
 Endpoints:
 - 4: /users/{userId}/followed/list
+Individuales:
+- 10: /products/promo-post
+- 11: /products/promo-post/count?user_id={userId} 
 
 Gonzalo:
 Endpoints:
