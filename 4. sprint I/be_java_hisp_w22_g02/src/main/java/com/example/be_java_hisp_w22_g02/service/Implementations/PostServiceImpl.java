@@ -3,12 +3,13 @@ package com.example.be_java_hisp_w22_g02.service.Implementations;
 
 import com.example.be_java_hisp_w22_g02.dto.request.PostPromoDTO;
 import com.example.be_java_hisp_w22_g02.dto.response.FollowedPostDTO;
-import com.example.be_java_hisp_w22_g02.dto.response.CountPostPromoByUserDTO;
 import com.example.be_java_hisp_w22_g02.dto.response.PostPromoByUserDTO;
 import com.example.be_java_hisp_w22_g02.dto.response.TwoWeeksPostDTO;
+import com.example.be_java_hisp_w22_g02.dto.response.UserDTO;
 import com.example.be_java_hisp_w22_g02.entity.Post;
 
 import com.example.be_java_hisp_w22_g02.exception.NotFoundException;
+import com.example.be_java_hisp_w22_g02.entity.User;
 import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
 import com.example.be_java_hisp_w22_g02.service.Interfaces.IPostService;
 import lombok.AllArgsConstructor;
@@ -45,27 +46,27 @@ public class PostServiceImpl implements IPostService {
     public TwoWeeksPostDTO getLastTwoWeeksPostByUser(int userId, String order) {
         List<FollowedPostDTO> followedPostDTOS;
 
-        if (userRepository.findById(userId) == null) {
+        if(userRepository.findById(userId) == null){
             throw new NotFoundException("Error: the id does not exist");
         }
-        if (order != null) {
+        if(order != null){
             followedPostDTOS = userRepository.getFollowedPostLasTwoWeeksOrd(userId, order);
-        } else {
+        }else{
             followedPostDTOS = userRepository.getFollowedPostLasTwoWeeks(userId);
         }
 
-        TwoWeeksPostDTO twoWeeksPostDTO = new TwoWeeksPostDTO(userId, followedPostDTOS);
+        TwoWeeksPostDTO twoWeeksPostDTO = new TwoWeeksPostDTO(userId,followedPostDTOS);
 
         return twoWeeksPostDTO;
     }
 
     @Override
     public PostDTO addNewPost(PostDTO dto) {
-        if (dto == null || !valid(dto)) {
+        if(dto == null || !valid(dto)){
             throw new BadRequestException("Input fields are not valid");
         }
         userService.addUserPost(mapper.convertValue(dto, Post.class), dto.getUserId());
-        if (dto instanceof PostPromoDTO)
+        if(dto instanceof PostPromoDTO)
             return mapper.convertValue(postRepository.save(mapper.convertValue(dto, Post.class)), PostPromoDTO.class);
         else
             return mapper.convertValue(postRepository.save(mapper.convertValue(dto, Post.class)), PostDTO.class);
@@ -73,23 +74,14 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public CountPostPromoByUserDTO countPostPromoByUser(int userId) {
-        if (!userService.existsUser(userId))
-            throw new NotFoundException("User with id: " + userId + " doesn't exist");
+    public PostPromoByUserDTO countPostPromoByUser(int userId) {
         List<Post> posts = postRepository.findPromoPostByUser(userId);
-        return new CountPostPromoByUserDTO(userId, userService.getUser(userId).getUserName(), posts.size());
+        if(posts.isEmpty())
+            throw new NotFoundException("User with id: " + userId + " doesn't has posts with promotions");
+        return new PostPromoByUserDTO(userId, userService.getUser(userId).getUserName(), posts.size());
     }
 
-    @Override
-    public PostPromoByUserDTO getPostPromoByUser(int userId) {
-        if (!userService.existsUser(userId))
-            throw new NotFoundException("User with id: " + userId + " doesn't exist");
-        List<Post> posts = postRepository.findPromoPostByUser(userId);
-        List<PostPromoDTO> postsDTO = posts.stream().map(p -> mapper.convertValue(p, PostPromoDTO.class)).toList();
-        return new PostPromoByUserDTO(userId, userService.getUser(userId).getUserName(), postsDTO);
-    }
-
-    private boolean valid(PostDTO dto) {
+    private boolean valid(PostDTO dto){
         return !isValidInt(dto.getUserId()) || !userService.existsUser(dto.getUserId()) || !isValidInt(dto.getCategory())
                 || !isValidDouble(dto.getPrice()) || dto.getProduct() == null;
     }
@@ -101,4 +93,5 @@ public class PostServiceImpl implements IPostService {
     private boolean isValidDouble(double value) {
         return !DOUBLE_PATTERN.matcher(String.valueOf(value)).matches();
     }
+
 }

@@ -21,7 +21,7 @@ public class Post {
     private Product product;
     private int category;
     private double price;
-    @JsonAlias("has_promo")
+    @JsonProperty("has_promo")
     private boolean hasPromo;
     private double discount;
 }

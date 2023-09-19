@@ -1,7 +1,6 @@
 package com.example.be_java_hisp_w22_g02.controller;
 import com.example.be_java_hisp_w22_g02.dto.request.PostDTO;
 import com.example.be_java_hisp_w22_g02.dto.request.PostPromoDTO;
-import com.example.be_java_hisp_w22_g02.dto.response.CountPostPromoByUserDTO;
 import com.example.be_java_hisp_w22_g02.dto.response.PostPromoByUserDTO;
 import com.example.be_java_hisp_w22_g02.service.Interfaces.IPostService;
 import org.springframework.http.ResponseEntity;
@@ -37,14 +36,9 @@ public class PostController {
         return ResponseEntity.ok(postService.addNewPost(post));
     }
 
-    @GetMapping("/promo-post/count")
-    public ResponseEntity<CountPostPromoByUserDTO> getCountPostPromoByUser(@RequestParam int user_id) {
+    @GetMapping("/products/promo-post/count")
+    public ResponseEntity<PostPromoByUserDTO> getCountPostPromoByUser(@RequestParam int user_id) {
         return ResponseEntity.ok(postService.countPostPromoByUser(user_id));
-    }
-
-    @GetMapping("/promo-post/list")
-    public ResponseEntity<PostPromoByUserDTO> getPostPromoByUser(@RequestParam int user_id) {
-        return ResponseEntity.ok(postService.getPostPromoByUser(user_id));
     }
 }
 
