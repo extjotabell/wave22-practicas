@@ -9,19 +9,16 @@ import com.example.be_java_hisp_w22_g05.exception.NotFoundException;
 import com.example.be_java_hisp_w22_g05.mapper.PostMapper;
 import com.example.be_java_hisp_w22_g05.repository.IPostRepository;
 import com.example.be_java_hisp_w22_g05.repository.IUserRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.stereotype.Service;
-import org.modelmapper.ModelMapper;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -43,9 +40,7 @@ public class PostService implements IPostService {
 
         LocalDate postDate = LocalDate.parse(postDto.getDate(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
-        ModelMapper mapper = new ModelMapper();
-
-        boolean hasPromo = (postDto.getHasPromo() != null) ? postDto.getHasPromo() : false;
+        boolean hasPromo = (postDto.getHasPromo() != null) && postDto.getHasPromo();
         Double discount = (postDto.getHasPromo() != null) ? postDto.getDiscount() : 0.0;
 
         Post newPost = new Post(postDto.getId(), postDate, postDto.getCategory(),
@@ -73,8 +68,6 @@ public class PostService implements IPostService {
     @Override
     public List<PostDto> getListPostsFromSellersFollowed(int userId, String order) {
 
-        ObjectMapper objectMapper = mapperBuilder.build();
-
         // Obtain list of sellers followed
         List<User> sellersList = userRepository.findUsersById(userId).getFollowed();
 
@@ -94,11 +87,8 @@ public class PostService implements IPostService {
         }
 
         //Aca ordenamos
-        if (order != null && order.equals("date_asc")) {
-            return orderList(postList, true);
-        } else {
-            return orderList(postList, false);
-        }
+        boolean ascendingOrder = order != null && order.equals("date_asc");
+        return orderList(postList, ascendingOrder);
 
     }
 
@@ -154,14 +144,14 @@ public class PostService implements IPostService {
         List<Post> postList = postRepository.findPostAll();
         return postList.stream()
                 .map(this::mapPostToPostDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private List<PostDto> orderList(List<Post> posts, boolean isAsc) {
         return posts.stream()
                 .filter(Objects::nonNull).sorted((x, y) -> isAsc ? x.getDate().compareTo(y.getDate()) : y.getDate().compareTo(x.getDate()))
                 .map(postMapper::toPostDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private List<PostDto> getFormattedPostDtosForUser(User user) {
@@ -170,7 +160,7 @@ public class PostService implements IPostService {
         return postList.stream()
                 .filter(post -> post.getUser().equals(user))
                 .map(this::mapPostToPostDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     //convierte una instancia de Post en un PostDto

@@ -28,7 +28,7 @@ public class PostController {
     }
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<?> getListPostsFromSellersFollowed(@PathVariable int userId,@RequestParam(required = false) String order){
+    public ResponseEntity<List<PostDto>> getListPostsFromSellersFollowed(@PathVariable int userId,@RequestParam(required = false) String order){
         return new ResponseEntity<List<PostDto>>(postService.getListPostsFromSellersFollowed(userId, order), HttpStatus.OK);
     }
 
@@ -41,7 +41,7 @@ public class PostController {
 
     //US 0011: Obtener la cantidad de productos en promoción de un determinado vendedor
     @GetMapping("/promo-post/count")
-    public ResponseEntity<?> getQuantityProductsPromoBySeller(@RequestParam int userId){
+    public ResponseEntity<PostPromoCountDto> getQuantityProductsPromoBySeller(@RequestParam int userId){
         return new ResponseEntity<PostPromoCountDto>(postService.findQuantityProductsPromoBySeller(userId), HttpStatus.OK);
     }
 
@@ -52,7 +52,7 @@ public class PostController {
     }
 
     @GetMapping
-    public  ResponseEntity<?> getAll(){
+    public  ResponseEntity<List<PostDto>> getAll(){
         return new ResponseEntity<List<PostDto>>(postService.findPostAll(),HttpStatus.OK);
     }
 }
