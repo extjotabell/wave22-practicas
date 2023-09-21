@@ -25,13 +25,23 @@ public class CharacterRepositoryImplTest {
 
 
     @Test
-    void testFindAllByNameContains_MatchingName() {
+    void findNameLukeTest() {
         String query = "Luke";
 
         List<CharacterDTO> listCharacters = characterRepository.findAllByNameContains(query);
 
         assertNotNull(listCharacters);
         assertEquals(1, listCharacters.size());
+    }
+
+    @Test
+    void findNameDarthTest() {
+        String query = "Darth";
+
+        List<CharacterDTO> listCharacters = characterRepository.findAllByNameContains(query);
+
+        assertNotNull(listCharacters);
+        assertEquals(2, listCharacters.size());
     }
 
 
