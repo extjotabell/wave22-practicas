@@ -18,10 +18,10 @@ import java.util.List;
 public class FindServiceTest {
 
     @Mock
-    CharacterRepositoryImpl characterRepository = new CharacterRepositoryImpl();
+    CharacterRepositoryImpl characterRepository;
 
     @InjectMocks
-    FindService findService = new FindService();
+    FindService findService;
 
     @Test
     void findTest(){

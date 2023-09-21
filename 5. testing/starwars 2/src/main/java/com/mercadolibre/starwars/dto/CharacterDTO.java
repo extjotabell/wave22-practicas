@@ -1,13 +1,11 @@
 package com.mercadolibre.starwars.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@EqualsAndHashCode
 @Data
-@AllArgsConstructor
 public class CharacterDTO {
   private String name;
   private String hair_color;
