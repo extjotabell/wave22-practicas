@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.io.IOException;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class StudentServiceTests {
+class StudentServiceTests {
 
     @Mock
     IStudentDAO studentDAO;
@@ -29,7 +30,7 @@ public class StudentServiceTests {
     StudentService service;
 
     @Test
-    public void createStudent() {
+    void createStudent() {
         // arrange
         StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
 
@@ -41,7 +42,7 @@ public class StudentServiceTests {
     }
 
     @Test
-    public void readStudent() {
+    void readStudent() {
         // arrange
         StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
         when(studentDAO.findById(stu.getId())).thenReturn(stu);
@@ -55,7 +56,7 @@ public class StudentServiceTests {
     }
 
     @Test
-    public void updateStudent() {
+    void updateStudent() {
         // arrange
         StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
 
@@ -67,7 +68,7 @@ public class StudentServiceTests {
     }
 
     @Test
-    public void deleteStudent() {
+    void deleteStudent() {
         // arrange
         StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
 
@@ -79,7 +80,7 @@ public class StudentServiceTests {
     }
 
     @Test
-    public void getAllStudents() {
+    void getAllStudents() throws IOException {
         // arrange
         Set<StudentDTO> students = TestUtilsGenerator.getStudentSet();
         when(studentRepo.findAll()).thenReturn(students);

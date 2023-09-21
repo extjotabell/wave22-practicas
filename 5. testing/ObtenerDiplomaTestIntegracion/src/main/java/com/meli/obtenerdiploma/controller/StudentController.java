@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Set;
 
 @RestController
@@ -17,7 +18,7 @@ public class StudentController {
     IStudentService studentService;
 
     @PostMapping("/registerStudent")
-    public ResponseEntity<?> registerStudent(@RequestBody @Valid StudentDTO stu) {
+    public ResponseEntity<Object> registerStudent(@RequestBody @Valid StudentDTO stu) {
         this.studentService.create(stu);
         return ResponseEntity.ok(null);
     }
@@ -28,19 +29,19 @@ public class StudentController {
     }
 
     @PostMapping("/modifyStudent")
-    public ResponseEntity<?> modifyStudent(@RequestBody @Valid StudentDTO stu) {
+    public ResponseEntity<Object> modifyStudent(@RequestBody @Valid StudentDTO stu) {
         this.studentService.update(stu);
         return ResponseEntity.ok(null);
     }
 
     @GetMapping("/removeStudent/{id}")
-    public ResponseEntity<?> removeStudent(@PathVariable Long id) {
+    public ResponseEntity<Object> removeStudent(@PathVariable Long id) {
         this.studentService.delete(id);
         return ResponseEntity.ok(null);
     }
 
     @GetMapping("/listStudents")
-    public Set<StudentDTO> listStudents() {
+    public Set<StudentDTO> listStudents() throws IOException {
         return this.studentService.getAll();
     }
 

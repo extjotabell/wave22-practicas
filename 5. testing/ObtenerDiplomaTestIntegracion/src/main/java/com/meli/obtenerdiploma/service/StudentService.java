@@ -6,6 +6,7 @@ import com.meli.obtenerdiploma.repository.IStudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Set;
 
 @Service
@@ -38,7 +39,7 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public Set<StudentDTO> getAll() {
+    public Set<StudentDTO> getAll() throws IOException {
         return this.studentRepository.findAll();
     }
 }

@@ -12,13 +12,13 @@ import java.io.PrintWriter;
 import java.util.Properties;
 import java.util.Set;
 
-public class StudentRepositoryTests {
+class StudentRepositoryTests {
 
     IStudentRepository studentRepo;
     IStudentDAO studentDAO;
 
     @BeforeEach @AfterEach
-    private void setUp() {
+    private void setUp() throws IOException {
         TestUtilsGenerator.emptyUsersFile();
 
         this.studentDAO = new StudentDAO();
@@ -26,7 +26,7 @@ public class StudentRepositoryTests {
     }
 
     @Test
-    public void findAllExistentStudents() {
+    void findAllExistentStudents() throws IOException {
         // arrange
         Set<StudentDTO> students = TestUtilsGenerator.getStudentSet();
         students.forEach((stu) -> studentDAO.save(stu));
