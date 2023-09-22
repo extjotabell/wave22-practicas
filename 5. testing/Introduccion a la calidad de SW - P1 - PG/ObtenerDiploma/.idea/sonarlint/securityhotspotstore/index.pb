@@ -17,3 +17,5 @@ g
 7src/main/java/com/meli/obtenerdiploma/dto/ErrorDto.java,b/f/bf5903d589b84bd9ea580322b7c3dc121f1ff4d2
 t
 Dsrc/main/java/com/meli/obtenerdiploma/exception/ExceptionConfig.java,e/6/e60305a49bcd62eea6887973e0d9c7474eb6a8fa
+y
+Isrc/test/java/com/meli/obtenerdiploma/ObtenerDiplomaApplicationTests.java,a/9/a91cafda48da1959aa138e59d01f977c3355a08a

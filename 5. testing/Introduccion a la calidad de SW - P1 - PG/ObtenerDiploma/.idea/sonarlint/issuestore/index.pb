@@ -17,3 +17,5 @@ Dsrc/main/java/com/meli/obtenerdiploma/exception/ExceptionConfig.java,e/6/e6030
 Nsrc/main/java/com/meli/obtenerdiploma/controller/ObtenerDiplomaController.java,d/7/d753dd9534d4c9871436c38e947a03687071b4f9
 t
 Dsrc/main/java/com/meli/obtenerdiploma/ObtenerDiplomaApplication.java,4/a/4acbfe03152eb34dd5e7875bf9fad09c784909b4
+y
+Isrc/test/java/com/meli/obtenerdiploma/ObtenerDiplomaApplicationTests.java,a/9/a91cafda48da1959aa138e59d01f977c3355a08a
