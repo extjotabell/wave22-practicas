@@ -1,10 +1,12 @@
 package com.meli.obtenerdiploma.model;
 
-import jakarta.validation.constraints.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter @Setter
+import javax.validation.constraints.*;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class SubjectDTO {
 
     @NotEmpty(message = "El nombre de la materia no puede estar vacío.")
@@ -12,7 +14,7 @@ public class SubjectDTO {
     @Size(max = 30, message = "La longitud del nombre no puede superar los 30 caracteres.")
     String name;
 
-    @NotEmpty(message = "La nota no puede estar vacía.")
+    @NotNull(message = "La nota no puede estar vacía.")
     @DecimalMin(value = "0.0", message = "La mínima nota es 0.0.")
     @DecimalMax(value = "10.0", message = "La máxima nota es 10.0.")
     Double score;
