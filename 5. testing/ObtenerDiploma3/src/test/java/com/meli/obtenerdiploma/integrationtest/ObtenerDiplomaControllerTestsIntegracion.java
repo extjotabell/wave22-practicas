@@ -27,11 +27,11 @@ public class ObtenerDiplomaControllerTestsIntegracion {
 
         ObjectWriter mapper = new ObjectMapper().configure(SerializationFeature.WRAP_ROOT_VALUE, false).writer();
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/analyzeScores/{studentId}", 1))
+        mockMvc.perform(MockMvcRequestBuilders.get("/analyzeScores/{studentId}", 1)) //ejecutar la request
                 .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.studentName").value("Juan"))
+                .andExpect(status().isOk()) // cotejar que coincide el status
+                .andExpect(content().contentType("application/json")) //cotejar que coincida el status
+                .andExpect(MockMvcResultMatchers.jsonPath("$.studentName").value("Juan")) // cotejar que coincida el body
                 .andExpect(MockMvcResultMatchers.jsonPath("$.averageScore").value("7.333333333333333"));
     }
 
