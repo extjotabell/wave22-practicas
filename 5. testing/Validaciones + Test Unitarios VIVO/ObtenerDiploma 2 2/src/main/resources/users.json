@@ -1,0 +1,54 @@
+[
+  {
+    "id": 2,
+    "studentName": "Pedro",
+    "message": null,
+    "averageScore": null,
+    "subjects": [
+      {
+        "name": "Matemática",
+        "score": 10.0
+      },
+      {
+        "name": "Física",
+        "score": 8.0
+      },
+      {
+        "name": "Química",
+        "score": 4.0
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "studentName": "Carlos",
+    "message": "Hola",
+    "averageScore": 8.2,
+    "subjects": [
+      {
+        "name": "Química",
+        "score": 7.8
+      },
+      {
+        "name": "Física",
+        "score": 8.4
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "studentName": "Carlos",
+    "message": "Hola",
+    "averageScore": 8.2,
+    "subjects": [
+      {
+        "name": "Química",
+        "score": 7.8
+      },
+      {
+        "name": "Física",
+        "score": 8.4
+      }
+    ]
+  }
+]
