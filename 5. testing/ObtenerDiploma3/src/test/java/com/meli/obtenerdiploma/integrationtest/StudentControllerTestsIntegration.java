@@ -1,4 +1,4 @@
-package com.meli.obtenerdiploma.controller;
+package com.meli.obtenerdiploma.integrationtest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
