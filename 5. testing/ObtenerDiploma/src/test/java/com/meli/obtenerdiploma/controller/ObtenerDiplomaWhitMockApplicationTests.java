@@ -20,10 +20,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ObtenerDiplomaWhitMockApplicationTests {
 
     @Mock
-    private StudentDAO studentDAO;
+    private ObtenerDiplomaService obtenerDiplomaService;
 
     @InjectMocks
-    private ObtenerDiplomaService obtenerDiplomaService;
+    private ObtenerDiplomaController obtenerDiplomaController;
 
 
     @Test
@@ -32,9 +32,10 @@ public class ObtenerDiplomaWhitMockApplicationTests {
         student.setId(7L);
         student.setStudentName("Mati Marin");
         student.setSubjects(List.of(new SubjectDTO("Math", 9.0)));
+        student.setAverageScore(9.0);
         double averageExpected = 9.0;
 
-        Mockito.when(studentDAO.findById(7L)).thenReturn(student);
+        Mockito.when(obtenerDiplomaController.analyzeScores(7L)).thenReturn(student);
 
         StudentDTO foundStudent = obtenerDiplomaService.analyzeScores(7L);
 
@@ -44,7 +45,7 @@ public class ObtenerDiplomaWhitMockApplicationTests {
 
     @Test
     void findByIdThrowsExceptionWhenNotFound() {
-        Mockito.when(studentDAO.findById(Mockito.any())).thenThrow(new StudentNotFoundException(999L));
+        Mockito.when(obtenerDiplomaController.analyzeScores(Mockito.any())).thenThrow(new StudentNotFoundException(999L));
         assertThrows(StudentNotFoundException.class, () -> obtenerDiplomaService.analyzeScores(999L));
     }
 

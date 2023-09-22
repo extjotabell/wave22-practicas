@@ -30,7 +30,7 @@ public class ObtenerDiplomaWithMockApplicationTests {
         inputStudent.setId(17L);
         inputStudent.setStudentName("John Doe");
         inputStudent.setSubjects(Collections.singletonList(new SubjectDTO("Math", 80.0)));
-        double averageExpected = 90.0;
+        double averageExpected = 80.0;
 
         Mockito.when(studentDAO.findById(17L)).thenReturn(inputStudent);
 
