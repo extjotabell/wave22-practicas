@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UserController {
 
-    private final IUserService userService;
+    private IUserService userService;
 
     @PostMapping("/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<?> followUser(@PathVariable int userId, @PathVariable int userIdToFollow) {
-        userService.followUser(userId, userIdToFollow);
-        return ResponseEntity.ok("User followed successfully");
+        return new ResponseEntity<>(userService.followUser(userId, userIdToFollow), HttpStatus.OK);
     }
 
     @GetMapping("/{userId}/followers/list")
@@ -29,8 +28,8 @@ public class UserController {
 
     @GetMapping("/{userId}/followed/list")
     public ResponseEntity<UserFollowedDTO> getFollowedUser(@PathVariable Integer userId, @RequestParam(required = false) String order) {
-        UserFollowedDTO userFollowedDTO = userService.getFollowedUsersById(userId, order);
-        return new ResponseEntity<>(userFollowedDTO, HttpStatusCode.valueOf(200));
+        UserFollowedDTO userFollowedDTO = userService.getFollowed(userId, order);
+        return new ResponseEntity<>(userFollowedDTO, HttpStatus.OK);
     }
     @GetMapping("/{userId}/followers/count")
     public ResponseEntity<?> getFollowersCountByUserId(@PathVariable int userId){
@@ -39,8 +38,7 @@ public class UserController {
 
     @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
     public ResponseEntity<?> unfollowUser(@PathVariable int userId, @PathVariable int userIdToUnfollow) {
-        userService.unfollowUser(userId, userIdToUnfollow);
-        return new ResponseEntity<>("User unfollowed succesfully.", HttpStatus.valueOf(200));
+        return new ResponseEntity<>(userService.unfollowUser(userId, userIdToUnfollow), HttpStatus.OK);
     }
 
 }

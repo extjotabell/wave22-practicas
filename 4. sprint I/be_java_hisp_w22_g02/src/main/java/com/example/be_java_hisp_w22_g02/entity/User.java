@@ -16,15 +16,8 @@ public class User {
     @JsonAlias({"user_name"})
     private String userName;
 
-    private List<UserFollow> followers = new ArrayList<>();
-    private List<UserFollow> followed = new ArrayList<>();
+    private List<Integer> followers = new ArrayList<>();
+    private List<Integer> followed = new ArrayList<>();
     private List<Post> posts = new ArrayList<>();
 
-    public void addFollower(UserFollow follower) {
-        followers.add(follower);
-    }
-
-    public void addFollowed(UserFollow f) {
-        followed.add(f);
-    }
 }

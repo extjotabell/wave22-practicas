@@ -1,101 +1,65 @@
 package com.example.be_java_hisp_w22_g02.service.Implementations;
 
 import com.example.be_java_hisp_w22_g02.dto.request.PostDTO;
-import com.example.be_java_hisp_w22_g02.dto.response.UserDTO;
+import com.example.be_java_hisp_w22_g02.dto.response.*;
 import com.example.be_java_hisp_w22_g02.entity.Post;
 import com.example.be_java_hisp_w22_g02.exception.BadRequestException;
 import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
 import com.example.be_java_hisp_w22_g02.service.Interfaces.IUserService;
-
-
-
-import com.example.be_java_hisp_w22_g02.dto.response.TotalFollowersDto;
-import com.example.be_java_hisp_w22_g02.dto.response.UserFollowedDTO;
-import com.example.be_java_hisp_w22_g02.dto.response.UserFollowerDTO;
-
 import com.example.be_java_hisp_w22_g02.entity.User;
-import com.example.be_java_hisp_w22_g02.entity.UserFollow;
-import com.example.be_java_hisp_w22_g02.exception.IsEmptyException;
 import com.example.be_java_hisp_w22_g02.exception.NotFoundException;
-import com.example.be_java_hisp_w22_g02.mapper.UserFollowMapper;
-
-
-
-
 import lombok.AllArgsConstructor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-
-
-import com.example.be_java_hisp_w22_g02.mapper.UserFollowerMapper;
-
-import com.example.be_java_hisp_w22_g02.mapper.UserMapper;
-
-import com.example.be_java_hisp_w22_g02.mapper.UserFollowedMapper;
-
 import org.springframework.stereotype.Service;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static com.example.be_java_hisp_w22_g02.enums.ResponseMessages.*;
 
 
 @AllArgsConstructor
 @Service
 public class UserServiceImpl implements IUserService {
 
-    private final IUserRepository userRepository;
-    private final UserFollowerMapper userFollowerMapper;
-    private final UserMapper userMapper;
-    private final UserFollowedMapper userFollowedMapper;
-    private final ObjectMapper mapper;
+    private IUserRepository userRepository;
+    private ObjectMapper mapper;
 
 
     @Override
-    public void followUser(int userId, int userIdToFollow) {
-        if(!existsUser(userId))
-            throw new NotFoundException("User with id: " + userId + " not found.");
-        if(!existsUser(userIdToFollow))
-            throw new NotFoundException("User with id: " + userIdToFollow + " not found.");
+    public SuccessDTO followUser(int userId, int userIdToFollow) {
+        if(!userRepository.existingUserById(userId))
+            throw new NotFoundException(String.format(USER_ID_NOT_FOUND.toString(), userId));
+        if(!userRepository.existingUserById(userIdToFollow))
+            throw new NotFoundException(String.format(USER_ID_NOT_FOUND.toString(), userIdToFollow));
         if(userId == userIdToFollow)
-            throw new BadRequestException("User ids can't be the same");
+            throw new BadRequestException(SAME_USER_ID.toString());
+        if(userRepository.findById(userId).getFollowed().contains(userIdToFollow))
+            throw new BadRequestException(FOLLOW_TWICE.toString());
         userRepository.followUser(userId, userIdToFollow);
-    }
-
-    @Override
-
-    public UserDTO getUser(int userId) {
-        if(existsUser(userId))
-            return userMapper.toDto(userRepository.findById(userId));
-        else
-            throw new NotFoundException("There's no user for id: "+userId);
-    }
-
-    @Override
-    public List<UserDTO> getAllUsers() {
-        return userRepository.getAllUsers()
-                .stream()
-                .map(u -> mapper.convertValue(u, UserDTO.class))
-                .toList();
+        return new SuccessDTO(SUCCESSFUL_FOLLOW.toString());
     }
 
     @Override
     public UserFollowerDTO getFollowers(int id, String order) {
+        if (!userRepository.existingUserById(id))
+            throw new NotFoundException(String.format(USER_ID_NOT_FOUND.toString(), id));
+
         User user = userRepository.findById(id);
-        if (user == null)
-            throw new NotFoundException("User with id: " + id + " not found.");
+        UserFollowerDTO userFollowersDTO = new UserFollowerDTO(user.getUserId(), user.getUserName());
+        userFollowersDTO.setFollowers(getUserFollowsInfo(user.getFollowers()));
+
         if(order != null){
-            User sortedFollowers = sortingFollowers(user, order);
-            return userFollowerMapper.toDto(sortedFollowers);
+            return sortingFollowers(userFollowersDTO, order);
         }
-        return userFollowerMapper.toDto(user);
+        return userFollowersDTO;
     }
 
     @Override
     public TotalFollowersDto getTotalFollowersByUserId(int userId) {
-        if (!existsUser(userId)) {
-            throw new NotFoundException("User with id: " + userId + " not found.");
+        if (!userRepository.existingUserById(userId)) {
+            throw new NotFoundException(String.format(USER_ID_NOT_FOUND.toString(), userId));
         }
 
         User user = userRepository.findById(userId);
@@ -104,88 +68,92 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void unfollowUser(int userId, int userIdToUnfollow) {
-        User mainUser = userRepository.findById(userId);
-        User targetUserToUnfollow = userRepository.findById(userIdToUnfollow);
+    public SuccessDTO unfollowUser(int userId, int userIdToUnfollow) {
+        if(!userRepository.existingUserById(userId))
+            throw new NotFoundException(String.format(USER_ID_NOT_FOUND.toString(), userId));
+        if(!userRepository.existingUserById(userIdToUnfollow))
+            throw new NotFoundException(String.format(USER_ID_NOT_FOUND.toString(), userIdToUnfollow));
+        if(userId == userIdToUnfollow)
+            throw new BadRequestException(SAME_USER_ID.toString());
+        userRepository.unFollowUser(userId, userIdToUnfollow);
+        return new SuccessDTO(SUCCESSFUL_UNFOLLOW.toString());
+    }
 
-        if (mainUser == null) {
-            throw new NotFoundException("User with id: " + userId + " not found.");
-        } else if (targetUserToUnfollow == null) {
-            throw new NotFoundException("User with id: " + userIdToUnfollow + " not found.");
+    @Override
+    public UserFollowedDTO getFollowed(Integer id, String order) {
+        if (!userRepository.existingUserById(id)) {
+            throw new NotFoundException(String.format(USER_ID_NOT_FOUND.toString(), id));
+        }
+
+        User user = userRepository.findById(id);
+        UserFollowedDTO userFollowedDTO = new UserFollowedDTO(user.getUserId(), user.getUserName());
+        userFollowedDTO.setFollowed(getUserFollowsInfo(user.getFollowed()));
+
+        if (order != null) {
+            return sortingFollowed(userFollowedDTO, order);
         } else {
-            List<UserFollow> userFollowedList = mainUser.getFollowed();
-            List<UserFollow> userFollowersList = targetUserToUnfollow.getFollowers();
-            deleteUserFromList(userFollowedList, getUserFollowById(userFollowedList,userIdToUnfollow));
-            deleteUserFromList(userFollowersList, getUserFollowById(userFollowersList, userId));
+            return userFollowedDTO;
         }
     }
 
-    public UserFollowedDTO getFollowedUsersById(Integer id, String order) {
-        User userFounded = userRepository.findById(id);
-        if (userFounded == null) {
-            throw new NotFoundException("User with id: " + id + " not found.");
-        } else if (order != null) {
-            User sortedFollowers = sortingFollowed(userFounded, order);
-            return userFollowedMapper.toDto(sortedFollowers);
-        } else {
-            return userFollowedMapper.toDto(userFounded);
+    @Override
+    public PostDTO addUserPost(PostDTO postDTO){
+        int userId = postDTO.getUserId();
+        if(!userRepository.existingUserById(userId))
+            throw new NotFoundException(String.format(USER_ID_NOT_FOUND.toString(), userId));
+        Post post = mapper.convertValue(postDTO, Post.class);
+
+        userRepository.addPostToUser(post, userId);
+        return postDTO;
+    }
+
+    @Override
+    public TwoWeeksPostDTO getLastTwoWeeksPostByUser(int userId, String order) {
+        List<Post> followedPost;
+
+        if(!userRepository.existingUserById(userId)){
+            throw new NotFoundException(String.format(USER_ID_NOT_FOUND.toString(), userId));
         }
-    }
-
-    public boolean existsUser(int userId) {
-        User user = userRepository.findById(userId);
-        return user != null;
-    }
-
-    public UserFollow getUserFollowById(List<UserFollow> users, int id) {
-        UserFollow userFounded = null;
-        for (UserFollow u: users) {
-            if(u.getUserId() == id) {
-                userFounded = u;
-            }
+        if(order != null){
+            followedPost = userRepository.getFollowedPostLasTwoWeeksOrd(userId, order);
+        }else{
+            followedPost = userRepository.getFollowedPostLasTwoWeeks(userId);
         }
-        return userFounded;
+        List<PostDTO> followPostsDTOS = followedPost.stream().map(p -> mapper.convertValue(p, PostDTO.class)).collect(Collectors.toList());
+
+        return new TwoWeeksPostDTO(userId,followPostsDTOS);
     }
 
-    private void deleteUserFromList(List<UserFollow> users, UserFollow user) {
-        if(users.isEmpty()) {
-            throw new IsEmptyException("Error. List is empty.");
-        } else {
-            users.remove(user);
-        }
-    }
-
-    private User sortingFollowers(User user, String order){
+    private UserFollowerDTO sortingFollowers(UserFollowerDTO user, String order){
         sortingByNameValidation(order);
-        if(Objects.equals(order, "name_asc")){
-            user.setFollowers(user.getFollowers().stream().sorted(Comparator.comparing(UserFollow::getUserName)).collect(Collectors.toList()));
+        if(Objects.equals(order, NAME_ASC.toString())){
+            user.setFollowers(user.getFollowers().stream().sorted(Comparator.comparing(UserFollowDTO::getUserName)).collect(Collectors.toList()));
         }
         else{
-            user.setFollowers(user.getFollowers().stream().sorted(Comparator.comparing(UserFollow::getUserName).reversed()).collect(Collectors.toList()));
+            user.setFollowers(user.getFollowers().stream().sorted(Comparator.comparing(UserFollowDTO::getUserName).reversed()).collect(Collectors.toList()));
         }
         return user;
     }
 
-    private User sortingFollowed(User user, String order){
+    private UserFollowedDTO sortingFollowed(UserFollowedDTO user, String order){
         sortingByNameValidation(order);
-        if(Objects.equals(order, "name_asc")){
-            user.setFollowed(user.getFollowed().stream().sorted(Comparator.comparing(UserFollow::getUserName)).collect(Collectors.toList()));
+        if(Objects.equals(order, NAME_ASC.toString())){
+            user.setFollowed(user.getFollowed().stream().sorted(Comparator.comparing(UserFollowDTO::getUserName)).collect(Collectors.toList()));
         }
         else{
-            user.setFollowed(user.getFollowed().stream().sorted(Comparator.comparing(UserFollow::getUserName).reversed()).collect(Collectors.toList()));
+            user.setFollowed(user.getFollowed().stream().sorted(Comparator.comparing(UserFollowDTO::getUserName).reversed()).collect(Collectors.toList()));
         }
         return user;
     }
+
     private void sortingByNameValidation(String order){
-        if(!order.equals("name_asc") && !order.equals("name_desc"))
-            throw new BadRequestException("The sorting order "+order+" doesn't exist.");
+        if(!order.equals(NAME_ASC.toString()) && !order.equals(NAME_DESC.toString()))
+            throw new BadRequestException(String.format(WRONG_SORTING_ORDER.toString(), order));
     }
 
-    public void addUserPost(Post post, Integer userId){
-        UserDTO userDTO = getUser(userId);
-        userDTO.getPosts().add(post);
+    private List<UserFollowDTO> getUserFollowsInfo(List<Integer> listOfFollows){
 
-        User entity = userRepository.findById(userId);
-        entity.getPosts().add(post);
+        return listOfFollows.stream().map(i -> mapper.convertValue(userRepository.findById(i), UserFollowDTO.class)).collect(Collectors.toList());
     }
+
 }

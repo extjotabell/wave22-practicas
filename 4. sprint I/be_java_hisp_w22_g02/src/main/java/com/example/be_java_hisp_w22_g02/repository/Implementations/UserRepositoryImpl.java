@@ -1,9 +1,7 @@
 package com.example.be_java_hisp_w22_g02.repository.Implementations;
 
-import com.example.be_java_hisp_w22_g02.dto.response.FollowedPostDTO;
 import com.example.be_java_hisp_w22_g02.entity.Post;
 import com.example.be_java_hisp_w22_g02.entity.User;
-import com.example.be_java_hisp_w22_g02.entity.UserFollow;
 import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,24 +30,11 @@ public class UserRepositoryImpl implements IUserRepository {
 
     @Override
     public void followUser(int userId, int userIdToFollow) {
-        User user = dbUser.get(userId);
-        User userToFollow = dbUser.get(userIdToFollow);
+        dbUser.get(userId).getFollowed().add(userIdToFollow);
+        dbUser.get(userIdToFollow).getFollowers().add(userId);
 
-        UserFollow userFollow = new UserFollow(user.getUserId(), user.getUserName());
-        UserFollow userFollowToFollow = new UserFollow(userToFollow.getUserId(), userToFollow.getUserName());
-        if(!user.getFollowed().contains(userFollowToFollow))
-            user.addFollowed(userFollowToFollow);
-        if(!userToFollow.getFollowers().contains(userFollow))
-            userToFollow.addFollower(userFollow);
     }
 
-
-    @Override
-    public List<User> getAllUsers() {
-        List<User> newList = new ArrayList<>();
-        dbUser.forEach((k,v) -> newList.add(v));
-        return newList;
-    }
 
     private void loadDataBase(){
         File file;
@@ -69,48 +54,65 @@ public class UserRepositoryImpl implements IUserRepository {
 
     @Override
 
-    public List<FollowedPostDTO> getFollowedPostLasTwoWeeks(int id) {
+    public List<Post> getFollowedPostLasTwoWeeks(int id) {
         User user = dbUser.get(id);
-        List<UserFollow> followed = user.getFollowed();
+        List<Integer> followed = user.getFollowed();
 
-        List<FollowedPostDTO> followedPostDTOS = new ArrayList<>();
+        List<Post> followedPost = new ArrayList<>();
 
         LocalDate today = LocalDate.now();
         LocalDate lastTwoWeeks = today.minus(2, ChronoUnit.WEEKS);
 
-                for (UserFollow u: followed) {
-                    User userFollow = findById(u.getUserId());
-                    for (Post p: userFollow.getPosts()) {
+                for (Integer u: followed) {
+                    User userFollowed = findById(u);
+                    for (Post p: userFollowed.getPosts()) {
                         if ((p.getDate().isAfter(lastTwoWeeks) || p.getDate().isEqual(lastTwoWeeks)) &&
                                 (p.getDate().isBefore(today) || p.getDate().isEqual(today))) {
 
-                            followedPostDTOS.add(new FollowedPostDTO(u.getUserId(),p));
+                            followedPost.add(p);
                         }
                     }
                 }
                 
-        Comparator<FollowedPostDTO> comparatorAsc = (f1, f2) -> f2.getPost().getDate()
-                .compareTo(f1.getPost().getDate());
+        Comparator<Post> comparatorAsc = (f1, f2) -> f2.getDate()
+                .compareTo(f1.getDate());
 
-        Collections.sort(followedPostDTOS,comparatorAsc);
+        Collections.sort(followedPost,comparatorAsc);
 
-        return followedPostDTOS;
+        return followedPost;
     }
 
     @Override
-    public List<FollowedPostDTO> getFollowedPostLasTwoWeeksOrd(int userId, String order) {
-        List<FollowedPostDTO> followedPostDTOS = getFollowedPostLasTwoWeeks(userId);
+    public List<Post> getFollowedPostLasTwoWeeksOrd(int userId, String order) {
+        List<Post> followedPost = getFollowedPostLasTwoWeeks(userId);
+        Comparator<Post> comparatorAsc;
         if (order.equals("date_asc")) {
-            Comparator<FollowedPostDTO> comparatorAsc = (f1, f2) -> f1.getPost().getDate()
-                    .compareTo(f2.getPost().getDate());
-            Collections.sort(followedPostDTOS, comparatorAsc);
+            comparatorAsc = (f1, f2) -> f1.getDate()
+                    .compareTo(f2.getDate());
         } else {
-            Comparator<FollowedPostDTO> comparatorAsc = (f1, f2) -> f2.getPost().getDate()
-                    .compareTo(f1.getPost().getDate());
-            Collections.sort(followedPostDTOS, comparatorAsc);
+            comparatorAsc = (f1, f2) -> f2.getDate()
+                    .compareTo(f1.getDate());
         }
-        return followedPostDTOS;
+        Collections.sort(followedPost, comparatorAsc);
+        return followedPost;
 
+    }
+
+    @Override
+    public boolean existingUserById(Integer id) {
+        return dbUser.containsKey(id);
+    }
+
+    @Override
+    public void unFollowUser(Integer userId, Integer userIdToUnfollow) {
+        dbUser.get(userId).getFollowed().remove(userIdToUnfollow);
+        dbUser.get(userIdToUnfollow).getFollowers().remove(userId);
+
+    }
+
+    @Override
+    public void addPostToUser(Post post, Integer id) {
+        dbUser.get(id).getPosts().add(post);
     }
 
 }

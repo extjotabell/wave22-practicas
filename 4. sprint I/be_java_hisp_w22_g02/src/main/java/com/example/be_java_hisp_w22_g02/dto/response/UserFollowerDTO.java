@@ -11,11 +11,14 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Builder
 public class UserFollowerDTO {
-    private Long userId;
+    private int userId;
     private String userName;
     private List<UserFollowDTO> followers;
 
+    public UserFollowerDTO(int userId, String userName) {
+        this.userId = userId;
+        this.userName = userName;
+    }
 }

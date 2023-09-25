@@ -2,6 +2,7 @@ package com.example.be_java_hisp_w22_g02.dto.request;
 
 import com.example.be_java_hisp_w22_g02.entity.Product;
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ public class PostDTO {
     @JsonAlias({"user_id"})
     private int userId;
     @NotNull
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate date;
     @NotNull
     private ProductDto product;

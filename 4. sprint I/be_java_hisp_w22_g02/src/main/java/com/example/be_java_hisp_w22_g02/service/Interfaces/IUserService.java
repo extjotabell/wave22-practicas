@@ -1,33 +1,20 @@
 package com.example.be_java_hisp_w22_g02.service.Interfaces;
 
-import com.example.be_java_hisp_w22_g02.dto.response.TotalFollowersDto;
-
-import com.example.be_java_hisp_w22_g02.dto.response.UserDTO;
-import com.example.be_java_hisp_w22_g02.dto.response.UserFollowerDTO;
-
-import com.example.be_java_hisp_w22_g02.dto.response.UserFollowedDTO;
-import com.example.be_java_hisp_w22_g02.entity.Post;
-
-
-import java.util.List;
+import com.example.be_java_hisp_w22_g02.dto.request.PostDTO;
+import com.example.be_java_hisp_w22_g02.dto.response.*;
 
 
 public interface IUserService {
 
-    UserFollowedDTO getFollowedUsersById(Integer id, String order);
+    UserFollowedDTO getFollowed(Integer id, String order);
 
-    void followUser(int userId, int userIdToFollow);
-
-    boolean existsUser(int userId);
-
-    UserDTO getUser(int userId);
-
-    List<UserDTO> getAllUsers();
+    SuccessDTO followUser(int userId, int userIdToFollow);
 
     UserFollowerDTO getFollowers(int id, String order);
 
     TotalFollowersDto getTotalFollowersByUserId(int userId);
 
-    void unfollowUser(int userId, int userIdToUnfollow);
-    void addUserPost(Post post, Integer userId);
+    SuccessDTO unfollowUser(int userId, int userIdToUnfollow);
+    PostDTO addUserPost(PostDTO post);
+    TwoWeeksPostDTO getLastTwoWeeksPostByUser(int userId, String order);
 }

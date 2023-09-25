@@ -1,6 +1,6 @@
 package com.example.be_java_hisp_w22_g02.dto.response;
 
-import com.example.be_java_hisp_w22_g02.entity.Post;
+import com.example.be_java_hisp_w22_g02.dto.request.PostDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,5 +13,5 @@ import java.util.Map;
 @Data
 public class TwoWeeksPostDTO {
     private int userId;
-    private List<FollowedPostDTO> posts;
+    private List<PostDTO> posts;
 }
