@@ -11,10 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Collectors;
 
 @Repository
@@ -34,7 +31,7 @@ public class PostRepositoryImpl implements IPostRepository{
         HashMap<Integer, Post> postsHashmap = new HashMap<>();
 
         for (Post post : posts) {
-            postsHashmap.put(post.getPost_id(), post);
+            postsHashmap.put(post.getPostId(), post);
         }
 
         return postsHashmap;
@@ -92,7 +89,7 @@ public class PostRepositoryImpl implements IPostRepository{
             List<Integer> listidPost = new ArrayList<>(postsDatabase.keySet().stream().toList());
             Collections.sort(listidPost);
             idPostNew = listidPost.get(listidPost.size()-1)+1;
-            post.setPost_id(idPostNew);
+            post.setPostId(idPostNew);
             postsDatabase.put(idPostNew, post);
             listidPost.add(idPostNew);
         }

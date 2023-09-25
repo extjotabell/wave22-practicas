@@ -1,5 +1,6 @@
 package bootcamp.socialMeli.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class FollowedPostListDto {
-    private int user_id;
+    @JsonProperty("userId")
+    private int userId;
     private List<PostDto> posts;
 }

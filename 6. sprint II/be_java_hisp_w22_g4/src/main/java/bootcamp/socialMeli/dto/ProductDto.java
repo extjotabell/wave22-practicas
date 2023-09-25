@@ -1,6 +1,7 @@
 package bootcamp.socialMeli.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -13,9 +14,11 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class ProductDto {
     @Min(value = 1, message = "Se debe ingresar un id producto")
-    private int product_id;
+    @JsonProperty("productId")
+    private int productId;
     @NotNull(message = "Se debe ingresar el nombre del producto")
-    private String product_name;
+    @JsonProperty("product_name")
+    private String productName;
     @NotNull(message = "Se debe ingresar el tipo")
     private String type;
     @NotNull(message = "Se dene ingresar la marca")

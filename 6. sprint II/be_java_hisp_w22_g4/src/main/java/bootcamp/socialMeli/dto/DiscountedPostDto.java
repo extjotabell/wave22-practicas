@@ -10,6 +10,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.NonNull;
 
 import java.time.LocalDate;
@@ -18,8 +19,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DiscountedPostDto {
-    private int user_id;
-    private int post_id;
+    @JsonProperty("userId")
+    private int userId;
+    @JsonProperty("postId")
+    private int postId;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
@@ -27,6 +30,7 @@ public class DiscountedPostDto {
     private ProductDto product;
     private int category;
     private double price;
-    private boolean has_promo;
+    @JsonProperty("has_promo")
+    private boolean hasPromo;
     private double discount;
 }

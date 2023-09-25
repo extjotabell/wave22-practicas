@@ -1,7 +1,7 @@
 package bootcamp.socialMeli.service;
 
 import bootcamp.socialMeli.dto.FollowedPostListDto;
-import bootcamp.socialMeli.dto.ProductOrderListEnum;
+import bootcamp.socialMeli.utils.ProductOrderListEnum;
 import bootcamp.socialMeli.dto.PostDto;
 
 import java.util.List;

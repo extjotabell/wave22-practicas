@@ -6,6 +6,7 @@ import bootcamp.socialMeli.entity.User;
 import bootcamp.socialMeli.exception.BadRequestException;
 import bootcamp.socialMeli.exception.NotFoundException;
 import bootcamp.socialMeli.repository.IUserRepository;
+import bootcamp.socialMeli.utils.NameOrderEnumDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
@@ -58,7 +59,7 @@ public class UserServiceImpl implements IUserService{
     public FollowersCountDto getFollowersCount(int userId) {
         User targetedUser = findUserById(userId);
 
-        return new FollowersCountDto(targetedUser.getUser_id(), targetedUser.getUser_name(), targetedUser.getFollowers().size());
+        return new FollowersCountDto(targetedUser.getUserId(), targetedUser.getUserName(), targetedUser.getFollowers().size());
     }
 
     // US 03
@@ -73,14 +74,14 @@ public class UserServiceImpl implements IUserService{
                 .stream()
                 .map(followerId -> {
                     User follower = findUserById(followerId);
-                    return new UserDto(follower.getUser_id(), follower.getUser_name());
+                    return new UserDto(follower.getUserId(), follower.getUserName());
                 })
                 .toList());
 
         // Sort depending on parameter input
         sortUserDtoList(followers, nameOrder);
 
-        return new FollowersListDto(targetedUser.getUser_id(), targetedUser.getUser_name(), followers);
+        return new FollowersListDto(targetedUser.getUserId(), targetedUser.getUserName(), followers);
     }
 
     // US 04
@@ -91,14 +92,14 @@ public class UserServiceImpl implements IUserService{
         List<UserDto> followed = new ArrayList<>();
         for (int idFollowed : targetedUser.getFollowed()){
             User userFollowed = findUserById(idFollowed);
-            UserDto userDto = new UserDto(userFollowed.getUser_id(), userFollowed.getUser_name());
+            UserDto userDto = new UserDto(userFollowed.getUserId(), userFollowed.getUserName());
             followed.add(userDto);
         }
 
         // Sort depending on parameter input
         sortUserDtoList(followed, nameOrder);
         
-        return new FollowedListDto(userId, targetedUser.getUser_name(), followed);
+        return new FollowedListDto(userId, targetedUser.getUserName(), followed);
     }
 
     // US 07
@@ -108,7 +109,7 @@ public class UserServiceImpl implements IUserService{
             User user = findUserById(userId);
             User userToUnfollow = findUserById(userIdToUnfollow);
 
-            if(!user.getFollowed().contains(userToUnfollow.getUser_id())){
+            if(!user.getFollowed().contains(userToUnfollow.getUserId())){
                 throw  new BadRequestException("No sigue al usuario seleccionado");
             }
             return objectMapper.convertValue(userRepository.removeFollower(user, userToUnfollow), UserDto.class);
@@ -127,10 +128,10 @@ public class UserServiceImpl implements IUserService{
 
     private void sortUserDtoList(List<UserDto> listToSort, NameOrderEnumDto criteria) {
         // Create comparator to sort
-        Comparator<UserDto> usernameComparator = Comparator.comparing(UserDto::getUser_name);
+        Comparator<UserDto> usernameComparator = Comparator.comparing(UserDto::getUserName);
 
         // Sort depending parameter input
-        if(criteria == NameOrderEnumDto.name_desc){
+        if (criteria == NameOrderEnumDto.nameDesc){
             listToSort.sort(usernameComparator.reversed());
         } else {
             listToSort.sort(usernameComparator);

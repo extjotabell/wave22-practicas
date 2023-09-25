@@ -32,7 +32,7 @@ public class ProductServiceImpl implements IProductService{
         Product product = productRepository.getProductById(productId);
         if (product == null) throw new NotFoundException("No se encontro producto para el id solicitado.");
         return new ProductDto(
-                product.getProduct_id(),
+                product.getProductId(),
                 product.getProduct_name(),
                 product.getType(),
                 product.getBrand(),

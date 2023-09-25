@@ -27,7 +27,7 @@ public class UserRepositoryImpl implements IUserRepository{
         HashMap<Integer, User> usersHashmap = new HashMap<>();
 
         for (User user : users) {
-            usersHashmap.put(user.getUser_id(), user);
+            usersHashmap.put(user.getUserId(), user);
         }
 
         return usersHashmap;
@@ -59,8 +59,8 @@ public class UserRepositoryImpl implements IUserRepository{
     @Override
     public User removeFollower(User user, User userToUnfollow)  {
 
-        user.getFollowed().removeIf(followedId -> followedId == userToUnfollow.getUser_id());
-        userToUnfollow.getFollowers().removeIf(followerId -> followerId == user.getUser_id());
+        user.getFollowed().removeIf(followedId -> followedId == userToUnfollow.getUserId());
+        userToUnfollow.getFollowers().removeIf(followerId -> followerId == user.getUserId());
 
         return user;
     }
@@ -72,7 +72,7 @@ public class UserRepositoryImpl implements IUserRepository{
 
     @Override
     public void addFollower(User user, User userToFollow) {
-        user.getFollowed().add(userToFollow.getUser_id());
-        userToFollow.getFollowers().add(user.getUser_id());
+        user.getFollowed().add(userToFollow.getUserId());
+        userToFollow.getFollowers().add(user.getUserId());
     }
 }

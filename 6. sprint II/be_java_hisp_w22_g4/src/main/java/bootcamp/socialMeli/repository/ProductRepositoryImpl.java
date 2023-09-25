@@ -1,7 +1,6 @@
 package bootcamp.socialMeli.repository;
 
 import bootcamp.socialMeli.entity.Product;
-import bootcamp.socialMeli.entity.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Repository;
@@ -10,7 +9,6 @@ import org.springframework.util.ResourceUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,7 +32,7 @@ public class ProductRepositoryImpl implements IProductRepository{
 
     @Override
     public void addProducto(Product product) {
-        productDatabase.put(product.getProduct_id(),product);
+        productDatabase.put(product.getProductId(),product);
     }
 
     private HashMap<Integer, Product> loadProducts(){
@@ -42,7 +40,7 @@ public class ProductRepositoryImpl implements IProductRepository{
         HashMap<Integer, Product> productHashMap = new HashMap<>();
 
         for (Product product : products) {
-            productHashMap.put(product.getProduct_id(), product);
+            productHashMap.put(product.getProductId(), product);
         }
 
         return productHashMap;

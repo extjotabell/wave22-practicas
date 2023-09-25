@@ -2,6 +2,7 @@ package bootcamp.socialMeli.service;
 
 import bootcamp.socialMeli.dto.*;
 import bootcamp.socialMeli.entity.User;
+import bootcamp.socialMeli.utils.NameOrderEnumDto;
 
 import java.util.List;
 

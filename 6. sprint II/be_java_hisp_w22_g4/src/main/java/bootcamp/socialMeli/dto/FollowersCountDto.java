@@ -1,5 +1,6 @@
 package bootcamp.socialMeli.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FollowersCountDto {
-    private int user_id;
-    private String user_name;
-    private int followers_count;
+    @JsonProperty("userId")
+    private int userId;
+    @JsonProperty("userName")
+    private String userName;
+    @JsonProperty("followers_count")
+    private int followersCount;
 }

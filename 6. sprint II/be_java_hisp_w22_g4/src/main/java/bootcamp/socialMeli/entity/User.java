@@ -11,9 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    private int user_id;
+    private int userId;
     private RolEnum rol;
-    private String user_name;
+    private String userName;
     private List<Integer> postList;
     private List<Integer> followed;
     private List<Integer> followers;
