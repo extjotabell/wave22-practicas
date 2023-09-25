@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 @Data
 public class ProductDTO {
 
-    @JsonProperty("product_id")
+    @JsonProperty(value = "product_id", index = 0)
     @NotNull
     private Long productId;
 
-    @JsonProperty("product_name")
+    @JsonProperty(value = "product_name", index = 1)
     @NotBlank
     private String name;
 

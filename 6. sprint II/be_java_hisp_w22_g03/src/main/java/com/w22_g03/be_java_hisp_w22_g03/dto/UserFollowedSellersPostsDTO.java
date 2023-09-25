@@ -12,8 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class UserFollowedSellersPostsDTO {
-    @JsonProperty("user_id")
 
+    @JsonProperty(value = "user_id", index = 0)
     private long userId;
 
     private List<PostDTO> posts;

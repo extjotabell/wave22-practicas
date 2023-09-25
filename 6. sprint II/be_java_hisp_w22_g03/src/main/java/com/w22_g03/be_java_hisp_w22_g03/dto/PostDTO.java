@@ -15,22 +15,25 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class PostDTO {
 
-    @JsonProperty("post_id")
+    @JsonProperty(value = "post_id", index = 1)
     private long postId;
 
-    @JsonProperty("user_id")
+    @JsonProperty(value = "user_id", index = 0)
     @NotNull
     private Long userId;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonProperty(index = 2)
     @NotNull
     private LocalDate date;
 
     @Valid
     @NotNull
+    @JsonProperty(index = 3)
     private ProductDTO product;
 
     @NotNull
+    @JsonProperty(index = 4)
     private Integer category;
 
     @NotNull
