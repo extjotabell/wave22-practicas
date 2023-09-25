@@ -27,11 +27,8 @@ public class UserServiceImpl implements UserService {
         if (userId == userIdToFollow){
             throw new BadRequestException("User can't add themselves.");
         }
-        User newFollower = userRepository.findById(userId);
-        User userToFollow = userRepository.findById(userIdToFollow);
-        if (newFollower == null || userToFollow == null){
-            throw new BadRequestException("User not found.");
-        }
+        User newFollower = getUserById(userId);
+        User userToFollow = getUserById(userIdToFollow);
         if (!userToFollow.isSeller()){
             throw new BadRequestException("User is not seller.");
         }
@@ -48,11 +45,8 @@ public class UserServiceImpl implements UserService {
         if (userId == userIdToUnfollow) {
             throw new BadRequestException("User can't unfollow themselves.");
         }
-        User follower = userRepository.findById(userId);
-        User userToUnfollow = userRepository.findById(userIdToUnfollow);
-        if (follower == null || userToUnfollow == null){
-            throw new BadRequestException("User not found");
-        }
+        User follower = getUserById(userId);
+        User userToUnfollow = getUserById(userIdToUnfollow);
         if (!follower.getFollowed().contains(userToUnfollow)){
             throw new BadRequestException("You are not a follower of this user.");
         }
@@ -64,17 +58,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public NumberOfFollowersDTO getNumberOfFollowers(int userId){
-        User user = userRepository.findById(userId);
-        if (user == null){
-            throw new NotFoundException("User not found");
-        }
+        User user = getUserById(userId);
         return new NumberOfFollowersDTO(userId, user.getUsername(), user.getFollowers().size());
     }
 
     @Override
     public FollowerDTO getFollowers(int userId, String order){
-        User user = userRepository.findById(userId);
-        if (user == null) throw new NotFoundException("User not found");
+        User user = getUserById(userId);
         List<User> followers = userRepository.findFollowers(userId);
         List<UserDTO> followerDTOS = new ArrayList<>();
         if (order != null){
@@ -90,8 +80,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public FollowedDTO getFollowed(int userId, String order){
-        User user = userRepository.findById(userId);
-        if (user == null) throw new NotFoundException("User not found");
+        User user = getUserById(userId);
         List<User> followed = userRepository.findFollowed(userId);
         List<UserDTO> followedDTOS = new ArrayList<>();
         if (order != null){
@@ -106,7 +95,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findById(long userId) {
+    public User getUserById(long userId) {
         User user = userRepository.findById(userId);
         if(Objects.isNull(user)){
             throw new NotFoundException("User not found");

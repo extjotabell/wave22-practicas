@@ -3,20 +3,16 @@ package com.w22_g03.be_java_hisp_w22_g03.service;
 import com.w22_g03.be_java_hisp_w22_g03.dto.PostDTO;
 import com.w22_g03.be_java_hisp_w22_g03.dto.ProductDTO;
 import com.w22_g03.be_java_hisp_w22_g03.dto.UserFollowedSellersPostsDTO;
-import com.w22_g03.be_java_hisp_w22_g03.exception.NotFoundException;
 import com.w22_g03.be_java_hisp_w22_g03.model.Post;
 import com.w22_g03.be_java_hisp_w22_g03.model.Product;
 import com.w22_g03.be_java_hisp_w22_g03.model.User;
 import com.w22_g03.be_java_hisp_w22_g03.repository.PostRepository;
-import com.w22_g03.be_java_hisp_w22_g03.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -29,7 +25,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostDTO addPost(PostDTO postDTO) {
 
-        User user = userService.findById(postDTO.getUserId());
+        User user = userService.getUserById(postDTO.getUserId());
 
         Post post = mapPostDtoToPost(postDTO, user);
         post.setPostId(this.postRepository.countPosts() + 1);
@@ -45,7 +41,7 @@ public class PostServiceImpl implements PostService {
     }
 
     public UserFollowedSellersPostsDTO getAllFollowedUsersPostsById(long userId) {
-        User user = userService.findById(userId);
+        User user = userService.getUserById(userId);
         List<Post> twoWeekOldPostsBySeller = postRepository.findTwoWeekOldPostsFromFollowedByUser(user);
 
         return mapPostsToUserFollowedSellersPostsDto(twoWeekOldPostsBySeller, userId);
