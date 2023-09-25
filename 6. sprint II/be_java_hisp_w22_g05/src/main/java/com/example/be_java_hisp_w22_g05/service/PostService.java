@@ -7,7 +7,7 @@ import com.example.be_java_hisp_w22_g05.entity.Product;
 import com.example.be_java_hisp_w22_g05.entity.User;
 import com.example.be_java_hisp_w22_g05.exception.AlreadyExistsException;
 import com.example.be_java_hisp_w22_g05.exception.NotFoundException;
-import com.example.be_java_hisp_w22_g05.mapper.PostMapper;
+import com.example.be_java_hisp_w22_g05.utils.PostMapper;
 import com.example.be_java_hisp_w22_g05.repository.IPostRepository;
 import com.example.be_java_hisp_w22_g05.repository.IUserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,7 +29,6 @@ import java.util.stream.Collectors;
 public class PostService implements IPostService {
     private final IPostRepository postRepository;
     private final IUserRepository userRepository;
-    private final PostMapper postMapper;
 
     @Autowired
     Jackson2ObjectMapperBuilder mapperBuilder;
@@ -76,6 +75,7 @@ public class PostService implements IPostService {
         // Obtain list of posts from sellers
         List<Post> postList = postRepository.findPostAll().stream()
                 .filter(x -> ChronoUnit.DAYS.between(x.getDate(), LocalDate.now()) <= 14)
+                .filter(x -> ChronoUnit.DAYS.between(x.getDate(), LocalDate.now()) >= 0)
                 .filter(post -> sellersId.contains(post.getUser().getId()))
                 .toList();
 
@@ -84,18 +84,15 @@ public class PostService implements IPostService {
         }
 
         //Aca ordenamos
-        if (order != null && order.equals("date_asc")) {
-            return orderList(postList, true);
-        } else {
-            return orderList(postList, false);
-        }
+        return orderList(postList, order != null && order.equals("date_asc"));
+
 
     }
 
     private List<PostDto> orderList(List<Post> posts, boolean isAsc) {
         return posts.stream()
                 .filter(Objects::nonNull).sorted((x, y) -> isAsc ? x.getDate().compareTo(y.getDate()) : y.getDate().compareTo(x.getDate()))
-                .map(postMapper::toPostDTO)
+                .map(PostMapper::toPostDTO)
                 .collect(Collectors.toList());
     }
 
