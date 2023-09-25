@@ -1,27 +1,27 @@
 [
   {
-    "userId": 0,
+    "userId": 1,
     "username":"Alejandro",
     "posts": [],
     "followed": [],
     "followers": []
   },
   {
-    "userId": 1,
+    "userId": 2,
     "username":"Bruno",
     "posts": [],
     "followed": [],
     "followers": []
   },
   {
-    "userId": 2,
+    "userId": 3,
     "username":"Carlos",
     "posts": [],
     "followed": [],
     "followers": []
   },
   {
-    "userId": 3,
+    "userId": 4,
     "username":"Damián",
     "posts": [],
     "followed": [],

@@ -4,13 +4,14 @@ import com.w22_g03.be_java_hisp_w22_g03.dto.PostDTO;
 import com.w22_g03.be_java_hisp_w22_g03.dto.UserFollowedSellersPostsDTO;
 import com.w22_g03.be_java_hisp_w22_g03.service.PostService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -27,11 +28,11 @@ public class PostController {
     }
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<UserFollowedSellersPostsDTO> getFollowedUsersPostsById(@PathVariable long userId,
+    public ResponseEntity<UserFollowedSellersPostsDTO> getFollowedUsersPostsById(@PathVariable @NotNull(message = "El  id no puede estar vacío.") @Min(value = 1, message = "El id debe ser mayor a cero") Long userId,
                                                                                  @RequestParam(required = false) @Pattern(regexp = "^date_(asc|desc)$") String order) {
-        if(Objects.nonNull(order)){
+        if (Objects.nonNull(order)) {
             return ResponseEntity.ok(this.postService.getFollowedUsersPostsById(userId, order));
-        }else {
+        } else {
             return ResponseEntity.ok(this.postService.getFollowedUsersPostsById(userId));
         }
     }

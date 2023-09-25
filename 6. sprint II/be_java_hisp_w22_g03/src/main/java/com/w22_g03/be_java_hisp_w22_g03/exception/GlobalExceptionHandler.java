@@ -1,7 +1,10 @@
 package com.w22_g03.be_java_hisp_w22_g03.exception;
 
 import com.w22_g03.be_java_hisp_w22_g03.dto.ExceptionDTO;
+import com.w22_g03.be_java_hisp_w22_g03.dto.FieldErrorsDTO;
+import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.util.List;
+
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -23,7 +28,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<?> handleBadRequestException(BadRequestException badRequestException){
+    public ResponseEntity<?> handleBadRequestException(BadRequestException badRequestException) {
         ExceptionDTO exceptionDTO = new ExceptionDTO(badRequestException.getMessage());
         return new ResponseEntity<>(exceptionDTO, HttpStatus.BAD_REQUEST);
     }
@@ -33,8 +38,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   HttpHeaders headers,
                                                                   HttpStatusCode status,
                                                                   WebRequest request) {
-        ExceptionDTO exceptionDTO = new ExceptionDTO("The request contains invalid field values");
-        return ResponseEntity.badRequest().body(exceptionDTO);
+
+        List<String> errors = ex.getFieldErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
+        return ResponseEntity.badRequest().body(new FieldErrorsDTO(errors));
+
     }
 
     @Override
@@ -47,9 +54,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<ExceptionDTO> handleConstraintViolationException(ConstraintViolationException constraintViolationException) {
-        ExceptionDTO exceptionDTO = new ExceptionDTO("Invalid order request");
-        return ResponseEntity.badRequest().body(exceptionDTO);
+    public ResponseEntity<FieldErrorsDTO> handleConstraintViolationException(ConstraintViolationException constraintViolationException) {
+
+        List<String> errors = constraintViolationException.getConstraintViolations().stream().map(ConstraintViolation::getMessage).toList();
+        return ResponseEntity.badRequest().body(new FieldErrorsDTO(errors));
+
     }
 
 }
