@@ -2,9 +2,7 @@ package com.personaje.personajedisney.Dto;
 
 import lombok.*;
 
-@Setter
-@Getter
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonajeDto {

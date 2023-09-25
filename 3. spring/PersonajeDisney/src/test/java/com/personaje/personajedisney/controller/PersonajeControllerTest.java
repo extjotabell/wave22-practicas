@@ -1,4 +1,4 @@
-package com.personaje.personajedisney;
+package com.personaje.personajedisney.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
