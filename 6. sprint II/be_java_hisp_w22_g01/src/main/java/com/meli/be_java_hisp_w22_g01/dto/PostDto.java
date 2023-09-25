@@ -22,8 +22,6 @@ public class PostDto {
     @Min( value=1 ,message = "El id debe ser mayor a 0." )
     private int user_id;
 
-    @NotNull(message = "El id no puede estar vacio.")
-    @Min( value=1 ,message = "El id debe ser mayor a 0." )
     private int post_id;
 
     @JsonFormat(pattern="dd-MM-yyyy")

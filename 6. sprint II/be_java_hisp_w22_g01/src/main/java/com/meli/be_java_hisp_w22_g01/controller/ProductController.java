@@ -4,6 +4,7 @@ import com.meli.be_java_hisp_w22_g01.dto.PostDto;
 import com.meli.be_java_hisp_w22_g01.service.IPostService;
 import com.meli.be_java_hisp_w22_g01.service.IUserService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class ProductController {
     }
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<?> followedList(@PathVariable int userId, @RequestParam(required = false) String order) {
+    public ResponseEntity<?> followedList(@PathVariable @Min(value = 1, message = "El id debe ser mayor a 0.") int userId, @RequestParam(required = false) String order) {
 
         if (order == null) {
             return new ResponseEntity<>(userService.userFollowedPostList(userId), HttpStatus.OK);

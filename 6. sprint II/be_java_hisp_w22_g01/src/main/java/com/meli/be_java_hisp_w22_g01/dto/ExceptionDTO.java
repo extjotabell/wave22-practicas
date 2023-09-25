@@ -6,11 +6,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.*;
 
+import java.util.Collections;
+import java.util.List;
+
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode
 public class ExceptionDTO {
-    private String message;
+
+
+    private List<String> message;
+
+
+    public ExceptionDTO(List<String> message) {
+        this.message = message;
+    }
+
+    public ExceptionDTO(String message) {
+        this.message = Collections.singletonList(message);
+    }
 }
