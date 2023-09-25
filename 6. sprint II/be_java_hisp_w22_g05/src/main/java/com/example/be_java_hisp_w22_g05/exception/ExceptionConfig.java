@@ -21,8 +21,8 @@ public class ExceptionConfig {
         return new ResponseEntity<>(new ExceptionDto(e.getMessage()), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(FollowException.class)
-    public ResponseEntity<ExceptionDto> followException(FollowException e){
+    @ExceptionHandler({FollowException.class, RequestParamInvalidException.class})
+    public ResponseEntity<ExceptionDto> followException(Exception e){
         return new ResponseEntity<>(new ExceptionDto(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
