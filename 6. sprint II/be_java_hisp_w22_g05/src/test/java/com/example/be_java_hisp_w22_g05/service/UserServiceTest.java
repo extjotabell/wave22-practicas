@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.mockito.Mockito.when;
@@ -35,13 +36,16 @@ public class UserServiceTest {
         User user = new User(1,"carlos",new ArrayList<>(),new ArrayList<>());
         User userToFollow = new User(2,"maria",new ArrayList<>(),new ArrayList<>());
 
-        UserFollowedDto expected = new UserFollowedDto(user.getId(),user.getName(),user.getFollowed().stream()
+        //Usuario que debe quedar luego de hacer el follow (tiene un item en la lista de followed)
+        User userAfterFollow = new User(1,"carlos",new ArrayList<>(), List.of(userToFollow));
+
+        UserFollowedDto expected = new UserFollowedDto(userAfterFollow.getId(),userAfterFollow.getName(),userAfterFollow.getFollowed().stream()
                 .map(u -> new UserDto(u.getId(), u.getName()))
                 .collect(Collectors.toList()));
 
         when(userRepository.findUsersById(user.getId())).thenReturn(user);
         when(userRepository.findUsersById(userToFollow.getId())).thenReturn(userToFollow);
-        when(userRepository.follow(user, userToFollow)).thenReturn(user);
+        when(userRepository.follow(user, userToFollow)).thenReturn(userAfterFollow);
 
         //Act
         UserFollowedDto result = userService.followUser(user.getId(), userToFollow.getId());
@@ -56,31 +60,32 @@ public class UserServiceTest {
     void followNonExistingUser(){
         //Arrange
         User user = new User(1,"carlos",new ArrayList<>(),new ArrayList<>());
-        User userToFollow = new User(0,"",new ArrayList<>(),new ArrayList<>());
+        int userIdToFollow = 0;
 
         when(userRepository.findUsersById(user.getId())).thenReturn(user);
         when(userRepository.findUsersById(0)).thenReturn(null);
 
         //Act & Assert
-        Assertions.assertThrows(NotFoundException.class, ()-> userService.followUser(user.getId(), userToFollow.getId()));
+        Assertions.assertThrows(NotFoundException.class, ()-> userService.followUser(user.getId(), userIdToFollow));
     }
 
     @Test
     @DisplayName("T-0002: Prueba exitosa de unfollow")
     void unfollowUserOk(){
         //Arrange
-        User user = new User(1,"carlos",new ArrayList<>(),new ArrayList<>());
-        User userToUnfollow = new User(2,"maria",new ArrayList<>(),new ArrayList<>());
+        User user = new User(1, "carlos", new ArrayList<>(), new ArrayList<>());
+        User userToUnfollow = new User(2,"maria", new ArrayList<>(), new ArrayList<>());
+        User userAfterUnfollow = new User(1, "carlos", new ArrayList<>(), new ArrayList<>());
         user.getFollowed().add(userToUnfollow);
         userToUnfollow.getFollower().add(user);
 
-        UserFollowedDto expected = new UserFollowedDto(user.getId(),user.getName(),user.getFollowed().stream()
+        UserFollowedDto expected = new UserFollowedDto(userAfterUnfollow.getId(),userAfterUnfollow.getName(),userAfterUnfollow.getFollowed().stream()
                 .map(u -> new UserDto(u.getId(), u.getName()))
                 .collect(Collectors.toList()));
 
         when(userRepository.findUsersById(user.getId())).thenReturn(user);
         when(userRepository.findUsersById(userToUnfollow.getId())).thenReturn(userToUnfollow);
-        when(userRepository.unfollow(user, userToUnfollow)).thenReturn(user);
+        when(userRepository.unfollow(user, userToUnfollow)).thenReturn(userAfterUnfollow);
 
         //Act
         UserFollowedDto result = userService.unfollowUser(user.getId(), userToUnfollow.getId());
@@ -94,16 +99,16 @@ public class UserServiceTest {
     void unfollowUserNotFound(){
         //Arrange
         User user = new User(1, "carlos", new ArrayList<>(), new ArrayList<>());
-        int userToUnfollowId = 2;
+        int userIdToUnfollow = 2;
 
         UserFollowedDto expected = new UserFollowedDto(user.getId(), user.getName(),
                 user.getFollowed().stream().map(u -> new UserDto(u.getId(), u.getName())).collect(Collectors.toList()));
 
         when(userRepository.findUsersById(user.getId())).thenReturn(user);
-        when(userRepository.findUsersById(userToUnfollowId)).thenReturn(null);
+        when(userRepository.findUsersById(userIdToUnfollow)).thenReturn(null);
 
         //Act & Assert
-        Assertions.assertThrows(NotFoundException.class, ()-> userService.unfollowUser(user.getId(), userToUnfollowId));
+        Assertions.assertThrows(NotFoundException.class, ()-> userService.unfollowUser(user.getId(), userIdToUnfollow));
     }
 
 
