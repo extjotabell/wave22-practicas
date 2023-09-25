@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "68be747f-56bc-4a3b-a737-d018c25d8960",
+		"_postman_id": "21d97c1a-a57b-4af6-b494-f27f127b7fa3",
 		"name": "Sprints",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29333264"
+		"_exporter_id": "29813520"
 	},
 	"item": [
 		{
@@ -126,7 +126,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user_id\": 6,\n    \"date\": \"2023-09-18\",\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}\n",
+							"raw": "{\n    \"user_id\": 1,\n    \"date\": \"18-09-2023\",\n    \"product\": {\n        \"product_id\": 100,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 2,\n    \"price\": 1500.50\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -134,7 +134,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/products/addPost",
+							"raw": "http://localhost:8080/products/post",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -142,7 +142,7 @@
 							"port": "8080",
 							"path": [
 								"products",
-								"addPost"
+								"post"
 							]
 						}
 					},
@@ -154,7 +154,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/products/followed/6/list?order=date_desc",
+							"raw": "http://localhost:8080/products/followed/2/list?order=date_desc",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -163,7 +163,7 @@
 							"path": [
 								"products",
 								"followed",
-								"6",
+								"2",
 								"list"
 							],
 							"query": [
@@ -218,25 +218,6 @@
 							"path": [
 								"products",
 								"posts"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getAllProducts",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/products",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"products"
 							]
 						}
 					},
