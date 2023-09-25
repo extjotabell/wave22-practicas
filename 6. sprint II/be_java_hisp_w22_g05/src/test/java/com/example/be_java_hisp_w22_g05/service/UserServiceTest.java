@@ -54,6 +54,27 @@ public class UserServiceTest {
     }
 
     @Test
+    @DisplayName("T-0004-DESC")
+    void findUsersFollowingSellerDescTest(){
+        //Arrange
+        String expected = "Maria";
+        User user1 = new User(24, "Juan", new ArrayList<>(), new ArrayList<>());
+        User user2 = new User(21, "Maria", new ArrayList<>(), new ArrayList<>());
+        List<User> followers = new ArrayList<>();
+        followers.add(user1);
+        followers.add(user2);
+        User userResponseMock = new User(1,"Enzo",followers,new ArrayList<>());
+        Mockito.when(userRepository.findUsersById(1)).thenReturn(userResponseMock);
+
+        //Act
+        UserFollowersDto obtain = userService.findUsersFollowingSeller(1,"name_desc");
+
+        //Assert
+        Assertions.assertEquals(expected, obtain.getFollowers().get(0).getName());
+
+    }
+
+    @Test
     @DisplayName("T-0001: Prueba exitosa de follow")
     void followUserOk() {
         //Arrange
