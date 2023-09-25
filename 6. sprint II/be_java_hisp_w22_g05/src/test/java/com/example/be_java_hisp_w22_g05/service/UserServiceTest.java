@@ -7,14 +7,15 @@ import com.example.be_java_hisp_w22_g05.entity.User;
 
 import com.example.be_java_hisp_w22_g05.dto.UserFollowersDto;
 import com.example.be_java_hisp_w22_g05.exception.NotFoundException;
-import com.example.be_java_hisp_w22_g05.repository.IUserRepository;
 
+import com.example.be_java_hisp_w22_g05.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
@@ -27,10 +28,30 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
     @Mock
-    IUserRepository userRepository;
+    UserRepository userRepository;
 
     @InjectMocks
     UserService userService;
+
+    @Test
+    @DisplayName("T-0004-ASC")
+    void findUsersFollowingSellerAscTest(){
+        //Arrange
+        String expected = "Juan";
+        User user1 = new User(24, "Maria", new ArrayList<>(), new ArrayList<>());
+        User user2 = new User(21, "Juan", new ArrayList<>(), new ArrayList<>());
+        List<User> followers = new ArrayList<>();
+        followers.add(user1);
+        followers.add(user2);
+        User userResponseMock = new User(1,"Enzo",followers,new ArrayList<>());
+        Mockito.when(userRepository.findUsersById(1)).thenReturn(userResponseMock);
+
+        //Act
+        UserFollowersDto obtain = userService.findUsersFollowingSeller(1,"name_asc");
+
+        //Assert
+        Assertions.assertEquals(expected, obtain.getFollowers().get(0).getName());
+    }
 
     @Test
     @DisplayName("T-0001: Prueba exitosa de follow")
