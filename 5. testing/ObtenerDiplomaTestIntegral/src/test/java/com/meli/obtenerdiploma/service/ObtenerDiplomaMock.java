@@ -1,4 +1,4 @@
-package com.meli.obtenerdiploma;
+package com.meli.obtenerdiploma.service;
 
 import com.meli.obtenerdiploma.model.StudentDTO;
 import com.meli.obtenerdiploma.model.SubjectDTO;
@@ -24,7 +24,7 @@ public class ObtenerDiplomaMock {
     IStudentDAO studentDAO;
 
     @InjectMocks
-    StudentService service;
+    ObtenerDiplomaService service;
 
 
     @Test
@@ -36,15 +36,10 @@ public class ObtenerDiplomaMock {
                                 new SubjectDTO("Química",6.0)));
 
         Mockito.when(studentDAO.findById(studentId)).thenReturn(studentDTO);
-
-        studentDTO.setAverageScore(7.333333333333333);
-        studentDTO.setMessage("El alumno Juan ha obtenido un promedio de 7.33");
-        
-
-
-
+        service.analyzeScores(studentId);
+        Assertions.assertEquals(7.333333333333333,studentDTO.getAverageScore());
     }
-
+ /*
     @Test
     public void calculateAverageTest(@NotEmpty(message = "La lista de materias no puede estar vacía.") List<@Valid SubjectDTO> subjects){
         List<SubjectDTO> subjectDTO = new ArrayList<>();
@@ -58,6 +53,8 @@ public class ObtenerDiplomaMock {
         ;
         Assertions.assertEquals(promedio,7.333333333333333);
     }
+
+  */
 
 
 }
