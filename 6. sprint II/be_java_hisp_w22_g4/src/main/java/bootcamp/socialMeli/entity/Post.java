@@ -1,4 +1,5 @@
 package bootcamp.socialMeli.entity;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,16 +16,19 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Post {
-    private int postId;
-    private int userId;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonProperty("post_id")
+    private Integer postId;
+    @JsonProperty("user_id")
+    private Integer userId;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate date;
-    private int productId;
-    private int category;
-    private double price;
-    private boolean hasPromo;
-    private double discount;
+    private Product product;
+    private Integer category;
+    private Double price;
+    @JsonProperty("has_promo")
+    private Boolean hasPromo;
+    private Double discount;
 
 }

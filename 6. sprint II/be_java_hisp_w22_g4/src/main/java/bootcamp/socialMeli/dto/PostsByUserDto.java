@@ -11,9 +11,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostsByUserDto {
-    @JsonProperty("userId")
-    private int userId;
-    @JsonProperty("userName")
+    @JsonProperty("user_id")
+    private Integer userId;
+    @JsonProperty("user_name")
     private String userName;
     private List<PostDto> posts;
 }

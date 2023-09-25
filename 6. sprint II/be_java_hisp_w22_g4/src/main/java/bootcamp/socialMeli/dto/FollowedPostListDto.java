@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class FollowedPostListDto {
-    @JsonProperty("userId")
-    private int userId;
+    @JsonProperty("user_id")
+    private Integer userId;
     private List<PostDto> posts;
 }

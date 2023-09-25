@@ -1,7 +1,6 @@
 package bootcamp.socialMeli.repository;
 
 import bootcamp.socialMeli.entity.Post;
-import bootcamp.socialMeli.entity.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Repository;
@@ -11,7 +10,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
@@ -72,27 +74,23 @@ public class PostRepositoryImpl implements IPostRepository{
 
     @Override
     public List<Post> getPostsByUserId(int userId) {
-        return this.postsDatabase.values().stream().filter(p -> p.getUser_id() == userId).collect(Collectors.toList());
+        return this.postsDatabase.values().stream().filter(p -> p.getUserId() == userId).collect(Collectors.toList());
     }
 
     public List<Post> getLatestPostsByUserId(int userId)
     {
         return this.postsDatabase.values().stream().filter(p ->
-                p.getUser_id() == userId && p.getDate().isAfter(LocalDate.now().minusWeeks(2))).collect(Collectors.toList());
+                p.getUserId() == userId && p.getDate().isAfter(LocalDate.now().minusWeeks(2))).collect(Collectors.toList());
     }
 
     @Override
-    public int addPost(Post post) {
-        int idPostNew=0;
-        User userPost = userRepository.findUserById(post.getUser_id()).orElse(null);
-        if(userPost!=null){
-            List<Integer> listidPost = new ArrayList<>(postsDatabase.keySet().stream().toList());
-            Collections.sort(listidPost);
-            idPostNew = listidPost.get(listidPost.size()-1)+1;
-            post.setPostId(idPostNew);
-            postsDatabase.put(idPostNew, post);
-            listidPost.add(idPostNew);
-        }
-        return idPostNew;
+    public Post addPost(Post post) {
+        List<Integer> postIdsList = new ArrayList<>(postsDatabase.keySet().stream().toList());
+        Collections.sort(postIdsList);
+        int idNewPost = postIdsList.get(postIdsList.size()-1)+1;
+        post.setPostId(idNewPost);
+        postsDatabase.put(idNewPost,post);
+
+        return post;
     }
 }

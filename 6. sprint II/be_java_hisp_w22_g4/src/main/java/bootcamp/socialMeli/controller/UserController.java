@@ -64,5 +64,4 @@ public class UserController {
         userService.removeFollower(userId, userIdToUnfollow);
         return new ResponseEntity<>("Se dejó de seguir al usuario "+userIdToUnfollow, HttpStatus.OK);
     }
-
 }

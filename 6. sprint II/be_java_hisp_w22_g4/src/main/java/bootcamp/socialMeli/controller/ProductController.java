@@ -2,7 +2,6 @@ package bootcamp.socialMeli.controller;
 
 import bootcamp.socialMeli.dto.*;
 import bootcamp.socialMeli.service.IPostService;
-import bootcamp.socialMeli.service.IProductService;
 import bootcamp.socialMeli.utils.ProductOrderListEnum;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -14,18 +13,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
-    private final IProductService productService;
     private final IPostService postService;
 
-    public ProductController(IProductService productService, IPostService postService) {
-        this.productService = productService;
+    public ProductController( IPostService postService) {
         this.postService = postService;
-    }
-
-    @GetMapping()
-    public ResponseEntity<List<ProductDto>> getAllProducts()
-    {
-        return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
     }
 
     @GetMapping("/posts")

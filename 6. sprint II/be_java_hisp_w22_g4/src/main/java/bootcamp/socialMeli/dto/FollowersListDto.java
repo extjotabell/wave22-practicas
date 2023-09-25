@@ -11,9 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FollowersListDto {
-    @JsonProperty("userId")
-    private int userId;
-    @JsonProperty("userName")
+    @JsonProperty("user_id")
+    private Integer userId;
+    @JsonProperty("user_name")
     private String userName;
     private List<UserDto> followers;
 }

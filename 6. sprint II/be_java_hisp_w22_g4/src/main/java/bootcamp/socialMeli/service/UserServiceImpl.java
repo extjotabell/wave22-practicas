@@ -131,7 +131,7 @@ public class UserServiceImpl implements IUserService{
         Comparator<UserDto> usernameComparator = Comparator.comparing(UserDto::getUserName);
 
         // Sort depending parameter input
-        if (criteria == NameOrderEnumDto.nameDesc){
+        if (criteria == NameOrderEnumDto.name_desc){
             listToSort.sort(usernameComparator.reversed());
         } else {
             listToSort.sort(usernameComparator);

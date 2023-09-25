@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FollowersCountDto {
-    @JsonProperty("userId")
-    private int userId;
-    @JsonProperty("userName")
+    @JsonProperty("user_id")
+    private Integer userId;
+    @JsonProperty("user_name")
     private String userName;
     @JsonProperty("followers_count")
-    private int followersCount;
+    private Integer followersCount;
 }

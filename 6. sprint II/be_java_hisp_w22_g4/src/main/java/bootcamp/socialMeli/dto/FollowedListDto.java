@@ -13,9 +13,9 @@ import java.util.List;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class FollowedListDto {
-    @JsonProperty("userId")
-    private int userId;
-    @JsonProperty("userName")
+    @JsonProperty("user_id")
+    private Integer userId;
+    @JsonProperty("user_name")
     private String userName;
     private List<UserDto> followed;
 }

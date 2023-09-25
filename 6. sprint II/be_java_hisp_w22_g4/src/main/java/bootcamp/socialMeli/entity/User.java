@@ -1,5 +1,6 @@
 package bootcamp.socialMeli.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,8 +12,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    private int userId;
+    @JsonProperty("user_id")
+    private Integer userId;
     private RolEnum rol;
+    @JsonProperty("user_name")
     private String userName;
     private List<Integer> postList;
     private List<Integer> followed;
@@ -28,12 +31,8 @@ public class User {
         return followers;
     }
 
-    public boolean isBeingFollowedBy(int followerId){
-        return followers.stream().anyMatch(id -> id == followerId);
+    public List<Integer> getPostList() {
+        if (postList == null) return new ArrayList<>();
+        return postList;
     }
-
-    public boolean isFollowing(int userId){
-        return followed.stream().anyMatch(id -> id == userId);
-    }
-
 }

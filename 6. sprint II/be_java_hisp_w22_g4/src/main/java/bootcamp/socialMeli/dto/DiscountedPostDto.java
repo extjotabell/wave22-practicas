@@ -6,7 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import jakarta.annotation.Nullable;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,18 +20,27 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DiscountedPostDto {
-    @JsonProperty("userId")
-    private int userId;
-    @JsonProperty("postId")
-    private int postId;
+    @JsonProperty("user_id")
+    @Min(value = 1, message = "El id debe ser mayor a cero")
+    @NotNull(message = "El  id no puede estar vacío.")
+    private Integer userId;
+    @JsonProperty("post_id")
+    private Integer postId;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
+    @NotEmpty(message = "La fecha no puede estar vacía.")
     private LocalDate date;
-    private ProductDto product;
-    private int category;
-    private double price;
+    @NotNull(message = "Se debe ingresar un producto")
+    private @Valid ProductDto product;
+    @Min(value = 1, message = "Se debe ingresar un Categoria")
+    @NotNull(message = "El campo no puede estar vacío.")
+    private Integer category;
+    @DecimalMin(value = "1", message = "Se debe ingresar un precio")
+    @NotNull(message = "El campo no puede estar vacío.")
+    @DecimalMax(value = "10000000", message = "El precio máximo por producto es de 10.000.000")
+    private Double price;
     @JsonProperty("has_promo")
-    private boolean hasPromo;
-    private double discount;
+    private Boolean hasPromo;
+    private Double discount;
 }

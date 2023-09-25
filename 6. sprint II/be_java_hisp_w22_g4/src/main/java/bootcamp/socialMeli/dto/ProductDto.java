@@ -2,8 +2,7 @@ package bootcamp.socialMeli.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,18 +12,33 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class ProductDto {
-    @Min(value = 1, message = "Se debe ingresar un id producto")
-    @JsonProperty("productId")
-    private int productId;
-    @NotNull(message = "Se debe ingresar el nombre del producto")
+    @NotNull(message = "El  id no puede estar vacío.")
+    @Min(value = 1, message = "El  id debe ser mayor a 0.")
+    @JsonProperty("product_id")
+    private Integer productId;
+
+    @NotEmpty(message ="El campo no puede estar vacio." )
+    @Size(max = 40, message = "La longitud no puede superar los 40 caracteres.")
+    @Pattern(regexp = "[a-zA-Z][a-zA-Z ]*", message = "El campo no puede poseer caracteres especiales.")
     @JsonProperty("product_name")
     private String productName;
-    @NotNull(message = "Se debe ingresar el tipo")
+
+    @NotEmpty(message = "El campo no puede estar vacio.")
+    @Size(max = 15, message = "La longitud no puede superar los 15 caracteres.")
+    @Pattern(regexp = "[a-zA-Z][a-zA-Z ]*", message = "El campo no puede poseer caracteres especiales.")
     private String type;
-    @NotNull(message = "Se dene ingresar la marca")
+
+    @NotEmpty(message ="El campo no puede estar vacio." )
+    @Size(max = 25, message = "La longitud no puede superar los 25 caracteres.")
+    @Pattern(regexp = "[a-zA-Z][a-zA-Z ]*", message = "El campo no puede poseer caracteres especiales.")
     private String brand;
-    @NotNull(message = "Se debe el color")
+
+    @NotEmpty(message = "El campo no puede estar vacio.")
+    @Size(max = 15, message = "La longitud no puede superar los 15 caracteres.")
+    @Pattern(regexp = "[a-zA-Z][a-zA-Z ]*", message = "El campo no puede poseer caracteres especiales.")
     private String color;
-    @NotNull(message = "Se debe ingresar nota")
+
+    @Size(max=80, message = "La longitud no puede superar los 80 caracteres.")
+    @Pattern(regexp = "[a-zA-Z][a-zA-Z ]*", message = "El campo no puede poseer caracteres especiales.")
     private String notes;
 }

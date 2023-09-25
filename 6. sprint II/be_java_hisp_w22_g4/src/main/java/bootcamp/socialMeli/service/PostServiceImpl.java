@@ -1,10 +1,14 @@
 package bootcamp.socialMeli.service;
 
-import bootcamp.socialMeli.dto.*;
+import bootcamp.socialMeli.dto.FollowedPostListDto;
+import bootcamp.socialMeli.dto.PostDto;
 import bootcamp.socialMeli.entity.Post;
+import bootcamp.socialMeli.entity.RolEnum;
+import bootcamp.socialMeli.entity.User;
 import bootcamp.socialMeli.exception.NotFoundException;
 import bootcamp.socialMeli.repository.IPostRepository;
 import bootcamp.socialMeli.utils.ProductOrderListEnum;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,13 +19,14 @@ import java.util.stream.Collectors;
 @Service
 public class PostServiceImpl implements IPostService {
     private final IPostRepository postRepository;
-    private final IProductService productService;
     private final IUserService userService;
+    private final ObjectMapper mapper;
 
-    public PostServiceImpl(IPostRepository postRepository, IProductService productService,IUserService userService ) {
+    public PostServiceImpl(IPostRepository postRepository,IUserService userService, ObjectMapper mapper)
+    {
         this.postRepository = postRepository;
-        this.productService = productService;
         this.userService = userService;
+        this.mapper = mapper;
     }
     @Override
     public List<PostDto> getAllPosts() {
@@ -29,10 +34,7 @@ public class PostServiceImpl implements IPostService {
         if (postList.isEmpty()) throw new NotFoundException("No se encontraron posts en el sistema.");
 
         return postList.stream().map(post ->
-        {
-            ProductDto product = productService.getProductById(post.getProductId());
-            return new PostDto(post.getUserId(), post.getPostId(), post.getDate(), product, post.getCategory(), post.getPrice());
-        }).collect(Collectors.toList());
+                mapper.convertValue(post, PostDto.class)).collect(Collectors.toList());
     }
 
 
@@ -42,30 +44,13 @@ public class PostServiceImpl implements IPostService {
         List<Integer> userFollowedId = userService.findUserById(userId).getFollowed();
         List<PostDto> postDtoList = new ArrayList<>();
 
-        userFollowedId.forEach(idUser ->
-        {
-            List<Post> post = postRepository.getLatestPostsByUserId(idUser);
-            post.forEach(x -> {
-                ProductDto productDto = productService.getProductById(x.getProductId());
-
-                postDtoList.add(new PostDto(
-                        x.getUserId(),
-                        x.getPostId(),
-                        x.getDate(),
-                        new ProductDto(
-                                productDto.getProductId(),
-                                productDto.getProductName(),
-                                productDto.getType(),
-                                productDto.getBrand(),
-                                productDto.getColor(),
-                                productDto.getNotes()
-                        ),
-                        x.getCategory(),
-                        x.getPrice()));
+        userFollowedId.forEach(idUser ->{
+            List<Post> posts = postRepository.getLatestPostsByUserId(idUser);
+            posts.forEach(post -> {postDtoList.add(mapper.convertValue(post, PostDto.class));
             });
         });
 
-        if(order == ProductOrderListEnum.dateDesc) return new FollowedPostListDto(
+        if(order == ProductOrderListEnum.date_asc) return new FollowedPostListDto(
                 userId, postDtoList.stream().sorted(Comparator.comparing(PostDto::getDate)).
                 collect(Collectors.toList()));
 
@@ -76,17 +61,12 @@ public class PostServiceImpl implements IPostService {
 
     @Override
     public String addPost(PostDto postDto) {
-        int idNewPost;
-        Post post = new Post(postDto.getPostId(),
-                postDto.getPostId(),
-                postDto.getDate(),
-                postDto.getProduct().getProductId(),
-                postDto.getCategory(),
-                postDto.getPrice(),false,0);
-        idNewPost = postRepository.addPost(post);
-        productService.addProducto(postDto.getProduct());
+        User user = userService.findUserById(postDto.getUserId());
 
-        return "Se agrego exitosamente un nuevo post con el numero : " + idNewPost;
-        //Returning the sorted list ordered by the latest post
+        if(user.getRol() == RolEnum.COMPRADOR) user.setRol(RolEnum.VENDEDOR);
+        Post post = postRepository.addPost(mapper.convertValue(postDto, Post.class));
+
+        user.getPostList().add(post.getPostId());
+        return "Se agrego exitosamente un nuevo post con el id : " + post.getPostId();
     }
 }
