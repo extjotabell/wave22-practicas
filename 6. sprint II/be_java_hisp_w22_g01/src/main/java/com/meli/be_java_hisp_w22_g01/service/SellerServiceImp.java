@@ -18,7 +18,6 @@ public class SellerServiceImp implements ISellerService{
 
     private final ISellerRepository sellerRepository;
     private final IUserRepository userRepository;
-    private final ObjectMapper mapper;
     @Override
     public CountFollowersDTO countFollowers(int userId) {
         Seller seller = sellerRepository.findById(userId);
