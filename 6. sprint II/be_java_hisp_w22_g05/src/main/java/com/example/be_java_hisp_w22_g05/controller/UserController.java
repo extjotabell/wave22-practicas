@@ -2,6 +2,8 @@ package com.example.be_java_hisp_w22_g05.controller;
 
 import com.example.be_java_hisp_w22_g05.dto.UserNumberFollowersDto;
 import com.example.be_java_hisp_w22_g05.service.IUserService;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +34,10 @@ public class UserController {
     }
 
     @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
-    public ResponseEntity<?> unfollow(@PathVariable int userId, @PathVariable int userIdToUnfollow){
+    public ResponseEntity<?> unfollow(@PathVariable
+                                          @Min(value = 1,message = "El id del usuario seguidor debe ser mayor a 0") int userId,
+                                      @PathVariable
+                                      @Min(value = 1,message = "El id del usuario seguido debe ser mayor a 0") int userIdToUnfollow){
         return new ResponseEntity<>(userService.unfollowUser(userId,userIdToUnfollow), HttpStatus.OK);
     }
 
