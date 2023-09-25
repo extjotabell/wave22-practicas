@@ -3,6 +3,7 @@ package com.example.be_java_hisp_w22_g05.controller;
 import com.example.be_java_hisp_w22_g05.dto.UserNumberFollowersDto;
 import com.example.be_java_hisp_w22_g05.service.IUserService;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}/followed/list")
-    public ResponseEntity<?> getListOfUsersFollowedBy(@PathVariable int userId, @RequestParam(required = false) String order){
+    public ResponseEntity<?> getListOfUsersFollowedBy(@PathVariable @NotBlank @Min(value = 0) int userId, @RequestParam(required = false) String order){
         return new ResponseEntity<>(userService.getListOfUsersFollowedBy(userId, order), HttpStatus.OK);
     }
 
