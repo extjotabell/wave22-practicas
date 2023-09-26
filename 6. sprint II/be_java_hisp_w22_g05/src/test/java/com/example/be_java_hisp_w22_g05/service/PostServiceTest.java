@@ -134,6 +134,7 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName("T0008: Test para US0006")
     void getListPostsFromSellersFollowedOkTest(){
         //Arrange
         List<Post> postList = new ArrayList<>();
