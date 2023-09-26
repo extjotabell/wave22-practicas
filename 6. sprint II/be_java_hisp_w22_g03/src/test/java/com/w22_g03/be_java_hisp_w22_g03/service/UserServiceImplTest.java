@@ -33,10 +33,13 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
+    User userToGet;
     User follower;
     User followed;
     User follower2;
     User follower3;
+    User followed2;
+    User followed3;
 
     @Mock
     UserRepository userRepo;
@@ -51,6 +54,9 @@ class UserServiceImplTest {
         followed = new User(2L, "Juana", List.of(post), new ArrayList<>(), new ArrayList<>());
         follower2 = new User(3L, "Juanita", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         follower3 = new User(4L, "Josefa", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        userToGet = new User(5L, "Gaspar", new ArrayList<>(),new ArrayList<>(), new ArrayList<>());
+        followed2 = new User(5L, "Gaspar", new ArrayList<>(),new ArrayList<>(), new ArrayList<>());
+        followed3 = new User(5L, "Gaspar", new ArrayList<>(),new ArrayList<>(), new ArrayList<>());
     }
 
     @AfterEach
@@ -250,24 +256,22 @@ class UserServiceImplTest {
         });
     }
 
-    //T-0004
+    /**
+     * Unit test to verify if followers retrieval is in ascending order by name.
+     */
     @Test
     void getFollowersOrderByNameAscOk() {
         //Arrange
-        User userToGetFollowers = new User(1, "Gaspar", null,null, new ArrayList<>());
-        User followerUser = new User(2, "Franco", null, null, null);
-        User followerUser2 = new User(3, "Ezequiel", null, null, null);
-        User followerUser3 = new User(4, "Matias", null, null, null);
-        userToGetFollowers.getFollowers().add(followerUser);
-        userToGetFollowers.getFollowers().add(followerUser2);
-        userToGetFollowers.getFollowers().add(followerUser3);
-        List<User> followers = userToGetFollowers.getFollowers();
+        userToGet.getFollowers().add(follower);
+        userToGet.getFollowers().add(follower2);
+        userToGet.getFollowers().add(follower3);
+        List<User> followers = userToGet.getFollowers();
         String orderByNameAsc = "name_asc";
 
         //Act
-        when(userRepo.findById(userToGetFollowers.getUserId())).thenReturn(userToGetFollowers);
-        when(userRepo.findFollowers((int)userToGetFollowers.getUserId())).thenReturn(followers);
-        FollowerDTO followersOfUser1 = userService.getFollowers(((int) userToGetFollowers.getUserId()),orderByNameAsc);
+        when(userRepo.findById(userToGet.getUserId())).thenReturn(userToGet);
+        when(userRepo.findFollowers((int)userToGet.getUserId())).thenReturn(followers);
+        FollowerDTO followersOfUser1 = userService.getFollowers(((int) userToGet.getUserId()),orderByNameAsc);
 
         //Assert
         boolean isAscendingOrder = IntStream.range(0, followersOfUser1.getFollowers().size() - 1) //Compares that all the names of the followers are ordered ascending
@@ -305,24 +309,22 @@ class UserServiceImplTest {
     }
 
 
-    //T-0004
+    /**
+     * Unit test to verify if followers retrieval is in descending order by name.
+     */
     @Test
     void getFollowersOrderByNameDescOk() {
         //Arrange
-        User userToGetFollowers = new User(1, "Gaspar", null,null, new ArrayList<>());
-        User followerUser = new User(2, "Franco", null, null, null);
-        User followerUser2 = new User(3, "Ezequiel", null, null, null);
-        User followerUser3 = new User(4, "Matias", null, null, null);
-        userToGetFollowers.getFollowers().add(followerUser);
-        userToGetFollowers.getFollowers().add(followerUser2);
-        userToGetFollowers.getFollowers().add(followerUser3);
-        List<User> followers = userToGetFollowers.getFollowers();
+        userToGet.getFollowers().add(follower);
+        userToGet.getFollowers().add(follower2);
+        userToGet.getFollowers().add(follower3);
+        List<User> followers = userToGet.getFollowers();
         String orderByNameAsc = "name_desc";
 
         //Act
-        when(userRepo.findById(userToGetFollowers.getUserId())).thenReturn(userToGetFollowers);
-        when(userRepo.findFollowers((int)userToGetFollowers.getUserId())).thenReturn(followers);
-        FollowerDTO followersOfUser1 = userService.getFollowers(((int) userToGetFollowers.getUserId()),orderByNameAsc);
+        when(userRepo.findById(userToGet.getUserId())).thenReturn(userToGet);
+        when(userRepo.findFollowers((int)userToGet.getUserId())).thenReturn(followers);
+        FollowerDTO followersOfUser1 = userService.getFollowers(((int) userToGet.getUserId()),orderByNameAsc);
 
         //Assert
         boolean isDescendingOrder = IntStream.range(0, followersOfUser1.getFollowers().size() - 1) //Compares that all the names of the followers are ordered descending
@@ -331,42 +333,39 @@ class UserServiceImplTest {
         assertTrue(isDescendingOrder);
     }
 
-    //T-0004
+    /**
+     * Unit test to verify behavior when trying to get followers with an invalid sorting parameter.
+     */
     @Test
     void getFollowersOrderByParameterNotOk() {
         //Arrange
-        User userToGetFollowers = new User(1, "Gaspar", null,null, new ArrayList<>());
-        User followerUser = new User(2, "Franco", null, null, null);
-        User followerUser2 = new User(3, "Ezequiel", null, null, null);
-        userToGetFollowers.getFollowers().add(followerUser);
-        userToGetFollowers.getFollowers().add(followerUser2);
-        List<User> followers = userToGetFollowers.getFollowers();
+        userToGet.getFollowers().add(follower);
+        userToGet.getFollowers().add(follower2);
+        List<User> followers = userToGet.getFollowers();
         String invalidOrder = "invalid_order";
 
         //Act and assert
-        when(userRepo.findById(userToGetFollowers.getUserId())).thenReturn(userToGetFollowers);
-        when(userRepo.findFollowers((int)userToGetFollowers.getUserId())).thenReturn(followers);
-        assertThrows(BadRequestException.class, () -> userService.getFollowers(((int) userToGetFollowers.getUserId()),invalidOrder));
+        when(userRepo.findById(userToGet.getUserId())).thenReturn(userToGet);
+        when(userRepo.findFollowers((int)userToGet.getUserId())).thenReturn(followers);
+        assertThrows(BadRequestException.class, () -> userService.getFollowers(((int) userToGet.getUserId()),invalidOrder));
     }
 
-    //T-0004
+    /**
+     * Unit test to verify if followed retrieval is in ascending order by name.
+     */
     @Test
     void getFollowedOrderByNameAscOk() {
         //Arrange
-        User userToGetFollowed = new User(1, "Gaspar", null,new ArrayList<>(), null);
-        User followerUser = new User(2, "Franco", null, null, null);
-        User followerUser2 = new User(3, "Ezequiel", null, null, null);
-        User followerUser3 = new User(4, "Matias", null, null, null);
-        userToGetFollowed.getFollowed().add(followerUser);
-        userToGetFollowed.getFollowed().add(followerUser2);
-        userToGetFollowed.getFollowed().add(followerUser3);
-        List<User> followed = userToGetFollowed.getFollowed();
+        userToGet.getFollowed().add(followed);
+        userToGet.getFollowed().add(followed2);
+        userToGet.getFollowed().add(followed3);
+        List<User> followedList = userToGet.getFollowed();
         String orderByNameAsc = "name_asc";
 
         //Act
-        when(userRepo.findById(userToGetFollowed.getUserId())).thenReturn(userToGetFollowed);
-        when(userRepo.findFollowed((int)userToGetFollowed.getUserId())).thenReturn(followed);
-        FollowedDTO followedOfUser1 = userService.getFollowed(((int) userToGetFollowed.getUserId()),orderByNameAsc);
+        when(userRepo.findById(userToGet.getUserId())).thenReturn(userToGet);
+        when(userRepo.findFollowed((int)userToGet.getUserId())).thenReturn(followedList);
+        FollowedDTO followedOfUser1 = userService.getFollowed(((int) userToGet.getUserId()),orderByNameAsc);
 
         //Assert
         boolean isAscendingOrder = IntStream.range(0, followedOfUser1.getFollowed().size() - 1) //Compares that all the names of the followers are ordered ascending
@@ -375,24 +374,22 @@ class UserServiceImplTest {
         assertTrue(isAscendingOrder);
     }
 
-    //T-0004
+    /**
+     * Unit test to verify if followed retrieval is in descending order by name.
+     */
     @Test
     void getFollowedOrderByNameDescOk() {
         //Arrange
-        User userToGetFollowed = new User(1, "Gaspar", null,new ArrayList<>(), null);
-        User followerUser = new User(2, "Franco", null, null, null);
-        User followerUser2 = new User(3, "Ezequiel", null, null, null);
-        User followerUser3 = new User(4, "Matias", null, null, null);
-        userToGetFollowed.getFollowed().add(followerUser);
-        userToGetFollowed.getFollowed().add(followerUser2);
-        userToGetFollowed.getFollowed().add(followerUser3);
-        List<User> followed = userToGetFollowed.getFollowed();
+        userToGet.getFollowed().add(followed);
+        userToGet.getFollowed().add(followed2);
+        userToGet.getFollowed().add(followed3);
+        List<User> followedList = userToGet.getFollowed();
         String orderByNameAsc = "name_desc";
 
         //Act
-        when(userRepo.findById(userToGetFollowed.getUserId())).thenReturn(userToGetFollowed);
-        when(userRepo.findFollowed((int)userToGetFollowed.getUserId())).thenReturn(followed);
-        FollowedDTO followedOfUser1 = userService.getFollowed(((int) userToGetFollowed.getUserId()),orderByNameAsc);
+        when(userRepo.findById(userToGet.getUserId())).thenReturn(userToGet);
+        when(userRepo.findFollowed((int)userToGet.getUserId())).thenReturn(followedList);
+        FollowedDTO followedOfUser1 = userService.getFollowed(((int) userToGet.getUserId()),orderByNameAsc);
 
         //Assert
         boolean isAscendingOrder = IntStream.range(0, followedOfUser1.getFollowed().size() - 1) //Compares that all the names of the followers are ordered ascending
@@ -401,22 +398,21 @@ class UserServiceImplTest {
         assertTrue(isAscendingOrder);
     }
 
-    //T-0004
+    /**
+     * Unit test to verify behavior when trying to get followed with an invalid sorting parameter.
+     */
     @Test
     void getFollowedOrderByParameterNotOk() {
         //Arrange
-        User userToGetFollowed = new User(1, "Gaspar", null,new ArrayList<>(), null);
-        User followerUser = new User(2, "Franco", null, null, null);
-        User followerUser2 = new User(3, "Ezequiel", null, null, null);
-        userToGetFollowed.getFollowed().add(followerUser);
-        userToGetFollowed.getFollowed().add(followerUser2);
-        List<User> followed = userToGetFollowed.getFollowed();
+        userToGet.getFollowed().add(followed);
+        userToGet.getFollowed().add(followed2);
+        List<User> followedList = userToGet.getFollowed();
         String invalidOrder = "invalid_order";
 
         //Act and assert
-        when(userRepo.findById(userToGetFollowed.getUserId())).thenReturn(userToGetFollowed);
-        when(userRepo.findFollowed((int)userToGetFollowed.getUserId())).thenReturn(followed);
-        assertThrows(BadRequestException.class, () -> userService.getFollowed(((int) userToGetFollowed.getUserId()),invalidOrder));
+        when(userRepo.findById(userToGet.getUserId())).thenReturn(userToGet);
+        when(userRepo.findFollowed((int)userToGet.getUserId())).thenReturn(followedList);
+        assertThrows(BadRequestException.class, () -> userService.getFollowed(((int) userToGet.getUserId()),invalidOrder));
     }
 
     @Test
