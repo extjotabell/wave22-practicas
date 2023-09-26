@@ -13,9 +13,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -72,18 +74,22 @@ public class SellerServiceImpTest {
 
     }
 
-//    @Test
-//    void setAFollowerBadRequestException(){
-//        //ARRANGE
-//        int idFollowerParam = 2;
-//        int idSellerParam = 2;
-//        Seller seller = new Seller(new ArrayList<>(),new ArrayList<>());
-//
-//        //ACT & ASSERT
-//        when(userRepositoryImp.findById(2)).thenReturn(new User());
-//
-//        when(sellerRepositoryImp.findById(2).getFollowers().contains(userRepositoryImp.findById(2))).thenReturn(true);
-//        Assertions.assertThrows(BadRequestException.class,()-> sellerService.setAFollower(idFollowerParam,idSellerParam));
-//
-//    }
+    @Test
+    void setAFollowerBadRequestException(){
+        // ARRANGE
+        int idFollowerParam = 2;
+        int idSellerParam = 2;
+        Seller seller = new Seller(new ArrayList<>(), new ArrayList<>());
+        User user = new User(2, "valen", new ArrayList<>());
+        List<User> followers = new ArrayList<>();
+        followers.add(user); // Agregar el usuario a la lista de seguidores
+
+        // Configura el objeto simulado sellerRepositoryImp
+        Mockito.when(userRepositoryImp.findById(2)).thenReturn(user);
+        Mockito.when(sellerRepositoryImp.findById(2)).thenReturn(seller);// Aquí se debe devolver un objeto Seller
+        Mockito.when(seller.getFollowers().contains(user)).thenReturn(true);
+        // ACT & ASSERT
+        Assertions.assertThrows(BadRequestException.class, () -> sellerService.setAFollower(idFollowerParam, idSellerParam));
+    }
+
 }

@@ -188,6 +188,7 @@ public class UserServiceImp implements IUserService{
 
         return userFollowedPostListDTO;
     }
+    // US-009
     @Override
     public UserFollowedPostListDTO orderByDateFollowedSellers(int id, String order) {
         UserFollowedPostListDTO lista = userFollowedPostList(id);
