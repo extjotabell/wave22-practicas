@@ -2,8 +2,11 @@ package com.meli.be_java_hisp_w22_g01.unitTest;
 
 
 import com.meli.be_java_hisp_w22_g01.dto.PostDto;
+import com.meli.be_java_hisp_w22_g01.dto.response.FollowedDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.UserFollowedPostListDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.meli.be_java_hisp_w22_g01.dto.response.UserFollowersListDTO;
+import com.meli.be_java_hisp_w22_g01.dto.response.UserMiniDTO;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
 import com.meli.be_java_hisp_w22_g01.exceptions.BadRequestException;
@@ -20,10 +23,13 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.Collections.reverse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
@@ -144,5 +150,28 @@ public class UserServiceImpTest {
         System.out.print("expected " + expected + "\n" + "obtained " + obtainedDates);
 
     }
+    @Test
+    void orderFollowsDtoByNameAscDescTest() {
+        // ARRANGE
+        String order = "name_asc";
+        String order2 = "name_desc";
+        Seller seller = UtilTestGenerator.get2SellerWithPosts().get(0);
+        User mockUser = seller.getFollowers().get(0);
+        List<UserMiniDTO> orderedList = Arrays.asList(new UserMiniDTO(4, "Berna"),
+                new UserMiniDTO(5, "Carla"));
+
+        when(userRepository.findById(anyInt())).thenReturn(mockUser);
+
+        //ACT
+        FollowedDTO result = userService.orderFollowsDto(mockUser.getUser_id(), order);
+        FollowedDTO result2 = userService.orderFollowsDto(mockUser.getUser_id(), order2);
+
+        //ASSERT
+        assertEquals(orderedList, result.getFollowed());
+        reverse(orderedList);
+        assertEquals(orderedList, result2.getFollowed());
+    }
+
+
 
 }
