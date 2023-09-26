@@ -1,25 +1,21 @@
 package com.w22_g03.be_java_hisp_w22_g03.service;
 
 import com.w22_g03.be_java_hisp_w22_g03.dto.NumberOfFollowersDTO;
-import com.w22_g03.be_java_hisp_w22_g03.dto.PostDTO;
-import com.w22_g03.be_java_hisp_w22_g03.dto.ProductDTO;
+import com.w22_g03.be_java_hisp_w22_g03.dto.ResponseDTO;
+import com.w22_g03.be_java_hisp_w22_g03.exception.BadRequestException;
 import com.w22_g03.be_java_hisp_w22_g03.exception.NotFoundException;
 import com.w22_g03.be_java_hisp_w22_g03.model.Post;
+import com.w22_g03.be_java_hisp_w22_g03.model.User;
 import com.w22_g03.be_java_hisp_w22_g03.repository.UserRepository;
 import com.w22_g03.be_java_hisp_w22_g03.util.TestUtilGenerator;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.w22_g03.be_java_hisp_w22_g03.dto.ResponseDTO;
-import org.springframework.boot.test.context.SpringBootTest;
-import com.w22_g03.be_java_hisp_w22_g03.exception.BadRequestException;
-import org.junit.jupiter.api.BeforeEach;
-import com.w22_g03.be_java_hisp_w22_g03.model.User;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,12 +57,13 @@ class UserServiceImplTest {
         assertEquals("1 successfully followed 2", response.getMessage());
     }
 
-        @Test
+    @Test
     void startFollowing_SameUser() {
         //act & assert
         BadRequestException exception = assertThrows(BadRequestException.class, () -> userService.startFollowing(1, 1));
         assertEquals("User can't add themselves.", exception.getMessage());
     }
+
     @Test
     void startFollowing_UserNotFound() {
         //arrange
@@ -222,7 +219,7 @@ class UserServiceImplTest {
     @Test
     void getNumberOfFollowersUserNotFoundFailTest() {
         //Act & Assert
-        Assertions.assertThrows(NotFoundException.class, ()->{
+        Assertions.assertThrows(NotFoundException.class, () -> {
             NumberOfFollowersDTO numberDto = userService.getNumberOfFollowers(2);
         });
     }
