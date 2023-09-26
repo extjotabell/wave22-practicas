@@ -115,6 +115,7 @@ public class UserServiceImpl implements IUserService {
             throw new NotFoundException(String.format(USER_ID_NOT_FOUND.toString(), userId));
         }
         if(order != null){
+            sortingByDateValidation(order);
             followedPost = userRepository.getFollowedPostLasTwoWeeksOrd(userId, order);
         }else{
             followedPost = userRepository.getFollowedPostLasTwoWeeks(userId);
@@ -150,9 +151,12 @@ public class UserServiceImpl implements IUserService {
         if(!order.equals(NAME_ASC.toString()) && !order.equals(NAME_DESC.toString()))
             throw new BadRequestException(String.format(WRONG_SORTING_ORDER.toString(), order));
     }
+    private void sortingByDateValidation(String order){
+        if(!order.equals(DATE_ASC.toString()) && !order.equals(DATE_DESC.toString()))
+            throw new BadRequestException(String.format(WRONG_SORTING_ORDER.toString(), order));
+    }
 
     private List<UserFollowDTO> getUserFollowsInfo(List<Integer> listOfFollows){
-
         return listOfFollows.stream().map(i -> mapper.convertValue(userRepository.findById(i), UserFollowDTO.class)).collect(Collectors.toList());
     }
 

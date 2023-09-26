@@ -9,11 +9,8 @@ import com.example.be_java_hisp_w22_g02.entity.User;
 
 public interface IUserRepository {
     User findById(Integer id);
-
     void followUser(int userId, int userIdToFollow);
-
-    public List<Post> getFollowedPostLasTwoWeeks(int id);
-
+    List<Post> getFollowedPostLasTwoWeeks(int id);
     List<Post> getFollowedPostLasTwoWeeksOrd(int userId, String order);
     boolean existingUserById(Integer id);
     void unFollowUser(Integer userId, Integer userIdToUnfollow);

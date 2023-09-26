@@ -48,6 +48,18 @@ public enum ResponseMessages {
         public String toString() {
             return "The sorting order %s doesn't exist.";
         }
+    },
+    DATE_ASC{
+        @Override
+        public String toString() {
+            return "date_asc";
+        }
+    },
+    DATE_DESC{
+        @Override
+        public String toString() {
+            return "date_desc";
+        }
     }
 
 

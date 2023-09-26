@@ -23,12 +23,12 @@ public class ProductDto {
     @NotNull(message = "Product name can't be blank or empty.")
     @JsonAlias({"product_name"})
     @Size(max = 40, message = "Product names can have 40 characters MAX.")
-    @Pattern(regexp = "^[A-Za-z\\s]*$", message = "Special characters are not allowed.")
+    @Pattern(regexp = "^[A-Z][a-z]\\s*$", message = "Special characters are not allowed.")
     private String productName;
 
     @NotNull
     @Size(max = 15, message = "Product names can have 15 characters MAX.")
-    @Pattern(regexp = "^[a-zA-Z]*$", message = "Special characters are not allowed.")
+    @Pattern(regexp = "^[a-z][A-Z]*$", message = "Special characters are not allowed.")
     private String type;
 
     @NotNull
@@ -36,11 +36,11 @@ public class ProductDto {
 
     @NotNull
     @Size(max = 15, message = "Product names can have 15 characters MAX.")
-    @Pattern(regexp = "^[a-zA-Z]*$", message = "Special characters are not allowed.")
+    @Pattern(regexp = "^[a-z][A-Z]*$", message = "Special characters are not allowed.")
     private String color;
 
     @NotNull
     @Size(max = 80, message = "Product names can have 80 characters MAX.")
-    @Pattern(regexp = "^[A-Za-z\\s]*$", message = "Special characters are not allowed.")
+    @Pattern(regexp = "^[A-Z][a-z]\\s*$", message = "Special characters are not allowed.")
     private String notes;
 }
