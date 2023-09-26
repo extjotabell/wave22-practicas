@@ -7,6 +7,7 @@ import com.meli.be_java_hisp_w22_g01.dto.response.*;
 import com.meli.be_java_hisp_w22_g01.entity.Post;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
+import com.meli.be_java_hisp_w22_g01.exceptions.BadRequestException;
 import com.meli.be_java_hisp_w22_g01.exceptions.NotFoundException;
 import com.meli.be_java_hisp_w22_g01.repository.ISellerRepository;
 import com.meli.be_java_hisp_w22_g01.repository.IUserRepository;
@@ -201,6 +202,8 @@ public class UserServiceImp implements IUserService{
             lista.setPosts(posts.stream()
                     .sorted(Comparator.comparing(PostDto::getDate).reversed())
                     .toList());
+        } else {
+            throw new BadRequestException("No existe ese método de ordenamiento");
         }
 
         return lista;
