@@ -23,7 +23,6 @@ public class UserServiceImp implements IUserService{
 
     private final IUserRepository userRepository;
     private final ISellerRepository sellerRepository;
-    private final ObjectMapper mapper;
 
     @Override
     public FollowedDTO getUserFollowedList(int user_id) {
@@ -154,7 +153,6 @@ public class UserServiceImp implements IUserService{
 
     @Override
     public UserFollowedPostListDTO userFollowedPostList(int user_id) {
-
         ObjectMapper mapper = new ObjectMapper();
 
         User user = userRepository.findById(user_id);

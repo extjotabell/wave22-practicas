@@ -1,7 +1,9 @@
 package com.meli.be_java_hisp_w22_g01.unitTest;
 
+
 import com.meli.be_java_hisp_w22_g01.dto.PostDto;
 import com.meli.be_java_hisp_w22_g01.dto.response.UserFollowedPostListDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
 import com.meli.be_java_hisp_w22_g01.exceptions.BadRequestException;
@@ -30,6 +32,9 @@ import static org.mockito.Mockito.*;
 public class UserServiceImpTest {
     @Mock
     UserRepositoryImp userRepository;
+    @Mock
+    ObjectMapper mapper;
+
     @InjectMocks
     UserServiceImp userService;
 
@@ -39,16 +44,14 @@ public class UserServiceImpTest {
         // ARRANGE
         String order = "date_asc";
         List<Seller> sellerList = UtilTestGenerator.get2SellerWithPosts();
-
         User user = sellerList.get(0).getFollowers().get(0);
-
         when(userRepository.findById(anyInt())).thenReturn(user);
 
         // ACT
         userService.orderByDateFollowedSellers(1, order);
 
         // ASSERT
-        verify(userService, times(1)).orderByDateFollowedSellers(1, order);
+        verify(userRepository, times(1)).findById(user.getUser_id());
     }
 
     @Test
@@ -58,14 +61,12 @@ public class UserServiceImpTest {
         List<Seller> sellerList = UtilTestGenerator.get2SellerWithPosts();
         User user = sellerList.get(0).getFollowers().get(0);
         when(userRepository.findById(anyInt())).thenReturn(user);
-        UserFollowedPostListDTO userFollowedPostListDTO = UtilTestGenerator.getUserFollowedPostListDTO();
-        when(userService.userFollowedPostList(anyInt())).thenReturn(userFollowedPostListDTO);
 
         // ACT
         userService.orderByDateFollowedSellers(1, order);
 
         // ASSERT
-        verify(userService, times(1)).orderByDateFollowedSellers(1, order);
+        verify(userRepository, times(1)).findById(user.getUser_id());
     }
 
     @Test
