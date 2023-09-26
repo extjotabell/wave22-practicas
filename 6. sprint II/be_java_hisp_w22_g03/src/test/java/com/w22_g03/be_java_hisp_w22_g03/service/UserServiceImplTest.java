@@ -33,6 +33,10 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
+    User follower;
+    User followed;
+    User follower2;
+    User follower3;
 
     @Mock
     UserRepository userRepo;
@@ -42,6 +46,11 @@ class UserServiceImplTest {
 
     @BeforeEach
     void setUp() {
+        Post post = new Post();
+        follower = new User(1L, "Ana", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        followed = new User(2L, "Juana", List.of(post), new ArrayList<>(), new ArrayList<>());
+        follower2 = new User(3L, "Juanita", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        follower3 = new User(4L, "Josefa", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     }
 
     @AfterEach
@@ -109,14 +118,15 @@ class UserServiceImplTest {
     }
 
     //T-0002
+    /**
+     * This test verifies that stopFollowing() correctly returns a responseDTO.
+     * It also checks that the followed user no longer has followers.
+     */
     @Test
     void stopFollowingTestOk() {
         //Arrange
-        Post post = new Post();
-        User newFollower = new User(1L, "Ana", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User userToFollow = new User(2L, "Juana", List.of(post), new ArrayList<>(), new ArrayList<>());
-        when(userRepo.findById(1L)).thenReturn(newFollower);
-        when(userRepo.findById(2L)).thenReturn(userToFollow);
+        when(userRepo.findById(1L)).thenReturn(follower);
+        when(userRepo.findById(2L)).thenReturn(followed);
         userService.startFollowing(1, 2);
 
         //Act
@@ -124,8 +134,13 @@ class UserServiceImplTest {
 
         //Assert
         assertEquals(new ResponseDTO("1 successfully unfollowed 2"), response);
+        assertEquals(0, followed.getFollowers().size());
     }
 
+
+    /**
+     * This tests verifies that a follower can't follow themselves.
+     */
     @Test
     void stopFollowingCantUnfollowThemselvesTestFail() {
         //Act & Assert
@@ -135,14 +150,15 @@ class UserServiceImplTest {
         assertEquals("User can't unfollow themselves.", exception.getMessage());
     }
 
+    /**
+     * This test verifies that a user only can stop following another
+     * user that it was already following.
+     */
     @Test
     void stopFollowingCantUnfollowIfDidntFollowTestFail() {
         //Arrange
-        Post post = new Post();
-        User newFollower = new User(1L, "Ana", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User userToFollow = new User(2L, "Juana", List.of(post), new ArrayList<>(), new ArrayList<>());
-        when(userRepo.findById(1L)).thenReturn(newFollower);
-        when(userRepo.findById(2L)).thenReturn(userToFollow);
+        when(userRepo.findById(1L)).thenReturn(follower);
+        when(userRepo.findById(2L)).thenReturn(followed);
 
         //Act & Assert
         Exception exception = assertThrows(BadRequestException.class, () -> {
@@ -151,51 +167,49 @@ class UserServiceImplTest {
         assertEquals("You are not a follower of this user.", exception.getMessage());
     }
 
+    /**
+     * This test verifies that the followed user pops followers correctly.
+     */
     @Test
     void userPopsFollowerTestOk() {
         //Arrange
-        Post post = new Post();
-        User follower = new User(1L, "Ana", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User userToUnfollow = new User(2L, "Juana", List.of(post), new ArrayList<>(), new ArrayList<>());
         when(userRepo.findById(1L)).thenReturn(follower);
-        when(userRepo.findById(2L)).thenReturn(userToUnfollow);
+        when(userRepo.findById(2L)).thenReturn(followed);
         userService.startFollowing(1, 2);
 
         //Act
-        userToUnfollow.popFollower(follower);
+        followed.popFollower(follower);
 
         //Assert
-        Assertions.assertTrue(userToUnfollow.getFollowers().isEmpty());
+        assertTrue(followed.getFollowers().isEmpty());
     }
 
+    /**
+     * This test verifies that the follower user pops followeds correctly.
+     */
     @Test
     void userPopsFollowedTestOk() {
         //Arrange
-        Post post = new Post();
-        User follower = new User(1L, "Ana", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User userToUnfollow = new User(2L, "Juana", List.of(post), new ArrayList<>(), new ArrayList<>());
         when(userRepo.findById(1L)).thenReturn(follower);
-        when(userRepo.findById(2L)).thenReturn(userToUnfollow);
+        when(userRepo.findById(2L)).thenReturn(followed);
         userService.startFollowing(1, 2);
 
         //Act
-        follower.popFollowed(userToUnfollow);
+        follower.popFollowed(followed);
 
         //Assert
         Assertions.assertTrue(follower.getFollowed().isEmpty());
     }
 
     // T-0007
+    /**
+     * This test verifies that userService correctly counts the number of followers.
+     */
     @Test
     void getNumberOfFollowersTestOk() {
         //Arrange
-        Post post = new Post();
-        User userToFollow = new User(1L, "Juana", List.of(post), new ArrayList<>(), new ArrayList<>());
-        User follower1 = new User(2L, "Ana", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User follower2 = new User(3L, "Ana", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User follower3 = new User(4L, "Ana", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        when(userRepo.findById(1L)).thenReturn(userToFollow);
-        when(userRepo.findById(2L)).thenReturn(follower1);
+        when(userRepo.findById(1L)).thenReturn(followed);
+        when(userRepo.findById(2L)).thenReturn(follower);
         when(userRepo.findById(3L)).thenReturn(follower2);
         when(userRepo.findById(4L)).thenReturn(follower3);
         userService.startFollowing(2, 1);
@@ -209,12 +223,13 @@ class UserServiceImplTest {
         Assertions.assertEquals(3, numberDto.getFollowers_count());
     }
 
+    /**
+     * This test verifies that the number of followers of a user without followers is zero.
+     */
     @Test
     void getNumberOfFollowersEmptyTestOk() {
         //Arrange
-        Post post = new Post();
-        User userToFollow = new User(1L, "Juana", List.of(post), new ArrayList<>(), new ArrayList<>());
-        when(userRepo.findById(1L)).thenReturn(userToFollow);
+        when(userRepo.findById(1L)).thenReturn(followed);
 
         //Act
         NumberOfFollowersDTO numberDto = userService.getNumberOfFollowers(1);
@@ -223,6 +238,10 @@ class UserServiceImplTest {
         Assertions.assertEquals(0, numberDto.getFollowers_count());
     }
 
+    /**
+     * This test verifies that a NotFoundException is correctly thrown when
+     * userService searches for the number of followers of a non-existent user.
+     */
     @Test
     void getNumberOfFollowersUserNotFoundFailTest() {
         //Act & Assert
