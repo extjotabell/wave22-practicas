@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
@@ -255,6 +256,35 @@ class UserServiceImplTest {
                         .compareTo(followersOfUser1.getFollowers().get(i + 1).getUsername()) <= 0);
         assertTrue(isAscendingOrder);
     }
+
+    // T-0003
+    @Test
+    void getFollowersExists(){
+
+        User expectedUser = new User(1,"userPedro",null,null,new ArrayList<>());
+        List<User> followersExpected = new ArrayList<>();
+
+        when(userRepo.findById(expectedUser.getUserId())).thenReturn(expectedUser);
+        when(userRepo.findFollowers((int) expectedUser.getUserId())).thenReturn(followersExpected);
+
+        userService.getFollowers(1,"name_asc");
+
+        verify(userRepo, Mockito.atLeastOnce()).findFollowers(1);
+    }
+
+    // T-0003
+    @Test
+    public void testFindFollowersMethodNonExistence() {
+
+        User expectedUser = new User(1,"userPedro",null,null,new ArrayList<>());
+        List<User> followersExpected = new ArrayList<>();
+
+        when(userRepo.findById(expectedUser.getUserId())).thenReturn(expectedUser);
+        when(userRepo.findFollowers((int) expectedUser.getUserId())).thenReturn(followersExpected);
+
+        assertThrows(BadRequestException.class, () ->   userService.getFollowers(1, "fake"));
+    }
+
 
     //T-0004
     @Test
