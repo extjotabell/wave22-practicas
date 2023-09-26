@@ -2,6 +2,7 @@ package com.example.be_java_hisp_w22_g05.controller;
 
 import com.example.be_java_hisp_w22_g05.dto.PostDto;
 import com.example.be_java_hisp_w22_g05.service.IPostService;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class PostController {
     }
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<?> getListPostsFromSellersFollowed(@PathVariable int userId,@RequestParam(required = false) String order){
+    public ResponseEntity<?> getListPostsFromSellersFollowed(@PathVariable @Min(value = 1, message = "El userId debe ser mayor que 0") int userId, @RequestParam(required = false) String order){
         return new ResponseEntity<List<PostDto>>(postService.getListPostsFromSellersFollowed(userId, order), HttpStatus.OK);
     }
 }

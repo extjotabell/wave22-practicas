@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}/followed/list")
-    public ResponseEntity<?> getListOfUsersFollowedBy(@PathVariable @NotBlank(message = "El userId debe tener un valor") @Min(value = 0, message = "El userId debe ser mayor que 0") int userId, @RequestParam(required = false) String order){
+    public ResponseEntity<?> getListOfUsersFollowedBy(@PathVariable @Min(value = 1, message = "El userId debe ser mayor que 0") int userId, @RequestParam(required = false) String order){
         return new ResponseEntity<>(userService.getListOfUsersFollowedBy(userId, order), HttpStatus.OK);
     }
 
@@ -48,7 +48,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}/followers/list")
-    public ResponseEntity<?> findUsersFollowingSeller(@PathVariable int userId, @RequestParam(required = false) String order){
+    public ResponseEntity<?> findUsersFollowingSeller(@PathVariable @Min(value = 1, message = "El userId debe ser mayor que 0") int userId, @RequestParam(required = false) String order){
         return new ResponseEntity<>(userService.findUsersFollowingSeller(userId, order),HttpStatus.OK);
     }
 
