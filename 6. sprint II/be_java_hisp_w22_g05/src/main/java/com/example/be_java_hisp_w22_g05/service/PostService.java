@@ -39,9 +39,7 @@ public class PostService implements IPostService {
 
         Product product = mapProduct(postDto.getProduct());
 
-        LocalDate postDate = LocalDate.parse(postDto.getDate(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-
-        Post newPost = new Post(postDto.getId(), postDate, postDto.getCategory(), user, product, postDto.getPrice(), postDto.getHasPromo(), postDto.getDiscount());
+        Post newPost = new Post(postDto.getId(), postDto.getDate(), postDto.getCategory(), user, product, postDto.getPrice(), postDto.getHasPromo(), postDto.getDiscount());
 
         if (postRepository.save(newPost) == null)
             throw new AlreadyExistsException("El producto con id " + product.getId() + " ya existe");

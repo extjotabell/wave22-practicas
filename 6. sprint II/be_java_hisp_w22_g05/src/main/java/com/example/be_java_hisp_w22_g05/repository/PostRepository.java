@@ -53,6 +53,7 @@ public class PostRepository implements IPostRepository {
 
         //Verifica que no exista un producto con ese id
         if(productExists(post.getProduct().getId())) return null;
+        productList.add(post.getProduct());
 
         //Setea el id del post y lo agrega a la lista
         post.setId(idCounter);

@@ -1,5 +1,6 @@
 package com.example.be_java_hisp_w22_g05.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import jakarta.validation.Valid;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 
@@ -22,8 +24,9 @@ public class PostDto {
     @Min(value = 1,message = "El id debe ser mayor a 0")
     @JsonProperty("user_id")
     private int userId;
-    @NotBlank(message = "La fecha no puede estar vacia")
-    private String date;
+    @NotNull(message = "La fecha no puede estar vacia")
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate date;
     private @Valid ProductDto product;
     @NotNull(message = "El campo no puede estar vacio")
     private int category;

@@ -12,7 +12,7 @@ public class PostMapper {
         return PostDto.builder()
                 .id(post.getId())
                 .userId(post.getUser().getId())
-                .date(post.getDate().toString())
+                .date(post.getDate())
                 .category(post.getCategory())
                 .product(toProductDTO(post.getProduct()))
                 .price(post.getPrice())
