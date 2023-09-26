@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class FollowMessageDto {
 
     private String message;

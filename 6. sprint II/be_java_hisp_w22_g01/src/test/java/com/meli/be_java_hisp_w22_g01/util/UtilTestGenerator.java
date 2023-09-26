@@ -44,14 +44,14 @@ public class UtilTestGenerator {
         return List.of(seller1, seller2);
     }
 
-    private static List<Product> get3Products() {
+    public static List<Product> get3Products() {
         Product product1 = new Product(1, "Prod 1", "Tipo 1", "Marca 1", "Color 1", "Nota 1");
         Product product2 = new Product(2, "Prod 2", "Tipo 1", "Marca 1", "Color 1", "Nota 2");
         Product product3 = new Product(3, "Prod 3", "Tipo 2", "Marca 2", "Color 2", "Nota 3");
         return List.of(product1, product2, product3);
     }
 
-    private static List<ProductDto> get3ProductsDtos() {
+    public static List<ProductDto> get3ProductsDtos() {
         ProductDto product1 = new ProductDto(1, "Prod 1", "Tipo 1", "Marca 1", "Color 1", "Nota 1");
         ProductDto product2 = new ProductDto(2, "Prod 2", "Tipo 1", "Marca 1", "Color 1", "Nota 2");
         ProductDto product3 = new ProductDto(3, "Prod 3", "Tipo 2", "Marca 2", "Color 2", "Nota 3");
