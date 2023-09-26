@@ -1,4 +1,4 @@
-package com.example.be_java_hisp_w22_g05;
+package com.example.be_java_hisp_w22_g05.utils;
 
 import com.example.be_java_hisp_w22_g05.dto.PostDto;
 import com.example.be_java_hisp_w22_g05.dto.ProductDto;

@@ -111,10 +111,10 @@ public class UserService implements IUserService {
 
     private List<UserDto> orderList(List<UserDto> userDtos, String order){
         if("name_asc".equals(order)){
-            return userDtos.stream().sorted(Comparator.comparing(UserDto::getName)).collect(Collectors.toList());
+            return userDtos.stream().sorted(Comparator.comparing(UserDto::getName,String.CASE_INSENSITIVE_ORDER)).collect(Collectors.toList());
         }
         else if ("name_desc".equals(order)){
-            return userDtos.stream().sorted(Comparator.comparing(UserDto::getName).reversed()).collect(Collectors.toList());
+            return userDtos.stream().sorted(Comparator.comparing(UserDto::getName,String.CASE_INSENSITIVE_ORDER).reversed()).collect(Collectors.toList());
 
         }
         else{
