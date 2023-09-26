@@ -6,6 +6,7 @@ import com.w22_g03.be_java_hisp_w22_g03.dto.ProductDTO;
 import com.w22_g03.be_java_hisp_w22_g03.exception.NotFoundException;
 import com.w22_g03.be_java_hisp_w22_g03.model.Post;
 import com.w22_g03.be_java_hisp_w22_g03.repository.UserRepository;
+import com.w22_g03.be_java_hisp_w22_g03.util.TestUtilGenerator;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -19,13 +20,13 @@ import com.w22_g03.be_java_hisp_w22_g03.model.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.web.client.HttpClientErrorException;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
@@ -45,7 +46,62 @@ class UserServiceImplTest {
     }
 
     @Test
-    void startFollowing() {
+    void startFollowingOk() {
+        // arrange
+        User follower = TestUtilGenerator.createTestUser(2, "Batalla");
+        User followed = TestUtilGenerator.createTestUserSeller(1, "Insua");
+        when(userRepo.findById(1)).thenReturn(follower);
+        when(userRepo.findById(2)).thenReturn(followed);
+
+        // act
+        ResponseDTO response = userService.startFollowing(1, 2);
+
+        //assert
+        verify(userRepo, atLeast(2)).findById(anyLong());
+        assertEquals("1 successfully followed 2", response.getMessage());
+    }
+
+        @Test
+    void startFollowing_SameUser() {
+        //act & assert
+        BadRequestException exception = assertThrows(BadRequestException.class, () -> userService.startFollowing(1, 1));
+        assertEquals("User can't add themselves.", exception.getMessage());
+    }
+    @Test
+    void startFollowing_UserNotFound() {
+        //arrange
+        when(userRepo.findById(1)).thenReturn(null);
+
+        //act & assert
+        NotFoundException exception = assertThrows(NotFoundException.class, () -> userService.startFollowing(1, 2));
+        assertEquals("User not found", exception.getMessage());
+    }
+
+    @Test
+    void startFollowing_UserNotSeller() {
+        // arrange
+        User follower = TestUtilGenerator.createTestUser(2, "Batalla");
+        User followed = TestUtilGenerator.createTestUser(1, "Insua");
+        when(userRepo.findById(1)).thenReturn(follower);
+        when(userRepo.findById(2)).thenReturn(followed);
+
+        // act & assert
+        BadRequestException exception = assertThrows(BadRequestException.class, () -> userService.startFollowing(1, 2));
+        assertEquals("User is not seller.", exception.getMessage());
+    }
+
+    @Test
+    void startFollowing_AlreadyFollowed() {
+        // arrange
+        User follower = TestUtilGenerator.createTestUser(2, "Batalla");
+        User followed = TestUtilGenerator.createTestUserSeller(1, "Insua");
+        follower.addFollowed(followed);
+        when(userRepo.findById(1)).thenReturn(follower);
+        when(userRepo.findById(2)).thenReturn(followed);
+
+        // act & assert
+        BadRequestException exception = assertThrows(BadRequestException.class, () -> userService.startFollowing(1, 2));
+        assertEquals("User cant follow the same seller more than once.", exception.getMessage());
     }
 
     //T-0002
@@ -63,16 +119,16 @@ class UserServiceImplTest {
         ResponseDTO response = userService.stopFollowing(1, 2);
 
         //Assert
-        Assertions.assertEquals(new ResponseDTO("1 successfully unfollowed 2"), response);
+        assertEquals(new ResponseDTO("1 successfully unfollowed 2"), response);
     }
 
     @Test
     void stopFollowingCantUnfollowThemselvesTestFail() {
         //Act & Assert
-        Exception exception = Assertions.assertThrows(BadRequestException.class, () -> {
+        Exception exception = assertThrows(BadRequestException.class, () -> {
             userService.stopFollowing(1, 1);
         });
-        Assertions.assertEquals("User can't unfollow themselves.", exception.getMessage());
+        assertEquals("User can't unfollow themselves.", exception.getMessage());
     }
 
     @Test
@@ -85,10 +141,10 @@ class UserServiceImplTest {
         when(userRepo.findById(2L)).thenReturn(userToFollow);
 
         //Act & Assert
-        Exception exception = Assertions.assertThrows(BadRequestException.class, () -> {
+        Exception exception = assertThrows(BadRequestException.class, () -> {
             userService.stopFollowing(1, 2);
         });
-        Assertions.assertEquals("You are not a follower of this user.", exception.getMessage());
+        assertEquals("You are not a follower of this user.", exception.getMessage());
     }
 
     @Test
