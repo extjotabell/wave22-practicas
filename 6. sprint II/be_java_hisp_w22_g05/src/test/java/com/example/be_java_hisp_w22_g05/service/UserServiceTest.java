@@ -9,6 +9,7 @@ import com.example.be_java_hisp_w22_g05.dto.UserFollowersDto;
 import com.example.be_java_hisp_w22_g05.exception.NotFoundException;
 
 import com.example.be_java_hisp_w22_g05.repository.UserRepository;
+import com.example.be_java_hisp_w22_g05.dto.UserNumberFollowersDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -203,4 +204,23 @@ public class UserServiceTest {
 
     }
 
+    @DisplayName("T-0007: Calculo correcto del total de la cantidad de seguidores de un usuario")
+    void followersOfUser(){
+        // ARRANGE
+        User user = new User(1, "carlos", new ArrayList<>(), new ArrayList<>());
+        User userFollower =  new User(2, "maria", new ArrayList<>(), new ArrayList<>());
+
+        user.getFollower().add(userFollower);
+
+        UserNumberFollowersDto expected = new UserNumberFollowersDto(user.getId(), user.getName(), user.getFollower().size());
+
+        when (userRepository.findUsersById(user.getId())).thenReturn(user);
+
+        // ACT
+
+        UserNumberFollowersDto result = userService.getNumberFollowers(user.getId());
+
+        // ASSERT
+        Assertions.assertEquals(expected.getFollowersCount(), result.getFollowersCount());
+    }
 }

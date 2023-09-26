@@ -26,9 +26,11 @@ public class UserController {
     }
 
     @GetMapping("/{userId}/followers/count")
+
     public ResponseEntity<UserNumberFollowersDto> getFollowersCount(@PathVariable
                                                                     @Min(value = 1, message = "El id debe ser mayor a cero")
                                                                     int userId) {
+
         return ResponseEntity.ok(userService.getNumberFollowers(userId));
     }
 
