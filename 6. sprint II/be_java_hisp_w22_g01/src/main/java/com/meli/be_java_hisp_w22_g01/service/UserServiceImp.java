@@ -122,7 +122,7 @@ public class UserServiceImp implements IUserService{
     }
 
     @Override
-    public FollowedDTO orderFollowsDto(int userId, String order) {
+    public FollowedDTO orderFollowedDto(int userId, String order) {
         FollowedDTO followedsDto = getUserFollowedList(userId);
         List<UserMiniDTO> followed = followedsDto.getFollowed();
         if (order.equals("name_asc")) {
@@ -132,6 +132,8 @@ public class UserServiceImp implements IUserService{
             followedsDto.setFollowed(followed.stream()
                     .sorted(Comparator.comparing(UserMiniDTO::getUser_name, Comparator.reverseOrder()))
                     .toList());
+        } else {
+            throw new BadRequestException("No existe ese método de ordenamiento");
         }
         return followedsDto;
     }
@@ -147,6 +149,8 @@ public class UserServiceImp implements IUserService{
             followersDto.setFollowers(followers.stream()
                     .sorted(Comparator.comparing(UserMiniDTO::getUser_name, Comparator.reverseOrder()))
                     .toList());
+        } else {
+            throw new BadRequestException("No existe ese método de ordenamiento");
         }
         return followersDto;
     }

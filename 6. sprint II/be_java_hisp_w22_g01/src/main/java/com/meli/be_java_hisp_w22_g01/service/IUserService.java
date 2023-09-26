@@ -10,7 +10,7 @@ public interface IUserService {
 
     FollowedDTO getUserFollowedList(int user_id);
 
-    FollowedDTO orderFollowsDto(int userId, String order);
+    FollowedDTO orderFollowedDto(int userId, String order);
 
     UserFollowersListDTO orderFollowersDto(int userId, String order);
 

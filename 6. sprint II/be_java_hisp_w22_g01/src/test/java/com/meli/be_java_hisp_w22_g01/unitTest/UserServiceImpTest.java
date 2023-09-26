@@ -10,6 +10,7 @@ import com.meli.be_java_hisp_w22_g01.dto.response.UserMiniDTO;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
 import com.meli.be_java_hisp_w22_g01.exceptions.BadRequestException;
+import com.meli.be_java_hisp_w22_g01.repository.SellerRepositoryImp;
 import com.meli.be_java_hisp_w22_g01.repository.UserRepositoryImp;
 import com.meli.be_java_hisp_w22_g01.service.UserServiceImp;
 import com.meli.be_java_hisp_w22_g01.util.UtilTestGenerator;
@@ -38,6 +39,9 @@ import static org.mockito.Mockito.*;
 public class UserServiceImpTest {
     @Mock
     UserRepositoryImp userRepository;
+
+    @Mock
+    SellerRepositoryImp sellerRepository;
     @Mock
     ObjectMapper mapper;
 
@@ -150,7 +154,9 @@ public class UserServiceImpTest {
         System.out.print("expected " + expected + "\n" + "obtained " + obtainedDates);
 
     }
+
     @Test
+    @DisplayName(value = "OK: Verifica que el orden asc/desc pedido funcione en followed.")
     void orderFollowsDtoByNameAscDescTest() {
         // ARRANGE
         String order = "name_asc";
@@ -163,15 +169,59 @@ public class UserServiceImpTest {
         when(userRepository.findById(anyInt())).thenReturn(mockUser);
 
         //ACT
-        FollowedDTO result = userService.orderFollowsDto(mockUser.getUser_id(), order);
-        FollowedDTO result2 = userService.orderFollowsDto(mockUser.getUser_id(), order2);
+        FollowedDTO result = userService.orderFollowedDto(mockUser.getUser_id(), order);
+        FollowedDTO result2 = userService.orderFollowedDto(mockUser.getUser_id(), order2);
 
         //ASSERT
         assertEquals(orderedList, result.getFollowed());
         reverse(orderedList);
         assertEquals(orderedList, result2.getFollowed());
     }
+    @Test
+    @DisplayName(value = "OK: Verifica que el orden asc/desc pedido funcione en followers.")
+    void orderFollowersDtoByNameAscDescTest() {
+        // ARRANGE
+        String order = "name_asc";
+        String order2 = "name_desc";
+        Seller mockSeller = UtilTestGenerator.get2SellerWithPosts().get(1);
+        List<UserMiniDTO> orderedList = Arrays.asList(new UserMiniDTO(2, "Alberto"),
+                new UserMiniDTO(3, "Dario"), new UserMiniDTO(1, "Pepe"));
 
+        List<UserMiniDTO> orderedDescList = Arrays.asList(new UserMiniDTO(1, "Pepe"),
+                new UserMiniDTO(3, "Dario"), new UserMiniDTO(2, "Alberto"));
 
+        when(sellerRepository.findById(anyInt())).thenReturn(mockSeller);
+
+        //ACT
+        UserFollowersListDTO result = userService.orderFollowersDto(mockSeller.getUser_id(), order);
+        UserFollowersListDTO result2 = userService.orderFollowersDto(mockSeller.getUser_id(), order2);
+
+        //ASSERT
+        assertEquals(orderedList, result.getFollowers());
+        assertEquals(orderedDescList, result2.getFollowers());
+    }
+    @Test
+    @DisplayName(value = "FAIL: El orden proporcionado no existe para followed")
+    void orderFollowedDtoBadRequestException() {
+        // ARRANGE
+        String orderFake = "name_fake";
+        Seller seller = UtilTestGenerator.get2SellerWithPosts().get(1);
+        User user = seller.getFollowers().get(0);
+        when(userRepository.findById(anyInt())).thenReturn(user);
+
+        //ACT & ASSERT
+        Assertions.assertThrows(BadRequestException.class,()-> userService.orderFollowedDto(user.getUser_id(), orderFake));
+    }
+    @Test
+    @DisplayName(value = "FAIL: El orden proporcionado no existe para followers")
+    void orderFollowersDtoBadRequestException() {
+        // ARRANGE
+        String orderFake = "name_fake";
+        Seller mockSeller = UtilTestGenerator.get2SellerWithPosts().get(1);
+        when(sellerRepository.findById(anyInt())).thenReturn(mockSeller);
+
+        //ACT & ASSERT
+        Assertions.assertThrows(BadRequestException.class,()-> userService.orderFollowersDto(mockSeller.getUser_id(), orderFake));
+    }
 
 }
