@@ -7,9 +7,6 @@ import com.w22_g03.be_java_hisp_w22_g03.dto.ProductDTO;
 import com.w22_g03.be_java_hisp_w22_g03.dto.UserFollowedSellersPostsDTO;
 import com.w22_g03.be_java_hisp_w22_g03.service.PostService;
 import com.w22_g03.be_java_hisp_w22_g03.service.UserService;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,21 +37,6 @@ class PostControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
-    @Test
-    void addPost() {
-    }
-
-    @Test
-    void getFollowedUsersPostsById() {
-    }
 
     /**
      * This parameterized test method verifies the behavior of the `getFollowedUsersPostsById` endpoint in the `ProductController` class.

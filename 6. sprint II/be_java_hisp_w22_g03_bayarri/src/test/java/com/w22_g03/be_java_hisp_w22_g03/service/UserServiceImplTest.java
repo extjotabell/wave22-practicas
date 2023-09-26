@@ -1,5 +1,7 @@
 package com.w22_g03.be_java_hisp_w22_g03.service;
 
+import com.w22_g03.be_java_hisp_w22_g03.dto.FollowedDTO;
+import com.w22_g03.be_java_hisp_w22_g03.dto.FollowerDTO;
 import com.w22_g03.be_java_hisp_w22_g03.dto.NumberOfFollowersDTO;
 import com.w22_g03.be_java_hisp_w22_g03.dto.ResponseDTO;
 import com.w22_g03.be_java_hisp_w22_g03.exception.BadRequestException;
@@ -8,9 +10,6 @@ import com.w22_g03.be_java_hisp_w22_g03.model.Post;
 import com.w22_g03.be_java_hisp_w22_g03.model.User;
 import com.w22_g03.be_java_hisp_w22_g03.repository.UserRepository;
 import com.w22_g03.be_java_hisp_w22_g03.util.TestUtilGenerator;
-import com.w22_g03.be_java_hisp_w22_g03.dto.FollowedDTO;
-import com.w22_g03.be_java_hisp_w22_g03.dto.FollowerDTO;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,10 +24,6 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -51,10 +46,6 @@ class UserServiceImplTest {
         followed = new User(2L, "Juana", List.of(post), new ArrayList<>(), new ArrayList<>());
         follower2 = new User(3L, "Juanita", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         follower3 = new User(4L, "Josefa", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-    }
-
-    @AfterEach
-    void tearDown() {
     }
 
     @Test
@@ -118,6 +109,7 @@ class UserServiceImplTest {
     }
 
     //T-0002
+
     /**
      * This test verifies that stopFollowing() correctly returns a responseDTO.
      * It also checks that the followed user no longer has followers.
@@ -144,9 +136,7 @@ class UserServiceImplTest {
     @Test
     void stopFollowingCantUnfollowThemselvesTestFail() {
         //Act & Assert
-        Exception exception = assertThrows(BadRequestException.class, () -> {
-            userService.stopFollowing(1, 1);
-        });
+        Exception exception = assertThrows(BadRequestException.class, () -> userService.stopFollowing(1, 1));
         assertEquals("User can't unfollow themselves.", exception.getMessage());
     }
 
@@ -161,9 +151,7 @@ class UserServiceImplTest {
         when(userRepo.findById(2L)).thenReturn(followed);
 
         //Act & Assert
-        Exception exception = assertThrows(BadRequestException.class, () -> {
-            userService.stopFollowing(1, 2);
-        });
+        Exception exception = assertThrows(BadRequestException.class, () -> userService.stopFollowing(1, 2));
         assertEquals("You are not a follower of this user.", exception.getMessage());
     }
 
@@ -202,6 +190,7 @@ class UserServiceImplTest {
     }
 
     // T-0007
+
     /**
      * This test verifies that userService correctly counts the number of followers.
      */
@@ -220,7 +209,7 @@ class UserServiceImplTest {
         NumberOfFollowersDTO numberDto = userService.getNumberOfFollowers(1);
 
         //Assert
-        Assertions.assertEquals(3, numberDto.getFollowers_count());
+        Assertions.assertEquals(3, numberDto.getFollowersCount());
     }
 
     /**
@@ -235,7 +224,7 @@ class UserServiceImplTest {
         NumberOfFollowersDTO numberDto = userService.getNumberOfFollowers(1);
 
         //Assert
-        Assertions.assertEquals(0, numberDto.getFollowers_count());
+        Assertions.assertEquals(0, numberDto.getFollowersCount());
     }
 
     /**
@@ -245,16 +234,14 @@ class UserServiceImplTest {
     @Test
     void getNumberOfFollowersUserNotFoundFailTest() {
         //Act & Assert
-        Assertions.assertThrows(NotFoundException.class, () -> {
-            NumberOfFollowersDTO numberDto = userService.getNumberOfFollowers(2);
-        });
+        Assertions.assertThrows(NotFoundException.class, () -> userService.getNumberOfFollowers(2));
     }
 
     //T-0004
     @Test
     void getFollowersOrderByNameAscOk() {
         //Arrange
-        User userToGetFollowers = new User(1, "Gaspar", null,null, new ArrayList<>());
+        User userToGetFollowers = new User(1, "Gaspar", null, null, new ArrayList<>());
         User followerUser = new User(2, "Franco", null, null, null);
         User followerUser2 = new User(3, "Ezequiel", null, null, null);
         User followerUser3 = new User(4, "Matias", null, null, null);
@@ -266,8 +253,8 @@ class UserServiceImplTest {
 
         //Act
         when(userRepo.findById(userToGetFollowers.getUserId())).thenReturn(userToGetFollowers);
-        when(userRepo.findFollowers((int)userToGetFollowers.getUserId())).thenReturn(followers);
-        FollowerDTO followersOfUser1 = userService.getFollowers(((int) userToGetFollowers.getUserId()),orderByNameAsc);
+        when(userRepo.findFollowers((int) userToGetFollowers.getUserId())).thenReturn(followers);
+        FollowerDTO followersOfUser1 = userService.getFollowers(((int) userToGetFollowers.getUserId()), orderByNameAsc);
 
         //Assert
         boolean isAscendingOrder = IntStream.range(0, followersOfUser1.getFollowers().size() - 1) //Compares that all the names of the followers are ordered ascending
@@ -278,30 +265,30 @@ class UserServiceImplTest {
 
     // T-0003
     @Test
-    void getFollowersExists(){
+    void getFollowersExists() {
 
-        User expectedUser = new User(1,"userPedro",null,null,new ArrayList<>());
+        User expectedUser = new User(1, "userPedro", null, null, new ArrayList<>());
         List<User> followersExpected = new ArrayList<>();
 
         when(userRepo.findById(expectedUser.getUserId())).thenReturn(expectedUser);
         when(userRepo.findFollowers((int) expectedUser.getUserId())).thenReturn(followersExpected);
 
-        userService.getFollowers(1,"name_asc");
+        userService.getFollowers(1, "name_asc");
 
         verify(userRepo, Mockito.atLeastOnce()).findFollowers(1);
     }
 
     // T-0003
     @Test
-    public void testFindFollowersMethodNonExistence() {
+    void testFindFollowersMethodNonExistence() {
 
-        User expectedUser = new User(1,"userPedro",null,null,new ArrayList<>());
+        User expectedUser = new User(1, "userPedro", null, null, new ArrayList<>());
         List<User> followersExpected = new ArrayList<>();
 
         when(userRepo.findById(expectedUser.getUserId())).thenReturn(expectedUser);
         when(userRepo.findFollowers((int) expectedUser.getUserId())).thenReturn(followersExpected);
 
-        assertThrows(BadRequestException.class, () ->   userService.getFollowers(1, "fake"));
+        assertThrows(BadRequestException.class, () -> userService.getFollowers(1, "fake"));
     }
 
 
@@ -309,7 +296,7 @@ class UserServiceImplTest {
     @Test
     void getFollowersOrderByNameDescOk() {
         //Arrange
-        User userToGetFollowers = new User(1, "Gaspar", null,null, new ArrayList<>());
+        User userToGetFollowers = new User(1, "Gaspar", null, null, new ArrayList<>());
         User followerUser = new User(2, "Franco", null, null, null);
         User followerUser2 = new User(3, "Ezequiel", null, null, null);
         User followerUser3 = new User(4, "Matias", null, null, null);
@@ -321,8 +308,8 @@ class UserServiceImplTest {
 
         //Act
         when(userRepo.findById(userToGetFollowers.getUserId())).thenReturn(userToGetFollowers);
-        when(userRepo.findFollowers((int)userToGetFollowers.getUserId())).thenReturn(followers);
-        FollowerDTO followersOfUser1 = userService.getFollowers(((int) userToGetFollowers.getUserId()),orderByNameAsc);
+        when(userRepo.findFollowers((int) userToGetFollowers.getUserId())).thenReturn(followers);
+        FollowerDTO followersOfUser1 = userService.getFollowers(((int) userToGetFollowers.getUserId()), orderByNameAsc);
 
         //Assert
         boolean isDescendingOrder = IntStream.range(0, followersOfUser1.getFollowers().size() - 1) //Compares that all the names of the followers are ordered descending
@@ -335,7 +322,7 @@ class UserServiceImplTest {
     @Test
     void getFollowersOrderByParameterNotOk() {
         //Arrange
-        User userToGetFollowers = new User(1, "Gaspar", null,null, new ArrayList<>());
+        User userToGetFollowers = new User(1, "Gaspar", null, null, new ArrayList<>());
         User followerUser = new User(2, "Franco", null, null, null);
         User followerUser2 = new User(3, "Ezequiel", null, null, null);
         userToGetFollowers.getFollowers().add(followerUser);
@@ -345,15 +332,15 @@ class UserServiceImplTest {
 
         //Act and assert
         when(userRepo.findById(userToGetFollowers.getUserId())).thenReturn(userToGetFollowers);
-        when(userRepo.findFollowers((int)userToGetFollowers.getUserId())).thenReturn(followers);
-        assertThrows(BadRequestException.class, () -> userService.getFollowers(((int) userToGetFollowers.getUserId()),invalidOrder));
+        when(userRepo.findFollowers((int) userToGetFollowers.getUserId())).thenReturn(followers);
+        assertThrows(BadRequestException.class, () -> userService.getFollowers(1, invalidOrder));
     }
 
     //T-0004
     @Test
     void getFollowedOrderByNameAscOk() {
         //Arrange
-        User userToGetFollowed = new User(1, "Gaspar", null,new ArrayList<>(), null);
+        User userToGetFollowed = new User(1, "Gaspar", null, new ArrayList<>(), null);
         User followerUser = new User(2, "Franco", null, null, null);
         User followerUser2 = new User(3, "Ezequiel", null, null, null);
         User followerUser3 = new User(4, "Matias", null, null, null);
@@ -365,8 +352,8 @@ class UserServiceImplTest {
 
         //Act
         when(userRepo.findById(userToGetFollowed.getUserId())).thenReturn(userToGetFollowed);
-        when(userRepo.findFollowed((int)userToGetFollowed.getUserId())).thenReturn(followed);
-        FollowedDTO followedOfUser1 = userService.getFollowed(((int) userToGetFollowed.getUserId()),orderByNameAsc);
+        when(userRepo.findFollowed((int) userToGetFollowed.getUserId())).thenReturn(followed);
+        FollowedDTO followedOfUser1 = userService.getFollowed(((int) userToGetFollowed.getUserId()), orderByNameAsc);
 
         //Assert
         boolean isAscendingOrder = IntStream.range(0, followedOfUser1.getFollowed().size() - 1) //Compares that all the names of the followers are ordered ascending
@@ -379,7 +366,7 @@ class UserServiceImplTest {
     @Test
     void getFollowedOrderByNameDescOk() {
         //Arrange
-        User userToGetFollowed = new User(1, "Gaspar", null,new ArrayList<>(), null);
+        User userToGetFollowed = new User(1, "Gaspar", null, new ArrayList<>(), null);
         User followerUser = new User(2, "Franco", null, null, null);
         User followerUser2 = new User(3, "Ezequiel", null, null, null);
         User followerUser3 = new User(4, "Matias", null, null, null);
@@ -391,8 +378,8 @@ class UserServiceImplTest {
 
         //Act
         when(userRepo.findById(userToGetFollowed.getUserId())).thenReturn(userToGetFollowed);
-        when(userRepo.findFollowed((int)userToGetFollowed.getUserId())).thenReturn(followed);
-        FollowedDTO followedOfUser1 = userService.getFollowed(((int) userToGetFollowed.getUserId()),orderByNameAsc);
+        when(userRepo.findFollowed((int) userToGetFollowed.getUserId())).thenReturn(followed);
+        FollowedDTO followedOfUser1 = userService.getFollowed(((int) userToGetFollowed.getUserId()), orderByNameAsc);
 
         //Assert
         boolean isAscendingOrder = IntStream.range(0, followedOfUser1.getFollowed().size() - 1) //Compares that all the names of the followers are ordered ascending
@@ -405,7 +392,7 @@ class UserServiceImplTest {
     @Test
     void getFollowedOrderByParameterNotOk() {
         //Arrange
-        User userToGetFollowed = new User(1, "Gaspar", null,new ArrayList<>(), null);
+        User userToGetFollowed = new User(1, "Gaspar", null, new ArrayList<>(), null);
         User followerUser = new User(2, "Franco", null, null, null);
         User followerUser2 = new User(3, "Ezequiel", null, null, null);
         userToGetFollowed.getFollowed().add(followerUser);
@@ -415,11 +402,8 @@ class UserServiceImplTest {
 
         //Act and assert
         when(userRepo.findById(userToGetFollowed.getUserId())).thenReturn(userToGetFollowed);
-        when(userRepo.findFollowed((int)userToGetFollowed.getUserId())).thenReturn(followed);
-        assertThrows(BadRequestException.class, () -> userService.getFollowed(((int) userToGetFollowed.getUserId()),invalidOrder));
+        when(userRepo.findFollowed((int) userToGetFollowed.getUserId())).thenReturn(followed);
+        assertThrows(BadRequestException.class, () -> userService.getFollowed(1, invalidOrder));
     }
 
-    @Test
-    void getUserById() {
-    }
 }

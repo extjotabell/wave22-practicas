@@ -1,14 +1,18 @@
 package com.w22_g03.be_java_hisp_w22_g03.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
 public class NumberOfFollowersDTO {
-    int user_id;
-    String user_name;
-    int followers_count;
+    @JsonProperty("user_id")
+    int userId;
+
+    @JsonProperty("user_name")
+    String username;
+
+    @JsonProperty("followers_count")
+    int followersCount;
 }

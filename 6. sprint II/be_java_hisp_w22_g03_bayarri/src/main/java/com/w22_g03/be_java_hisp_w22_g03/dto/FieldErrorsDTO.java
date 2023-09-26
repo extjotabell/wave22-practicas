@@ -1,11 +1,11 @@
 package com.w22_g03.be_java_hisp_w22_g03.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 
 import java.util.List;
 
-@Data
+@Getter
 @AllArgsConstructor
 public class FieldErrorsDTO {
 

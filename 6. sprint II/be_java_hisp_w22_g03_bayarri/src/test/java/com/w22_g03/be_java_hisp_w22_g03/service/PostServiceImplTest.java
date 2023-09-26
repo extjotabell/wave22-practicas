@@ -7,8 +7,6 @@ import com.w22_g03.be_java_hisp_w22_g03.model.Post;
 import com.w22_g03.be_java_hisp_w22_g03.model.Product;
 import com.w22_g03.be_java_hisp_w22_g03.model.User;
 import com.w22_g03.be_java_hisp_w22_g03.repository.PostRepository;
-import com.w22_g03.be_java_hisp_w22_g03.repository.PostRepositoryImpl;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -21,8 +19,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 class PostServiceImplTest {
 
@@ -40,13 +38,6 @@ class PostServiceImplTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
-    @Test
-    void addPost() {
-    }
 
     @Test
     void getFollowedUsersPostsByIdWithNoPostsWithDescendingOrderReturnEmptyListOk() {
@@ -120,15 +111,7 @@ class PostServiceImplTest {
         }
     }
 
-    @Test
-    void getAllFollowedUsersPostsById() {
-    }
-
-    @Test
-    void testGetFollowedUsersPostsById() {
-    }
-
-    private  PostDTO mapPostToPostDto(Post post) {
+    private PostDTO mapPostToPostDto(Post post) {
         ModelMapper mapper = new ModelMapper();
         PostDTO postDto = mapper.map(post, PostDTO.class);
         postDto.setProduct(mapper.map(post.getProduct(), ProductDTO.class));

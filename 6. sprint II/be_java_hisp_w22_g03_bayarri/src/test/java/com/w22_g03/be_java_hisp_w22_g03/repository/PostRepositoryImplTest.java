@@ -3,9 +3,7 @@ package com.w22_g03.be_java_hisp_w22_g03.repository;
 import com.w22_g03.be_java_hisp_w22_g03.model.Post;
 import com.w22_g03.be_java_hisp_w22_g03.model.Product;
 import com.w22_g03.be_java_hisp_w22_g03.model.User;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,18 +17,6 @@ class PostRepositoryImplTest {
 
     @InjectMocks
     private PostRepositoryImpl postRepository;
-
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
-    @Test
-    void savePost() {
-    }
 
     /**
      * This test method verifies the functionality of the `findTwoWeekOldPostsFromFollowedByUser` method in the `PostRepository` class.
@@ -57,7 +43,4 @@ class PostRepositoryImplTest {
         Assertions.assertEquals(1, twoWeekOldPostsFromFollowedByUser.size());
     }
 
-    @Test
-    void countPosts() {
-    }
 }

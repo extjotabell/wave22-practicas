@@ -23,14 +23,11 @@ public class User {
 
     private List<User> followers;
 
-    public boolean isSeller(){
-        if (!posts.isEmpty()){
-            return true;
-        }
-        return false;
+    public boolean isSeller() {
+        return !posts.isEmpty();
     }
 
-    public void addFollower(User follower){
+    public void addFollower(User follower) {
         followers.add(follower);
     }
 

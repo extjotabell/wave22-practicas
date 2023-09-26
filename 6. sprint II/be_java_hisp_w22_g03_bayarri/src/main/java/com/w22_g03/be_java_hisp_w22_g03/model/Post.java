@@ -2,7 +2,6 @@ package com.w22_g03.be_java_hisp_w22_g03.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
@@ -10,7 +9,6 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 public class Post {
 
     private long postId;
