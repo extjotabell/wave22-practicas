@@ -1,12 +1,19 @@
 package com.w22_g03.be_java_hisp_w22_g03.controller;
 
+import com.w22_g03.be_java_hisp_w22_g03.service.PostService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 class PostControllerTest {
+
 
     @BeforeEach
     void setUp() {
@@ -23,4 +30,5 @@ class PostControllerTest {
     @Test
     void getFollowedUsersPostsById() {
     }
+
 }

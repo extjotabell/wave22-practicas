@@ -31,11 +31,11 @@ public class UserController {
     }
 
     //US 0003
-    @GetMapping("/{userId}/followers/list")
+    /*@GetMapping("/{userId}/followers/list")
     public ResponseEntity<?> getFollowers(@PathVariable @NotNull(message = "El  id no puede estar vacío.") @Min(value = 1, message = "El id debe ser mayor a cero") Integer userId,
                                           @RequestParam(required = false) String order){
         return new ResponseEntity<>(userService.getFollowers(userId, order),HttpStatus.OK);
-    }
+    }*/
 
     //US 0004
     @GetMapping("/{userId}/followed/list")
