@@ -1,6 +1,5 @@
 package com.meli.be_java_hisp_w22_g01.unitTest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w22_g01.dto.PostDto;
 import com.meli.be_java_hisp_w22_g01.dto.response.UserFollowedPostListDTO;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
@@ -9,16 +8,14 @@ import com.meli.be_java_hisp_w22_g01.exceptions.BadRequestException;
 import com.meli.be_java_hisp_w22_g01.repository.UserRepositoryImp;
 import com.meli.be_java_hisp_w22_g01.service.UserServiceImp;
 import com.meli.be_java_hisp_w22_g01.util.UtilTestGenerator;
-import net.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -27,7 +24,6 @@ import java.util.stream.Collectors;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -86,6 +82,7 @@ public class UserServiceImpTest {
     }
 
     @Test
+    @DisplayName("Verificamos que la fecha esta ordenada ascendente")
     void orderByDateFollowedSellersDateASC(){
         //ARRANGE
         int userIdParam = 4;
@@ -111,12 +108,13 @@ public class UserServiceImpTest {
         //ASSERT
 
         Assertions.assertEquals(expected,obtainedDates);
-        System.out.print("expected " + expected + "\n");
-        System.out.print("obtained " + obtainedDates);
+
+        System.out.print("expected " + expected + "\n" + "obtained " + obtainedDates);
 
     }
 
     @Test
+    @DisplayName("Verificamos que la fecha este ordenada descendiente")
     void orderByDateFollowedSellersDateDES(){
         //ARRANGE
         int userIdParam = 4;
@@ -142,8 +140,7 @@ public class UserServiceImpTest {
         //ASSERT
 
         Assertions.assertEquals(expected,obtainedDates);
-        System.out.print("expected " + expected + "\n");
-        System.out.print("obtained " + obtainedDates);
+        System.out.print("expected " + expected + "\n" + "obtained " + obtainedDates);
 
     }
 
