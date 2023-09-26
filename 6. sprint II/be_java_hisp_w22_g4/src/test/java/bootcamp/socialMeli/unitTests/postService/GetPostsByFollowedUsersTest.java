@@ -74,7 +74,7 @@ public class GetPostsByFollowedUsersTest {
 
 
     @Test
-    @DisplayName("US 06 - T-0009 - Posts by followed users - OK")
+    @DisplayName("US 06 - T-0008 - Posts by followed users - OK")
     void getPostsByFollowedUsersTestOk()
     {
         //ARRANGE
