@@ -29,7 +29,7 @@ public class PostController {
 
     @GetMapping("/followed/{userId}/list")
     public ResponseEntity<UserFollowedSellersPostsDTO> getFollowedUsersPostsById(@PathVariable @NotNull(message = "El  id no puede estar vacío.") @Min(value = 1, message = "El id debe ser mayor a cero") Long userId,
-                                                                                 @RequestParam(required = false) @Pattern(regexp = "^date_(asc|desc)$") String order) {
+                                                                                 @RequestParam(required = false) @Pattern(regexp = "^date_(asc|desc)$", message = "Orden no válido, Solamente acepta date_asc o date_desc") String order) {
         if (Objects.nonNull(order)) {
             return ResponseEntity.ok(this.postService.getFollowedUsersPostsById(userId, order));
         } else {
