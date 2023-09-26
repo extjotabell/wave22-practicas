@@ -117,6 +117,8 @@ public class UserService implements IUserService {
             return userDtos.stream().sorted(Comparator.comparing(UserDto::getName).reversed()).collect(Collectors.toList());
 
         }
-        return userDtos;
+        else{
+            throw new NotFoundException("El tipo de ordenamiento solicitado no existe");
+        }
     }
 }

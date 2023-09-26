@@ -2,8 +2,10 @@ package com.example.be_java_hisp_w22_g05.service;
 
 import com.example.be_java_hisp_w22_g05.dto.UserDto;
 import com.example.be_java_hisp_w22_g05.dto.UserFollowedDto;
+
 import com.example.be_java_hisp_w22_g05.entity.User;
-import com.example.be_java_hisp_w22_g05.exception.FollowException;
+
+import com.example.be_java_hisp_w22_g05.dto.UserFollowersDto;
 import com.example.be_java_hisp_w22_g05.exception.NotFoundException;
 import com.example.be_java_hisp_w22_g05.repository.IUserRepository;
 
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -31,15 +34,15 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("T-0001: Prueba exitosa de follow")
-    void followUserOk(){
+    void followUserOk() {
         //Arrange
-        User user = new User(1,"carlos",new ArrayList<>(),new ArrayList<>());
-        User userToFollow = new User(2,"maria",new ArrayList<>(),new ArrayList<>());
+        User user = new User(1, "carlos", new ArrayList<>(), new ArrayList<>());
+        User userToFollow = new User(2, "maria", new ArrayList<>(), new ArrayList<>());
 
         //Usuario que debe quedar luego de hacer el follow (tiene un item en la lista de followed)
-        User userAfterFollow = new User(1,"carlos",new ArrayList<>(), List.of(userToFollow));
+        User userAfterFollow = new User(1, "carlos", new ArrayList<>(), List.of(userToFollow));
 
-        UserFollowedDto expected = new UserFollowedDto(userAfterFollow.getId(),userAfterFollow.getName(),userAfterFollow.getFollowed().stream()
+        UserFollowedDto expected = new UserFollowedDto(userAfterFollow.getId(), userAfterFollow.getName(), userAfterFollow.getFollowed().stream()
                 .map(u -> new UserDto(u.getId(), u.getName()))
                 .collect(Collectors.toList()));
 
@@ -52,8 +55,8 @@ public class UserServiceTest {
 
         //Assert
         Assertions.assertEquals(expected, result);
-
     }
+
 
     @Test
     @DisplayName("T-0001: El usuario a seguir no existe")
@@ -96,7 +99,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("T-0002: No existe el usuario a dejar de seguir")
-    void unfollowUserNotFound(){
+    void unfollowUserNotFound() {
         //Arrange
         User user = new User(1, "carlos", new ArrayList<>(), new ArrayList<>());
         int userIdToUnfollow = 2;
@@ -108,8 +111,54 @@ public class UserServiceTest {
         when(userRepository.findUsersById(userIdToUnfollow)).thenReturn(null);
 
         //Act & Assert
-        Assertions.assertThrows(NotFoundException.class, ()-> userService.unfollowUser(user.getId(), userIdToUnfollow));
+        Assertions.assertThrows(NotFoundException.class, () -> userService.unfollowUser(user.getId(), userIdToUnfollow));
     }
 
+    @Test
+    @DisplayName("T-0003: Existe el ordenamiento descendente.")
+    void existOrderNameDescOk(){
+        //ARRANGE
+        UserFollowersDto expected = new UserFollowersDto(1,"Carlos", List.of(new UserDto(2,"Maria")));
+        String order = "name_desc";
+        User expectedRepository = new User(1,"Carlos",List.of(new User(2,"Maria", List.of(), List.of())),List.of());
+        when(userRepository.findUsersById(1)).thenReturn(expectedRepository);
+
+        //ACT
+        UserFollowersDto actual = userService.findUsersFollowingSeller(1,order);
+
+        //ASSERTION
+        Assertions.assertEquals(expected.getFollowers(),actual.getFollowers());
+
+    }
+
+    @Test
+    @DisplayName("T-0003: No existe el ordenamiento")
+    void existOrderNotFound(){
+        //ARRANGE
+        String order = "fake";
+        User expectedRepository = new User(1,"Carlos",List.of(new User(2,"Maria", List.of(), List.of())),List.of());
+        when(userRepository.findUsersById(1)).thenReturn(expectedRepository);
+
+        //ACT AND ASSERTION
+        Assertions.assertThrows(NotFoundException.class,() -> userService.findUsersFollowingSeller(1,order));
+
+    }
+
+    @Test
+    @DisplayName("T-0003: Existe el ordenamiento ascendente")
+    void existOrderNameAscOk(){
+        //ARRANGE
+        UserFollowersDto expected = new UserFollowersDto(1,"Carlos", List.of(new UserDto(2,"Maria")));
+        String order = "name_asc";
+        User expectedRepository = new User(1,"Carlos",List.of(new User(2,"Maria", List.of(), List.of())),List.of());
+        when(userRepository.findUsersById(1)).thenReturn(expectedRepository);
+
+        //ACT
+        UserFollowersDto actual = userService.findUsersFollowingSeller(1,order);
+
+        //ASSERTION
+        Assertions.assertEquals(expected.getFollowers(),actual.getFollowers());
+
+    }
 
 }
