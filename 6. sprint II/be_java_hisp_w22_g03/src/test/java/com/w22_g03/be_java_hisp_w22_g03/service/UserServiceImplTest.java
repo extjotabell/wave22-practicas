@@ -47,6 +47,7 @@ class UserServiceImplTest {
     void getNumberOfFollowers() {
     }
 
+    //T-0004
     @Test
     void getFollowersOrderByNameAscOk() {
         //Arrange
@@ -72,6 +73,7 @@ class UserServiceImplTest {
         assertTrue(isAscendingOrder);
     }
 
+    //T-0004
     @Test
     void getFollowersOrderByNameDescOk() {
         //Arrange
@@ -97,6 +99,7 @@ class UserServiceImplTest {
         assertTrue(isDescendingOrder);
     }
 
+    //T-0004
     @Test
     void getFollowersOrderByParameterNotOk() {
         //Arrange
@@ -114,6 +117,7 @@ class UserServiceImplTest {
         assertThrows(BadRequestException.class, () -> userService.getFollowers(((int) userToGetFollowers.getUserId()),invalidOrder));
     }
 
+    //T-0004
     @Test
     void getFollowedOrderByNameAscOk() {
         //Arrange
@@ -139,6 +143,7 @@ class UserServiceImplTest {
         assertTrue(isAscendingOrder);
     }
 
+    //T-0004
     @Test
     void getFollowedOrderByNameDescOk() {
         //Arrange
@@ -164,6 +169,7 @@ class UserServiceImplTest {
         assertTrue(isAscendingOrder);
     }
 
+    //T-0004
     @Test
     void getFollowedOrderByParameterNotOk() {
         //Arrange
@@ -180,11 +186,7 @@ class UserServiceImplTest {
         when(userRepository.findFollowed((int)userToGetFollowed.getUserId())).thenReturn(followed);
         assertThrows(BadRequestException.class, () -> userService.getFollowed(((int) userToGetFollowed.getUserId()),invalidOrder));
     }
-
-    @Test
-    void getFollowed() {
-    }
-
+    
     @Test
     void getUserById() {
     }
