@@ -82,7 +82,23 @@ public class GetFollowersListTest {
         Assertions.assertEquals(followerExpected,followerActual);
     }
     @Test
-    @DisplayName("US 03 - List Follow Not Found OK")
+    @DisplayName("US 03 - List Follow Not param Order Ok")
+    void FollowersListNameNotParamOrderOk() {
+        //Arrange
+        FollowersListDto followerExpected = new FollowersListDto(6, "Jesica", List.of(
+                new UserDto(1, "Diego"),
+                new UserDto(10, "Hector")));
+        int UserId = 6;
+        //Act
+        when(userRepository.findUserById(UserId)).thenReturn(Optional.of(userExpected6));
+        when(userRepository.findUserById(userExpected6.getFollowers().get(0))).thenReturn(Optional.of(userExpected1));
+        when(userRepository.findUserById(userExpected6.getFollowers().get(1))).thenReturn(Optional.of(userExpected10));
+        FollowersListDto followerActual = userService.getFollowersList(UserId,null);
+        //Assert
+        Assertions.assertEquals(followerExpected,followerActual);
+    }
+    @Test
+    @DisplayName("US 03 - List Follow Not Found")
     void FollowersListNameNotFound() {
         //Arrange
         FollowersListDto followerExpected = null;
