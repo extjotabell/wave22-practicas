@@ -16,9 +16,9 @@ import java.util.List;
 public class UtilTestGenerator {
 
     private static List<User> get3Users() {
-        User user1 = new User(1, "User1", new ArrayList<>());
-        User user2 = new User(2, "User2", new ArrayList<>());
-        User user3 = new User(3, "User3", new ArrayList<>());
+        User user1 = new User(1, "Pepe", new ArrayList<>());
+        User user2 = new User(2, "Alberto", new ArrayList<>());
+        User user3 = new User(3, "Dario", new ArrayList<>());
         return List.of(user1, user2, user3);
     }
 
@@ -34,10 +34,12 @@ public class UtilTestGenerator {
 
         Seller seller1 = new Seller(List.of(post1, post2), List.of(users.get(0)));
         seller1.setUser_id(4);
-        users.get(0).setFollowed(List.of(seller1));
+        seller1.setUser_name("Berna");
 
-        Seller seller2 = new Seller(List.of(post3, post4), List.of(users.get(1), users.get(2)));
+        Seller seller2 = new Seller(List.of(post3, post4), List.of(users.get(1), users.get(2), users.get(0)));
         seller2.setUser_id(5);
+        seller2.setUser_name("Carla");
+        users.get(0).setFollowed(List.of(seller1, seller2));
         users.get(1).setFollowed(List.of(seller2));
         users.get(2).setFollowed(List.of(seller2));
 
