@@ -2,7 +2,6 @@ package com.example.be_java_hisp_w22_g05.controller;
 
 import com.example.be_java_hisp_w22_g05.dto.UserNumberFollowersDto;
 import com.example.be_java_hisp_w22_g05.service.IUserService;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,9 +24,12 @@ public class UserController {
     }
 
     @GetMapping("/{userId}/followers/count")
-    public ResponseEntity<UserNumberFollowersDto> getFollowersCount(@PathVariable int userId) {
+    public ResponseEntity<UserNumberFollowersDto> getFollowersCount(@PathVariable
+                                                                    @Min(value = 1, message = "El id debe ser mayor a cero")
+                                                                    int userId) {
         return ResponseEntity.ok(userService.getNumberFollowers(userId));
     }
+
     @GetMapping("/{userId}/followed/list")
     public ResponseEntity<?> getListOfUsersFollowedBy(@PathVariable int userId, @RequestParam(required = false) String order){
         return new ResponseEntity<>(userService.getListOfUsersFollowedBy(userId, order), HttpStatus.OK);

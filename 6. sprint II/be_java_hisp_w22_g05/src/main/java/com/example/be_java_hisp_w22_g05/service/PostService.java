@@ -7,17 +7,16 @@ import com.example.be_java_hisp_w22_g05.entity.Product;
 import com.example.be_java_hisp_w22_g05.entity.User;
 import com.example.be_java_hisp_w22_g05.exception.AlreadyExistsException;
 import com.example.be_java_hisp_w22_g05.exception.NotFoundException;
+import com.example.be_java_hisp_w22_g05.exception.RequestParamInvalidException;
 import com.example.be_java_hisp_w22_g05.utils.PostMapper;
 import com.example.be_java_hisp_w22_g05.repository.IPostRepository;
 import com.example.be_java_hisp_w22_g05.repository.IUserRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Objects;
@@ -60,8 +59,6 @@ public class PostService implements IPostService {
 
     public List<PostDto> getListPostsFromSellersFollowed(int userId, String order) {
 
-        ObjectMapper objectMapper = mapperBuilder.build();
-
         // Obtain list of sellers followed
         List<User> sellersList = userRepository.findUsersById(userId).getFollowed();
 
@@ -82,9 +79,14 @@ public class PostService implements IPostService {
         }
 
         //Aca ordenamos
-        return orderList(postList, order != null && order.equals("date_asc"));
+        validateOrder(order);
+        return orderList(postList, order!= null && order.equals("date_asc"));
+    }
 
-
+    private void validateOrder(String order) {
+        if(order != null && !order.equals("date_asc") && !order.equals("date_desc")){
+            throw new RequestParamInvalidException("Request param invalido, opciones validas: <date_asc> o <date_desc>");
+        }
     }
 
     private List<PostDto> orderList(List<Post> posts, boolean isAsc) {
