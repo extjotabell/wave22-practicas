@@ -29,7 +29,7 @@ public class FollowUserTest {
 
 
     @Test
-    @DisplayName("US 01 - Follow user OK")
+    @DisplayName("[T-0001 / US-0001] - Follow user OK")
     void followUserOk(){
         //Arrange
         User user = new User(1, RolEnum.COMPRADOR, "UsuarioComprador", List.of(), List.of(), List.of());
@@ -46,19 +46,18 @@ public class FollowUserTest {
     }
 
     @Test
-    @DisplayName("US 01 - Follow user with same id")
+    @DisplayName("[US-0001] - Follow user with same id")
     void followUserWithSameId(){
         //Arrange
         Integer userId = 1;
         Integer userIdToFollow = 1;
 
-        //Act
         //Assert
         Assertions.assertThrows(BadRequestException.class, () -> this.userService.followUser(userId, userIdToFollow));
     }
 
     @Test
-    @DisplayName("US 01 - Trying to follow COMPRADOR")
+    @DisplayName("[US-0001] - Trying to follow COMPRADOR")
     void followingComprador(){
         //Arrange
         User user = new User(1, RolEnum.COMPRADOR, "UsuarioComprador", List.of(), List.of(), List.of());
@@ -68,7 +67,6 @@ public class FollowUserTest {
         when(userRepository.findUserById(user.getUserId())).thenReturn(Optional.of(user));
         when(userRepository.findUserById(userToFollow.getUserId())).thenReturn(Optional.of(userToFollow));
 
-        //Act
         //Assert
         Assertions.assertThrows(
                 BadRequestException.class,
@@ -77,7 +75,7 @@ public class FollowUserTest {
     }
 
     @Test
-    @DisplayName("US 01 - Follow an already followed user")
+    @DisplayName("[US-0001] - Follow an already followed user")
     void followAlreadyFollowed(){
         //Arrange
         User user = new User(1, RolEnum.COMPRADOR, "UsuarioComprador", List.of(), List.of(2), List.of());
@@ -87,7 +85,6 @@ public class FollowUserTest {
         when(userRepository.findUserById(user.getUserId())).thenReturn(Optional.of(user));
         when(userRepository.findUserById(userToFollow.getUserId())).thenReturn(Optional.of(userToFollow));
 
-        //Act
         //Assert
         Assertions.assertThrows(
                 BadRequestException.class,
@@ -96,7 +93,7 @@ public class FollowUserTest {
     }
 
     @Test
-    @DisplayName("US 01 - Follow non existing user")
+    @DisplayName("[T-0001 / US-0001] - Follow non existing user")
     void followNonExistingUser(){
         //Arrange
         User user = new User(1, RolEnum.COMPRADOR, "UsuarioComprador", List.of(), List.of(2), List.of());
@@ -105,7 +102,6 @@ public class FollowUserTest {
         when(userRepository.findUserById(user.getUserId())).thenReturn(Optional.of(user));
         when(userRepository.findUserById(-4)).thenReturn(Optional.empty());
 
-        //Act
         //Assert
         Assertions.assertThrows(
                 NotFoundException.class,
