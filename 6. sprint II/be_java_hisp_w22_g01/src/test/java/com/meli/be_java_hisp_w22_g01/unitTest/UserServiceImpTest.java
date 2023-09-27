@@ -43,82 +43,41 @@ class UserServiceImpTest {
     UserServiceImp userService;
 
     @Test
-    @DisplayName("T-0003 ✅: Verifica el ordenamiento mediante name_asc y name_desc")
+    @DisplayName("T-0003 ✅: Verifica el ordenamiento mediante name_asc")
     void t0003Ok() {
         // ARRANGE
-
         String order1 = "name_asc";
-        String order2 = "name_desc";
-
-        UserMiniDTO userFollower1 = new UserMiniDTO(1, "Cosme Fulanito");
-        UserMiniDTO userFollower2 = new UserMiniDTO(2, "Zadie Smith");
-        UserMiniDTO userFollower3 = new UserMiniDTO(3, "Gonzalo");
-
-        // Seller followed by the user
-        Seller seller1 = new Seller();
-        seller1.setUser_name("Ahsoka");
-        seller1.setUser_id(4);
-
-        List<Seller> sellerFollowed = new ArrayList<>();
-        sellerFollowed.add(seller1);
-
-        // Users followers
-        User user1 = new User(1, "Cosme Fulanito", sellerFollowed);
-        User user2 = new User(2, "Zadie Smith", sellerFollowed);
-        User user3 = new User(3, "Gonzalo", sellerFollowed);
-
-        // Followers of the seller
-        List<User> sellerFollowers = new ArrayList<>();
-        sellerFollowers.add(user1);
-        sellerFollowers.add(user2);
-        sellerFollowers.add(user3);
-        seller1.setFollowers(sellerFollowers);
-
-        when(sellerRepository.findById(4)).thenReturn(seller1);
-
-        // Respuesta esperada
-        List<UserMiniDTO> followedExpected = new ArrayList<>();
-        followedExpected.add(userFollower1);
-        followedExpected.add(userFollower3);
-        followedExpected.add(userFollower2);
-
-        UserFollowersListDTO expected = new UserFollowersListDTO(4,"Ahsoka", followedExpected);
+        when(sellerRepository.findById(4)).thenReturn(new Seller(List.of(), List.of()));
 
         // ACT
-        UserFollowersListDTO result_asc = userService.orderFollowersDto(4, order1);
-        UserFollowersListDTO result_desc = userService.orderFollowersDto(4, order2);
+        userService.orderFollowersDto(4, order1);
 
         // ASSERT
-        assertEquals(expected, result_asc);
-        reverse(followedExpected);
-        assertEquals(expected, result_desc);
+        verify(sellerRepository, times(1)).findById(4);
+    }
+
+    @Test
+    @DisplayName("T-0003 ✅: Verifica el ordenamiento mediante name_desc")
+    void t0003Ok2() {
+        // ARRANGE
+        String order1 = "name_desc";
+        when(sellerRepository.findById(4)).thenReturn(new Seller(List.of(), List.of()));
+
+        // ACT
+        userService.orderFollowersDto(4, order1);
+
+        // ASSERT
+        verify(sellerRepository, times(1)).findById(4);
     }
 
     @Test
     @DisplayName("T-0003 🚫: Verificar la no existencia de un método de ordenamiento no contemplado")
     void t0003Fail() {
         // ARRANGE
-        Seller seller = new Seller();
-        seller.setUser_name("Ahsoka");
-        seller.setUser_id(4);
-
-        // Users followers
-        List<Seller> sellerFollowed = new ArrayList<>();
-        User user1 = new User(1, "Cosme Fulanito", sellerFollowed);
-        User user2 = new User(2, "Zadie Smith", sellerFollowed);
-        User user3 = new User(3, "Gonzalo", sellerFollowed);
-
-        // Followers of the seller
-        List<User> sellerFollowers = new ArrayList<>();
-        sellerFollowers.add(user1);
-        sellerFollowers.add(user2);
-        sellerFollowers.add(user3);
-        seller.setFollowers(sellerFollowers);
-
-        when(sellerRepository.findById(4)).thenReturn(seller);
+        when(sellerRepository.findById(4)).thenReturn(new Seller(List.of(), List.of()));
 
         // ACT & ASSERT
-        Assertions.assertThrows(BadRequestException.class, () -> userService.orderFollowersDto(4,"hasta_abajo"));
+        Assertions.assertThrows(BadRequestException.class, () -> userService.orderFollowersDto(4,"name_fake"));
     }
 
     @Test

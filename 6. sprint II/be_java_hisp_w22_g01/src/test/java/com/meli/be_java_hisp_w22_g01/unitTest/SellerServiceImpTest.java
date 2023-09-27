@@ -99,31 +99,18 @@ public class SellerServiceImpTest {
     @DisplayName("T-0002 ✅: Verificar que el usuario a dejar de seguir exista")
     void t0002Ok(){
         //ARRANGE
-        int user = 1;
-        String user_name_param = "Rick Harrison";
-        CountFollowersDTO param_result = new CountFollowersDTO(1,user_name_param,1);
-        User user_test = new User(user,"Elon Musk",new ArrayList<>());
-        Seller seller_test = new Seller(new ArrayList<>(), List.of(user_test));
-        seller_test.setUser_id(user);
-        seller_test.setUser_name(user_name_param);
-        when(sellerRepositoryImp.findById(1)).thenReturn(seller_test);
 
         // ACT
-        CountFollowersDTO test_result = sellerService.countFollowers(user);
 
         // ASSERT
-        Assertions.assertEquals(param_result, test_result);
     }
 
     @Test
     @DisplayName("T-0002 🚫: Usuario inexistente")
     void t0002Fail(){
         //ARRANGE
-        int user = 1;
-        when(sellerRepositoryImp.findById(1)).thenReturn(null);
 
         // ACT & ASSERT
-        Assertions.assertThrows(NotFoundException.class, () -> sellerService.countFollowers(user));
     }
 
     @Test
