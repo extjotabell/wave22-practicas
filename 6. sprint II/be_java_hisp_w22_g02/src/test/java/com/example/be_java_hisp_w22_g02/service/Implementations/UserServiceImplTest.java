@@ -10,7 +10,6 @@ import com.example.be_java_hisp_w22_g02.dto.response.UserFollowDTO;
 import com.example.be_java_hisp_w22_g02.dto.response.UserFollowerDTO;
 import com.example.be_java_hisp_w22_g02.entity.Post;
 import com.example.be_java_hisp_w22_g02.entity.Product;
-import com.example.be_java_hisp_w22_g02.entity.User;
 import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
@@ -23,19 +22,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
-
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
 import java.util.stream.Collectors;
-
-import java.util.List;
-
 import static com.example.be_java_hisp_w22_g02.enums.ResponseMessages.*;
 import static org.mockito.Mockito.*;
 
@@ -55,8 +46,131 @@ class UserServiceImplTest {
     @Test
     void followUser() {
     }
+    @Test
+    @DisplayName("T002 - Unfollow Existent User - unfollowUser")
+    void unfollowUserExistent() {
+        //Arrange
+        int idUserPrincipal = 1;
+        int idUserToUnfollow = 2;
+        User user1 = new User(1, "pepito", List.of(), List.of(2), List.of());
+        User user2 = new User(2, "juancito", List.of(1), List.of(), List.of());
+        SuccessDTO expectedSuccessDTO = new SuccessDTO(SUCCESSFUL_UNFOLLOW.toString());
+        when(userRepository.existingUserById(idUserPrincipal)).thenReturn(true);
+        when(userRepository.existingUserById(idUserToUnfollow)).thenReturn(true);
+        when(userRepository.findById(idUserPrincipal)).thenReturn(user1);
+
+        //Act
+        SuccessDTO actualSuccessDTO = userService.unfollowUser(idUserPrincipal, idUserToUnfollow);
+
+        //Assert
+        assertEquals(expectedSuccessDTO, actualSuccessDTO);
+    }
 
     @Test
+    @DisplayName("T002 - Unfollow Nonexistent User - unfollowUser")
+    void unfollowUserNonExistent() {
+        //Arrange
+        int idUserPrincipal = 1;
+        int idUserToUnfollow = 999;
+        when(userRepository.existingUserById(idUserPrincipal)).thenReturn(true);
+        when(userRepository.existingUserById(idUserToUnfollow)).thenReturn(false);
+        //Act
+
+        //Assert
+        assertThrows(NotFoundException.class, () -> userService.unfollowUser(idUserPrincipal, idUserToUnfollow));
+    }
+
+    @Test
+    @DisplayName("T003 - Validate OK ascending alphabetic order - getFollowers")
+    void getFollowers_OrderByNameAsc_ExistsTest() {
+
+        //Arrange
+        when(userRepository.existingUserById(anyInt())).thenReturn(true);
+        when(userRepository.findById(anyInt())).thenReturn(new User());
+
+        //Act
+        userService.getFollowers(1, "name_asc");
+
+        //Assert
+        verify(userRepository, atLeastOnce()).findById(anyInt());
+
+    }
+
+    @Test
+    @DisplayName("T003 - Validate OK descending alphabetic order - getFollowers")
+    void getFollowers_OrderByNameDesc_ExistsTest() {
+
+        //Arrange
+        when(userRepository.existingUserById(anyInt())).thenReturn(true);
+        when(userRepository.findById(anyInt())).thenReturn(new User());
+
+        //Act
+        userService.getFollowers(1, "name_desc");
+
+        //Assert
+        verify(userRepository, atLeastOnce()).findById(anyInt());
+
+    }
+
+    @Test
+    @DisplayName("0003 - Validate exception when order is invalid - getFollowers")
+    void getFollowers_OrderByName_NotExistTest() {
+
+        //Arrange
+        when(userRepository.existingUserById(anyInt())).thenReturn(true);
+        when(userRepository.findById(anyInt())).thenReturn(new User());
+
+        //Act & Assert
+        assertThrows(BadRequestException.class, () -> userService.getFollowers(1, "name_ascc"));
+
+    }
+
+    @Test
+    @DisplayName("T003 - Validate OK ascending alphabetic order - getFollowed")
+    void getFollowed_OrderByNameAsc_ExistsTest() {
+
+        //Arrange
+        when(userRepository.existingUserById(anyInt())).thenReturn(true);
+        when(userRepository.findById(anyInt())).thenReturn(new User());
+
+        //Act
+        userService.getFollowed(1, "name_asc");
+
+        //Assert
+        verify(userRepository, atLeastOnce()).findById(anyInt());
+
+    }
+
+    @Test
+    @DisplayName("T003 - Validate OK descending alphabetic order - getFollowed")
+    void getFollowed_OrderByNameDesc_ExistsTest() {
+
+        //Arrange
+        when(userRepository.existingUserById(anyInt())).thenReturn(true);
+        when(userRepository.findById(anyInt())).thenReturn(new User());
+
+        //Act
+        userService.getFollowed(1, "name_desc");
+
+        //Assert
+        verify(userRepository, atLeastOnce()).findById(anyInt());
+
+    }
+
+    @Test
+    @DisplayName("T0003 - Validate exception when order is invalid - getFollowed")
+    void getFollowed_OrderByName_NotExistsTest() {
+
+        //Arrange
+        when(userRepository.existingUserById(anyInt())).thenReturn(true);
+        when(userRepository.findById(anyInt())).thenReturn(new User());
+
+        //Act & Assert
+        assertThrows(BadRequestException.class, () -> userService.getFollowed(1, "name_ascc"));
+    }
+
+    @Test
+    @DisplayName("T004 - Followers ordered correctly ASC - getFollowers")
     void getFollowers_order_asc_Test() {
         //arrange
         User user = new User(10,
@@ -110,93 +224,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    @DisplayName("T0003 - Validate OK ascending alphabetic order - getFollowers")
-    void getFollowers_OrderByNameAsc_ExistsTest() {
-
-        //Arrange
-        when(userRepository.existingUserById(anyInt())).thenReturn(true);
-        when(userRepository.findById(anyInt())).thenReturn(new User());
-
-        //Act
-        userService.getFollowers(1, "name_asc");
-
-        //Assert
-        verify(userRepository, atLeastOnce()).findById(anyInt());
-
-    }
-
-    @Test
-    @DisplayName("T0003 - Validate OK descending alphabetic order - getFollowers")
-    void getFollowers_OrderByNameDesc_ExistsTest() {
-
-        //Arrange
-        when(userRepository.existingUserById(anyInt())).thenReturn(true);
-        when(userRepository.findById(anyInt())).thenReturn(new User());
-
-        //Act
-        userService.getFollowers(1, "name_desc");
-
-        //Assert
-        verify(userRepository, atLeastOnce()).findById(anyInt());
-
-    }
-
-    @Test
-    @DisplayName("T0003 - Validate exception when order is invalid - getFollowers")
-    void getFollowers_OrderByName_NotExistTest() {
-
-        //Arrange
-        when(userRepository.existingUserById(anyInt())).thenReturn(true);
-        when(userRepository.findById(anyInt())).thenReturn(new User());
-
-        //Act & Assert
-        assertThrows(BadRequestException.class, () -> userService.getFollowers(1, "name_ascc"));
-
-    }
-
-    @Test
-    @DisplayName("T0003 - Validate OK ascending alphabetic order - getFollowed")
-    void getFollowed_OrderByNameAsc_ExistsTest() {
-
-        //Arrange
-        when(userRepository.existingUserById(anyInt())).thenReturn(true);
-        when(userRepository.findById(anyInt())).thenReturn(new User());
-
-        //Act
-        userService.getFollowed(1, "name_asc");
-
-        //Assert
-        verify(userRepository, atLeastOnce()).findById(anyInt());
-
-    }
-
-    @Test
-    @DisplayName("T0003 - Validate OK descending alphabetic order - getFollowed")
-    void getFollowed_OrderByNameDesc_ExistsTest() {
-
-        //Arrange
-        when(userRepository.existingUserById(anyInt())).thenReturn(true);
-        when(userRepository.findById(anyInt())).thenReturn(new User());
-
-        //Act
-        userService.getFollowed(1, "name_desc");
-
-        //Assert
-        verify(userRepository, atLeastOnce()).findById(anyInt());
-
-    }
-
-    @Test
-    @DisplayName("T0003 - Validate exception when order is invalid - getFollowed")
-    void getFollowed_OrderByName_NotExistsTest() {
-
-        //Arrange
-        when(userRepository.existingUserById(anyInt())).thenReturn(true);
-        when(userRepository.findById(anyInt())).thenReturn(new User());
-
-        //Act & Assert
-        assertThrows(BadRequestException.class, () -> userService.getFollowed(1, "name_ascc"));
-
+    @DisplayName("T004 - Followers ordered correctly DESC - getFollowers")
     void getFollowers_order_desc_Test() {
         //arrange
         User user = new User(10,
@@ -247,6 +275,25 @@ class UserServiceImplTest {
         Assertions.assertAll(() -> Assertions.assertEquals(expected, actual),
                 () -> Assertions.assertEquals(expected.getFollowers().get(0).getUserName(), actual.getFollowers().get(0).getUserName()));
     }
+    @DisplayName("T005 - Valid sorting parameter - getFollowedPostLasTwoWeeksOrd")
+    @Test
+    void shouldVerifyValidOrderDateExists() {
+        // ARRANGE
+        when(userRepository.existingUserById(2)).thenReturn(true);
+        // ACT
+        TwoWeeksPostDTO postTest = userService.getLastTwoWeeksPostByUser(2, "date_asc");
+        // ASSERT
+        assertNotNull(postTest.getPosts());
+    }
+
+    @DisplayName("T005 - Invalid sorting parameter - getFollowedPostLasTwoWeeksOrd")
+    @Test
+    void shouldCatchValidOrderDateException() {
+        // ARRANGE
+        when(userRepository.existingUserById(2)).thenReturn(true);
+        // ACT & ASSERT
+        assertThrows(BadRequestException.class, () -> userService.getLastTwoWeeksPostByUser(2, "invalid_asc"));
+    }
 
     @Test
     @DisplayName("T0007 - Validate followers count is correct - getTotalFollowersByUserId")
@@ -267,40 +314,6 @@ class UserServiceImplTest {
     }
 
     @Test
-    @DisplayName("Unfollow Existent User")
-    void unfollowUserExistent() {
-        //Arrange
-        int idUserPrincipal = 1;
-        int idUserToUnfollow = 2;
-        SuccessDTO expectedSuccessDTO = new SuccessDTO(SUCCESSFUL_UNFOLLOW.toString());
-        when(userRepository.existingUserById(idUserPrincipal)).thenReturn(true);
-        when(userRepository.existingUserById(idUserToUnfollow)).thenReturn(true);
-        when(userRepository.findById(idUserPrincipal).getFollowed().contains(idUserToUnfollow)).thenReturn(true);
-
-        //Act
-        SuccessDTO actualSuccessDTO = userService.unfollowUser(idUserPrincipal, idUserToUnfollow);
-
-        //Assert
-        assertEquals(expectedSuccessDTO, actualSuccessDTO);
-    }
-
-    @Test
-    @DisplayName("Unfollow Nonexistent User")
-    void unfollowUserNonExistent() {
-        //Arrange
-        int idUserPrincipal = 1;
-        int idUserToUnfollow = 999;
-        when(userRepository.existingUserById(idUserPrincipal)).thenReturn(true);
-        when(userRepository.existingUserById(idUserToUnfollow)).thenReturn(false);
-        when(userRepository.findById(idUserPrincipal).getFollowed().contains(idUserToUnfollow)).thenReturn(false);
-
-        //Act
-
-        //Assert
-        assertThrows(NotFoundException.class,()->userService.unfollowUser(idUserPrincipal, idUserToUnfollow));
-    }
-
-    @Test
     void getFollowed() {
     }
 
@@ -312,25 +325,6 @@ class UserServiceImplTest {
     void getLastTwoWeeksPostByUser() {
 
     }
-    @DisplayName("T-0005 Success - Test for the US-009")
-    @Test
-    void shouldVerifyValidOrderDateExists() {
-        // ARRANGE
-        when(userRepository.existingUserById(2)).thenReturn(true);
-        List<TwoWeeksPostDTO> expectedAscPosts = new ArrayList<>();
-        // ACT
-        TwoWeeksPostDTO postTest = userService.getLastTwoWeeksPostByUser(2, "date_asc");
-        expectedAscPosts.add(postTest);
-        // ASSERT
-        assertNotNull(postTest.getPosts());
-    }
 
-    @DisplayName("T-0005 Fail - Test for the US-009")
-    @Test
-    void shouldCatchValidOrderDateException() {
-        // ARRANGE
-        when(userRepository.existingUserById(2)).thenReturn(true);
-        // ACT & ASSERT
-        assertThrows(BadRequestException.class, () -> userService.getLastTwoWeeksPostByUser(2, "invalid_asc"));
-    }
+
 }
