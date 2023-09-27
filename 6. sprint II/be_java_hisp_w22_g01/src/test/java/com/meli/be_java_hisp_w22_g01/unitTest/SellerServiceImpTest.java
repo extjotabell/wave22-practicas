@@ -21,6 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -118,6 +119,7 @@ public class SellerServiceImpTest {
         Assertions.assertEquals(param_result, test_result);
     }
 
+<<<<<<< Updated upstream
 
     @Test
     @DisplayName(value = "T-0002 - Usuario inexistente")
@@ -133,4 +135,53 @@ public class SellerServiceImpTest {
         Assertions.assertThrows(NotFoundException.class, () -> sellerService.countFollowers(user));
     }
 
+=======
+    @Test
+    @DisplayName("T0007 ✅ - Verificar que la cantidad de seguidores de un determinado usuario se correcta") //US 0002
+    public void t0007Ok(){
+        // Arrange
+
+        // Seller followed by the user
+        Seller seller1 = new Seller();
+        seller1.setUser_name("Ahsoka");
+        seller1.setUser_id(4);
+
+        List<Seller> sellerFollowed = new ArrayList<>();
+        sellerFollowed.add(seller1);
+
+        // Users followers
+        User user1 = new User(1, "Cosme Fulanito", sellerFollowed);
+        User user2 = new User(2, "Zadie Smith", sellerFollowed);
+        User user3 = new User(3, "Gonzalo", sellerFollowed);
+
+        // Followers of the seller
+        List<User> sellerFollowers = new ArrayList<>();
+        sellerFollowers.add(user1);
+        sellerFollowers.add(user2);
+        sellerFollowers.add(user3);
+        seller1.setFollowers(sellerFollowers);
+
+        when(sellerRepositoryImp.findById(4)).thenReturn(seller1);
+
+        // expected
+        CountFollowersDTO expected = new CountFollowersDTO(4, "Ahsoka", 3);
+
+        // Act
+        CountFollowersDTO result = sellerService.countFollowers(4);
+
+        // Assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    @DisplayName("T0007 🚫 - Verificar que la cantidad de seguidores de un determinado usuario se correcta")
+    public void t0007Fail(){
+        // Arrange
+//        Seller seller = null;
+        when(sellerRepositoryImp.findById(4)).thenReturn(null);
+
+        // Act & Assert
+        Assertions.assertThrows(NotFoundException.class, () -> sellerService.countFollowers(4));
+    }
+>>>>>>> Stashed changes
 }

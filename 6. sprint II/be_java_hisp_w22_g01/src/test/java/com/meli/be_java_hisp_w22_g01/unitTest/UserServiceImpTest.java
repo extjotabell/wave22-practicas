@@ -23,6 +23,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -45,6 +46,84 @@ class UserServiceImpTest {
     @InjectMocks
     UserServiceImp userService;
 
+
+    @Test
+    @DisplayName("T0003 ✅ - (Asc) Seguidores del vendedor ordenados de forma ascendente")
+    public void t0003AscOk() {
+        // Arrange
+
+        UserMiniDTO userFollower1 = new UserMiniDTO(1, "Cosme Fulanito");
+        UserMiniDTO userFollower2 = new UserMiniDTO(2, "Zadie Smith");
+        UserMiniDTO userFollower3 = new UserMiniDTO(3, "Gonzalo");
+        List<UserMiniDTO> followed = new ArrayList<>();
+        followed.add(userFollower1);
+        followed.add(userFollower2);
+        followed.add(userFollower3);
+
+        // Seller followed by the user
+        Seller seller1 = new Seller();
+        seller1.setUser_name("Ahsoka");
+        seller1.setUser_id(4);
+
+        List<Seller> sellerFollowed = new ArrayList<>();
+        sellerFollowed.add(seller1);
+
+        // Users followers
+        User user1 = new User(1, "Cosme Fulanito", sellerFollowed);
+        User user2 = new User(2, "Zadie Smith", sellerFollowed);
+        User user3 = new User(3, "Gonzalo", sellerFollowed);
+
+        // Followers of the seller
+        List<User> sellerFollowers = new ArrayList<>();
+        sellerFollowers.add(user1);
+        sellerFollowers.add(user2);
+        sellerFollowers.add(user3);
+        seller1.setFollowers(sellerFollowers);
+
+        UserFollowersListDTO followersDto = new UserFollowersListDTO(4, "Ahsoka", followed);
+
+        when(sellerRepository.findById(4)).thenReturn(seller1);
+
+        // Respuesta esperada
+        List<UserMiniDTO> followedExpected = new ArrayList<>();
+        followedExpected.add(userFollower1);
+        followedExpected.add(userFollower3);
+        followedExpected.add(userFollower2);
+
+        UserFollowersListDTO expected = new UserFollowersListDTO(4,"Ahsoka", followedExpected);
+
+        // Act
+        UserFollowersListDTO result = userService.orderFollowersDto(4, "name_asc");
+
+        // Assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    @DisplayName("T0003 🚫 - (Asc) Seguidores del vendedor ordenados de forma ascendente")
+    public void t0003AscFail() {
+        Seller seller = new Seller();
+        seller.setUser_name("Ahsoka");
+        seller.setUser_id(4);
+
+        // Users followers
+        List<Seller> sellerFollowed = new ArrayList<>();
+        User user1 = new User(1, "Cosme Fulanito", sellerFollowed);
+        User user2 = new User(2, "Zadie Smith", sellerFollowed);
+        User user3 = new User(3, "Gonzalo", sellerFollowed);
+
+        // Followers of the seller
+        List<User> sellerFollowers = new ArrayList<>();
+        sellerFollowers.add(user1);
+        sellerFollowers.add(user2);
+        sellerFollowers.add(user3);
+        seller.setFollowers(sellerFollowers);
+        // Arrange
+        when(sellerRepository.findById(4)).thenReturn(seller);
+
+        // Act & Assert
+        Assertions.assertThrows(BadRequestException.class, () -> userService.orderFollowersDto(4,"hasta_abajo"));
+    }
 
     @DisplayName("T-0005 ✅")
     @Test
