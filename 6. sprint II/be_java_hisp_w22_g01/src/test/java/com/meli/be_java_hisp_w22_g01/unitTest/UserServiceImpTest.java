@@ -1,6 +1,5 @@
 package com.meli.be_java_hisp_w22_g01.unitTest;
 
-
 import com.meli.be_java_hisp_w22_g01.dto.PostDto;
 import com.meli.be_java_hisp_w22_g01.dto.response.FollowedDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.UserFollowedPostListDTO;
@@ -34,7 +33,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
-
 @ExtendWith(MockitoExtension.class)
 class UserServiceImpTest {
     @Mock
@@ -46,12 +44,10 @@ class UserServiceImpTest {
     @InjectMocks
     UserServiceImp userService;
 
-
     @Test
-    @DisplayName("T-0003 ✅ - (Asc) Seguidores del vendedor ordenados de forma ascendente")
-    public void t0003AscOk() {
-        // Arrange
-
+    @DisplayName("T-0003 ✅: Seguidores del vendedor ordenados de forma ascendente")
+    public void t0003Ok() {
+        // ARRANGE
         UserMiniDTO userFollower1 = new UserMiniDTO(1, "Cosme Fulanito");
         UserMiniDTO userFollower2 = new UserMiniDTO(2, "Zadie Smith");
         UserMiniDTO userFollower3 = new UserMiniDTO(3, "Gonzalo");
@@ -80,8 +76,6 @@ class UserServiceImpTest {
         sellerFollowers.add(user3);
         seller1.setFollowers(sellerFollowers);
 
-        UserFollowersListDTO followersDto = new UserFollowersListDTO(4, "Ahsoka", followed);
-
         when(sellerRepository.findById(4)).thenReturn(seller1);
 
         // Respuesta esperada
@@ -92,16 +86,17 @@ class UserServiceImpTest {
 
         UserFollowersListDTO expected = new UserFollowersListDTO(4,"Ahsoka", followedExpected);
 
-        // Act
+        // ACT
         UserFollowersListDTO result = userService.orderFollowersDto(4, "name_asc");
 
-        // Assert
+        // ASSERT
         assertEquals(expected, result);
     }
 
     @Test
-    @DisplayName("T0003 🚫 - (Asc) Seguidores del vendedor ordenados de forma ascendente")
-    public void t0003AscFail() {
+    @DisplayName("T-0003 🚫: Verificar la no existencia de un método de ordenamiento no contemplado")
+    public void t0003Fail() {
+        // ARRANGE
         Seller seller = new Seller();
         seller.setUser_name("Ahsoka");
         seller.setUser_id(4);
@@ -118,128 +113,18 @@ class UserServiceImpTest {
         sellerFollowers.add(user2);
         sellerFollowers.add(user3);
         seller.setFollowers(sellerFollowers);
-        // Arrange
+
         when(sellerRepository.findById(4)).thenReturn(seller);
 
-        // Act & Assert
+        // ACT & ASSERT
         Assertions.assertThrows(BadRequestException.class, () -> userService.orderFollowersDto(4,"hasta_abajo"));
     }
 
-    @DisplayName("T-0005 ✅")
     @Test
-    void orderByDateFollowedSellersDateAscOk() {
-        // ARRANGE
-        String order = "date_asc";
-        List<Seller> sellerList = UtilTestGenerator.get2SellerWithPosts();
-        User user = sellerList.get(0).getFollowers().get(0);
-        when(userRepository.findById(anyInt())).thenReturn(user);
-
-        // ACT
-        userService.orderByDateFollowedSellers(1, order);
-
-        // ASSERT
-        verify(userRepository, times(1)).findById(user.getUser_id());
-    }
-
-    @DisplayName("T-0005 ✅")
-    @Test
-    void orderByDateFollowedSellersDateDescOk() {
-        // ARRANGE
-        String order = "date_desc";
-        List<Seller> sellerList = UtilTestGenerator.get2SellerWithPosts();
-        User user = sellerList.get(0).getFollowers().get(0);
-        when(userRepository.findById(anyInt())).thenReturn(user);
-
-        // ACT
-        userService.orderByDateFollowedSellers(1, order);
-
-        // ASSERT
-        verify(userRepository, times(1)).findById(user.getUser_id());
-    }
-
-    @DisplayName("T-0005 🚫")
-    @Test
-    void orderByDateFollowedSellersDateFail() {
-        // ARRANGE
-        String order = "sarasa";
-        List<Seller> sellerList = UtilTestGenerator.get2SellerWithPosts();
-        User user = sellerList.get(0).getFollowers().get(0);
-
-        when(userRepository.findById(anyInt())).thenReturn(user);
-
-        // ACT & ASSERT
-        Assertions.assertThrows(BadRequestException.class, () -> userService.orderByDateFollowedSellers(1, order));
-    }
-
-    @Test
-    @DisplayName("Verificamos que la fecha esta ordenada ascendente")
-    void orderByDateFollowedSellersDateASC(){
-        //ARRANGE
-        int userIdParam = 4;
-        String order = "date_asc";
-        List<Seller> sellerWithPosts = UtilTestGenerator.get2SellerWithPosts();
-        User user = sellerWithPosts.get(1).getFollowers().get(0);
-
-        Mockito.when(userRepository.findById(4)).thenReturn(user);
-        UserFollowedPostListDTO lista = userService.userFollowedPostList(userIdParam);
-        List<LocalDate> fechas = lista.getPosts().stream()
-                .map(PostDto::getDate).toList();
-
-        List<LocalDate> expected = fechas.stream()
-                .sorted()
-                .collect(Collectors.toList());
-
-
-        //ACT
-
-        UserFollowedPostListDTO obtained = userService.orderByDateFollowedSellers(userIdParam,order);
-        List<LocalDate> obtainedDates = obtained.getPosts().stream().map(PostDto::getDate).toList();
-
-        //ASSERT
-
-        Assertions.assertEquals(expected,obtainedDates);
-
-        System.out.print("expected " + expected + "\n" + "obtained " + obtainedDates);
-
-    }
-
-    @Test
-    @DisplayName("Verificamos que la fecha este ordenada descendiente")
-    void orderByDateFollowedSellersDateDES(){
-        //ARRANGE
-        int userIdParam = 4;
-        String order = "date_desc";
-        List<Seller> sellerWithPosts = UtilTestGenerator.get2SellerWithPosts();
-        User user = sellerWithPosts.get(1).getFollowers().get(0);
-
-        Mockito.when(userRepository.findById(4)).thenReturn(user);
-
-        UserFollowedPostListDTO lista = userService.userFollowedPostList(userIdParam);
-        List<LocalDate> fechas = lista.getPosts().stream()
-                .map(PostDto::getDate).toList();
-
-        List<LocalDate> expected = fechas.stream()
-                .sorted(Comparator.reverseOrder())
-                .toList();
-
-        //ACT
-
-        UserFollowedPostListDTO obtained = userService.orderByDateFollowedSellers(userIdParam,order);
-        List<LocalDate> obtainedDates = obtained.getPosts().stream().map(PostDto::getDate).toList();
-
-        //ASSERT
-
-        Assertions.assertEquals(expected,obtainedDates);
-        System.out.print("expected " + expected + "\n" + "obtained " + obtainedDates);
-
-    }
-
-    @Test
-    @DisplayName(value = "OK: Verifica que el orden asc/desc pedido funcione en followed.")
-    void orderFollowsDtoByNameAscDescTest() {
+    @DisplayName("T-0004 ✅: Verifica que el orden ascendente pedido funcione en followed.")
+    void t0004Ok() {
         // ARRANGE
         String order = "name_asc";
-        String order2 = "name_desc";
         Seller seller = UtilTestGenerator.get2SellerWithPosts().get(0);
         User mockUser = seller.getFollowers().get(0);
         List<UserMiniDTO> orderedList = Arrays.asList(new UserMiniDTO(4, "Berna"),
@@ -249,39 +134,68 @@ class UserServiceImpTest {
 
         //ACT
         FollowedDTO result = userService.orderFollowedDto(mockUser.getUser_id(), order);
-        FollowedDTO result2 = userService.orderFollowedDto(mockUser.getUser_id(), order2);
 
         //ASSERT
         assertEquals(orderedList, result.getFollowed());
+    }
+
+    @Test
+    @DisplayName("T-0004 ✅: Verifica que el orden descendente pedido funcione en followed.")
+    void t0004Ok2() {
+        // ARRANGE
+        String order2 = "name_desc";
+        Seller seller = UtilTestGenerator.get2SellerWithPosts().get(0);
+        User mockUser = seller.getFollowers().get(0);
+        List<UserMiniDTO> orderedList = Arrays.asList(new UserMiniDTO(4, "Berna"),
+                new UserMiniDTO(5, "Carla"));
+
+        when(userRepository.findById(anyInt())).thenReturn(mockUser);
+
+        //ACT
+        FollowedDTO result2 = userService.orderFollowedDto(mockUser.getUser_id(), order2);
+
+        //ASSERT
         reverse(orderedList);
         assertEquals(orderedList, result2.getFollowed());
     }
     @Test
-    @DisplayName(value = "OK: Verifica que el orden asc/desc pedido funcione en followers.")
-    void orderFollowersDtoByNameAscDescTest() {
+    @DisplayName("T-0004 ✅: Verifica que el orden ascendente pedido funcione en followers.")
+    void t0004Ok3() {
         // ARRANGE
         String order = "name_asc";
-        String order2 = "name_desc";
         Seller mockSeller = UtilTestGenerator.get2SellerWithPosts().get(1);
         List<UserMiniDTO> orderedList = Arrays.asList(new UserMiniDTO(2, "Alberto"),
                 new UserMiniDTO(3, "Dario"), new UserMiniDTO(1, "Pepe"));
 
+        when(sellerRepository.findById(anyInt())).thenReturn(mockSeller);
+
+        //ACT
+        UserFollowersListDTO result = userService.orderFollowersDto(mockSeller.getUser_id(), order);
+
+        //ASSERT
+        assertEquals(orderedList, result.getFollowers());
+    }
+    @Test
+    @DisplayName("T-0004 ✅: Verifica que el orden descendente pedido funcione en followers.")
+    void t0004Ok4() {
+        // ARRANGE
+        String order2 = "name_desc";
+        Seller mockSeller = UtilTestGenerator.get2SellerWithPosts().get(1);
         List<UserMiniDTO> orderedDescList = Arrays.asList(new UserMiniDTO(1, "Pepe"),
                 new UserMiniDTO(3, "Dario"), new UserMiniDTO(2, "Alberto"));
 
         when(sellerRepository.findById(anyInt())).thenReturn(mockSeller);
 
         //ACT
-        UserFollowersListDTO result = userService.orderFollowersDto(mockSeller.getUser_id(), order);
         UserFollowersListDTO result2 = userService.orderFollowersDto(mockSeller.getUser_id(), order2);
 
         //ASSERT
-        assertEquals(orderedList, result.getFollowers());
         assertEquals(orderedDescList, result2.getFollowers());
     }
+
     @Test
-    @DisplayName(value = "FAIL: El orden proporcionado no existe para followed")
-    void orderFollowedDtoBadRequestException() {
+    @DisplayName("T-0004 🚫: El orden proporcionado no existe para followed")
+    void t0004Fail() {
         // ARRANGE
         String orderFake = "name_fake";
         Seller seller = UtilTestGenerator.get2SellerWithPosts().get(1);
@@ -292,8 +206,8 @@ class UserServiceImpTest {
         Assertions.assertThrows(BadRequestException.class,()-> userService.orderFollowedDto(user.getUser_id(), orderFake));
     }
     @Test
-    @DisplayName(value = "FAIL: El orden proporcionado no existe para followers")
-    void orderFollowersDtoBadRequestException() {
+    @DisplayName("T-0004 🚫: El orden proporcionado no existe para followers")
+    void t0004Fail2() {
         // ARRANGE
         String orderFake = "name_fake";
         Seller mockSeller = UtilTestGenerator.get2SellerWithPosts().get(1);
@@ -303,9 +217,95 @@ class UserServiceImpTest {
         Assertions.assertThrows(BadRequestException.class,()-> userService.orderFollowersDto(mockSeller.getUser_id(), orderFake));
     }
 
-    @DisplayName("T-0008 ✅")
+    @DisplayName("T-0005 ✅: Verificar que el tipo de ordenamiento por fecha ascendente exista")
     @Test
-    void userFollowedPostListOk() {
+    void t0005Ok() {
+        // ARRANGE
+        String order = "date_asc";
+        List<Seller> sellerList = UtilTestGenerator.get2SellerWithPosts();
+        User user = sellerList.get(0).getFollowers().get(0);
+        when(userRepository.findById(anyInt())).thenReturn(user);
+
+        // ACT
+        userService.orderByDateFollowedSellers(1, order);
+
+        // ASSERT
+        verify(userRepository, times(1)).findById(user.getUser_id());
+    }
+
+    @DisplayName("T-0005 ✅: Verificar que el tipo de ordenamiento por fecha descendente exista")
+    @Test
+    void t0005Ok2() {
+        // ARRANGE
+        String order = "date_desc";
+        List<Seller> sellerList = UtilTestGenerator.get2SellerWithPosts();
+        User user = sellerList.get(0).getFollowers().get(0);
+        when(userRepository.findById(anyInt())).thenReturn(user);
+
+        // ACT
+        userService.orderByDateFollowedSellers(1, order);
+
+        // ASSERT
+        verify(userRepository, times(1)).findById(user.getUser_id());
+    }
+
+    @DisplayName("T-0005 🚫: Verificar la no existencia de un método de ordenamiento no contemplado")
+    @Test
+    void t0005Fail() {
+        // ARRANGE
+        String order = "name_fake";
+        List<Seller> sellerList = UtilTestGenerator.get2SellerWithPosts();
+        User user = sellerList.get(0).getFollowers().get(0);
+
+        when(userRepository.findById(anyInt())).thenReturn(user);
+
+        // ACT & ASSERT
+        Assertions.assertThrows(BadRequestException.class, () -> userService.orderByDateFollowedSellers(1, order));
+    }
+
+    @Test
+    @DisplayName("T-0006 ✅: Verificamos que la fecha esta ordenada ascendente")
+    void t0006Ok(){
+        //ARRANGE
+        int userIdParam = 4;
+        String order = "date_asc";
+        List<Seller> sellerWithPosts = UtilTestGenerator.get2SellerWithPosts();
+        User user = sellerWithPosts.get(0).getFollowers().get(0);
+
+        Mockito.when(userRepository.findById(4)).thenReturn(user);
+        List<LocalDate> expected = List.of(LocalDate.now().minusDays(3), LocalDate.now(), LocalDate.now());
+
+        //ACT
+        UserFollowedPostListDTO obtained = userService.orderByDateFollowedSellers(userIdParam,order);
+        List<LocalDate> obtainedDates = obtained.getPosts().stream().map(PostDto::getDate).toList();
+
+        //ASSERT
+        Assertions.assertEquals(expected,obtainedDates);
+    }
+
+    @Test
+    @DisplayName("T-0006 ✅: Verificamos que la fecha este ordenada descendiente")
+    void t0006Ok2(){
+        //ARRANGE
+        String order = "date_desc";
+        List<Seller> sellerWithPosts = UtilTestGenerator.get2SellerWithPosts();
+        User user = sellerWithPosts.get(0).getFollowers().get(0);
+
+        Mockito.when(userRepository.findById(anyInt())).thenReturn(user);
+
+        List<LocalDate> expected = List.of(LocalDate.now(), LocalDate.now(), LocalDate.now().minusDays(3));
+
+        //ACT
+        UserFollowedPostListDTO obtained = userService.orderByDateFollowedSellers(user.getUser_id(), order);
+        List<LocalDate> obtainedDates = obtained.getPosts().stream().map(PostDto::getDate).toList();
+
+        //ASSERT
+        Assertions.assertEquals(expected,obtainedDates);
+    }
+
+    @Test
+    @DisplayName("T-0008 ✅: Verificar que la consulta de publicaciones realizadas en la últimas 2 semanas de un determinado vendedor sean efectivamente de las últimas 2 semanas")
+    void t0008Ok() {
         // ARRANGE
         List<Seller> sellerWithPosts = UtilTestGenerator.get2SellerWithPosts();
         User user = sellerWithPosts.get(0).getFollowers().get(0);
@@ -322,9 +322,9 @@ class UserServiceImpTest {
         Assertions.assertEquals(expected, result);
     }
 
-    @DisplayName("T-0008 ✅")
     @Test
-    void userFollowedPostListOk2() {
+    @DisplayName("T-0008 ✅: Verificar que la consulta de publicaciones realizadas en la últimas 2 semanas de un determinado vendedor sean efectivamente de las últimas 2 semanas")
+    void t0008Ok2() {
         // ARRANGE
         List<Seller> sellerWithPosts = UtilTestGenerator.get2SellerWithPosts();
         User user = sellerWithPosts.get(1).getFollowers().get(0);
