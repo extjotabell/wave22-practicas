@@ -1,7 +1,6 @@
 package com.w22_g03.be_java_hisp_w22_g03.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.w22_g03.be_java_hisp_w22_g03.dto.PostDTO;
 import com.w22_g03.be_java_hisp_w22_g03.dto.ProductDTO;
 import com.w22_g03.be_java_hisp_w22_g03.dto.UserFollowedSellersPostsDTO;
