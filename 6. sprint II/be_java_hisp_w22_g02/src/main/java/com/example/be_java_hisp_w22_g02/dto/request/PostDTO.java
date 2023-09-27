@@ -1,6 +1,5 @@
 package com.example.be_java_hisp_w22_g02.dto.request;
 
-import com.example.be_java_hisp_w22_g02.entity.Product;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
@@ -10,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
