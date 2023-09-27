@@ -111,6 +111,19 @@ class UserServiceImplTest {
     }
 
     @Test
+    @DisplayName("T0003 - Validate exception when order is invalid - getFollowed")
+    void getFollowed_OrderByName_NotExistsTest() {
+
+        //Arrange
+        when(userRepository.existingUserById(anyInt())).thenReturn(true);
+        when(userRepository.findById(anyInt())).thenReturn(new User());
+
+        //Act & Assert
+        assertThrows(BadRequestException.class, () -> userService.getFollowed(1, "name_ascc"));
+
+    }
+
+    @Test
     void unfollowUser() {
     }
 
