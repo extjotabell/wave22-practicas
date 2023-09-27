@@ -119,8 +119,6 @@ public class SellerServiceImpTest {
         Assertions.assertEquals(param_result, test_result);
     }
 
-<<<<<<< Updated upstream
-
     @Test
     @DisplayName(value = "T-0002 - Usuario inexistente")
     void countFollowersErrorUserNoExists(){
@@ -135,7 +133,6 @@ public class SellerServiceImpTest {
         Assertions.assertThrows(NotFoundException.class, () -> sellerService.countFollowers(user));
     }
 
-=======
     @Test
     @DisplayName("T0007 ✅ - Verificar que la cantidad de seguidores de un determinado usuario se correcta") //US 0002
     public void t0007Ok(){
@@ -183,5 +180,4 @@ public class SellerServiceImpTest {
         // Act & Assert
         Assertions.assertThrows(NotFoundException.class, () -> sellerService.countFollowers(4));
     }
->>>>>>> Stashed changes
 }
