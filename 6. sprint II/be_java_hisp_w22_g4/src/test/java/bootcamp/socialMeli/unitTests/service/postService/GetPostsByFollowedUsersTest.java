@@ -51,23 +51,23 @@ public class GetPostsByFollowedUsersTest {
 
     private final ObjectMapper mapper = new ObjectMapper();
     private final List<Post> postList = List.of(
-            new Post(54, 6, LocalDate.of(2023, 7, 11), new Product(
+            new Post(54, 6, LocalDate.now().minusWeeks(3), new Product(
                     3, "Iphone", "Celulares",
                     "Apple", "Blanco",  "Nuevo de fabrica"),
                     3, 3000.00, false, 0.0),
-            new Post(100, 10, LocalDate.of(2023, 8, 5), new Product(
+            new Post(100, 10, LocalDate.now().minusDays(45), new Product(
                     9, "Lampara", "Velador",
                     "LuzSol", "Dorado",  "Luz calida"),
                     34, 8900.00, false, 0.0),
-            new Post(150, 6, LocalDate.of(2023, 9, 15), new Product(
+            new Post(150, 6, LocalDate.now().minusDays(13), new Product(
                     1, "Pochoclera", "Electrodomestico",
                     "Samsung", "Rojo",  "Pochoclera"),
                     3, 1500.50, false, 0.0),
-            new Post(2, 6, LocalDate.of(2023, 9, 20), new Product(
+            new Post(2, 6, LocalDate.now().minusDays(10), new Product(
                     2, "Mouse", "Gamer",
                     "Logitech", "Rosa",  "Inalambrico"),
                     200, 360.00, false, 0.0),
-            new Post(350, 10, LocalDate.of(2023, 9, 26), new Product(
+            new Post(350, 10, LocalDate.now().minusDays(8), new Product(
                     3, "Iphone 15", "Celulares",
                     "Apple", "Negro",  "Nuevo de fabrica"),
                     3, 3000.00, false, 0.0));
