@@ -1,0 +1,165 @@
+[
+  {
+    "userId": 1,
+    "username": "Alejandro",
+    "posts": [
+      {
+        "postId": 1,
+        "user": {
+          "userId": 1,
+          "username": "Alejandro",
+          "posts": [],
+          "followed": [],
+          "followers": []
+        },
+        "date": "2023-09-20",
+        "category": 12,
+        "product": {},
+        "price": 1000.0,
+        "discount": 0.0
+      }
+    ],
+    "followed": [
+      {
+        "userId": 4,
+        "username":"Damián",
+        "posts": [
+          {
+            "postId": 2,
+            "user": {
+              "userId": 4,
+              "username": "Damián",
+              "posts": [],
+              "followed": [],
+              "followers": []
+            },
+            "date": "2023-09-16",
+            "category": 12,
+            "product": {},
+            "price": 1000.0,
+            "discount": 0.0
+          }
+        ],
+        "followed": [],
+        "followers": [ {
+          "userId": 1,
+          "username": "Alejandro",
+          "posts": [],
+          "followed": [],
+          "followers": []
+        }]
+      },
+      {
+        "userId": 3,
+        "username": "Carlos",
+        "posts": [
+          {
+            "postId": 2,
+            "user": {
+              "userId": 4,
+              "username": "Damián",
+              "posts": [],
+              "followed": [],
+              "followers": []
+            },
+            "date": "2023-09-17",
+            "category": 12,
+            "product": {},
+            "price": 1000.0,
+            "discount": 0.0
+          }
+        ],
+        "followed": [],
+        "followers": [ {
+          "userId": 1,
+          "username": "Alejandro",
+          "posts": [
+            {
+              "postId": 2,
+              "user": {
+                "userId": 4,
+                "username": "Damián",
+                "posts": [],
+                "followed": [],
+                "followers": []
+              },
+              "date": "2023-09-20",
+              "category": 12,
+              "product": {},
+              "price": 1000.0,
+              "discount": 0.0
+            }
+          ],
+          "followed": [],
+          "followers": []
+        }]
+      }
+    ],
+    "followers": []
+  },
+  {
+    "userId": 2,
+    "username":"Bruno",
+    "posts": [],
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 3,
+    "username":"Carlos",
+    "posts": [],
+    "followed": [],
+    "followers": [ {
+      "userId": 1,
+      "username": "Alejandro",
+      "posts": [
+        {
+          "postId": 2,
+          "user": {
+            "userId": 4,
+            "username": "Damián",
+            "posts": [],
+            "followed": [],
+            "followers": []
+          },
+          "date": "2023-09-17",
+          "category": 12,
+          "product": {},
+          "price": 1000.0,
+          "discount": 0.0
+        }
+      ],
+      "followed": [],
+      "followers": []
+    }]
+  },
+  {
+    "userId": 4,
+    "username":"Damián",
+    "posts": [
+      {
+        "postId": 2,
+        "user": {
+          "userId": 4,
+          "username": "Damián",
+          "posts": [],
+          "followed": [],
+          "followers": []
+        },
+        "date": "2023-09-16",
+        "category": 12,
+        "product": {},
+        "price": 1000.0,
+        "discount": 0.0
+      }
+    ],
+    "followed": [],
+    "followers": [ {
+      "userId": 1,
+      "username": "Alejandro",
+      "posts": [],
+      "followed": [],
+      "followers": []
+    }]
+  }
+]
