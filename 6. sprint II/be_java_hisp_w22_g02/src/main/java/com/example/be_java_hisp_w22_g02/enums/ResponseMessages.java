@@ -19,6 +19,10 @@ public enum ResponseMessages {
             return "You can't follow the same user twice.";
         }
     },
+    NOT_FOLLOWING_USER {
+      @Override
+      public String toString() {return "You are not following user with id: %d.";}
+    },
     SUCCESSFUL_FOLLOW{
         @Override
         public String toString() {

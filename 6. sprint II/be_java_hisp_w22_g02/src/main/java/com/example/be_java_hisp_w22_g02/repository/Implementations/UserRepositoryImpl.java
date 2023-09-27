@@ -107,7 +107,6 @@ public class UserRepositoryImpl implements IUserRepository {
     public void unFollowUser(Integer userId, Integer userIdToUnfollow) {
         dbUser.get(userId).getFollowed().remove(userIdToUnfollow);
         dbUser.get(userIdToUnfollow).getFollowers().remove(userId);
-
     }
 
     @Override
