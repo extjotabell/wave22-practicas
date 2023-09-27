@@ -1,6 +1,7 @@
 package com.example.be_java_hisp_w22_g02.service.Implementations;
 
 import com.example.be_java_hisp_w22_g02.dto.response.TwoWeeksPostDTO;
+import com.example.be_java_hisp_w22_g02.exception.BadRequestException;
 import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -65,5 +66,14 @@ class UserServiceImplTest {
         expectedAscPosts.add(postTest);
         // ASSERT
         assertNotNull(postTest.getPosts());
+    }
+
+    @DisplayName("T-0005 Fail - Test for the US-009")
+    @Test
+    void shouldCatchValidOrderDateException() {
+        // ARRANGE
+        when(userRepository.existingUserById(2)).thenReturn(true);
+        // ACT & ASSERT
+        assertThrows(BadRequestException.class, () -> userService.getLastTwoWeeksPostByUser(2, "invalid_asc"));
     }
 }
