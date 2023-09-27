@@ -1,4 +1,4 @@
-package bootcamp.socialMeli.unitTests.userService;
+package bootcamp.socialMeli.unitTests.service.userService;
 
 import bootcamp.socialMeli.entity.RolEnum;
 import bootcamp.socialMeli.entity.User;

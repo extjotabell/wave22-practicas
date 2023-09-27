@@ -1,14 +1,10 @@
-package bootcamp.socialMeli.unitTests.productoController;
+package bootcamp.socialMeli.unitTests.controller.productController;
 
 import bootcamp.socialMeli.controller.ProductController;
 import bootcamp.socialMeli.dto.FollowedPostListDto;
 import bootcamp.socialMeli.dto.PostDto;
 import bootcamp.socialMeli.dto.ProductDto;
-import bootcamp.socialMeli.entity.Post;
-import bootcamp.socialMeli.entity.Product;
-import bootcamp.socialMeli.service.IPostService;
 import bootcamp.socialMeli.service.PostServiceImpl;
-import bootcamp.socialMeli.utils.NameOrderEnumDto;
 import bootcamp.socialMeli.utils.ProductOrderListEnum;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -19,13 +15,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
-public class getPostsByFollowedUsersTest {
+public class GetPostsByFollowedUsersTest {
 
     @Mock
     PostServiceImpl postService;
@@ -34,7 +29,7 @@ public class getPostsByFollowedUsersTest {
     ProductController productController;
 
     @Test
-    @DisplayName("US 06 - T-0005 - Valid Post Date Exist - OK")
+    @DisplayName("T-0005 - US 06 - Valid Post Date Exist - OK")
     void ValidPostDateExist(){
         //Arrange
          List<PostDto> postList = List.of(
@@ -70,7 +65,7 @@ public class getPostsByFollowedUsersTest {
     }
 
     @Test
-    @DisplayName("US 06 - T-0005 - Valid Post Date Param Error ")
+    @DisplayName("T-0005 - US 06 - Valid Post Date Param Error ")
     void FollowedPostListDateErrorTest() {
         //Arrange
         int UserId = 1;

@@ -1,4 +1,4 @@
-package bootcamp.socialMeli.unitTests.userService;
+package bootcamp.socialMeli.unitTests.service.userService;
 
 import bootcamp.socialMeli.dto.UserDto;
 import bootcamp.socialMeli.entity.RolEnum;
@@ -47,7 +47,7 @@ public class UnfollowUserTest {
         when(mapper.convertValue(any(), eq(UserDto.class))).thenReturn(userTestDto);
 
         UserDto result = userService.removeFollower(userTest.getUserId(), userToUnfollowTest.getUserId());
-        
+
         //Assert
         assertEquals(1, result.getUserId());
         verify(userRepository, atLeastOnce()).removeFollower(userTest, userToUnfollowTest);

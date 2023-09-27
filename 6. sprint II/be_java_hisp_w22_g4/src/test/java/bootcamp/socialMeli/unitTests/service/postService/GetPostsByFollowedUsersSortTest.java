@@ -1,4 +1,4 @@
-package bootcamp.socialMeli.unitTests.postService;
+package bootcamp.socialMeli.unitTests.service.postService;
 
 import bootcamp.socialMeli.dto.FollowedPostListDto;
 import bootcamp.socialMeli.dto.PostDto;

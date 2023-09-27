@@ -1,4 +1,4 @@
-package bootcamp.socialMeli.unitTests.userService;
+package bootcamp.socialMeli.unitTests.service.userService;
 
 import bootcamp.socialMeli.repository.UserRepositoryImpl;
 import bootcamp.socialMeli.service.UserServiceImpl;

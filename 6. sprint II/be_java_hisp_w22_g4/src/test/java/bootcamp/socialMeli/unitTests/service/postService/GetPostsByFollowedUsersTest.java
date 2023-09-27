@@ -1,4 +1,4 @@
-package bootcamp.socialMeli.unitTests.postService;
+package bootcamp.socialMeli.unitTests.service.postService;
 
 import bootcamp.socialMeli.dto.FollowedPostListDto;
 import bootcamp.socialMeli.dto.PostDto;
@@ -74,7 +74,7 @@ public class GetPostsByFollowedUsersTest {
 
 
     @Test
-    @DisplayName("US 06 - T-0008 - Posts by followed users - OK")
+    @DisplayName("T-0008 - US 06 - Posts by followed users - OK")
     void getPostsByFollowedUsersTestOk()
     {
         //ARRANGE
@@ -100,7 +100,7 @@ public class GetPostsByFollowedUsersTest {
     }
 
     @Test
-    @DisplayName("US 06 - Posts by followed users - User Not Found")
+    @DisplayName("T-0008 - US 06 - Posts by followed users - User Not Found")
     void getPostsByFollowedUsersTestNotFound()
     {
         //ARRANGE

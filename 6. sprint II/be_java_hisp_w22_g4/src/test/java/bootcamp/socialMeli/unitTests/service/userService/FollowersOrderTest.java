@@ -1,4 +1,4 @@
-package bootcamp.socialMeli.unitTests.userService;
+package bootcamp.socialMeli.unitTests.service.userService;
 
 import bootcamp.socialMeli.dto.FollowedListDto;
 import bootcamp.socialMeli.dto.FollowersListDto;
@@ -31,7 +31,7 @@ class FollowersOrderTest {
     private UserServiceImpl userService;
 
     @Test
-    @DisplayName("US-08 - Get followers list in ascending order")
+    @DisplayName("T-0004 - US-08 - Get followers list in ascending order")
     void getFollowersListAsc() {
         // Arrange
         User user = new User(1, RolEnum.VENDEDOR, "UsuarioA", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
@@ -58,7 +58,7 @@ class FollowersOrderTest {
     }
 
     @Test
-    @DisplayName("US-08 - Get followers list in descending order")
+    @DisplayName("T-0004 - US-08 - Get followers list in descending order")
     void getFollowersListDesc(){
         // Arrange
         User user = new User(1, RolEnum.VENDEDOR, "UsuarioA", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());

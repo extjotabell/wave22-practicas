@@ -1,4 +1,4 @@
-package bootcamp.socialMeli.unitTests.userService;
+package bootcamp.socialMeli.unitTests.service.userService;
 
 import bootcamp.socialMeli.dto.FollowersCountDto;
 import bootcamp.socialMeli.entity.RolEnum;
@@ -30,7 +30,7 @@ class FollowersCountTest {
     UserServiceImpl userService;
 
     @Test
-    @DisplayName("US 02 - FollowersCount OK")
+    @DisplayName("T-0007 - US 02 - FollowersCount OK")
     void getFollowersCountOk(){
         //Arrange
         User userToCheck = new User(1, RolEnum.COMPRADOR, "UsuarioComprador", List.of(), List.of(), List.of());
@@ -44,7 +44,7 @@ class FollowersCountTest {
     }
 
     @Test
-    @DisplayName("US 02 - FollowersCount Not Found")
+    @DisplayName("T-0007 - US 02 - FollowersCount Not Found")
     void getFollowersCountNotFound(){
         //Arrange
         int nonExistentUserId = -1;
