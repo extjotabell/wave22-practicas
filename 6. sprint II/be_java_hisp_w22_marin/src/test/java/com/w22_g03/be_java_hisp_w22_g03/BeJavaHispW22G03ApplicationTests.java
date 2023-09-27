@@ -7,7 +7,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 class BeJavaHispW22G03ApplicationTests {
 
     @Test
-    void contextLoads() {
+    public void mainShouldRunWithoutErrors() {
+        String[] args = {};
+        BeJavaHispW22G03Application.main(args);
     }
 
 }

@@ -2,6 +2,7 @@ package com.w22_g03.be_java_hisp_w22_g03.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.w22_g03.be_java_hisp_w22_g03.exception.NotFoundException;
 import com.w22_g03.be_java_hisp_w22_g03.model.Post;
 import com.w22_g03.be_java_hisp_w22_g03.model.User;
@@ -49,6 +50,7 @@ public class UserRepositoryImpl implements UserRepository {
     private void loadDatabase() throws IOException {
         ClassPathResource classPathResource = new ClassPathResource("users.json");
         ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
         this.users = mapper.readValue(classPathResource.getInputStream(), new TypeReference<>() {
         });
     }
