@@ -134,7 +134,7 @@ public class SellerServiceImpTest {
     }
 
     @Test
-    @DisplayName("T0007 ✅ - Verificar que la cantidad de seguidores de un determinado usuario se correcta") //US 0002
+    @DisplayName("T-0007 ✅ - Verificar que la cantidad de seguidores de un determinado usuario se correcta") //US 0002
     public void t0007Ok(){
         // Arrange
 
