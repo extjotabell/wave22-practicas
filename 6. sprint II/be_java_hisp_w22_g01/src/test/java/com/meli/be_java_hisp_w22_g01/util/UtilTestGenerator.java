@@ -13,7 +13,7 @@ import java.util.List;
 
 public class UtilTestGenerator {
 
-    private static List<User> get3Users() {
+    public static List<User> get3Users() {
         User user1 = new User(1, "Pepe", new ArrayList<>());
         User user2 = new User(2, "Alberto", new ArrayList<>());
         User user3 = new User(3, "Dario", new ArrayList<>());
@@ -71,5 +71,30 @@ public class UtilTestGenerator {
         PostDTO post4 = new PostDTO(5, 4, LocalDate.now().minusDays(20), products.get(2), 1, 4500);
 
         return List.of(post1, post2, post3, post4);
+    }
+
+
+    public static List<User> get3UserWithFollowers() {
+        List<User> users = get3Users();
+        List<Post> posts = get4Posts();
+
+
+        Seller seller1 = new Seller(List.of(posts.get(0), posts.get(1)), new ArrayList<>(List.of(users.get(0))));
+        seller1.setUser_id(4);
+        seller1.setUser_name("Berna");
+
+        Seller seller2 = new Seller(List.of(posts.get(2), posts.get(3)), new ArrayList<>(List.of(users.get(1), users.get(2), users.get(0))));
+        seller2.setUser_id(5);
+        seller2.setUser_name("Carla");
+        users.get(0).setFollowed(List.of(seller1, seller2));
+        users.get(1).setFollowed(List.of(seller2));
+        users.get(2).setFollowed(List.of(seller2));
+
+        User user1 = new User(1, "Pepe", new ArrayList<>());
+        user1.setFollowed(new ArrayList<>(List.of(seller1, seller2)));
+        User user2 = new User(2, "Alberto", new ArrayList<>());
+        user2.setFollowed(new ArrayList<>(List.of(seller1)));
+
+        return new ArrayList<>(List.of(user1, user2));
     }
 }
