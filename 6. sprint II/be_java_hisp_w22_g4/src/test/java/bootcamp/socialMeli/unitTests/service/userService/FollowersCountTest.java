@@ -33,7 +33,7 @@ class FollowersCountTest {
     @DisplayName("T-0007 - US 02 - FollowersCount OK")
     void getFollowersCountOk(){
         //Arrange
-        User userToCheck = new User(1, RolEnum.COMPRADOR, "UsuarioComprador", List.of(), List.of(), List.of());
+        User userToCheck = new User(1, RolEnum.VENDEDOR, "UsuarioComprador", List.of(), List.of(), List.of());
         FollowersCountDto expectedResult = new FollowersCountDto(1, "UsuarioComprador", 0);
 
         //Act
