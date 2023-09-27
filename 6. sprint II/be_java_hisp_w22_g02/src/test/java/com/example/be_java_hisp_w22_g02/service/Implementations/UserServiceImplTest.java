@@ -24,8 +24,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -35,8 +36,6 @@ import java.util.stream.Collectors;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static com.example.be_java_hisp_w22_g02.enums.ResponseMessages.*;
 import static org.mockito.Mockito.*;
 
@@ -111,6 +110,93 @@ class UserServiceImplTest {
     }
 
     @Test
+    @DisplayName("T0003 - Validate OK ascending alphabetic order - getFollowers")
+    void getFollowers_OrderByNameAsc_ExistsTest() {
+
+        //Arrange
+        when(userRepository.existingUserById(anyInt())).thenReturn(true);
+        when(userRepository.findById(anyInt())).thenReturn(new User());
+
+        //Act
+        userService.getFollowers(1, "name_asc");
+
+        //Assert
+        verify(userRepository, atLeastOnce()).findById(anyInt());
+
+    }
+
+    @Test
+    @DisplayName("T0003 - Validate OK descending alphabetic order - getFollowers")
+    void getFollowers_OrderByNameDesc_ExistsTest() {
+
+        //Arrange
+        when(userRepository.existingUserById(anyInt())).thenReturn(true);
+        when(userRepository.findById(anyInt())).thenReturn(new User());
+
+        //Act
+        userService.getFollowers(1, "name_desc");
+
+        //Assert
+        verify(userRepository, atLeastOnce()).findById(anyInt());
+
+    }
+
+    @Test
+    @DisplayName("T0003 - Validate exception when order is invalid - getFollowers")
+    void getFollowers_OrderByName_NotExistTest() {
+
+        //Arrange
+        when(userRepository.existingUserById(anyInt())).thenReturn(true);
+        when(userRepository.findById(anyInt())).thenReturn(new User());
+
+        //Act & Assert
+        assertThrows(BadRequestException.class, () -> userService.getFollowers(1, "name_ascc"));
+
+    }
+
+    @Test
+    @DisplayName("T0003 - Validate OK ascending alphabetic order - getFollowed")
+    void getFollowed_OrderByNameAsc_ExistsTest() {
+
+        //Arrange
+        when(userRepository.existingUserById(anyInt())).thenReturn(true);
+        when(userRepository.findById(anyInt())).thenReturn(new User());
+
+        //Act
+        userService.getFollowed(1, "name_asc");
+
+        //Assert
+        verify(userRepository, atLeastOnce()).findById(anyInt());
+
+    }
+
+    @Test
+    @DisplayName("T0003 - Validate OK descending alphabetic order - getFollowed")
+    void getFollowed_OrderByNameDesc_ExistsTest() {
+
+        //Arrange
+        when(userRepository.existingUserById(anyInt())).thenReturn(true);
+        when(userRepository.findById(anyInt())).thenReturn(new User());
+
+        //Act
+        userService.getFollowed(1, "name_desc");
+
+        //Assert
+        verify(userRepository, atLeastOnce()).findById(anyInt());
+
+    }
+
+    @Test
+    @DisplayName("T0003 - Validate exception when order is invalid - getFollowed")
+    void getFollowed_OrderByName_NotExistsTest() {
+
+        //Arrange
+        when(userRepository.existingUserById(anyInt())).thenReturn(true);
+        when(userRepository.findById(anyInt())).thenReturn(new User());
+
+        //Act & Assert
+        assertThrows(BadRequestException.class, () -> userService.getFollowed(1, "name_ascc"));
+
     void getFollowers_order_desc_Test() {
         //arrange
         User user = new User(10,
