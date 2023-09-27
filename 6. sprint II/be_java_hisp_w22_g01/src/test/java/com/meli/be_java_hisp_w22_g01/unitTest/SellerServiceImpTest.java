@@ -1,5 +1,6 @@
 package com.meli.be_java_hisp_w22_g01.unitTest;
 
+import com.meli.be_java_hisp_w22_g01.dto.response.CountFollowersDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.FollowMessageDto;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
@@ -91,5 +92,27 @@ public class SellerServiceImpTest {
         when(sellerRepositoryImp.findById(2)).thenReturn( seller);
 
         Assertions.assertThrows(BadRequestException.class,()-> sellerService.setAFollower(idFollowerParam,idSellerParam));
+    }
+
+
+    @Test
+    @DisplayName(value = "T-0002 - Resultado correcto")
+    void countFollowers(){
+        //ARRANGE
+        int user = 1;
+        String user_name_param = "Rick Harrison";
+        CountFollowersDTO param_result = new CountFollowersDTO(1,user_name_param,1);
+
+        // ACT
+        User user_test = new User(user,"Elon Musk",new ArrayList<>());
+        Seller seller_test = new Seller(new ArrayList<>(), List.of(user_test));
+        seller_test.setUser_id(user);
+        seller_test.setUser_name(user_name_param);
+
+        when(sellerRepositoryImp.findById(1)).thenReturn(seller_test);
+        CountFollowersDTO test_result = sellerService.countFollowers(user);
+
+        // ASSERT
+        Assertions.assertEquals(param_result, test_result);
     }
 }
