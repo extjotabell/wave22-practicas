@@ -6,9 +6,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class UserTest {
+class UserTest {
+
     @Test
-    public void testIsSeller() {
+    void testIsSeller() {
         // arrange
         User userWithPosts = TestUtilGenerator.createTestUserSeller(1, "Insua");
         User userWithoutPosts = TestUtilGenerator.createTestUser(2, "Batalla");
@@ -19,7 +20,7 @@ public class UserTest {
     }
 
     @Test
-    public void testAddFollower() {
+    void testAddFollower() {
         // arrange
         User user = TestUtilGenerator.createTestUser(1, "Insua");
         User follower = TestUtilGenerator.createTestUser(2, "Batalla");
@@ -32,7 +33,7 @@ public class UserTest {
     }
 
     @Test
-    public void testAddFollowed() {
+    void testAddFollowed() {
         // arrange
         User user = TestUtilGenerator.createTestUser(1, "Insua");
         User followedUser = TestUtilGenerator.createTestUser(2, "Batalla");

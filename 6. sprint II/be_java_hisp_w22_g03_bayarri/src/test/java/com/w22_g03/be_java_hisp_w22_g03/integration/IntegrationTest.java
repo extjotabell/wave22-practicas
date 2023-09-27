@@ -1,7 +1,6 @@
 package com.w22_g03.be_java_hisp_w22_g03.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.w22_g03.be_java_hisp_w22_g03.dto.NumberOfFollowersDTO;
 import com.w22_g03.be_java_hisp_w22_g03.dto.PostDTO;
 import com.w22_g03.be_java_hisp_w22_g03.dto.ProductDTO;
@@ -32,6 +31,12 @@ class IntegrationTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
+    private ObjectMapper mapper;
 
     private User seller;
 
@@ -69,9 +74,15 @@ class IntegrationTest {
         seller.getPosts().remove(0);
     }
 
-    @Autowired
-    private MockMvc mockMvc;
-
+    /**
+     * This is a unit test method that tests the behavior of the "add post" endpoint in the
+     * controller class. It simulates an HTTP POST request to the "/products/post" endpoint
+     * with a JSON request body containing a product post DTO. The test verifies that the
+     * response status is HTTP OK (200), the content type is JSON, and that the response JSON
+     * contains a "post_id" field.
+     *
+     * @throws Exception if there is an unexpected error during test execution.
+     */
     @Test
     @DisplayName("Add post Ok Test")
     void addPostOkTest() throws Exception {
@@ -90,9 +101,6 @@ class IntegrationTest {
         requestPostDTO.setCategory(3);
         requestPostDTO.setProduct(productDTO);
 
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
-
         mockMvc.perform(post("/products/post")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(requestPostDTO)))
@@ -103,6 +111,15 @@ class IntegrationTest {
 
     }
 
+    /**
+     * This is a unit test method that tests the behavior of the "add post" endpoint in the
+     * controller class when the user is not found. It simulates an HTTP POST request to the
+     * "/products/post" endpoint with a JSON request body containing a product post DTO.
+     * The test verifies that the response status is HTTP Not Found (404), the content type is
+     * JSON, and that the response JSON contains a "message" field with the value "User not found".
+     *
+     * @throws Exception if there is an unexpected error during test execution.
+     */
     @Test
     @DisplayName("Add post Fail Test")
     void addPostUserNotFoundTest() throws Exception {
@@ -121,9 +138,6 @@ class IntegrationTest {
         requestPostDTO.setCategory(3);
         requestPostDTO.setProduct(productDTO);
 
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
-
         mockMvc.perform(post("/products/post")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(requestPostDTO)))
@@ -134,6 +148,16 @@ class IntegrationTest {
 
     }
 
+    /**
+     * This is a unit test method that tests the behavior of the "add post" endpoint in the
+     * controller class when there is a validation error in the request. It simulates an HTTP
+     * POST request to the "/products/post" endpoint with a JSON request body containing a
+     * product post DTO that has a price exceeding the maximum allowed price. The test verifies
+     * that the response status is HTTP Bad Request (400), the content type is JSON, and that
+     * the response JSON contains an "errors" array with a validation error message.
+     *
+     * @throws Exception if there is an unexpected error during test execution.
+     */
     @Test
     @DisplayName("Add post Fail Test")
     void addPostValidationErrorTest() throws Exception {
@@ -152,9 +176,6 @@ class IntegrationTest {
         requestPostDTO.setCategory(3);
         requestPostDTO.setProduct(productDTO);
 
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
-
         mockMvc.perform(post("/products/post")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(requestPostDTO)))
@@ -165,6 +186,16 @@ class IntegrationTest {
 
     }
 
+    /**
+     * This is a unit test method that tests the behavior of the "add post" endpoint in the
+     * controller class when the HTTP request message is not readable due to invalid JSON.
+     * It simulates an HTTP POST request to the "/products/post" endpoint with an invalid JSON
+     * payload that contains a non-numeric value for "user_id." The test verifies that the
+     * response status is HTTP Bad Request (400), the content type is JSON, and that the response
+     * JSON contains a "message" field indicating that the request contains invalid field values.
+     *
+     * @throws Exception if there is an unexpected error during test execution.
+     */
     @Test
     @DisplayName("Add post Fail Test")
     void addPostHttpMessageNotReadableTest() throws Exception {
@@ -195,12 +226,18 @@ class IntegrationTest {
 
     }
 
+    /**
+     * This is a unit test method that tests the behavior of the "Amount of Followers" endpoint
+     * in the controller class when the request is successful. It simulates an HTTP GET request
+     * to the "/users/1/followers/count" endpoint, and the test verifies that the response status
+     * is HTTP OK (200), the content type is JSON, and that the response JSON matches the expected
+     * NumberOfFollowersDTO object.
+     *
+     * @throws Exception if there is an unexpected error during test execution.
+     */
     @Test
     @DisplayName("Amount of Followers Ok Test")
     void testAmountOfFollowersForSellerOk() throws Exception {
-
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
 
         NumberOfFollowersDTO expected = new NumberOfFollowersDTO(1, "Alejandro", 1);
 
@@ -211,7 +248,15 @@ class IntegrationTest {
                 .andDo(print());
     }
 
-
+    /**
+     * This is a unit test method that tests the behavior of the "Followers" endpoint in the
+     * controller class when the request is successful. It simulates an HTTP GET request to the
+     * "/users/1/followers/list" endpoint, and the test verifies that the response status is
+     * HTTP OK (200), the content type is JSON, and that the response JSON contains a "followers"
+     * array with at least one follower.
+     *
+     * @throws Exception if there is an unexpected error during test execution.
+     */
     @Test
     @DisplayName("Followers Ok Test")
     void getFollowersOkTest() throws Exception {

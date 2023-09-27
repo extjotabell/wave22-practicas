@@ -6,19 +6,22 @@ import com.w22_g03.be_java_hisp_w22_g03.model.User;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class TestUtilGenerator {
     public static User createTestUser(long userId, String username) {
         return new User(userId, username, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     }
+
     public static User createTestUserSeller(long userId, String username) {
-        User seller = new User(userId, username, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User seller = createTestUser(userId, username);
         Product product = createTestProduct(1, "Producto 1", null);
-        Post post = createTestPost(1, seller, LocalDate.of(2023, 9, 26), product);
-        seller.setPosts(List.of(post));
+        Post post = createTestPost(1, seller, LocalDate.now(), product);
+        Post post2 = createTestPost(2, seller, LocalDate.now().minusDays(14), product);
+        seller.getPosts().add(post);
+        seller.getPosts().add(post2);
         return seller;
     }
+
     public static Product createTestProduct(long productId, String productName, Post post) {
         return new Product(productId, productName, "Tipo", "Marca", "Color", "Notas", post);
     }
