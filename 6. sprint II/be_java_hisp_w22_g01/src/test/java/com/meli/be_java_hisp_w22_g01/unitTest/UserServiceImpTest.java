@@ -4,7 +4,6 @@ package com.meli.be_java_hisp_w22_g01.unitTest;
 import com.meli.be_java_hisp_w22_g01.dto.PostDto;
 import com.meli.be_java_hisp_w22_g01.dto.response.FollowedDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.UserFollowedPostListDTO;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w22_g01.dto.response.UserFollowersListDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.UserMiniDTO;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
@@ -36,19 +35,18 @@ import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
-public class UserServiceImpTest {
+class UserServiceImpTest {
     @Mock
     UserRepositoryImp userRepository;
 
     @Mock
     SellerRepositoryImp sellerRepository;
-    @Mock
-    ObjectMapper mapper;
 
     @InjectMocks
     UserServiceImp userService;
 
 
+    @DisplayName("T-0005 ✅")
     @Test
     void orderByDateFollowedSellersDateAscOk() {
         // ARRANGE
@@ -64,6 +62,7 @@ public class UserServiceImpTest {
         verify(userRepository, times(1)).findById(user.getUser_id());
     }
 
+    @DisplayName("T-0005 ✅")
     @Test
     void orderByDateFollowedSellersDateDescOk() {
         // ARRANGE
@@ -79,6 +78,7 @@ public class UserServiceImpTest {
         verify(userRepository, times(1)).findById(user.getUser_id());
     }
 
+    @DisplayName("T-0005 🚫")
     @Test
     void orderByDateFollowedSellersDateFail() {
         // ARRANGE
@@ -224,4 +224,41 @@ public class UserServiceImpTest {
         Assertions.assertThrows(BadRequestException.class,()-> userService.orderFollowersDto(mockSeller.getUser_id(), orderFake));
     }
 
+    @DisplayName("T-0008 ✅")
+    @Test
+    void userFollowedPostListOk() {
+        // ARRANGE
+        List<Seller> sellerWithPosts = UtilTestGenerator.get2SellerWithPosts();
+        User user = sellerWithPosts.get(0).getFollowers().get(0);
+        List<PostDto> postsDTO = UtilTestGenerator.get4PostsDTO();
+
+        when(userRepository.findById(anyInt())).thenReturn(user);
+
+        UserFollowedPostListDTO expected = new UserFollowedPostListDTO(1, List.of(postsDTO.get(0), postsDTO.get(1), postsDTO.get(2)));
+
+        // ACT
+        UserFollowedPostListDTO result = userService.userFollowedPostList(user.getUser_id());
+
+        // ASSERT
+        Assertions.assertEquals(expected, result);
+    }
+
+    @DisplayName("T-0008 ✅")
+    @Test
+    void userFollowedPostListOk2() {
+        // ARRANGE
+        List<Seller> sellerWithPosts = UtilTestGenerator.get2SellerWithPosts();
+        User user = sellerWithPosts.get(1).getFollowers().get(0);
+        List<PostDto> postsDTO = UtilTestGenerator.get4PostsDTO();
+
+        when(userRepository.findById(anyInt())).thenReturn(user);
+
+        UserFollowedPostListDTO expected = new UserFollowedPostListDTO(2, List.of(postsDTO.get(2)));
+
+        // ACT
+        UserFollowedPostListDTO result = userService.userFollowedPostList(user.getUser_id());
+
+        // ASSERT
+        Assertions.assertEquals(expected, result);
+    }
 }
