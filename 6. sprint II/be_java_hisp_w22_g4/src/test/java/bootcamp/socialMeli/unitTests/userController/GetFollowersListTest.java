@@ -23,7 +23,7 @@ public class GetFollowersListTest {
     @InjectMocks
     private UserController userController;
     @Test
-    @DisplayName("US 03 - List Follow Not param Order Ok")
+    @DisplayName("US 03 - T-0003 List Follow Not param Order Ok")
     void FollowersListNameNotParamOrderOk() {
         //Arrange
         int UserId = 6;
@@ -38,7 +38,7 @@ public class GetFollowersListTest {
     }
 
     @Test
-    @DisplayName("US 03 - List Follow Not param Order Ok")
+    @DisplayName("US 03 - T-0003 Invalid order param")
     void FollowersListNameParamInvalid() {
         //Arrange
         int UserId = 6;
