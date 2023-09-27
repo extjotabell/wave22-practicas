@@ -51,7 +51,10 @@ public class UserServiceImpl implements IUserService {
         userFollowersDTO.setFollowers(getUserFollowsInfo(user.getFollowers()));
 
         if(order != null){
+            if (!sortingByNameValidation(order))
+                throw new BadRequestException(String.format(WRONG_SORTING_ORDER.toString(), order)) ;
             return sortingFollowers(userFollowersDTO, order);
+
         }
         return userFollowersDTO;
     }
@@ -90,6 +93,8 @@ public class UserServiceImpl implements IUserService {
         userFollowedDTO.setFollowed(getUserFollowsInfo(user.getFollowed()));
 
         if (order != null) {
+            if (!sortingByNameValidation(order))
+                throw new BadRequestException(String.format(WRONG_SORTING_ORDER.toString(), order)) ;
             return sortingFollowed(userFollowedDTO, order);
         } else {
             return userFollowedDTO;
@@ -115,7 +120,8 @@ public class UserServiceImpl implements IUserService {
             throw new NotFoundException(String.format(USER_ID_NOT_FOUND.toString(), userId));
         }
         if(order != null){
-            sortingByDateValidation(order);
+            if(!sortingByDateValidation(order))
+                throw new BadRequestException(String.format(WRONG_SORTING_ORDER.toString(), order));;
             followedPost = userRepository.getFollowedPostLasTwoWeeksOrd(userId, order);
         }else{
             followedPost = userRepository.getFollowedPostLasTwoWeeks(userId);
@@ -126,7 +132,6 @@ public class UserServiceImpl implements IUserService {
     }
 
     private UserFollowerDTO sortingFollowers(UserFollowerDTO user, String order){
-        sortingByNameValidation(order);
         if(Objects.equals(order, NAME_ASC.toString())){
             user.setFollowers(user.getFollowers().stream().sorted(Comparator.comparing(UserFollowDTO::getUserName)).collect(Collectors.toList()));
         }
@@ -137,7 +142,6 @@ public class UserServiceImpl implements IUserService {
     }
 
     private UserFollowedDTO sortingFollowed(UserFollowedDTO user, String order){
-        sortingByNameValidation(order);
         if(Objects.equals(order, NAME_ASC.toString())){
             user.setFollowed(user.getFollowed().stream().sorted(Comparator.comparing(UserFollowDTO::getUserName)).collect(Collectors.toList()));
         }
@@ -147,13 +151,11 @@ public class UserServiceImpl implements IUserService {
         return user;
     }
 
-    private void sortingByNameValidation(String order){
-        if(!order.equals(NAME_ASC.toString()) && !order.equals(NAME_DESC.toString()))
-            throw new BadRequestException(String.format(WRONG_SORTING_ORDER.toString(), order));
+    private boolean sortingByNameValidation(String order){
+        return order.equals(NAME_ASC.toString()) || order.equals(NAME_DESC.toString());
     }
-    private void sortingByDateValidation(String order){
-        if(!order.equals(DATE_ASC.toString()) && !order.equals(DATE_DESC.toString()))
-            throw new BadRequestException(String.format(WRONG_SORTING_ORDER.toString(), order));
+    private boolean sortingByDateValidation(String order){
+        return order.equals(DATE_ASC.toString()) || order.equals(DATE_DESC.toString());
     }
 
     private List<UserFollowDTO> getUserFollowsInfo(List<Integer> listOfFollows){
