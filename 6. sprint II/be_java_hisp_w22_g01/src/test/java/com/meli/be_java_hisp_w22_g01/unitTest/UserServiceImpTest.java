@@ -46,7 +46,7 @@ class UserServiceImpTest {
 
     @Test
     @DisplayName("T-0003 ✅: Verifica el ordenamiento mediante name_asc y name_desc")
-    public void t0003Ok() {
+    void t0003Ok() {
         // ARRANGE
 
         String order1 = "name_asc";
@@ -87,8 +87,8 @@ class UserServiceImpTest {
         UserFollowersListDTO expected = new UserFollowersListDTO(4,"Ahsoka", followedExpected);
 
         // ACT
-        UserFollowersListDTO result_asc = userService.orderFollowersDto(4, "name_asc");
-        UserFollowersListDTO result_desc = userService.orderFollowersDto(4, "name_desc");
+        UserFollowersListDTO result_asc = userService.orderFollowersDto(4, order1);
+        UserFollowersListDTO result_desc = userService.orderFollowersDto(4, order2);
 
         // ASSERT
         assertEquals(expected, result_asc);
@@ -98,7 +98,7 @@ class UserServiceImpTest {
 
     @Test
     @DisplayName("T-0003 🚫: Verificar la no existencia de un método de ordenamiento no contemplado")
-    public void t0003Fail() {
+    void t0003Fail() {
         // ARRANGE
         Seller seller = new Seller();
         seller.setUser_name("Ahsoka");
