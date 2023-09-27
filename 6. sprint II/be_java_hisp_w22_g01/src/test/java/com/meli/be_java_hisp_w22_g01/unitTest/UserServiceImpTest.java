@@ -48,7 +48,7 @@ class UserServiceImpTest {
 
 
     @Test
-    @DisplayName("T0003 ✅ - (Asc) Seguidores del vendedor ordenados de forma ascendente")
+    @DisplayName("T-0003 ✅ - (Asc) Seguidores del vendedor ordenados de forma ascendente")
     public void t0003AscOk() {
         // Arrange
 
