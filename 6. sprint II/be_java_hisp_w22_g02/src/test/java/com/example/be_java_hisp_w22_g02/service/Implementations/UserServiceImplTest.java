@@ -2,13 +2,10 @@ package com.example.be_java_hisp_w22_g02.service.Implementations;
 
 import com.example.be_java_hisp_w22_g02.dto.response.TwoWeeksPostDTO;
 import com.example.be_java_hisp_w22_g02.exception.BadRequestException;
-import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
 import org.junit.jupiter.api.DisplayName;
 import com.example.be_java_hisp_w22_g02.dto.response.SuccessDTO;
 import com.example.be_java_hisp_w22_g02.entity.User;
 import com.example.be_java_hisp_w22_g02.exception.NotFoundException;
-import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
-import org.junit.jupiter.api.DisplayName;
 import com.example.be_java_hisp_w22_g02.dto.response.UserFollowDTO;
 import com.example.be_java_hisp_w22_g02.dto.response.UserFollowerDTO;
 import com.example.be_java_hisp_w22_g02.entity.Post;
@@ -36,9 +33,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static com.example.be_java_hisp_w22_g02.enums.ResponseMessages.*;
 import static org.mockito.Mockito.*;
+
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
@@ -162,7 +163,21 @@ class UserServiceImplTest {
     }
 
     @Test
-    void getTotalFollowersByUserId() {
+    @DisplayName("T0007 - Validate followers count is correct - getTotalFollowersByUserId")
+    void getTotalFollowersByUserId_OkTest() {
+
+        //Arrange
+        User user = new User(1, "user1", List.of(2, 3, 4), List.of(), List.of());
+        when(userRepository.existingUserById(anyInt())).thenReturn(true);
+        when(userRepository.findById(anyInt())).thenReturn(user);
+        int expected = user.getFollowers().size();
+
+        //Act
+        int actual = userService.getTotalFollowersByUserId(user.getUserId()).getFollowersCount();
+
+        //Assert
+        assertEquals(expected, actual);
+
     }
 
     @Test
