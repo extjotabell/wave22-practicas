@@ -78,6 +78,8 @@ public class UserServiceImpl implements IUserService {
             throw new NotFoundException(String.format(USER_ID_NOT_FOUND.toString(), userIdToUnfollow));
         if(userId == userIdToUnfollow)
             throw new BadRequestException(SAME_USER_ID.toString());
+        if(!userRepository.findById(userId).getFollowed().contains(userIdToUnfollow))
+            throw new BadRequestException(String.format(NOT_FOLLOWING_USER.toString(), userIdToUnfollow));
         userRepository.unFollowUser(userId, userIdToUnfollow);
         return new SuccessDTO(SUCCESSFUL_UNFOLLOW.toString());
     }
