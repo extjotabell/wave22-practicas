@@ -5,6 +5,7 @@ import com.meli.be_java_hisp_w22_g01.dto.response.FollowMessageDto;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
 import com.meli.be_java_hisp_w22_g01.exceptions.BadRequestException;
+import com.meli.be_java_hisp_w22_g01.exceptions.NotFoundException;
 import com.meli.be_java_hisp_w22_g01.repository.SellerRepositoryImp;
 import com.meli.be_java_hisp_w22_g01.repository.UserRepositoryImp;
 import com.meli.be_java_hisp_w22_g01.service.SellerServiceImp;
@@ -79,6 +80,7 @@ public class SellerServiceImpTest {
 
     }
 
+    @Test
     @DisplayName(value = "T-0001 FAIL: Ya es seguidor de ese seller")
     void setAFollowerBadRequestException(){
         //ARRANGE
@@ -115,4 +117,20 @@ public class SellerServiceImpTest {
         // ASSERT
         Assertions.assertEquals(param_result, test_result);
     }
+
+
+    @Test
+    @DisplayName(value = "T-0002 - Usuario inexistente")
+    void countFollowersErrorUserNoExists(){
+
+        //ARRANGE
+        int user = 1;
+
+        // ACT
+        when(sellerRepositoryImp.findById(1)).thenReturn(null);
+
+        // ASSERT
+        Assertions.assertThrows(NotFoundException.class, () -> sellerService.countFollowers(user));
+    }
+
 }
