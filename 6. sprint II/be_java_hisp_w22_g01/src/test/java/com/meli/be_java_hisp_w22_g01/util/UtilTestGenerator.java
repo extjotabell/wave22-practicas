@@ -23,20 +23,15 @@ public class UtilTestGenerator {
     }
 
     public static List<Seller> get2SellerWithPosts() {
-        List<Product> products = get3Products();
         List<User> users = get3Users();
-
-        Post post1 = new Post(4, 1, LocalDate.of(2023, 9, 15), products.get(0), 1, 1900);
-        Post post2 = new Post(4, 2, LocalDate.of(2023, 9, 12), products.get(1), 1, 2400);
-        Post post3 = new Post(5, 3, LocalDate.of(2023, 9, 15), products.get(0), 1, 1900);
-        Post post4 = new Post(5, 4, LocalDate.of(2023, 10, 12), products.get(2), 1, 4500);
+        List<Post> posts = get4Posts();
 
 
-        Seller seller1 = new Seller(List.of(post1, post2), List.of(users.get(0)));
+        Seller seller1 = new Seller(List.of(posts.get(0), posts.get(1)), List.of(users.get(0)));
         seller1.setUser_id(4);
         seller1.setUser_name("Berna");
 
-        Seller seller2 = new Seller(List.of(post3, post4), List.of(users.get(1), users.get(2), users.get(0)));
+        Seller seller2 = new Seller(List.of(posts.get(2), posts.get(3)), List.of(users.get(1), users.get(2), users.get(0)));
         seller2.setUser_id(5);
         seller2.setUser_name("Carla");
         users.get(0).setFollowed(List.of(seller1, seller2));
@@ -60,22 +55,23 @@ public class UtilTestGenerator {
         return List.of(product1, product2, product3);
     }
 
-    public static UserFollowedPostListDTO getUserFollowedPostListDTO() {
-        List<ProductDto> products = get3ProductsDtos();
+    private static List<Post> get4Posts() {
+        List<Product> products = get3Products();
+        Post post1 = new Post(4, 1, LocalDate.now(), products.get(0), 1, 1900);
+        Post post2 = new Post(4, 2, LocalDate.now().minusDays(3), products.get(1), 1, 2400);
+        Post post3 = new Post(5, 3, LocalDate.now(), products.get(0), 1, 1900);
+        Post post4 = new Post(5, 4, LocalDate.now().minusDays(20), products.get(2), 1, 4500);
 
-        PostDto post1 = new PostDto(4, 1, LocalDate.of(2023, 9, 15), products.get(0), 1, 1900);
-        PostDto post2 = new PostDto(4, 2, LocalDate.of(2023, 9, 12), products.get(1), 1, 2400);
-        List<PostDto> posts = List.of(post1, post2);
-
-        return new UserFollowedPostListDTO(1, posts);
+        return List.of(post1, post2, post3, post4);
     }
-    public static UserFollowedPostListDTO getUserFollowedPostListDTOWithLargeGapBetweenDate() {
+
+    public static List<PostDto> get4PostsDTO() {
         List<ProductDto> products = get3ProductsDtos();
+        PostDto post1 = new PostDto(4, 1, LocalDate.now(), products.get(0), 1, 1900);
+        PostDto post2 = new PostDto(4, 2, LocalDate.now().minusDays(3), products.get(1), 1, 2400);
+        PostDto post3 = new PostDto(5, 3, LocalDate.now(), products.get(0), 1, 1900);
+        PostDto post4 = new PostDto(5, 4, LocalDate.now().minusDays(20), products.get(2), 1, 4500);
 
-        PostDto post1 = new PostDto(5, 1, LocalDate.of(2023, 9, 15), products.get(0), 1, 1900);
-        PostDto post2 = new PostDto(5, 2, LocalDate.of(2022, 9, 12), products.get(1), 1, 2400);
-        List<PostDto> posts = List.of(post1, post2);
-
-        return new UserFollowedPostListDTO(2, posts);
+        return List.of(post1, post2, post3, post4);
     }
 }
