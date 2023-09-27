@@ -11,8 +11,7 @@ import java.util.List;
 
 @Repository
 public class SellerRepositoryImp implements ISellerRepository{
-
-    private List<Seller> sellerList = new ArrayList<>();
+    private final List<Seller> sellerList = new ArrayList<>();
     @Autowired
     private IUserRepository userRepo;
 
@@ -88,18 +87,8 @@ public class SellerRepositoryImp implements ISellerRepository{
     }
 
     @Override
-    public void save(Seller seller) {
-        sellerList.add(seller);
-    }
-
-    @Override
-    public List<Seller> getAll() {
-        return sellerList;
-    }
-
-    @Override
-    public Seller findById(int seller_id) {
-        return sellerList.stream().filter(seller -> seller.getUser_id() == seller_id).findFirst().orElse(null);
+    public Seller findById(int sellerId) {
+        return sellerList.stream().filter(seller -> seller.getUser_id() == sellerId).findFirst().orElse(null);
     }
 
     @Override
@@ -108,14 +97,10 @@ public class SellerRepositoryImp implements ISellerRepository{
         seller.getFollowers().add(userRepo.findById(idFollower));
         userRepo.getAllFollows(userRepo.findById(idFollower)).add(findById(idSeller));
     }
-    @Override
-    public List<User> getAllFollowers(Seller seller) {
-        return seller.getFollowers();
-    }
 
     @Override
-    public void updateUser(int user_id, Seller seller) {
-        Seller oldSeller = this.findById(user_id);
+    public void updateUser(int sellerId, Seller seller) {
+        Seller oldSeller = this.findById(sellerId);
         int indexPos = this.sellerList.indexOf(oldSeller);
         this.sellerList.set(indexPos, seller);
     }

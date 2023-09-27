@@ -1,6 +1,7 @@
 package com.meli.be_java_hisp_w22_g01.controller;
 
-import com.meli.be_java_hisp_w22_g01.dto.PostDto;
+import com.meli.be_java_hisp_w22_g01.dto.PostDTO;
+import com.meli.be_java_hisp_w22_g01.dto.response.UserFollowedPostListDTO;
 import com.meli.be_java_hisp_w22_g01.service.IPostService;
 import com.meli.be_java_hisp_w22_g01.service.IUserService;
 import jakarta.validation.Valid;
@@ -19,14 +20,14 @@ public class ProductController {
     private final IUserService userService;
 
     @PostMapping("/post")
-    public ResponseEntity<?> createPost(@RequestBody @Valid PostDto postDto) {
+    public ResponseEntity<?> createPost(@RequestBody @Valid PostDTO postDto) {
         postService.createPost(postDto);
         return ResponseEntity.status(HttpStatus.OK).build();
 
     }
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<?> followedList(@PathVariable @Min(value = 1, message = "El id debe ser mayor a 0.") int userId, @RequestParam(required = false) String order) {
+    public ResponseEntity<UserFollowedPostListDTO> followedList(@PathVariable @Min(value = 1, message = "El id debe ser mayor a 0.") int userId, @RequestParam(required = false) String order) {
 
         if (order == null) {
             return new ResponseEntity<>(userService.userFollowedPostList(userId), HttpStatus.OK);

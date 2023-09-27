@@ -12,7 +12,7 @@ import java.util.Random;
 
 @Repository
 public class PostRepositoryImp implements IPostRepository {
-    private List<Post> posts = new ArrayList<>();
+    private final List<Post> posts = new ArrayList<>();
     private int nextPostId = 1;
 
     public PostRepositoryImp() {
@@ -56,26 +56,10 @@ public class PostRepositoryImp implements IPostRepository {
         }
         return null;
     }
+
     @Override
     public void addPost(Post post) {
         post.setPost_id(this.nextPostId++);
         this.posts.add(post);
-    }
-
-    @Override
-    public void updatePost(int postId, Post updatedPost) {
-        for (int i = 0; i < this.posts.size(); i++) {
-            Post post = this.posts.get(i);
-            if (post.getPost_id() == postId) {
-                updatedPost.setPost_id(postId);
-                this.posts.set(i, updatedPost);
-                return;
-            }
-        }
-    }
-
-    @Override
-    public void deletePost(int postId) {
-        this.posts.removeIf(post -> post.getPost_id() == postId);
     }
 }

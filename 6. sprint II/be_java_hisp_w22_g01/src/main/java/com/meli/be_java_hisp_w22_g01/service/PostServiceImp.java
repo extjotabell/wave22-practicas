@@ -1,12 +1,11 @@
 package com.meli.be_java_hisp_w22_g01.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.meli.be_java_hisp_w22_g01.dto.PostDto;
+import com.meli.be_java_hisp_w22_g01.dto.PostDTO;
 import com.meli.be_java_hisp_w22_g01.entity.Post;
 import com.meli.be_java_hisp_w22_g01.entity.Product;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.exceptions.BadRequestException;
-import com.meli.be_java_hisp_w22_g01.exceptions.NotFoundException;
 import com.meli.be_java_hisp_w22_g01.repository.IPostRepository;
 import com.meli.be_java_hisp_w22_g01.repository.IProductRepository;
 import com.meli.be_java_hisp_w22_g01.repository.ISellerRepository;
@@ -24,7 +23,7 @@ public class PostServiceImp implements IPostService{
     private final ISellerRepository sellerRepository;
     private final ObjectMapper mapper;
     @Override
-    public void createPost(PostDto postDto) {
+    public void createPost(PostDTO postDto) {
         Post post = mapper.convertValue(postDto, Post.class);
         Seller seller = sellerRepository.findById(post.getUser_id());
         if(seller == null){

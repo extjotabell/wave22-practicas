@@ -1,6 +1,6 @@
 package com.meli.be_java_hisp_w22_g01.unitTest;
 
-import com.meli.be_java_hisp_w22_g01.dto.PostDto;
+import com.meli.be_java_hisp_w22_g01.dto.PostDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.FollowedDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.UserFollowedPostListDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.UserFollowersListDTO;
@@ -22,7 +22,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -237,7 +236,7 @@ class UserServiceImpTest {
 
         //ACT
         UserFollowedPostListDTO obtained = userService.orderByDateFollowedSellers(userIdParam,order);
-        List<LocalDate> obtainedDates = obtained.getPosts().stream().map(PostDto::getDate).toList();
+        List<LocalDate> obtainedDates = obtained.getPosts().stream().map(PostDTO::getDate).toList();
 
         //ASSERT
         Assertions.assertEquals(expected,obtainedDates);
@@ -257,7 +256,7 @@ class UserServiceImpTest {
 
         //ACT
         UserFollowedPostListDTO obtained = userService.orderByDateFollowedSellers(user.getUser_id(), order);
-        List<LocalDate> obtainedDates = obtained.getPosts().stream().map(PostDto::getDate).toList();
+        List<LocalDate> obtainedDates = obtained.getPosts().stream().map(PostDTO::getDate).toList();
 
         //ASSERT
         Assertions.assertEquals(expected,obtainedDates);
@@ -269,7 +268,7 @@ class UserServiceImpTest {
         // ARRANGE
         List<Seller> sellerWithPosts = UtilTestGenerator.get2SellerWithPosts();
         User user = sellerWithPosts.get(0).getFollowers().get(0);
-        List<PostDto> postsDTO = UtilTestGenerator.get4PostsDTO();
+        List<PostDTO> postsDTO = UtilTestGenerator.get4PostsDTO();
 
         when(userRepository.findById(anyInt())).thenReturn(user);
 
@@ -288,7 +287,7 @@ class UserServiceImpTest {
         // ARRANGE
         List<Seller> sellerWithPosts = UtilTestGenerator.get2SellerWithPosts();
         User user = sellerWithPosts.get(1).getFollowers().get(0);
-        List<PostDto> postsDTO = UtilTestGenerator.get4PostsDTO();
+        List<PostDTO> postsDTO = UtilTestGenerator.get4PostsDTO();
 
         when(userRepository.findById(anyInt())).thenReturn(user);
 

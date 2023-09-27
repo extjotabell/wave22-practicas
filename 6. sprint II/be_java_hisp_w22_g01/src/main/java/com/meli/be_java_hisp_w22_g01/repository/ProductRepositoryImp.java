@@ -8,7 +8,7 @@ import java.util.List;
 @Repository
 public class ProductRepositoryImp  implements IProductRepository{
 
-    private List<Product> products = new ArrayList<>();
+    private final List<Product> products = new ArrayList<>();
 
     public ProductRepositoryImp() {
         // Productos falsos

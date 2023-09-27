@@ -6,12 +6,6 @@ import java.util.List;
 
 public interface IPostRepository {
     List<Post> getAllPosts();
-
     Post getPostById(int postId);
-
     void addPost(Post post);
-
-    void updatePost(int postId, Post updatedPost);
-
-    void deletePost(int postId);
 }

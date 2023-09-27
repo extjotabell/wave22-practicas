@@ -1,8 +1,8 @@
 package com.meli.be_java_hisp_w22_g01.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.meli.be_java_hisp_w22_g01.dto.PostDto;
-import com.meli.be_java_hisp_w22_g01.dto.ProductDto;
+import com.meli.be_java_hisp_w22_g01.dto.PostDTO;
+import com.meli.be_java_hisp_w22_g01.dto.ProductDTO;
 import com.meli.be_java_hisp_w22_g01.dto.response.*;
 import com.meli.be_java_hisp_w22_g01.entity.Post;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
@@ -25,25 +25,25 @@ public class UserServiceImp implements IUserService{
     private final ISellerRepository sellerRepository;
 
     @Override
-    public FollowedDTO getUserFollowedList(int user_id) {
-        User usersById = userRepository.findById(user_id);
+    public FollowedDTO getUserFollowedList(int userId) {
+        User usersById = userRepository.findById(userId);
         String userName = usersById.getUser_name();
         List<Seller> followed = usersById.getFollowed();
         List<UserMiniDTO> userMiniDTOS = new ArrayList<>();
         followed.forEach(seller -> userMiniDTOS.add(new UserMiniDTO(seller.getUser_id(), seller.getUser_name())));
-        return new FollowedDTO(user_id, userName, userMiniDTOS);
+        return new FollowedDTO(userId, userName, userMiniDTOS);
     }
 
     /**
      * Punto 3
      * Obtine un listado de todos los usuarios que siguen a un determinado vendedor
-     * @ param user_id
+     * @ param userId
      * @return lista de seguidores de un vendedor
      */
     @Override
-    public UserFollowersListDTO FollowersList(int user_id) {
+    public UserFollowersListDTO followersList(int userId) {
 
-        Seller sellerById = sellerRepository.findById(user_id);
+        Seller sellerById = sellerRepository.findById(userId);
         UserFollowersListDTO userFollowersList = new UserFollowersListDTO();
 
         if(sellerById == null){
@@ -83,7 +83,7 @@ public class UserServiceImp implements IUserService{
      * @return booleano para indicar si la operación fue exitosa o no
      **/
     @Override
-    public UnfollowDTO unfollow(int userId, int userIdToUnfollow) {
+    public MessageDTO unfollow(int userId, int userIdToUnfollow) {
 
         List<User> users = userRepository.getAll();
 
@@ -109,7 +109,7 @@ public class UserServiceImp implements IUserService{
                 // Buscar en el repositorio SellerRepository y actualizar los seguidores (followers) del vendedor
                 seller.get().getFollowers().remove(userToEdit.get());
                 sellerRepository.updateUser(seller.get().getUser_id(), seller.get());
-                return new UnfollowDTO("El usuario userId: " + userId + " ha dejado de seguir a userId: " + userIdToUnfollow);
+                return new MessageDTO("El usuario userId: " + userId + " ha dejado de seguir a userId: " + userIdToUnfollow);
             // Si el usuario no sigue al vendedor no se puede dejar de seguir y se lanza la siguiente excepción
             } else {
                 throw new NotFoundException("El usuario userId: " + userId + " no sigue al vendedor userId: " + userIdToUnfollow);
@@ -140,7 +140,7 @@ public class UserServiceImp implements IUserService{
 
     @Override
     public UserFollowersListDTO orderFollowersDto(int userId, String order) {
-        UserFollowersListDTO followersDto = FollowersList(userId);
+        UserFollowersListDTO followersDto = followersList(userId);
         List<UserMiniDTO> followers = followersDto.getFollowers();
         if (order.equals("name_asc")) {
             followersDto.setFollowers(followers.stream()
@@ -156,14 +156,14 @@ public class UserServiceImp implements IUserService{
     }
 
     @Override
-    public UserFollowedPostListDTO userFollowedPostList(int user_id) {
+    public UserFollowedPostListDTO userFollowedPostList(int userId) {
         ObjectMapper mapper = new ObjectMapper();
 
-        User user = userRepository.findById(user_id);
+        User user = userRepository.findById(userId);
         UserFollowedPostListDTO userFollowedPostListDTO = new UserFollowedPostListDTO();
 
         List<Seller> sellerOfUser = user.getFollowed();
-        List<PostDto> listOfPost = new ArrayList<>();
+        List<PostDTO> listOfPost = new ArrayList<>();
 
         LocalDate limitDateOfPost = LocalDate.now().minusDays(14);
 
@@ -174,21 +174,21 @@ public class UserServiceImp implements IUserService{
             for(Post post: seller.getPosts()){
 
                 // si la fecha del post esta dentro de las 2 semanas
-                if(limitDateOfPost.compareTo(post.getDate()) < 0){
-                    PostDto new_post = new PostDto();
-                    new_post.setUser_id(post.getUser_id());
-                    new_post.setPost_id(post.getPost_id());
-                    new_post.setDate(post.getDate());
-                    new_post.setProduct(mapper.convertValue(post.getProduct(), ProductDto.class));
-                    new_post.setCategory(post.getCategory());
-                    new_post.setPrice(post.getPrice());
+                if(limitDateOfPost.isBefore(post.getDate())){
+                    PostDTO newPost = new PostDTO();
+                    newPost.setUser_id(post.getUser_id());
+                    newPost.setPost_id(post.getPost_id());
+                    newPost.setDate(post.getDate());
+                    newPost.setProduct(mapper.convertValue(post.getProduct(), ProductDTO.class));
+                    newPost.setCategory(post.getCategory());
+                    newPost.setPrice(post.getPrice());
 
-                    listOfPost.add(new_post);
+                    listOfPost.add(newPost);
                 }
             }
         }
 
-        userFollowedPostListDTO.setUser_id(user_id);
+        userFollowedPostListDTO.setUser_id(userId);
         userFollowedPostListDTO.setPosts(listOfPost);
 
         return userFollowedPostListDTO;
@@ -197,15 +197,15 @@ public class UserServiceImp implements IUserService{
     @Override
     public UserFollowedPostListDTO orderByDateFollowedSellers(int id, String order) {
         UserFollowedPostListDTO lista = userFollowedPostList(id);
-        List<PostDto> posts = lista.getPosts();
+        List<PostDTO> posts = lista.getPosts();
 
         if (order.equals("date_asc")) {
             lista.setPosts(posts.stream()
-                    .sorted(Comparator.comparing(PostDto::getDate))
+                    .sorted(Comparator.comparing(PostDTO::getDate))
                     .toList());
         } else if (order.equals("date_desc")) {
             lista.setPosts(posts.stream()
-                    .sorted(Comparator.comparing(PostDto::getDate).reversed())
+                    .sorted(Comparator.comparing(PostDTO::getDate).reversed())
                     .toList());
         } else {
             throw new BadRequestException("No existe ese método de ordenamiento");

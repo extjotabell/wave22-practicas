@@ -1,9 +1,7 @@
 package com.meli.be_java_hisp_w22_g01.util;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.meli.be_java_hisp_w22_g01.dto.PostDto;
-import com.meli.be_java_hisp_w22_g01.dto.ProductDto;
-import com.meli.be_java_hisp_w22_g01.dto.response.UserFollowedPostListDTO;
+import com.meli.be_java_hisp_w22_g01.dto.PostDTO;
+import com.meli.be_java_hisp_w22_g01.dto.ProductDTO;
 import com.meli.be_java_hisp_w22_g01.entity.Post;
 import com.meli.be_java_hisp_w22_g01.entity.Product;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
@@ -48,10 +46,10 @@ public class UtilTestGenerator {
         return List.of(product1, product2, product3);
     }
 
-    public static List<ProductDto> get3ProductsDtos() {
-        ProductDto product1 = new ProductDto(1, "Prod 1", "Tipo 1", "Marca 1", "Color 1", "Nota 1");
-        ProductDto product2 = new ProductDto(2, "Prod 2", "Tipo 1", "Marca 1", "Color 1", "Nota 2");
-        ProductDto product3 = new ProductDto(3, "Prod 3", "Tipo 2", "Marca 2", "Color 2", "Nota 3");
+    public static List<ProductDTO> get3ProductsDtos() {
+        ProductDTO product1 = new ProductDTO(1, "Prod 1", "Tipo 1", "Marca 1", "Color 1", "Nota 1");
+        ProductDTO product2 = new ProductDTO(2, "Prod 2", "Tipo 1", "Marca 1", "Color 1", "Nota 2");
+        ProductDTO product3 = new ProductDTO(3, "Prod 3", "Tipo 2", "Marca 2", "Color 2", "Nota 3");
         return List.of(product1, product2, product3);
     }
 
@@ -65,12 +63,12 @@ public class UtilTestGenerator {
         return List.of(post1, post2, post3, post4);
     }
 
-    public static List<PostDto> get4PostsDTO() {
-        List<ProductDto> products = get3ProductsDtos();
-        PostDto post1 = new PostDto(4, 1, LocalDate.now(), products.get(0), 1, 1900);
-        PostDto post2 = new PostDto(4, 2, LocalDate.now().minusDays(3), products.get(1), 1, 2400);
-        PostDto post3 = new PostDto(5, 3, LocalDate.now(), products.get(0), 1, 1900);
-        PostDto post4 = new PostDto(5, 4, LocalDate.now().minusDays(20), products.get(2), 1, 4500);
+    public static List<PostDTO> get4PostsDTO() {
+        List<ProductDTO> products = get3ProductsDtos();
+        PostDTO post1 = new PostDTO(4, 1, LocalDate.now(), products.get(0), 1, 1900);
+        PostDTO post2 = new PostDTO(4, 2, LocalDate.now().minusDays(3), products.get(1), 1, 2400);
+        PostDTO post3 = new PostDTO(5, 3, LocalDate.now(), products.get(0), 1, 1900);
+        PostDTO post4 = new PostDTO(5, 4, LocalDate.now().minusDays(20), products.get(2), 1, 4500);
 
         return List.of(post1, post2, post3, post4);
     }

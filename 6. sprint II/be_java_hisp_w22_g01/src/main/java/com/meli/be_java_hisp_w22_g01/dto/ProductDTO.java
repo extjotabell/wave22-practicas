@@ -4,18 +4,14 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.NotBlank;
 import lombok.*;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class ProductDto {
+public class ProductDTO {
 
     @NotNull(message = "El id no puede estar vacio.")
     @Min( value=1 ,message = "El id debe ser mayor a 0." )

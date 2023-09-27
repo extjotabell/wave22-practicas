@@ -4,17 +4,17 @@ import com.meli.be_java_hisp_w22_g01.dto.response.*;
 
 public interface IUserService {
 
-    UserFollowersListDTO FollowersList(int user_id);
+    UserFollowersListDTO followersList(int userId);
 
-    public UnfollowDTO unfollow(int userId, int userIdToUnfollow);
+    MessageDTO unfollow(int userId, int userIdToUnfollow);
 
-    FollowedDTO getUserFollowedList(int user_id);
+    FollowedDTO getUserFollowedList(int userId);
 
     FollowedDTO orderFollowedDto(int userId, String order);
 
     UserFollowersListDTO orderFollowersDto(int userId, String order);
 
-    UserFollowedPostListDTO userFollowedPostList(int user_id);
+    UserFollowedPostListDTO userFollowedPostList(int userId);
 
     UserFollowedPostListDTO orderByDateFollowedSellers(int id, String order);
 }

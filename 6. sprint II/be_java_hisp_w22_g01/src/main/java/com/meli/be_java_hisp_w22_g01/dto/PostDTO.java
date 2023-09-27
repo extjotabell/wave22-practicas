@@ -2,7 +2,6 @@ package com.meli.be_java_hisp_w22_g01.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -16,7 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class PostDto {
+public class PostDTO {
 
     @NotNull(message = "El id no puede estar vacio.")
     @Min( value=1 ,message = "El id debe ser mayor a 0." )
@@ -29,7 +28,7 @@ public class PostDto {
     private LocalDate date;
 
     @Valid
-    private ProductDto product;
+    private ProductDTO product;
 
     @NotNull(message = "El campo no puede estar vacío.")
     private int category;

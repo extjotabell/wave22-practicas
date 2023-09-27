@@ -1,7 +1,7 @@
 package com.meli.be_java_hisp_w22_g01.unitTest;
 
 import com.meli.be_java_hisp_w22_g01.dto.response.CountFollowersDTO;
-import com.meli.be_java_hisp_w22_g01.dto.response.FollowMessageDto;
+import com.meli.be_java_hisp_w22_g01.dto.response.MessageDTO;
 import com.meli.be_java_hisp_w22_g01.entity.Seller;
 import com.meli.be_java_hisp_w22_g01.entity.User;
 import com.meli.be_java_hisp_w22_g01.exceptions.BadRequestException;
@@ -15,19 +15,17 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 
 @ExtendWith(MockitoExtension.class)
-public class SellerServiceImpTest {
+class SellerServiceImpTest {
 
     @Mock
     SellerRepositoryImp sellerRepositoryImp;
@@ -43,12 +41,12 @@ public class SellerServiceImpTest {
         //ARRANGE
         int idFollowerParam = 1;
         int idSellerParam = 1;
-        FollowMessageDto expected = new FollowMessageDto("El user: " + idFollowerParam + " comenzo a seguir a: " + idSellerParam);
+        MessageDTO expected = new MessageDTO("El user: " + idFollowerParam + " comenzo a seguir a: " + idSellerParam);
         when(userRepositoryImp.findById(1)).thenReturn(new User(1, "belu", new ArrayList<>()));
         when(sellerRepositoryImp.findById(1)).thenReturn(new Seller(new ArrayList<>(),new ArrayList<>()));
 
         //ACT
-        FollowMessageDto result = sellerService.setAFollower(idFollowerParam,idSellerParam);
+        MessageDTO result = sellerService.setAFollower(idFollowerParam,idSellerParam);
 
         //ASSERT
         Assertions.assertEquals(expected,result);
@@ -115,7 +113,7 @@ public class SellerServiceImpTest {
 
     @Test
     @DisplayName("T-0007 ✅: Verificar que la cantidad de seguidores de un determinado usuario se correcta") //US 0002
-    public void t0007Ok(){
+    void t0007Ok(){
         // ARRANGE
         // Seller followed by the user
         Seller seller1 = new Seller();
@@ -150,7 +148,7 @@ public class SellerServiceImpTest {
 
     @Test
     @DisplayName("T-0007 🚫: Vendedor inexistente")
-    public void t0007Fail(){
+    void t0007Fail(){
         // ARRANGE
         when(sellerRepositoryImp.findById(4)).thenReturn(null);
 

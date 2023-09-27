@@ -13,15 +13,10 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode
 public class ExceptionDTO {
-
-
     private List<String> message;
-
-
     public ExceptionDTO(List<String> message) {
         this.message = message;
     }
-
     public ExceptionDTO(String message) {
         this.message = Collections.singletonList(message);
     }
