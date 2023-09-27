@@ -4,7 +4,6 @@ import com.example.be_java_hisp_w22_g02.dto.response.UserFollowedDTO;
 import com.example.be_java_hisp_w22_g02.service.Interfaces.IUserService;
 import org.springframework.http.HttpStatus;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

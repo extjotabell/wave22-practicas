@@ -1,6 +1,9 @@
 package com.example.be_java_hisp_w22_g02.service.Implementations;
 
-
+import com.example.be_java_hisp_w22_g02.dto.response.TwoWeeksPostDTO;
+import com.example.be_java_hisp_w22_g02.exception.BadRequestException;
+import com.example.be_java_hisp_w22_g02.repository.Interfaces.IUserRepository;
+import org.junit.jupiter.api.DisplayName;
 import com.example.be_java_hisp_w22_g02.dto.response.SuccessDTO;
 import com.example.be_java_hisp_w22_g02.entity.User;
 import com.example.be_java_hisp_w22_g02.exception.NotFoundException;
@@ -21,7 +24,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
+import java.util.ArrayList;
+import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -202,5 +209,27 @@ class UserServiceImplTest {
 
     @Test
     void getLastTwoWeeksPostByUser() {
+
+    }
+    @DisplayName("T-0005 Success - Test for the US-009")
+    @Test
+    void shouldVerifyValidOrderDateExists() {
+        // ARRANGE
+        when(userRepository.existingUserById(2)).thenReturn(true);
+        List<TwoWeeksPostDTO> expectedAscPosts = new ArrayList<>();
+        // ACT
+        TwoWeeksPostDTO postTest = userService.getLastTwoWeeksPostByUser(2, "date_asc");
+        expectedAscPosts.add(postTest);
+        // ASSERT
+        assertNotNull(postTest.getPosts());
+    }
+
+    @DisplayName("T-0005 Fail - Test for the US-009")
+    @Test
+    void shouldCatchValidOrderDateException() {
+        // ARRANGE
+        when(userRepository.existingUserById(2)).thenReturn(true);
+        // ACT & ASSERT
+        assertThrows(BadRequestException.class, () -> userService.getLastTwoWeeksPostByUser(2, "invalid_asc"));
     }
 }
