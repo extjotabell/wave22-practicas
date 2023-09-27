@@ -301,7 +301,7 @@ class UserServiceImpTest {
     }
 
     @Test
-    @DisplayName("T-0002 - Verificar que el usuario a dejar de seguir exista.")
+    @DisplayName("T-0002 ✅ - Verificar que el usuario a dejar de seguir exista.")
     void userUnfollow(){
 
         // ARRANGE
@@ -320,7 +320,7 @@ class UserServiceImpTest {
     }
 
     @Test
-    @DisplayName("T-0002 - Error, usuario no sigue al vendedor.")
+    @DisplayName("T-0002 🚫- Error, usuario no sigue al vendedor.")
     void userUnfollowNotFoundSeller(){
 
         // ARRANGE
@@ -333,7 +333,7 @@ class UserServiceImpTest {
     }
 
     @Test
-    @DisplayName("T-0002 - Error, usuario no encontrado")
+    @DisplayName("T-0002 🚫- Error, usuario no encontrado")
     void userUnfollowNotFoundUser(){
 
         // ARRANGE
