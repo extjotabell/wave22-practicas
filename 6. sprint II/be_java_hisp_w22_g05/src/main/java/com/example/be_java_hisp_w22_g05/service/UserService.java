@@ -71,7 +71,7 @@ public class UserService implements IUserService {
         for (User u : user.getFollowed()) {
             userDtos.add(new UserDto(u.getId(), u.getName()));
         }
-        userDtos = orderList(userDtos, order);
+        if(order != null){userDtos = orderList(userDtos, order);}
         userFollowedDto.setFollowed(userDtos);
         return userFollowedDto;
     }
@@ -104,8 +104,8 @@ public class UserService implements IUserService {
                 .stream()
                 .map(user1 -> new UserDto(user1.getId(), user1.getName()))
                 .collect(Collectors.toList());
+        if(order != null){ userDtos = orderList(userDtos, order); }
 
-        userDtos = orderList(userDtos, order);
         return new UserFollowersDto(user.getId(), user.getName(), userDtos) ;
     }
 
