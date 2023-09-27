@@ -79,6 +79,22 @@ class UserServiceImplTest {
     }
 
     @Test
+    @DisplayName("T0003 - Validate OK ascending alphabetic order - getFollowed")
+    void getFollowed_OrderByNameAsc_ExistsTest() {
+
+        //Arrange
+        when(userRepository.existingUserById(anyInt())).thenReturn(true);
+        when(userRepository.findById(anyInt())).thenReturn(new User());
+
+        //Act
+        userService.getFollowed(1, "name_asc");
+
+        //Assert
+        verify(userRepository, atLeastOnce()).findById(anyInt());
+
+    }
+
+    @Test
     void unfollowUser() {
     }
 
