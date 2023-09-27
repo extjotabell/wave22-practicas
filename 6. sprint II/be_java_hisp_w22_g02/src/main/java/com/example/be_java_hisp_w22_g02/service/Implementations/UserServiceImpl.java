@@ -121,7 +121,7 @@ public class UserServiceImpl implements IUserService {
         }
         if(order != null){
             if(!sortingByDateValidation(order))
-                throw new BadRequestException(String.format(WRONG_SORTING_ORDER.toString(), order));;
+                throw new BadRequestException(String.format(WRONG_SORTING_ORDER.toString(), order));
             followedPost = userRepository.getFollowedPostLasTwoWeeksOrd(userId, order);
         }else{
             followedPost = userRepository.getFollowedPostLasTwoWeeks(userId);
