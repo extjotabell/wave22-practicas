@@ -36,7 +36,7 @@ class UserControllerTest {
     @Test
     void followASellerOk() {
         // arrange
-        when(userService.startFollowing(anyInt(), anyInt())).thenReturn(new ResponseDTO("Seguido correctamente"));
+        when(userService.startFollowing(anyInt(), anyInt())).thenReturn(new ResponseDTO("successfully followed"));
 
         // act
         ResponseEntity<?> responseEntity = userController.followASeller(1, 2);
