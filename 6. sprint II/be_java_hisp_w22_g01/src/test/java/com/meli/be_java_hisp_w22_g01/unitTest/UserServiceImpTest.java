@@ -24,9 +24,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.Collections.reverse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -206,7 +204,7 @@ class UserServiceImpTest {
         when(userRepository.findById(anyInt())).thenReturn(user);
 
         //ACT & ASSERT
-        Assertions.assertThrows(BadRequestException.class,()-> userService.orderFollowedDto(user.getUser_id(), orderFake));
+        Assertions.assertThrows(BadRequestException.class,()-> userService.orderFollowedDto(1, orderFake));
     }
     @Test
     @DisplayName("T-0004 🚫: El orden proporcionado no existe para followers")
@@ -217,7 +215,7 @@ class UserServiceImpTest {
         when(sellerRepository.findById(anyInt())).thenReturn(mockSeller);
 
         //ACT & ASSERT
-        Assertions.assertThrows(BadRequestException.class,()-> userService.orderFollowersDto(mockSeller.getUser_id(), orderFake));
+        Assertions.assertThrows(BadRequestException.class,()-> userService.orderFollowersDto(1, orderFake));
     }
 
     @DisplayName("T-0005 ✅: Verificar que el tipo de ordenamiento por fecha ascendente exista")
