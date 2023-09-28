@@ -2,7 +2,6 @@ package com.example.be_java_hisp_w22_g02.integration.controller;
 
 import com.example.be_java_hisp_w22_g02.dto.request.PostDTO;
 import com.example.be_java_hisp_w22_g02.dto.request.ProductDto;
-import com.example.be_java_hisp_w22_g02.entity.Product;
 import com.example.be_java_hisp_w22_g02.service.Implementations.UserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -19,40 +18,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import java.time.LocalDate;
 
-import static com.fasterxml.jackson.databind.SerializationFeature.WRAP_ROOT_VALUE;
 import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
-import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.ResultMatcher;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import javax.xml.transform.Result;
-import java.util.List;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -64,8 +35,6 @@ public class PostControllerIT {
     PostDTO post;
     ProductDto productDto;
     private static ObjectWriter writer;
-    private static ObjectMapper mapper;
-
 
     @BeforeAll
     public static void setUp() {
@@ -76,7 +45,7 @@ public class PostControllerIT {
     }
 
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         post = new PostDTO();
         productDto = new ProductDto(1, "RandomProduct", "type", "brand", "color", "notes");
         post.setPostId(2);
