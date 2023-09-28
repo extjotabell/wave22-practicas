@@ -69,6 +69,13 @@ public class UserControllerIntegrationTests {
                 .andExpect(status().isOk())
                 .andReturn();
     }
+    @Test
+    @DisplayName("Integration test US 1 - ok (validated user)")
+    void followIntegrationTest() throws Exception {
+        mockMvc.perform(post("/users/{userId}/follow/{userIdToFollow}",2,6))
+                .andExpect(status().isOk())
+                .andReturn();
+    }
 
 }
 
