@@ -31,13 +31,12 @@ class PostControllerIntegrationTest {
 
     @Test
     @DisplayName("Integration test for get list post OK")
-    void getListPostsFromSellersFollowedTest() throws Exception {
+    void getListPostsFromSellersFollowedOkTest() throws Exception {
         final int userId = 2;
         final int followedUserId = 1;
 
         mockMvc.perform(get("/products/followed/{userId}/list", userId)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].user_id").value(followedUserId));
 
@@ -51,7 +50,6 @@ class PostControllerIntegrationTest {
 
         mockMvc.perform(get("/products/followed/{userId}/list", userId)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.message").value(expectedMessageValue));
     }
@@ -66,14 +64,13 @@ class PostControllerIntegrationTest {
         mockMvc.perform(get("/products/followed/{userId}/list", userId)
                         .param("order", invalidOrder)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.message").value(expectedMessageValue));
     }
 
     @Test
     @DisplayName("Integration test for new post")
-    void newPostTest() throws Exception {
+    void newPostOkTest() throws Exception {
         final var productDto = new ProductDto(100,"celular","electro","samsung","negro","");
         final var postDto = new PostDto(1,1, LocalDate.of(2023,9,18), productDto, 1,200.0,false,0.0);
         final String postDtoJson = objectMapper.writeValueAsString(postDto);
@@ -81,7 +78,6 @@ class PostControllerIntegrationTest {
         mockMvc.perform(post("/products/post")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(postDtoJson))
-                .andDo(print())
                 .andExpect(status().isOk());
     }
 }

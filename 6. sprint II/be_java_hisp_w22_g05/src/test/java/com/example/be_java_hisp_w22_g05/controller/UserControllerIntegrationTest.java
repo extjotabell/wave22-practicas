@@ -27,7 +27,6 @@ class UserControllerIntegrationTest {
 
         mockMvc.perform(get("/users/{userId}/followers/count", userId)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.followers_count").value(expectedFollowersCount));
     }
@@ -41,7 +40,6 @@ class UserControllerIntegrationTest {
 
         mockMvc.perform(get("/users/{userId}/followers/list", userId)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.followers.[0].user_id").value(expectedUserFollowerId1))
                 .andExpect(jsonPath("$.followers.[1].user_id").value(expectedUserFollowerId2));
@@ -55,7 +53,6 @@ class UserControllerIntegrationTest {
 
         mockMvc.perform(get("/users/{userId}/followed/list", userId)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.followed.[0].user_id").value(expectedUserFollowerId));
     }
