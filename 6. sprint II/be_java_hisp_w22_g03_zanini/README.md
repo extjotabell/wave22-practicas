@@ -41,6 +41,23 @@ La coleccion de Postman para utilizar mas facilmente los endpoints del pryecto s
 - GET /products/followed/{userId}/list?order=date_asc (Rezno y Agustin)
 - GET /products/followed/{userId}/list?order=date_desc (Rezno y Agustin)
 
+## Unit Test
+
+- T-0001 : Verificar que el usuario a seguir exista. (Matias)
+- T-0002 : Verificar que el usuario a dejar de seguir exista. (Santiago)
+- T-0003 : Verificar que el tipo de ordenamiento alfabético exista. (Lucas)
+- T-0004 : Verificar el correcto ordenamiento ascendente y descendente por nombre. (Gaspar)
+- T-0005 : Verificar que el tipo de ordenamiento por fecha exista. (Renzo)
+- T-0006 : Verificar el correcto ordenamiento ascendente y descendente por fecha. (Agustin)
+- T-0007 : Verificar que la cantidad de seguidores de un determinado usuario sea correcta. (Santiago)
+- T-0008 : Verificar que la consulta de publicaciones realizadas en las últimas dos semanas de un determinado vendedor sean efectivamente de las últimas dos semanas. (Renzo)
+
+## Integration Test
+- GET : Get followersCount of given user ok. (Gaspar)
+- GET : Get followers list of given user ordered ok. (Gaspar)
+- GET : Get followed list of given user ordered ok. (Gaspar)
+- POST : Add new post ok. (Gaspar)
+
 ## Integrantes
 - Gaspar Zanini
 - Lucas Espinosa

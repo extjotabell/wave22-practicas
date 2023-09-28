@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.w22_g03.be_java_hisp_w22_g03.dto.*;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -40,6 +42,7 @@ class IntegrationTest {
      * of the number of followers.
      */
     @Test
+    @DisplayName("Get followersCount of given user ok")
     void followersCount () throws Exception{
         //Arrange
         Integer userId = 1;
@@ -69,6 +72,7 @@ class IntegrationTest {
      */
     @ParameterizedTest
     @ValueSource(strings = {"name_asc", "name_desc"})
+    @DisplayName("Get followers list of given user ordered ok")
     void followersList (String order) throws Exception{
         //Arrange
         Integer userId = 1;
@@ -99,6 +103,7 @@ class IntegrationTest {
      */
     @ParameterizedTest
     @ValueSource(strings = {"name_asc", "name_desc"})
+    @DisplayName("Get followed list of given user ordered ok")
     void followedList (String order) throws Exception{
         //Arrange
         Integer userId = 1;
@@ -126,6 +131,7 @@ class IntegrationTest {
      */
 
     @Test
+    @DisplayName("Add new post ok")
     void addPost() throws Exception{
         //Arrange
         ProductDTO productDTO = new ProductDTO(1L,"Mesa","Mueble","Mercado Libre","Blanco",null);
