@@ -23,8 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -74,7 +73,8 @@ public class PostControllerTest {
         JSONArray jsonErrorList = (JSONArray) jsonParser.parse(writer.writeValueAsString(errorList));
 
         mockMvc.perform(MockMvcRequestBuilders.post("/products/post").contentType(MediaType.APPLICATION_JSON).content(payload))
-                .andDo(print()).andExpect(status().isBadRequest())
+                .andDo(print()).andExpect(content().contentType("application/json"))
+                .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.messages").value(Matchers.containsInAnyOrder(jsonErrorList.toArray())));
     }
 
@@ -91,7 +91,8 @@ public class PostControllerTest {
         String payload = writer.writeValueAsString(input);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/products/post").contentType(MediaType.APPLICATION_JSON).content(payload))
-                .andDo(print()).andExpect(status().isBadRequest())
+                .andDo(print()).andExpect(content().contentType("application/json"))
+                .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.message").value("El producto con id " + productDto.getId() + " ya existe"));
     }
 
