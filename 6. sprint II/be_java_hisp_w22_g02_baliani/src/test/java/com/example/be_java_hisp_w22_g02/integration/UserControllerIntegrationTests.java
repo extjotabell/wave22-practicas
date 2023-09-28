@@ -199,5 +199,36 @@ public class UserControllerIntegrationTests {
 
     }
 
+    @Test
+    void getFollowersCountByUserId_Ok_Test() throws Exception {
+
+        int userId = 10;
+        TotalFollowersDto expected = new TotalFollowersDto(userId, "miguelito", 1);
+        String expectedString = mapper.writeValueAsString(expected);
+
+        MvcResult mvcResult = mockMvc.perform(get("/users/{userId}/followers/count", userId))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+
+        assertEquals(expectedString, mvcResult.getResponse().getContentAsString());
+    }
+
+    @Test
+    void getFollowersCountByUserId_NotFound_Test() throws Exception {
+
+        int userId = 999;
+        ExceptionDto expected = new ExceptionDto(String.format(USER_ID_NOT_FOUND.toString(), userId));
+        String expectedString = mapper.writeValueAsString(expected);
+
+        MvcResult mvcResult = mockMvc.perform(get("/users/{userId}/followers/count", userId))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andReturn();
+
+        assertEquals(expectedString, mvcResult.getResponse().getContentAsString());
+
+    }
+
 
 }
