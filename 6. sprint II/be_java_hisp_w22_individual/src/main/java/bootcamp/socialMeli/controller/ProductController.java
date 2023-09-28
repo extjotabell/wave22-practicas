@@ -19,12 +19,6 @@ public class ProductController {
         this.postService = postService;
     }
 
-    @GetMapping("/posts")
-    public ResponseEntity<List<PostDto>> getAllPosts()
-    {
-        return new ResponseEntity<>(postService.getAllPosts(), HttpStatus.OK);
-    }
-
     // US 06
     // us 09
     @GetMapping("/followed/{userId}/list")

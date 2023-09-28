@@ -28,15 +28,6 @@ public class PostServiceImpl implements IPostService {
         this.userService = userService;
         this.mapper = mapper;
     }
-    @Override
-    public List<PostDto> getAllPosts() {
-        List<Post> postList = postRepository.getAllPost();
-        if (postList.isEmpty()) throw new NotFoundException("No se encontraron posts en el sistema.");
-
-        return postList.stream().map(post ->
-                mapper.convertValue(post, PostDto.class)).collect(Collectors.toList());
-    }
-
 
     @Override
     public FollowedPostListDto getPostsByFollowedUsers(int userId, ProductOrderListEnum order) {
@@ -67,6 +58,6 @@ public class PostServiceImpl implements IPostService {
         Post post = postRepository.addPost(mapper.convertValue(postDto, Post.class));
 
         user.getPostList().add(post.getPostId());
-        return "Se agrego exitosamente un nuevo post con el id : " + post.getPostId();
+        return "Se agrego exitosamente un nuevo post con el id #" + post.getPostId();
     }
 }

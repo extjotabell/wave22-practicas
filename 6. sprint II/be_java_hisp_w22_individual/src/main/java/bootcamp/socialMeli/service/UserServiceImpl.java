@@ -25,14 +25,6 @@ public class UserServiceImpl implements IUserService{
         this.objectMapper = objectMapper;
     }
 
-    @Override
-    public List<UserDto> getAllUsers() {
-        return this.userRepository.getAllUsers()
-                .stream()
-                .map(u -> objectMapper.convertValue(u, UserDto.class))
-                .collect(Collectors.toList());
-    }
-
     // US 01
     @Override
     public void followUser(Integer userId, Integer userIdToFollow) {
@@ -122,7 +114,7 @@ public class UserServiceImpl implements IUserService{
     @Override
     public User findUserById(int userId) {
         return userRepository.findUserById(userId).orElseThrow(
-                () -> new NotFoundException("User with ID #" + userId + " not found")
+                () -> new NotFoundException("Usuario con id #" + userId + " no encontrado")
         );
     }
 

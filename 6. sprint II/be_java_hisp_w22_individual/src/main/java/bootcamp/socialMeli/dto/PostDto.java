@@ -40,4 +40,12 @@ public class PostDto {
     @DecimalMin(value = "1.0", message = "Se debe ingresar un precio")
     @DecimalMax(value = "10000000.0", message = "El precio máximo por producto es de 10.000.000")
     private Double price;
+
+    public PostDto(int user_id, LocalDate date, ProductDto productDtoRequest, int category, double price) {
+        this.userId = user_id;
+        this.date = date;
+        this.product = productDtoRequest;
+        this.category = category;
+        this.price = price;
+    }
 }

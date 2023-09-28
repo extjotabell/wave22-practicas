@@ -7,8 +7,6 @@ import bootcamp.socialMeli.utils.NameOrderEnumDto;
 import java.util.List;
 
 public interface IUserService {
-
-    List<UserDto> getAllUsers();
     UserDto removeFollower(int userId, int userIdToUnfollow);
 
     FollowersListDto getFollowersList(int userId, NameOrderEnumDto nameOrder);

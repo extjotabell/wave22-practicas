@@ -7,7 +7,6 @@ import bootcamp.socialMeli.dto.PostDto;
 import java.util.List;
 
 public interface IPostService {
-    List<PostDto> getAllPosts();
     FollowedPostListDto getPostsByFollowedUsers(int userId, ProductOrderListEnum order);
     String addPost(PostDto postDto);
 }
