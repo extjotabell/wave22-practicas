@@ -31,7 +31,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"raw": "{\n  \"user_id\": 100,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -49,7 +49,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"raw": "{\n  \"user_id\": 0,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -85,7 +85,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"producttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -103,7 +103,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product%\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -247,7 +247,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"alga\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue&\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 1,\n  \"price\": 1000\n}",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"alga\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl%\"\n  },\n  \"category\": 1,\n  \"price\": 1000\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -283,7 +283,151 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"02-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"raw": "{\n  \"user_id\": 1,\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post without user_id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \n  \"date\": \"17-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post without date",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post without category",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"17-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post without product_id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"17-09-2023\",\n  \"product\": {\n    \n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post without product_name",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"17-09-2023\",\n  \"product\": {\n    \"product_id\": 1,\n    \n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post without product_type",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"17-09-2023\",\n  \"product\": {\n    \"product_id\": 1,\n    \"product_name\": \"product\",\n    \n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post without brand",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"17-09-2023\",\n  \"product\": {\n    \"product_id\": 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post without color",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"17-09-2023\",\n  \"product\": {\n    \"product_id\": 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -317,7 +461,7 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"url": "http://localhost:8080/users/0/follow/1"
+				"url": "http://localhost:8080/users/100/follow/1"
 			},
 			"response": []
 		},
@@ -584,7 +728,7 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"url": "http://localhost:8080/users/0/unfollow/1"
+				"url": "http://localhost:8080/users/1/unfollow/2"
 			},
 			"response": []
 		},
@@ -602,7 +746,7 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"url": "http://localhost:8080/users/0/unfollow/1"
+				"url": "http://localhost:8080/users/1/unfollow/100"
 			},
 			"response": []
 		},
@@ -611,7 +755,7 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"url": "http://localhost:8080/users/0/unfollow/1"
+				"url": "http://localhost:8080/users/100/unfollow/1"
 			},
 			"response": []
 		},
@@ -620,7 +764,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:8080/products/followed/0/list"
+				"url": "http://localhost:8080/products/followed/1/list"
 			},
 			"response": []
 		},
@@ -676,7 +820,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/products/followed/0/list?order=date_asc",
+					"raw": "http://localhost:8080/products/followed/0/list?order=date_desc",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -691,7 +835,7 @@
 					"query": [
 						{
 							"key": "order",
-							"value": "date_asc"
+							"value": "date_desc"
 						}
 					]
 				}
@@ -704,7 +848,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/products/followed/0/list?order=date_asc",
+					"raw": "http://localhost:8080/products/followed/1/list?order=date",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -713,13 +857,13 @@
 					"path": [
 						"products",
 						"followed",
-						"0",
+						"1",
 						"list"
 					],
 					"query": [
 						{
 							"key": "order",
-							"value": "date_asc"
+							"value": "date"
 						}
 					]
 				}
@@ -732,7 +876,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/products/followed/1/list?order=date_asc",
+					"raw": "http://localhost:8080/products/followed/0/list?order=date_asc",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -741,7 +885,7 @@
 					"path": [
 						"products",
 						"followed",
-						"1",
+						"0",
 						"list"
 					],
 					"query": [
@@ -760,7 +904,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/products/followed/1/list?order=date_asc",
+					"raw": "http://localhost:8080/products/followed/100/list?order=date_asc",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -769,7 +913,7 @@
 					"path": [
 						"products",
 						"followed",
-						"1",
+						"100",
 						"list"
 					],
 					"query": [
