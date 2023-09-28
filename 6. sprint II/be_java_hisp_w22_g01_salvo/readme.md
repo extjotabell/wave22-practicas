@@ -63,7 +63,9 @@ Integration test:
 - US0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (GET: /users/{userId}/followers/list)
 - US0004: Obtener lista de vendedores que sigue un usuario (GET: /users/{userId}/followed/list)
 - US0005: Dar de alta una nueva publicación (POST: /products/post)
-
+- US0008: Ordenamiento alfabético ascendente y descendente de US0003 (GET: /users/{userId}/followers/list?order=[order])
+- US0008: Ordenamiento alfabético ascendente y descendente de US0004 (GET: /users/{userId}/followed/list?order=[order])
+- 
 Gonzalo:
 Test:
 - T-0007 : Verificar que la cantidad de seguidores de un determinado usuario sea correcta. (US-0002)
