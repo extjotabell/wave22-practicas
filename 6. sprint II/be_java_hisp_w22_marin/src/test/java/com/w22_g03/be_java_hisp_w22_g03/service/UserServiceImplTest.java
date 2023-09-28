@@ -81,7 +81,7 @@ class UserServiceImplTest {
      * Verifies that startFollowing() throws a BadRequestException when trying to follow the same user.
     */
     @Test
-    void startFollowing_SameUser() {
+    void startFollowingSameUser() {
         //act & assert
         BadRequestException exception = assertThrows(BadRequestException.class, () -> userService.startFollowing(1, 1));
         assertEquals("User can't add themselves.", exception.getMessage());
@@ -91,7 +91,7 @@ class UserServiceImplTest {
     * Verifies that startFollowing() throws a NotFoundException when the user is not found.
     */
     @Test
-    void startFollowing_UserNotFound() {
+    void startFollowingUserNotFound() {
         //arrange
         when(userRepo.findById(1)).thenReturn(null);
 
@@ -104,7 +104,7 @@ class UserServiceImplTest {
     * Verifies that startFollowing() throws a BadRequestException when the user is not a seller.
     */
     @Test
-    void startFollowing_UserNotSeller() {
+    void startFollowingUserNotSeller() {
         // arrange
         when(userRepo.findById(1)).thenReturn(follower);
         when(userRepo.findById(2)).thenReturn(follower2);
@@ -118,7 +118,7 @@ class UserServiceImplTest {
     * Verifies that startFollowing() throws a BadRequestException when trying to follow a user that is already being followed.
     */
     @Test
-    void startFollowing_AlreadyFollowed() {
+    void startFollowingAlreadyFollowed() {
         // arrange
         follower.addFollowed(followed);
         when(userRepo.findById(1)).thenReturn(follower);

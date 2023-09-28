@@ -26,4 +26,5 @@ public class TestUtilGenerator {
     public static Post createTestPost(long postId, User user, LocalDate date, Product product) {
         return new Post(postId, user, date, product, 1, 50.0, true, 10.0);
     }
+
 }

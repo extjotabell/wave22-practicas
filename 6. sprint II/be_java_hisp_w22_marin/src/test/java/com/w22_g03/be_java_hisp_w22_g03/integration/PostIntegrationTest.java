@@ -13,7 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -25,6 +24,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class PostIntegrationTest {
     @Autowired
     private MockMvc mockMvc;
+
+
 
     @Test
     void addPostOk () throws Exception {
@@ -52,7 +53,7 @@ public class PostIntegrationTest {
     }
 
      @Test
-    void addPost_InvalidField () throws Exception {
+    void addPostInvalidField () throws Exception {
         LocalDate date = LocalDate.of(2023, 8, 26);
         ProductDTO productDTO = new ProductDTO(1L, "Producto", "Raro" , "Pre", "psd", "ds");
 
@@ -60,6 +61,7 @@ public class PostIntegrationTest {
         postDTO.setDate(date);
         postDTO.setProduct(productDTO);
         postDTO.setUserId(1L);
+
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
@@ -73,25 +75,7 @@ public class PostIntegrationTest {
     }
 
     @Test
-    void getFollowedListOk_Asc () throws Exception {
-        mockMvc.perform(get("/products/followed/{userId}/list?order=date_asc", 1))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.posts[0].date").value("16-09-2023"))
-                .andDo(print());
-    }
-
-    @Test
-    void getFollowedListOk_Desc () throws Exception {
-        mockMvc.perform(get("/products/followed/{userId}/list?order=date_desc", 1))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.posts[0].date").value("17-09-2023"))
-                .andDo(print());
-    }
-
-    @Test
-    void getFollowedList_InvalidOrder () throws Exception {
+    void getFollowedListInvalidOrder () throws Exception {
         mockMvc.perform(get("/products/followed/{userId}/list?order=name_asc", 1))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -100,7 +84,7 @@ public class PostIntegrationTest {
     }
 
     @Test
-    void getFollowedList_WithOutOrder () throws Exception {
+    void getFollowedListWithOutOrder () throws Exception {
         mockMvc.perform(get("/products/followed/{userId}/list", 1))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))

@@ -33,7 +33,7 @@ public class UserIntegrationTest {
 
     @Test
     @Order(2)
-    void getFollowedList_NotFound () throws Exception {
+    void getFollowedListNotFound () throws Exception {
         mockMvc.perform(get("/users/{userId}/followed/list", 8))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -50,7 +50,7 @@ public class UserIntegrationTest {
 
     @Test
     @Order(3)
-    void countFollowers_DontHave () throws Exception {
+    void countFollowersEmpty () throws Exception {
         mockMvc.perform(get("/users/{userId}/followers/count", 1))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -59,7 +59,7 @@ public class UserIntegrationTest {
 
     @Test
     @Order(3)
-    void countFollowers_UserNotExist () throws Exception {
+    void countFollowersUserNotExist () throws Exception {
         mockMvc.perform(get("/users/{userId}/followers/count", 8))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -68,7 +68,7 @@ public class UserIntegrationTest {
 
     @Test
     @Order(3)
-    void getFollowersList_UserNotFound () throws Exception {
+    void getFollowersListUserNotFound () throws Exception {
         mockMvc.perform(get("/users/{userId}/followers/list", 8))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -96,7 +96,7 @@ public class UserIntegrationTest {
 
     @Test
     @Order(4)
-    void unFollow_SameUser () throws Exception {
+    void unFollowSameUser () throws Exception {
         mockMvc.perform(post("/users/{userId}/unfollow/{userIdToUnfollow}", 1, 1))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -106,7 +106,7 @@ public class UserIntegrationTest {
 
     @Test
     @Order(4)
-    void unFollow_UserNotFound () throws Exception {
+    void unFollowUserNotFound () throws Exception {
         mockMvc.perform(post("/users/{userId}/unfollow/{userIdToUnfollow}", 1, 8))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -116,7 +116,7 @@ public class UserIntegrationTest {
 
     @Test
     @Order(4)
-    void unFollow_UserIsNotFollower () throws Exception {
+    void unFollowUserIsNotFollower () throws Exception {
         mockMvc.perform(post("/users/{userId}/unfollow/{userIdToUnfollow}", 3, 1))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
