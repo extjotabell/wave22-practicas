@@ -21,7 +21,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import static com.example.be_java_hisp_w22_g02.enums.ResponseMessages.SUCCESSFUL_FOLLOW;
 import static org.mockito.ArgumentMatchers.any;
-import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -168,9 +167,8 @@ class UserServiceImplTest {
 
 
     @Test
-    void getFollowers() {
     @DisplayName("T003 - Validate OK ascending alphabetic order - getFollowed")
-    void getFollowed_OrderByNameAsc_ExistsTest() {
+    void getFollowers() {
 
         //Arrange
         when(userRepository.existingUserById(anyInt())).thenReturn(true);
@@ -181,7 +179,6 @@ class UserServiceImplTest {
 
         //Assert
         verify(userRepository, atLeastOnce()).findById(anyInt());
-
     }
 
     @Test
@@ -355,19 +352,4 @@ class UserServiceImplTest {
         assertEquals(expected, actual);
 
     }
-
-    @Test
-    void getFollowed() {
-    }
-
-    @Test
-    void addUserPost() {
-    }
-
-    @Test
-    void getLastTwoWeeksPostByUser() {
-
-    }
-
-
 }
