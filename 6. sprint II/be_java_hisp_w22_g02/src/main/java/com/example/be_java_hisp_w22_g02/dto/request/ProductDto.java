@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ProductDto {
-    @Min(1)
+    @Min(value = 1, message = "Product Id can't be less than 1")
     @JsonAlias({"product_id"})
     @NotNull(message = "Product id can't be blank or empty.")
     private int productId;
@@ -25,24 +25,23 @@ public class ProductDto {
     @NotNull(message = "Product name can't be blank or empty.")
     @JsonAlias({"product_name"})
     @Size(max = 40, message = "Product names can have 40 characters MAX.")
-    @Pattern(regexp = "^[A-Z][a-z]\\s*$", message = "Special characters are not allowed.")
+    @Pattern(regexp = "^[A-Za-z ]*$", message = "Special characters are not allowed.")
     private String productName;
 
-    @NotNull
+    @NotNull(message = "Type of a product can't be null or empty")
     @Size(max = 15, message = "Product names can have 15 characters MAX.")
-    @Pattern(regexp = "^[a-z][A-Z]*$", message = "Special characters are not allowed.")
+    @Pattern(regexp = "^[A-Za-z]*$", message = "Special characters are not allowed or blank spaces.")
     private String type;
 
-    @NotNull
+    @NotNull(message = "Brand of a product can't be null or empty")
     private String brand;
 
-    @NotNull
+    @NotNull(message = "Color of a product can't be null or empty")
     @Size(max = 15, message = "Product names can have 15 characters MAX.")
-    @Pattern(regexp = "^[a-z][A-Z]*$", message = "Special characters are not allowed.")
+    @Pattern(regexp = "^[A-Za-z]*$", message = "Special characters are not allowed or blank spaces.")
     private String color;
 
-    @NotNull
     @Size(max = 80, message = "Product names can have 80 characters MAX.")
-    @Pattern(regexp = "^[A-Z][a-z]\\s*$", message = "Special characters are not allowed.")
+    @Pattern(regexp = "^[A-Za-z ]*$", message = "Special characters are not allowed.")
     private String notes;
 }
