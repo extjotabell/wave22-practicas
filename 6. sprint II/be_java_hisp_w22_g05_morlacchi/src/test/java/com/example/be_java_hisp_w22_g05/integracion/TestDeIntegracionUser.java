@@ -5,8 +5,6 @@ import com.example.be_java_hisp_w22_g05.dto.UserDto;
 import com.example.be_java_hisp_w22_g05.dto.UserFollowedDto;
 import com.example.be_java_hisp_w22_g05.dto.UserFollowersDto;
 import com.example.be_java_hisp_w22_g05.dto.UserNumberFollowersDto;
-import com.example.be_java_hisp_w22_g05.entity.User;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -36,9 +34,11 @@ public class TestDeIntegracionUser {
     ObjectWriter mapper = new ObjectMapper()
             .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
             .writer();
+
+    //Testea que se realice el seguimiento correctamente
     @Test
     @DisplayName("US0001: follow")
-    void follow() throws Exception{
+    void followOK() throws Exception{
         //ARRANGE
         UserFollowedDto expected = new UserFollowedDto(1,"carlos",List.of(new UserDto(4,"javier"), new UserDto(3,"pedro")));
         String result = mapper.writeValueAsString(expected);
@@ -52,9 +52,10 @@ public class TestDeIntegracionUser {
 
     }
 
+    //Testea que traiga la cantidad de seguidores correctamente
     @Test
     @DisplayName("US0002: getFollowersCount")
-    void getFollowersCount() throws Exception {
+    void getFollowersCountOK() throws Exception {
         //ARRANGE
         UserNumberFollowersDto expected = new UserNumberFollowersDto(1,"carlos",2);
         String result = mapper.writeValueAsString(expected);
@@ -68,11 +69,12 @@ public class TestDeIntegracionUser {
 
     }
 
+    //Testea que se traiga el listado de los usuarios que siguen a otro usuario
     @Test
     @DisplayName("US0003: findUsersFollowingSeller")
-    void findUsersFollowingSeller() throws Exception{
+    void findUsersFollowingSellerOK() throws Exception{
         //ARRANGE
-        UserFollowersDto expected = new UserFollowersDto(1,"carlos",List.of(new UserDto(3,"pedro")));
+        UserFollowersDto expected = new UserFollowersDto(1,"carlos",List.of(new UserDto(3,"pedro"), new UserDto(2,"maria")));
         String result = mapper.writeValueAsString(expected);
 
         //ACT & ASSERTION
@@ -83,11 +85,12 @@ public class TestDeIntegracionUser {
                 .andExpect(content().json(result));
     }
 
+    //Testea que traiga un listado de todos los usuarios seguidos por otro
     @Test
     @DisplayName("US0004: getListOfUsersFollowedBy")
-    void getListOfUsersFollowedBy() throws Exception{
+    void getListOfUsersFollowedByOK() throws Exception{
         //ARRANGER
-        UserFollowedDto expected = new UserFollowedDto(1,"carlos",List.of(new UserDto(4,"javier"),new UserDto(3,"pedro")));
+        UserFollowedDto expected = new UserFollowedDto(1,"carlos",List.of(new UserDto(4,"javier")));
         String result = mapper.writeValueAsString(expected);
 
         //ACT & ASSERTION
@@ -98,9 +101,10 @@ public class TestDeIntegracionUser {
                 .andExpect(content().json(result));
     }
 
+    //Testea que se deje de seguir a un usuario correctamente
     @Test
     @DisplayName("US0007: unfollow")
-    void unfollow() throws Exception{
+    void unfollowOK() throws Exception{
         //ARRANGER
         UserFollowedDto expected = new UserFollowedDto(2,"maria",List.of(new UserDto(4,"javier")));
         String result = mapper.writeValueAsString(expected);
