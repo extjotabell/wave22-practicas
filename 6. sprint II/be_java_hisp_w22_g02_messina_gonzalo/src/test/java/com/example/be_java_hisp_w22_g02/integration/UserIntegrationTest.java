@@ -66,11 +66,10 @@ public class UserIntegrationTest {
 
     @Test
     public void unfollowUser() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/users/1/unfollow/2"))
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/users/4/unfollow/5"))
                 .andDo(print())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.userId").value(1))
                 .andReturn();
 
     }

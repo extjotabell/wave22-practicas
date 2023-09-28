@@ -23,15 +23,15 @@
   {
     "user_id": 4,
     "user_name": "luisa_89",
-    "followers": [],
-    "followed": [],
+    "followers": [5],
+    "followed": [5],
     "posts": []
   },
   {
     "user_id": 5,
     "user_name": "carlos22",
-    "followers": [],
-    "followed": [],
+    "followers": [4],
+    "followed": [4],
     "posts": []
   },
   {

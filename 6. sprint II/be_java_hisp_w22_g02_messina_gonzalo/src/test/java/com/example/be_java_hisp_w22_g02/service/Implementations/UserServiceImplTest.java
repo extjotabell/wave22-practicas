@@ -182,6 +182,15 @@ class UserServiceImplTest {
     }
 
     @Test
+    @DisplayName("T003 - Throws exception with wrong id - getFollowed")
+    void getFollowersWithIdDoesNotExist() {
+
+        //Arrange
+        when(userRepository.existingUserById(anyInt())).thenReturn(false);
+        assertThrows(NotFoundException.class,()->userService.getFollowed(1, "name_asc"));
+    }
+
+    @Test
     @DisplayName("T003 - Validate OK descending alphabetic order - getFollowed")
     void getFollowed_OrderByNameDesc_ExistsTest() {
 

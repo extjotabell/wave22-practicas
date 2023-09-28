@@ -32,7 +32,7 @@ public enum ResponseMessages {
     SUCCESSFUL_UNFOLLOW{
         @Override
         public String toString() {
-            return "User followed successfully.";
+            return "User unfollowed successfully.";
         }
     },
     NAME_ASC{
