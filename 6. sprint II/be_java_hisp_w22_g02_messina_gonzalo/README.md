@@ -9,15 +9,15 @@
 - Julio Alvarez
 - Rodrigo Baliani
 
-## Enunciado
+## Enunciado 
 
 Mercado Libre sigue creciendo y para el año que viene  tiene como objetivo empezar a implementar una
-serie de herramientas que permitan a los compradores y vendedores tener una experiencia totalmente
-innovadora, en donde el lazo que los una sea mucho más cercano. La fecha de lanzamiento se aproxima,
-por lo cual es necesaria la presentación de una versión Beta de lo que va a ser conocido como “SocialMeli”,
-en donde los compradores van a poder seguir a sus vendedores favoritos y enterarse de todas las novedades que
-los mismos posteen. Para poder realizar esto, un analista funcional relevó una serie de requerimientos que deben
-llevarse a cabo; sin embargo, como cuentan con una determinada complejidad y los tiempos son escasos, deberán ser
+serie de herramientas que permitan a los compradores y vendedores tener una experiencia totalmente 
+innovadora, en donde el lazo que los una sea mucho más cercano. La fecha de lanzamiento se aproxima, 
+por lo cual es necesaria la presentación de una versión Beta de lo que va a ser conocido como “SocialMeli”, 
+en donde los compradores van a poder seguir a sus vendedores favoritos y enterarse de todas las novedades que 
+los mismos posteen. Para poder realizar esto, un analista funcional relevó una serie de requerimientos que deben 
+llevarse a cabo; sin embargo, como cuentan con una determinada complejidad y los tiempos son escasos, deberán ser 
 ejecutados en equipos de trabajo. Los mismos se detallan a continuación:
 
 
@@ -51,13 +51,13 @@ Un analista funcional llevó a cabo el relevamiento de los requerimientos técni
 
 # Definiciones de Equipo 🤝
 
-Para correr la aplicación es necesaria una JDK 17 y Maven.
+Para correr la aplicación es necesaria una JDK 17 y Maven. 
 
-Ejecutar comando mvn i y luego ejecutar Run BeJavaHispW22G02Application.
+Ejecutar comando mvn i y luego ejecutar Run BeJavaHispW22G02Application. 
 
 Para las pruebas, se recomienda como primera medida seguir algunos usuarios usando el endpoint /users/{userId}/follow/{userIdToFollow}.
 
-Una vez que tenemos varios usuarios con los que jugar, podemos dar de alta publicaciones con el endpoint /products/post y verificar que el usuario tiene ese post en su lista de publicaciones.
+Una vez que tenemos varios usuarios con los que jugar, podemos dar de alta publicaciones con el endpoint /products/post y verificar que el usuario tiene ese post en su lista de publicaciones. 
 
 A partir de esto podemos dejar de seguir usuarios, visualizar a quienes sigo y quienes me siguen, ver las publicaciones de mis seguidos, entre otras.
 
@@ -103,31 +103,13 @@ La colección de postman se encuentra en la carpeta /resources en formato json.
 ✅ T008 - getFollowedPostLasTwoWeeks (US-006) --> Emmanuel Schenoni
 
 
-# Testing Individual (Test de integración en la carpeta integration dentro de "Test")
-
-POST CONTROLLER
-
-✅ addNewPost()
-
-✅ getLastTwoWeeksPostByUserFollowed()
-
-USER CONTROLLER
-
-✅ getFollwers()
-
-✅ getFollowedUser()
-
-✅ followUser()
-
-✅ unfollowUserNonFollow()
-
-✅ getFollowersCountByUserId()
-
 
 # Postman Testing 🟠
 
-Dentro de la carpeta resources se encuentra el archivo "Social Meli - Grupo 2.postman_collection" el cual contiene la coleccion de Postman donde se realizan las pruebas.
+Dentro de la carpeta resources se encuentra el archivo "Social Meli - Grupo 2.postman_collection" el cual contiene la coleccion de Postman donde se realizan las pruebas. 
 
 <img width="1672" alt="image" src="https://github.com/extjotabell/wave22-practicas/assets/143105901/3d6d3cf5-1c17-4d41-9d51-04d938adedcf">
 
 Ruta: wave22-practicas/4. sprint I/be_java_hisp_w22_g01/src/main/resources/Social Meli - Grupo 2.postman_collection.json
+
+
