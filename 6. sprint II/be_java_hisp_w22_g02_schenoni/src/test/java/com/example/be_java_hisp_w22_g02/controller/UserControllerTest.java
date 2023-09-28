@@ -81,7 +81,7 @@ class UserControllerTest {
 
     @Test
     @DisplayName("Unfollow user who non existent in followed list")
-    void unfollowUserNonUnfollow() throws Exception {
+    void unfollowUserNonFollow() throws Exception {
         ResultMatcher statusExpected = MockMvcResultMatchers.status().isBadRequest();
         ResultMatcher contentTypeExpected = MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON);
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post("/users/{userId}/unfollow/{userIdToUnfollow}", 1, 3);
