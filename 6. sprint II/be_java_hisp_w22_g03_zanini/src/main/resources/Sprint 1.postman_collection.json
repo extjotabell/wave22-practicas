@@ -1,183 +1,10 @@
 {
 	"info": {
-		"_postman_id": "3ec82fff-e6f1-4cb7-9cf9-98af2d603a67",
+		"_postman_id": "8f98fe98-80f1-4c73-aa0c-49db504bf26b",
 		"name": "Sprint 1",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29541580"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "Validations",
-			"item": [
-				{
-					"name": "Add invalid post",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"user_id\": 0,\n  \"date\": \"02-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/products/post",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"products",
-								"post"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Lista de Posts By Date Asc invalid",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/products/followed/0/list?order=date_asc",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"products",
-								"followed",
-								"0",
-								"list"
-							],
-							"query": [
-								{
-									"key": "order",
-									"value": "date_asc"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Follow invalid user",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/users/0/follow/0",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"0",
-								"follow",
-								"0"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Count followers invalid",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/users/0/followers/count",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"0",
-								"followers",
-								"count"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Followers invalid",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/users/0/followers/list",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"0",
-								"followers",
-								"list"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Followed invalid",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/users/0/followed/list",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"0",
-								"followed",
-								"list"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Unfollow invalid",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/users/0/unfollow/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"0",
-								"unfollow",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
 		{
 			"name": "Add post",
 			"request": {
@@ -335,7 +162,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/users/1/followed/list",
+					"raw": "http://localhost:8080/users/0/followed/list",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -343,7 +170,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"1",
+						"0",
 						"followed",
 						"list"
 					]
