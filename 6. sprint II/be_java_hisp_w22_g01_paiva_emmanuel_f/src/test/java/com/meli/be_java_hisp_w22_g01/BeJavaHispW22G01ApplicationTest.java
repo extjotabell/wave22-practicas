@@ -7,7 +7,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
-public class MainTest {
+public class BeJavaHispW22G01ApplicationTest {
 
     @Test
     public void Main(){
