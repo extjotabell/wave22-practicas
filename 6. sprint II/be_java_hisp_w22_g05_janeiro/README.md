@@ -63,6 +63,123 @@ GET
 
 Trabajado en grupo.
 
+## Tests
+
+### Units Tests
+
+
+##### T-0001: Verificar que el usuario a seguir exista. (US-0001)
+
+- Se cumple:
+  Permite continuar con normalidad.
+- No se cumple:
+  Notifica la no existencia mediante una excepción.
+
+
+##### T-0002: Verificar que el usuario a dejar de seguir exista. (US-0007)
+
+- Se cumple:
+  Permite continuar con normalidad.
+- No se cumple:
+  Notifica la no existencia mediante una excepción.
+
+
+##### T-0003: Verificar que el tipo de ordenamiento alfabético exista (US-0008)
+
+- Se cumple:
+  Permite continuar con normalidad.
+- No se cumple:
+  Notifica la no existencia mediante una excepción.
+
+##### T-0004: Verificar el correcto ordenamiento ascendente y descendente por nombre. (US-0008)
+
+- Devuelve la lista ordenada según el criterio solicitado
+
+##### T-0005: Verificar que el tipo de ordenamiento por fecha exista (US-0009)
+
+- Se cumple:
+  Permite continuar con normalidad.
+- No se cumple:
+  Notifica la no existencia mediante una excepción.
+
+##### T-0006: Verificar el correcto ordenamiento ascendente y descendente por fecha. (US-0009)
+
+- Verificar el correcto ordenamiento ascendente y descendente por fecha. (US-0009)
+
+##### T-0007: Verificar que la cantidad de seguidores de un determinado usuario sea correcta. (US-0002)
+
+- Devuelve el cálculo correcto del total de la cantidad de seguidores que posee un usuario.
+
+##### T-0008: Verificar que la consulta de publicaciones realizadas en las últimas dos semanas de un determinado vendedor sean efectivamente de las últimas dos semanas. (US-0006)
+
+- Devuelve únicamente los datos de las publicaciones que tengan fecha de publicación dentro de las últimas dos semanas a partir del día de la fecha.
+
+
+#### Individuales
+Se agregaron otros units tests no requeridos para aumentar el coverage. Estos estan anidados dentro de la @Nasted class testsParteIndividual.
+
+##### Follow Units Tests
+
+- Error: Already follow error
+
+##### Number Followers Units Test
+
+- Error:
+  User Number Followers Not Found
+
+##### List Of Followed Units Tests
+
+- OK:
+  List of follewd Ok
+- Error:
+  List Of Users Followed Not Found
+
+##### Unfollow Units Tests
+
+- Error:
+  Unfollowed Not Found
+
+### Integral Tests
+Se hicieron dos test integrales por EndPoint. Uno con caso de exito y otro con algun caso de error
+#### PostController
+##### Save Integral Tests
+- OK: Save OK
+- Error: Save product invalid param
+- Error: Save product Already exists
+
+##### List Posts From Sellers Integral Tests
+- OK: list Posts from sellers OK
+- Error: list Posts from sellers Not Found
+
+#### UserController
+##### Follow Integral Tests
+- OK: Follow OK
+- Error: Follow Exception
+
+##### Follow Count Integral Tests
+- OK: Follow count OK
+- Error: Followers count bad Argument
+
+##### List Of Followed Integral Tests
+- OK: List of follewd Ok
+- Error: List of follewd Conflict
+
+##### Unfollow Integral Tests
+- OK: Unfollow Ok
+- Error: Unfollow Not Found
+
+##### List of Followed Sellers Integral Tests
+- OK: Users Following Seller Ok
+- Error: Users Following Seller Not Found
+
+### Coverage
+- ##### PostController 100%
+- ##### UserController 100%
+- ##### PostService    100%
+- ##### UserService    100%
+- ##### ExceptionConfig 80%
+
+
 ## Integrantes
 - Cecilia Morlacchi
 - Facundo Hermida

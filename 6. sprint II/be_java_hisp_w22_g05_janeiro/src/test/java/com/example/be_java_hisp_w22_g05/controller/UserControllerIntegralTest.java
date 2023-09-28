@@ -108,7 +108,7 @@ public class UserControllerIntegralTest {
         }
 
         @Test
-        @DisplayName("Unfollow OK")
+        @DisplayName("Unfollow Not Found")
         void unfollowFaildTest() throws Exception{
             mockMvc.perform(post("/users/999/unfollow/4"))
                     .andDo(print())
@@ -132,7 +132,7 @@ public class UserControllerIntegralTest {
         }
 
         @Test
-        @DisplayName("Users Following Seller Ok")
+        @DisplayName("Users Following Seller Not Found")
         void UsersFollowingSellerNotFoundTest() throws Exception{
             mockMvc.perform(get("/users/{userId}/followers/list","999"))
                     .andDo(print())
