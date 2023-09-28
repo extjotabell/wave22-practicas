@@ -1,10 +1,8 @@
 package com.example.be_java_hisp_w22_g05.controller;
-import com.example.be_java_hisp_w22_g05.utils.PostGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.springframework.http.MediaType;
 import com.example.be_java_hisp_w22_g05.dto.PostDto;
-import com.example.be_java_hisp_w22_g05.dto.ProductDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -14,8 +12,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-
-import java.time.LocalDate;
+import static com.example.be_java_hisp_w22_g05.utils.PostGenerator.getInvalidPostDto;
+import static com.example.be_java_hisp_w22_g05.utils.PostGenerator.getPostDto;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -48,9 +46,7 @@ public class PostControllerIntegralTest {
         @Test
         @DisplayName("Save OK")
         void postSaveOkTest() throws Exception {
-            PostGenerator postGenerator = new PostGenerator();
-            ProductDto product = new ProductDto(5,"reloj","ropa","alguna","negro","asd");
-            PostDto postDto = new PostDto(2, 2,LocalDate.now(),product,1,120.0,null,null);
+            PostDto postDto = getPostDto();
             String jsonPayload = mapper.writeValueAsString(postDto);
 
             mockMvc.perform(post("/products/post")
@@ -63,8 +59,7 @@ public class PostControllerIntegralTest {
         @Test
         @DisplayName("Save product invalid param")
         void postSaveAlreadyExistsTest() throws Exception {
-            ProductDto product = new ProductDto(1,"reloj","ropa","alguna","negro","asd");
-            PostDto postDto = new PostDto(2, 2,LocalDate.now(),product,1,120.0,null,null);
+            PostDto postDto = getInvalidPostDto();
             String jsonPayload = mapper.writeValueAsString(postDto);
 
             mockMvc.perform(post("/products/post")
@@ -79,9 +74,8 @@ public class PostControllerIntegralTest {
         @Test
         @DisplayName("Save product Already exists")
         void postSaveInvalidArgumentTest() throws Exception {
-            PostGenerator postGenerator = new PostGenerator();
-            ProductDto product = new ProductDto(1,"reloj","ropa","alguna","negro","asd");
-            PostDto postDto = new PostDto(2, 0,LocalDate.now(),product,1,120.0,null,null);
+            PostDto postDto = getPostDto();
+            postDto.setUserId(0);
             String jsonPayload = mapper.writeValueAsString(postDto);
 
             mockMvc.perform(post("/products/post")

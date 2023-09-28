@@ -17,20 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostGenerator {
-
-    private static ObjectWriter mapper;
-
-    public PostGenerator(){
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-
-         this.mapper = objectMapper
-                .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
-                .writer();
+    public static PostDto getPostDto(){
+        ProductDto product = new ProductDto(999,"reloj","ropa","alguna","negro","asd");
+        return new PostDto(2, 1,LocalDate.now(),product,1,120.0,null,null);
     }
 
-    public static String postDtoParserString(PostDto postDto) throws Exception {
-        return mapper.writeValueAsString(postDto);
+    public static PostDto getInvalidPostDto(){
+        ProductDto product = new ProductDto(1,"reloj","ropa","alguna","negro","asd");
+        return new PostDto(2, 1,LocalDate.now(),product,1,120.0,null,null);
     }
 
     public static List<Post> postGenerator(User user){
