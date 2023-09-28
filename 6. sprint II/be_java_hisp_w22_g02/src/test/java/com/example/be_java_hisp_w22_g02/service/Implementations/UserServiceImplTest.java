@@ -50,10 +50,10 @@ class UserServiceImplTest {
     @DisplayName("T002 - Unfollow Existent User - unfollowUser")
     void unfollowUserExistent() {
         //Arrange
-        int idUserPrincipal = 1;
-        int idUserToUnfollow = 2;
         User user1 = new User(1, "pepito", List.of(), List.of(2), List.of());
         User user2 = new User(2, "juancito", List.of(1), List.of(), List.of());
+        int idUserPrincipal = user1.getUserId();
+        int idUserToUnfollow = user2.getUserId();
         SuccessDTO expectedSuccessDTO = new SuccessDTO(SUCCESSFUL_UNFOLLOW.toString());
         when(userRepository.existingUserById(idUserPrincipal)).thenReturn(true);
         when(userRepository.existingUserById(idUserToUnfollow)).thenReturn(true);
@@ -113,7 +113,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    @DisplayName("0003 - Validate exception when order is invalid - getFollowers")
+    @DisplayName("T003 - Validate exception when order is invalid - getFollowers")
     void getFollowers_OrderByName_NotExistTest() {
 
         //Arrange
@@ -158,7 +158,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    @DisplayName("T0003 - Validate exception when order is invalid - getFollowed")
+    @DisplayName("T003 - Validate exception when order is invalid - getFollowed")
     void getFollowed_OrderByName_NotExistsTest() {
 
         //Arrange
@@ -296,7 +296,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    @DisplayName("T0007 - Validate followers count is correct - getTotalFollowersByUserId")
+    @DisplayName("T007 - Validate followers count is correct - getTotalFollowersByUserId")
     void getTotalFollowersByUserId_OkTest() {
 
         //Arrange
