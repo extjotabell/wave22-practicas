@@ -31,6 +31,7 @@ class ProductControllerTest {
     @Test
     @DisplayName("US0005 ✅: Dar de alta una nueva publicación")
     void testUS0005Ok() throws Exception {
+        // ARRANGE
         String endpoint = "/products/post";
         int userId = 4;
         ObjectWriter writer = new ObjectMapper().registerModule(new JavaTimeModule()).writer();
@@ -39,6 +40,7 @@ class ProductControllerTest {
 
         String jsonPayload = writer.writeValueAsString(payload);
 
+        // ACT & ASSERT
         mockMvc.perform(post(endpoint, userId).contentType(MediaType.APPLICATION_JSON).content(jsonPayload))
                 .andExpect(status().isOk())
                 .andDo(print());
@@ -47,6 +49,7 @@ class ProductControllerTest {
     @Test
     @DisplayName("US0005 🚫: Error de validación: Id negativo")
     void testUS0005Fail() throws Exception {
+        // ARRANGE
         String endpoint = "/products/post";
         int userId = 4;
         ObjectWriter writer = new ObjectMapper().registerModule(new JavaTimeModule()).writer();
@@ -58,11 +61,11 @@ class ProductControllerTest {
         String jsonPayload = writer.writeValueAsString(payload);
         String jsonExpectedResponse = writer.writeValueAsString(expectedResponse);
 
+        // ACT & ASSERT
         mockMvc.perform(post(endpoint, userId).contentType(MediaType.APPLICATION_JSON).content(jsonPayload))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().json(jsonExpectedResponse))
-                .andDo(print())
-                .andReturn();
+                .andDo(print());
     }
 
     @Test
@@ -85,7 +88,6 @@ class ProductControllerTest {
         mockMvc.perform(post(endpoint, userId).contentType(MediaType.APPLICATION_JSON).content(jsonPayload))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().json(jsonExpectedResponse))
-                .andDo(print())
-                .andReturn();
+                .andDo(print());
     }
 }
