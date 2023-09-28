@@ -7,6 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UserTest {
+    /*
+    * Verifies when user is a seller.
+    */
     @Test
     public void testIsSeller() {
         // arrange
@@ -18,6 +21,9 @@ public class UserTest {
         assertFalse(userWithoutPosts.isSeller());
     }
 
+    /*
+    * Verify adding a follower to user"
+    */
     @Test
     public void testAddFollower() {
         // arrange
@@ -31,6 +37,9 @@ public class UserTest {
         assertTrue(user.getFollowers().contains(follower));
     }
 
+    /*
+    * Verify adding a followed to user
+    */
     @Test
     public void testAddFollowed() {
         // arrange
