@@ -7,8 +7,8 @@ import java.util.List;
 
 public class UserGenerator {
 
-    private UserGenerator(){
-
+    public static User getUserWithNameId(Integer id, String name){
+        return new User(id,name,new ArrayList<>(),new ArrayList<>());
     }
 
     public static User getUser(){

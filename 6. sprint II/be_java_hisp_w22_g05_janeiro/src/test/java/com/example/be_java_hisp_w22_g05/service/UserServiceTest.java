@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
+import static com.example.be_java_hisp_w22_g05.utils.UserGenerator.getUserWithNameId;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -252,8 +253,8 @@ public class UserServiceTest {
             @DisplayName("Already follow Error")
             void alreadyFollow(){
                 //Arrange
-                User follower = new User(1,"Enzo", new ArrayList<>(), new ArrayList<>());
-                User seller = new User(2,"Mati", new ArrayList<>(), new ArrayList<>());
+                User follower = getUserWithNameId(1,"Enzo");
+                User seller = getUserWithNameId(2,"Mati");
                 follower.getFollowed().add(seller);
                 when(userRepository.findUsersById(1)).thenReturn(follower);
                 when(userRepository.findUsersById(2)).thenReturn(seller);
@@ -296,8 +297,8 @@ public class UserServiceTest {
             void getListOfUsersFollowedByOkTest(){
                 //Arrange
                 String expected = "Mati";
-                User follower = new User(1,"Enzo", new ArrayList<>(), new ArrayList<>());
-                User seller = new User(2,"Mati", new ArrayList<>(), new ArrayList<>());
+                User follower = getUserWithNameId(1,"Enzo");
+                User seller = getUserWithNameId(2,"Mati");
                 follower.getFollowed().add(seller);
                 when(userRepository.findUsersById(1)).thenReturn(follower);
 
@@ -316,8 +317,8 @@ public class UserServiceTest {
             @DisplayName("Unfollowed Not Found")
             void unfollowedNotFound(){
                 //Arrange
-                User follower = new User(1,"Enzo", new ArrayList<>(), new ArrayList<>());
-                User seller = new User(2,"Mati", new ArrayList<>(), new ArrayList<>());
+                User follower = getUserWithNameId(1,"Enzo");
+                User seller = getUserWithNameId(2,"Mati");
                 when(userRepository.findUsersById(1)).thenReturn(follower);
                 when(userRepository.findUsersById(2)).thenReturn(seller);
 
