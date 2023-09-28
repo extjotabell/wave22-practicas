@@ -230,5 +230,98 @@ public class UserControllerIntegrationTests {
 
     }
 
+    @Test
+    void unfollowUser_Ok_Test() throws Exception{
+
+        int userId = 15;
+        int useridToUnfollow = 18;
+        SuccessDTO expected = new SuccessDTO(SUCCESSFUL_UNFOLLOW.toString());
+        String expectedString = mapper.writeValueAsString(expected);
+        userRepository.followUser(userId, useridToUnfollow);
+
+        MvcResult mvcResult = mockMvc.perform(post("/users/{userId}/unfollow/{userIdToUnfollow}", userId, useridToUnfollow))
+                .andDo(print())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        assertEquals(expectedString, mvcResult.getResponse().getContentAsString());
+
+    }
+
+    @Test
+    void unfollowUser_NotFoundUserId_Test() throws Exception {
+
+        int userId = 999;
+        int userIdToUnfollow = 10;
+        ExceptionDto expected = new ExceptionDto(String.format(USER_ID_NOT_FOUND.toString(), userId));
+        String expectedString = mapper.writeValueAsString(expected);
+
+        MvcResult mvcResult = mockMvc.perform(post("/users/{userId}/unfollow/{userIdToUnfollow}", userId, userIdToUnfollow))
+                .andDo(print())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(status().isNotFound())
+                .andReturn();
+
+        assertEquals(expectedString, mvcResult.getResponse().getContentAsString());
+
+    }
+
+    @Test
+    void unfollowUser_NotFoundUserIdToUnfollow_Test() throws Exception {
+
+        int userId = 1;
+        int userIdToUnfollow = 999;
+        ExceptionDto expected = new ExceptionDto(String.format(USER_ID_NOT_FOUND.toString(), userIdToUnfollow));
+        String expectedString = mapper.writeValueAsString(expected);
+
+        MvcResult mvcResult = mockMvc.perform(post("/users/{userId}/unfollow/{userIdToUnfollow}", userId, userIdToUnfollow))
+                .andDo(print())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(status().isNotFound())
+                .andReturn();
+
+        assertEquals(expectedString, mvcResult.getResponse().getContentAsString());
+
+    }
+
+    @Test
+    void unfollowUser_NotFollowing_Test() throws Exception {
+
+        int userId = 8;
+        int userIdToUnfollow = 10;
+        ExceptionDto expected = new ExceptionDto(String.format(NOT_FOLLOWING_USER.toString(), userIdToUnfollow));
+        String expectedString = mapper.writeValueAsString(expected);
+
+        MvcResult mvcResult = mockMvc.perform(post("/users/{userId}/unfollow/{userIdToUnfollow}", userId, userIdToUnfollow))
+                .andDo(print())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        assertEquals(expectedString, mvcResult.getResponse().getContentAsString());
+
+    }
+
+    @Test
+    void unfollowUser_SameUserId_Test() throws Exception {
+
+        int userId = 1;
+        int userIdToUnfollow = 1;
+        ExceptionDto expected = new ExceptionDto(SAME_USER_ID.toString());
+        String expectedString = mapper.writeValueAsString(expected);
+
+        MvcResult mvcResult = mockMvc.perform(post("/users/{userId}/unfollow/{userIdToUnfollow}", userId, userIdToUnfollow))
+                .andDo(print())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        assertEquals(expectedString, mvcResult.getResponse().getContentAsString());
+    }
+
+
+
+
 
 }
