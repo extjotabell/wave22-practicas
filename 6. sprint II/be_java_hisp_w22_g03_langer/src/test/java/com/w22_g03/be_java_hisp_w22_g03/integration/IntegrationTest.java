@@ -2,10 +2,7 @@ package com.w22_g03.be_java_hisp_w22_g03.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.w22_g03.be_java_hisp_w22_g03.dto.FollowedDTO;
-import com.w22_g03.be_java_hisp_w22_g03.dto.PostDTO;
-import com.w22_g03.be_java_hisp_w22_g03.dto.ProductDTO;
-import com.w22_g03.be_java_hisp_w22_g03.dto.UserDTO;
+import com.w22_g03.be_java_hisp_w22_g03.dto.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -134,6 +131,30 @@ public class IntegrationTest {
                         .content(jsonPayload))
                 .andDo(print())
                 .andExpect(status().isOk())
+                .andReturn();
+
+        // Assert
+        Assertions.assertEquals(expected, result.getResponse().getContentAsString());
+    }
+
+    /**
+     * This test verifies that the /products/post POST endpoint returns an Exception DTO when an empty payload is sent.
+     * @throws Exception
+     */
+    @Test
+    @DisplayName("Empty post Fail")
+    void emptyPostFailTest() throws Exception{
+        // Arrange
+        ExceptionDTO exceptionExpected = new ExceptionDTO("The request contains invalid field values");
+        String expected = mapper.writeValueAsString(exceptionExpected);
+
+        // Act
+        MvcResult result = mockMvc.perform(
+                        MockMvcRequestBuilders.post("/products/post")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(""))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
                 .andReturn();
 
         // Assert
