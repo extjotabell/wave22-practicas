@@ -19,6 +19,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import static com.example.be_java_hisp_w22_g02.enums.ResponseMessages.SUCCESSFUL_FOLLOW;
+import static org.mockito.ArgumentMatchers.any;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +32,7 @@ import java.util.stream.Collectors;
 import static com.example.be_java_hisp_w22_g02.enums.ResponseMessages.*;
 import static org.mockito.Mockito.*;
 
-
 @ExtendWith(MockitoExtension.class)
-@SpringBootTest
 class UserServiceImplTest {
 
     @Mock
@@ -44,8 +44,32 @@ class UserServiceImplTest {
     UserServiceImpl userService;
 
     @Test
+    @DisplayName(value="T001 - Successfull follow - followUser")
     void followUser() {
+        //ARRANGE
+        int id = 1;
+        int idToFollow = 2;
+        List<Integer> follow = new ArrayList<>();
+        follow.add(5);
+        User user = new User(1,"test",follow,follow,null);
+
+        when(userRepository.findById(any())).thenReturn(user);
+        when(userRepository.existingUserById(any())).thenReturn(true);
+
+         //ACT
+        SuccessDTO actual = userService.followUser(id,idToFollow);
+
+        //ASSERT
+        assertEquals(SUCCESSFUL_FOLLOW.toString(),actual.getMessage());
     }
+  
+    @Test
+    @DisplayName(value="T001 - Main user does not exist - followUser")
+    void followUserWithIdNotFound() {
+
+        assertThrows(NotFoundException.class,()->userService.followUser(1,2));
+    }
+  
     @Test
     @DisplayName("T002 - Unfollow Existent User - unfollowUser")
     void unfollowUserExistent() {
@@ -126,6 +150,25 @@ class UserServiceImplTest {
     }
 
     @Test
+    @DisplayName(value="T001 - Following a non existing user - followUser")
+    void followUserWithIdNotFoundToFollow() {
+        when(userRepository.existingUserById(1)).thenReturn(true);
+
+        assertThrows(NotFoundException.class,()->userService.followUser(1,2));
+    }
+
+    @Test
+    @DisplayName(value="T001 - Unable to autofollow - followUser ")
+    void followUserWithSameId() {
+        //ARRANGE
+        when(userRepository.existingUserById(any())).thenReturn(true);
+
+        assertThrows(BadRequestException.class,()->userService.followUser(1,1));
+    }
+
+
+    @Test
+    void getFollowers() {
     @DisplayName("T003 - Validate OK ascending alphabetic order - getFollowed")
     void getFollowed_OrderByNameAsc_ExistsTest() {
 
