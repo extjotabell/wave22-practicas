@@ -201,4 +201,67 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.message").value(errorMessage));
     }
 
+    /**
+     * Integration test to successfully unfollow a user
+     */
+    @Test
+    @DisplayName("Unfollow OK")
+    void unfollowOk() throws Exception {
+        int userId = 2;
+        int userIdToUnfollow = 1;
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/unfollow/{userIdToUnfollow}", userId, userIdToUnfollow))
+                .andDo(print()).andExpect(content().contentType("application/json"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.user_id").value(userId));
+
+    }
+
+    /**
+     * Integration test for when a user tries to unfollow with validation errors
+     */
+    @Test
+    @DisplayName("Unfollow error validaciones")
+    void unfollowValidationError() throws Exception {
+
+        int id = 0;
+        List<String> errorList = List.of("El id del usuario seguidor debe ser mayor a 0", "El id del usuario seguido debe ser mayor a 0");
+        JSONParser jsonParser = new JSONParser(JSONParser.DEFAULT_PERMISSIVE_MODE);
+        JSONArray jsonErrorList = (JSONArray) jsonParser.parse(writer.writeValueAsString(errorList));
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/unfollow/{userIdToUnfollow}", id, id))
+                .andDo(print()).andExpect(content().contentType("application/json"))
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.messages").value(Matchers.containsInAnyOrder(jsonErrorList.toArray())));
+
+    }
+
+    /**
+     * Integration test for when the user to unfollow doesn't exist
+     */
+    @Test
+    @DisplayName("Unfollow seguidor no existe")
+    void unfollowUserNotFound() throws Exception {
+        int userId = 1;
+        int userIdToUnfollow = 100;
+        mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/unfollow/{userIdToUnfollow}", userId, userIdToUnfollow))
+                .andDo(print()).andExpect(content().contentType("application/json"))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message").value("No se encontro el usuario " + userIdToUnfollow));
+    }
+
+    /**
+     * Integration test for when the user who unfollows doesn't exist
+     */
+    @Test
+    @DisplayName("Unfollow usuario no existe")
+    void unfollowFollowerNotFound() throws Exception {
+        int userId = 1;
+        int userIdToUnfollow = 2;
+        mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/unfollow/{userIdToUnfollow}", userId, userIdToUnfollow))
+                .andDo(print()).andExpect(content().contentType("application/json"))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message").value("No seguis al usuario con id " + userIdToUnfollow));
+    }
+
 }
