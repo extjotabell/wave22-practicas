@@ -1,5 +1,4 @@
 package bootcamp.socialMeli.integrationTests.controller;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,7 +20,6 @@ public class ControllerIntegrationTests {
                 .andExpect(status().isOk())
                 .andExpect(content().string("Se dejó de seguir al usuario 6"))
                 .andReturn();
-
     }
 
 }
