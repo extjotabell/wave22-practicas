@@ -21,7 +21,7 @@ Fecha Ascendente y Descendente
 ## Correr la aplicacion
 Desde el el IntelliJ IDEA abrir el proyecto en de la carpeta be_java_hisp_w22_g03, abrir el archivo BeJavaHispW22G03Application.java y pulsar el boton de run que se encuentra arriba a la derecha.
 
-La coleccion de Postman para utilizar mas facilmente los endpoints del pryecto se encuetra en la carpeta be_java_hisp_w22_g03/src/main/resources con el numbre "Sprint 1.postman_collection.json"
+Las colecciones de Postman para utilizar mas facilmente los endpoints del proyecto se encuetra en la carpeta be_java_hisp_w22_g03/src/main/resources con el nombre "Sprint 1.postman_collection.json" y "Sprint 2.postman_collection.json" para cada Sprint
 
 ## Endpoints
 
