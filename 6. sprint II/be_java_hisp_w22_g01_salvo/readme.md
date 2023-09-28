@@ -60,8 +60,9 @@ Unit test:
 - T-0005 : Verificar que el tipo de ordenamiento por fecha exista (US-0009)
 - T-0008 : Verificar que la consulta de publicaciones realizadas en las últimas dos semanas de un determinado vendedor sean efectivamente de las últimas dos semanas. (US-0006)
 Integration test:
+- US0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (GET: /users/{userId}/followers/list)
 - US0004: Obtener lista de vendedores que sigue un usuario (GET: /users/{userId}/followed/list)
-- US0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario sigue en las últimas dos semanas (GET: /products/followed/{userId}/list)
+- US0005: Dar de alta una nueva publicación (POST: /products/post)
 
 Gonzalo:
 Test:

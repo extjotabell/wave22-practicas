@@ -35,7 +35,7 @@ class ProductControllerTest {
         int userId = 4;
         ObjectWriter writer = new ObjectMapper().registerModule(new JavaTimeModule()).writer();
 
-        PostDTO payload = new PostDTO(3, 1, LocalDate.of(2023,9,28), new ProductDTO(1, "Botella", "Tipo", "Genérica", "Rojo", "Notas"), 63, 2543.0);
+        PostDTO payload = new PostDTO(3, 1, LocalDate.of(2023, 9, 28), new ProductDTO(1, "Botella", "Tipo", "Genérica", "Rojo", "Notas"), 63, 2543.0);
 
         String jsonPayload = writer.writeValueAsString(payload);
 
@@ -51,7 +51,7 @@ class ProductControllerTest {
         int userId = 4;
         ObjectWriter writer = new ObjectMapper().registerModule(new JavaTimeModule()).writer();
 
-        PostDTO payload = new PostDTO(-1, 1, LocalDate.of(2023,9,28), new ProductDTO(1, "Botella", "Tipo", "Genérica", "Rojo", "Notas"), 63, 2543.0);
+        PostDTO payload = new PostDTO(-1, 1, LocalDate.of(2023, 9, 28), new ProductDTO(1, "Botella", "Tipo", "Genérica", "Rojo", "Notas"), 63, 2543.0);
 
         ExceptionDTO expectedResponse = new ExceptionDTO("El id debe ser mayor a 0.");
 
@@ -68,17 +68,20 @@ class ProductControllerTest {
     @Test
     @DisplayName("US0005 🚫: Error de validación: Id negativo y carácteres especiales")
     void testUS0005Fail2() throws Exception {
+        // ARRANGE
         String endpoint = "/products/post";
         int userId = 4;
+
         ObjectWriter writer = new ObjectMapper().registerModule(new JavaTimeModule()).writer();
 
-        PostDTO payload = new PostDTO(-1, 1, LocalDate.of(2023,9,28), new ProductDTO(1, "Botella", "Tipo$$$", "Genérica", "Rojo", "Notas"), 63, 2543.0);
+        PostDTO payload = new PostDTO(-1, 1, LocalDate.of(2023, 9, 28), new ProductDTO(1, "Botella", "Tipo$$$", "Genérica", "Rojo", "Notas"), 63, 2543.0);
 
         ExceptionDTO expectedResponse = new ExceptionDTO(List.of("El id debe ser mayor a 0.", "El campo no puede poseer caracteres especiales."));
 
         String jsonPayload = writer.writeValueAsString(payload);
         String jsonExpectedResponse = writer.writeValueAsString(expectedResponse);
 
+        // ACT & ASSERT
         mockMvc.perform(post(endpoint, userId).contentType(MediaType.APPLICATION_JSON).content(jsonPayload))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().json(jsonExpectedResponse))
