@@ -1,0 +1,30 @@
+[
+  {
+    "userId": 1,
+    "username":"Alejandro",
+    "posts": [],
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 2,
+    "username":"Bruno",
+    "posts": [],
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 3,
+    "username":"Carlos",
+    "posts": [],
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 4,
+    "username":"Damián",
+    "posts": [],
+    "followed": [],
+    "followers": []
+  }
+]
