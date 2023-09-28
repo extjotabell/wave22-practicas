@@ -98,4 +98,69 @@ public class UserControllerIntegrationTest {
                 .andReturn();
     }
 
+    @Test
+    void getFollowedListTestOk() throws Exception
+    {
+        mockMvc.perform(get("/users/5/followed/list")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.user_id")
+                        .value(5))
+                .andExpect(jsonPath("$.user_name")
+                        .value("Soledad"))
+                .andReturn();
+    }
+
+    @Test
+    void getFollowedListTestFailUserNotFound() throws Exception
+    {
+        mockMvc.perform(get("/users/20/followed/list")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.message")
+                        .value("User with ID #20 not found"))
+                .andReturn();
+    }
+
+    @Test
+    void unfollowUserTestOk() throws Exception
+    {
+        mockMvc.perform(post("/users/2/unfollow/7")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("text/plain;charset=UTF-8"))
+                .andExpect(content().string("Se dejó de seguir al usuario 7"))
+                .andDo(print())
+                .andReturn();
+    }
+
+    @Test
+    void unfollowUserTestFailUserNotFound() throws Exception
+    {
+        mockMvc.perform(post("/users/20/unfollow/5")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.message")
+                        .value("User with ID #20 not found"))
+                .andDo(print())
+                .andReturn();
+    }
+
+    @Test
+    void unfollowUserTestFailNotFolllowUser() throws Exception
+    {
+        mockMvc.perform(post("/users/2/unfollow/5")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.message")
+                        .value("No sigue al usuario seleccionado"))
+                .andDo(print())
+                .andReturn();
+    }
 }
