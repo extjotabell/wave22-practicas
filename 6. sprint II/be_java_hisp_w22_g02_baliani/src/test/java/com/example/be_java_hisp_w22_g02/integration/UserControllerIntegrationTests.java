@@ -1,12 +1,12 @@
 package com.example.be_java_hisp_w22_g02.integration;
 
-import com.example.be_java_hisp_w22_g02.dto.response.ExceptionDto;
-import com.example.be_java_hisp_w22_g02.dto.response.SuccessDTO;
+import com.example.be_java_hisp_w22_g02.dto.response.*;
 import com.example.be_java_hisp_w22_g02.repository.Implementations.UserRepositoryImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,9 +14,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import java.util.List;
+
 import static com.example.be_java_hisp_w22_g02.enums.ResponseMessages.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -101,7 +104,6 @@ public class UserControllerIntegrationTests {
         int userIdToFollow = 10;
         ExceptionDto expected = new ExceptionDto(FOLLOW_TWICE.toString());
         String expectedString = mapper.writeValueAsString(expected);
-        userRepository.followUser(1, 10);
 
         MvcResult mvcResult = mockMvc.perform(post("/users/{userId}/follow/{userIdToFollow}", userId, userIdToFollow))
                 .andDo(print())
@@ -128,7 +130,40 @@ public class UserControllerIntegrationTests {
                 .andReturn();
 
         assertEquals(expectedString, mvcResult.getResponse().getContentAsString());
+    }
+
+    @Test
+    void getFollowers_Ok_Test() throws Exception {
+
+        int userId = 10;
+        UserFollowerDTO expected = new UserFollowerDTO(10, "miguelito");
+        UserFollowDTO userFollow = new UserFollowDTO(1, "pepito1234");
+        expected.setFollowers(List.of(userFollow));
+        String expectedString = mapper.writeValueAsString(expected);
+
+        MvcResult mvcResult = mockMvc.perform(get("/users/{userId}/followers/list", userId))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+        assertEquals(expectedString, mvcResult.getResponse().getContentAsString());
 
     }
+
+    @Test
+    void getFollowers_NotFound_Test() throws Exception {
+
+        int userId = 999;
+        ExceptionDto expected = new ExceptionDto(String.format(USER_ID_NOT_FOUND.toString(), userId));
+        String expectedString = mapper.writeValueAsString(expected);
+
+        MvcResult mvcResult = mockMvc.perform(get("/users/{userId}/followers/list", userId))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andReturn();
+
+        assertEquals(expectedString, mvcResult.getResponse().getContentAsString());
+
+    }
+
 
 }
