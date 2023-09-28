@@ -71,3 +71,36 @@ Trabajado en grupo.
 - Maximiliano Leiva
 - Nahuel Filippa
 - Randy Mendoza
+
+***
+
+## Test 
+### (Trabajo grupal)
+
+* T-0001 : Verificar que el usuario a seguir exista. (US-0001)
+* T-0002 : Verificar que el usuario a dejar de seguir exista. (US-0007)
+* T-0003: Verificar que el tipo de ordenamiento alfabético exista (US-0008)
+* T-0004: Verificar el correcto ordenamiento ascendente y descendente por nombre. (US-0008)
+* T-0005: Verificar que el tipo de ordenamiento por fecha exista (US-0009)
+* T-0006: Verificar el correcto ordenamiento ascendente y descendente por fecha. (US-0009)
+* T-0007: Verificar que la cantidad de seguidores de un determinado usuario sea correcta. (US-0002)
+* T-0008 : Verificar que la consulta de publicaciones realizadas en las últimas dos semanas de un determinado vendedor sean efectivamente de las últimas dos semanas. (US-0006)
+
+### (Trabajo Individual)
+
+* US0001 : Test de integracion verificando que se siga a un usuario.
+* US0002 : Test de integracion verificando que se traiga la cantidad de usuarios que sigue un usuario.
+* US0003:  Test de integracion verificando que traiga un listado con los usuarios que siguen a un usuario.
+* US0004:  Test de integracion verificando que traiga un listado de los usuarios a los que sigue otro usuario determinado.
+* US0005:  Test de integracion verificando que se produzca el alta de un post.
+* US0007:  Test de integracion verificando que se deje de seguir a un usuario.
+
+***
+*El trabajo grupal junto con el trabajo individual, lograron una cobertura del 80%*
+
+
+
+
+
+
+
