@@ -5,7 +5,7 @@ API de proyecto grupal para el Bootcamp Java que permite seguir usuarios en la p
 
 Abrir el archivo pom.xml en IntelliJ para levantar el servidor, las pruebas se pueden realizar desde la carpeta de Tests bajo el siguiente orden:
 
-### Tests
+### Tests Unit grupal
 
 - Test 0001 (US 0001): Verificar que el usuario a seguir exista.
 
@@ -39,6 +39,23 @@ Responsable: Nicolas Guglielmi
 
 Responsable: Luciana Yamila Pio Monardez
 
+### Tests Integral individual
+------- ProductControllerTest -----
+- US 0005 : Se verifico que se agregara un posteo correctamente. Se controlo que el PAYLOAD tenga validacion en sus atributo. Por ultimo se controlo la excepcion de que un usuario no exista.
+
+- US 0006 : Se verifico todo el circuito de la consulta de publicaciones realizadas se encuentre en las ultimas dos semana, y su correcto ordenamiento. Tambien que se controle la excepcion de que el usuario no exista.
+
+------- UserControllerTest -----
+
+- US 0001 : Se verifico que un usuario puede seguir a otro usuario. Tambien si ya lo seguia que lo advierta.
+
+- US 0002 : Se Verifico la cantidad de usuarios que siguen a un determinado vendedor. Tambien que ese usuario exista.
+
+- US 0004 : Se verifico el listado de todos los vendedores a los cuales sigue un determinado usuario y su correcto ordenamiento.
+
+- US 0007 : Se Valido que un usuario pueda dejar de seguir a otro correctamente. Se controlo que se advierta que ya se dejo de seguir al usurio. Tambien se valido que el usuario se deje de seguir a si mismo. Por ultimo que exita el usuario al que quiera dejar de seguir.
+
+Responsable: Solange Tamara Recayte
 
 ## Integrantes
 

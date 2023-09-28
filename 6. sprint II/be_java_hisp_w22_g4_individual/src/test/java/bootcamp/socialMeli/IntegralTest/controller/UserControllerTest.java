@@ -68,7 +68,7 @@ public class UserControllerTest {
 
     }
     @Test
-    @DisplayName("US 02 Count Followers by Vendedor OK")
+    @DisplayName("US 02 Count Followers OK")
     void getFollowersCount()  throws Exception {
         //Arrange
         FollowersCountDto followerExpected = new FollowersCountDto(6,"Jesica",2);
