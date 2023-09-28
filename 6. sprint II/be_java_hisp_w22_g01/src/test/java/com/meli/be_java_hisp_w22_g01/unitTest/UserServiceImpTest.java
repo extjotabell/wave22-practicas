@@ -136,7 +136,6 @@ class UserServiceImpTest {
 
         //ACT
         FollowedDTO result = userService.orderFollowedDto(mockUser.getUser_id(), order);
-
         //ASSERT
         assertEquals(orderedList, result.getFollowed());
     }
