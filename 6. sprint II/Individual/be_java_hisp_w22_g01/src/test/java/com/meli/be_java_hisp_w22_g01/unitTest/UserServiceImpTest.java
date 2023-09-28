@@ -20,10 +20,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static java.util.Collections.reverse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -40,6 +38,52 @@ class UserServiceImpTest {
 
     @InjectMocks
     UserServiceImp userService;
+
+
+    @Test
+    @DisplayName("T-0002 ✅: Verificar que el usuario a dejar de seguir exista.")
+    void t0002Ok(){
+
+        // ARRANGE
+        int paramUserId = 1;
+        int paramUserIdToUnfollow = 4;
+        MessageDTO messageDTO = new MessageDTO("El usuario userId: " + paramUserId + " ha dejado de seguir a userId: " + paramUserIdToUnfollow);
+
+        when(userRepository.getAll()).thenReturn(UtilTestGenerator.get3UserWithFollowers());
+
+        // ACT
+        MessageDTO message_unfollow = userService.unfollow(paramUserId, paramUserIdToUnfollow);
+
+        // ASSERT
+        Assertions.assertEquals(messageDTO, message_unfollow);
+
+    }
+
+    @Test
+    @DisplayName("T-0002 🚫: Error, usuario no sigue al vendedor.")
+    void t0002Fail(){
+
+        // ARRANGE
+        int paramUserId = 1;
+        int paramUserIdToUnfollow = 7;
+        when(userRepository.getAll()).thenReturn(UtilTestGenerator.get3UserWithFollowers());
+
+        // ACT & ASSERT
+        Assertions.assertThrows(NotFoundException.class, () -> userService.unfollow(paramUserId, paramUserIdToUnfollow));
+    }
+
+    @Test
+    @DisplayName("T-0002 🚫: Error, usuario no encontrado")
+    void t0002Fail2(){
+
+        // ARRANGE
+        int paramUserId = 9;
+        int paramUserIdToUnfollow = 2;
+        when(userRepository.getAll()).thenReturn(UtilTestGenerator.get3UserWithFollowers());
+
+        // ACT & ASSERT
+        Assertions.assertThrows(NotFoundException.class, () -> userService.unfollow(paramUserId, paramUserIdToUnfollow));
+    }
 
     @Test
     @DisplayName("T-0003 ✅: Verifica el ordenamiento mediante name_asc")
@@ -299,50 +343,4 @@ class UserServiceImpTest {
         // ASSERT
         Assertions.assertEquals(expected, result);
     }
-
-    @Test
-    @DisplayName("T-0002 ✅ - Verificar que el usuario a dejar de seguir exista.")
-    void userUnfollow(){
-
-        // ARRANGE
-        int param_userId = 1;
-        int param_userIdToUnfollow = 4;
-        MessageDTO message_expected = new MessageDTO("El usuario userId: " + param_userId + " ha dejado de seguir a userId: " + param_userIdToUnfollow);
-
-        when(userRepository.getAll()).thenReturn(UtilTestGenerator.get3UserWithFollowers());
-
-        // ACT
-        MessageDTO message_unfollow = userService.unfollow(param_userId, param_userIdToUnfollow);
-
-        // ASSERT
-        Assertions.assertEquals(message_expected, message_unfollow);
-
-    }
-
-    @Test
-    @DisplayName("T-0002 🚫- Error, usuario no sigue al vendedor.")
-    void userUnfollowNotFoundSeller(){
-
-        // ARRANGE
-        int param_userId = 1;
-        int param_userIdToUnfollow = 7;
-        when(userRepository.getAll()).thenReturn(UtilTestGenerator.get3UserWithFollowers());
-
-        // ACT & ASSERT
-        Assertions.assertThrows(NotFoundException.class, () -> userService.unfollow(param_userId, param_userIdToUnfollow));
-    }
-
-    @Test
-    @DisplayName("T-0002 🚫- Error, usuario no encontrado")
-    void userUnfollowNotFoundUser(){
-
-        // ARRANGE
-        int param_userId = 9;
-        int param_userIdToUnfollow = 2;
-        when(userRepository.getAll()).thenReturn(UtilTestGenerator.get3UserWithFollowers());
-
-        // ACT & ASSERT
-        Assertions.assertThrows(NotFoundException.class, () -> userService.unfollow(param_userId, param_userIdToUnfollow));
-    }
-
 }

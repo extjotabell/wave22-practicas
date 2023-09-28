@@ -92,25 +92,6 @@ class SellerServiceImpTest {
         Assertions.assertThrows(BadRequestException.class,()-> sellerService.setAFollower(idFollowerParam,idSellerParam));
     }
 
-
-    @Test
-    @DisplayName("T-0002 ✅: Verificar que el usuario a dejar de seguir exista")
-    void t0002Ok(){
-        //ARRANGE
-
-        // ACT
-
-        // ASSERT
-    }
-
-    @Test
-    @DisplayName("T-0002 🚫: Usuario inexistente")
-    void t0002Fail(){
-        //ARRANGE
-
-        // ACT & ASSERT
-    }
-
     @Test
     @DisplayName("T-0007 ✅: Verificar que la cantidad de seguidores de un determinado usuario se correcta") //US 0002
     void t0007Ok(){
