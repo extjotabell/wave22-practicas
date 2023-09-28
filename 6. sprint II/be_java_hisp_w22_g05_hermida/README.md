@@ -1,4 +1,4 @@
-# SocialMELI
+# SocialMELI 2
 Es una API REST que permite seguirse a usuarios y postear nuevas ofertas.
 
 ## Problema a resolver
@@ -62,6 +62,9 @@ GET
 - /products/followed/{userId}/list?order=date_desc
 
 Trabajado en grupo.
+
+## Trabajo individual
+Se realizaron tests de integración sobre los controllers del user (US0001, US0002 y US0003) y del post (US0005), llegando a un 84% de coverage.
 
 ## Integrantes
 - Cecilia Morlacchi
