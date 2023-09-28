@@ -3,6 +3,10 @@
 
 API de proyecto grupal para el Bootcamp Java que permite seguir usuarios en la plataforma Social Meli, crear publicaciones y ver las publicaciones creadas por otros usuarios de la plataforma.
 
+En este sprint en la parte individual se solicitó un test de integración. Realice el test referido a darle unfollow a un usuario, el mismo esta en la carpeta integrationTest dentro de test en un archivo UserControllerIntegrationTest.
+Además sume un par de tests más en ese archivo y generé una carpeta más con el archivo ProductControllerIntegrationTest que incluye otros test de integración.
+Con todo esto sobrepase el coverage solicitado de 75%.
+
 Abrir el archivo pom.xml en IntelliJ para levantar el servidor, las pruebas se pueden realizar desde la carpeta de Tests bajo el siguiente orden:
 
 ### Tests

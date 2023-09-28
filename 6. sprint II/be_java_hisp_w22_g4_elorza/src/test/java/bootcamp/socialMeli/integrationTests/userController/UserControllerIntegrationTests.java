@@ -51,5 +51,24 @@ public class UserControllerIntegrationTests {
                 .andReturn();
     }
 
+    @Test
+    @DisplayName("Integration test US 3 - ok")
+    void getFollowedListIntegrationTest() throws Exception {
+
+        List<UserDto> emptyList = new ArrayList<>();
+        mockMvc.perform(get("/users/{userId}/followed/list",1))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.user_id").value(1))
+                .andExpect(jsonPath("$.user_name").value("Diego"))
+                .andReturn();
+    }
+    @Test
+    @DisplayName("Integration test endpoint getAllUsers")
+    void getAllUsersIntegrationTest() throws Exception {
+        mockMvc.perform(get("/users"))
+                .andExpect(status().isOk())
+                .andReturn();
+    }
+
 }
 
