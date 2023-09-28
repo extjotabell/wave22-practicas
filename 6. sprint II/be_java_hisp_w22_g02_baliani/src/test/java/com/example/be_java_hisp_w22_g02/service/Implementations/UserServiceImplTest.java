@@ -162,7 +162,7 @@ class UserServiceImplTest {
 
     @Test
     @DisplayName("T003 - Validate OK ascending alphabetic order - getFollowed")
-    void getFollowers() {
+    void getFollowed_OrderByNameAsc_ExistsTest() {
 
         //Arrange
         when(userRepository.existingUserById(anyInt())).thenReturn(true);
