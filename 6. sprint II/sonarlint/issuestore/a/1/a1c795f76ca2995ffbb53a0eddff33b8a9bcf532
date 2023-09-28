@@ -1,0 +1,11 @@
+
+h
+java:S62043"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ã¤£’
+m
+java:S6204r"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(¶³üüÿÿÿÿ
+m
+java:S6204u"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(à€¼Ãüÿÿÿÿ
+4
+java:S1128"Remove this duplicated import.(÷‰îƒ
+9
+java:S1128"Remove this duplicated import.(Õë±Äøÿÿÿÿ
