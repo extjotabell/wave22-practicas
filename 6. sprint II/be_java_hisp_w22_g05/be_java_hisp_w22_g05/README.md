@@ -71,3 +71,7 @@ Trabajado en grupo.
 - Maximiliano Leiva
 - Nahuel Filippa
 - Randy Mendoza
+
+## Parte individual y Bonus
+
+En este caso todos los test de integracion realizados fueron para la parte individual y bonus
