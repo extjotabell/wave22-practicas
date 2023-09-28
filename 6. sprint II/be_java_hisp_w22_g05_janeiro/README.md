@@ -172,12 +172,7 @@ Se hicieron dos test integrales por EndPoint. Uno con caso de exito y otro con a
 - OK: Users Following Seller Ok
 - Error: Users Following Seller Not Found
 
-### Coverage
-- ##### PostController 100%
-- ##### UserController 100%
-- ##### PostService    100%
-- ##### UserService    100%
-- ##### ExceptionConfig 80%
+### Coverage Total 89%
 
 
 ## Integrantes
