@@ -83,6 +83,27 @@ La colección de postman se encuentra en la carpeta /resources en formato json.
 
 ✅ GET /products/followed/{userId}/list?order --> Gonzalo Messina
 
+
+# Testing Development
+
+✅ T001 - followUser (US-001) --> Gonzalo Messina
+
+✅ T002 - unfollowUser (US-007) --> Emmanuel Schenoni
+
+✅ T003 - getFollowers (US-008 - Existing Order Param)  --> Rodrigo Baliani
+
+✅ T004 - getFollowers (US-008 - Correct Order) --> Iara Roldán
+
+✅ T005 - getFollowedPostLasTwoWeeksOrd (US-009 - Existing Order Param)  --> Julio Alvarez
+
+✅ T006 - getFollowedPostLasTwoWeeksOrd (US-009 - Correct Order) --> Magui Cagna
+
+✅ T007 - getTotalFollowersByUserId (US-002) --> Rodrigo Baliani
+
+✅ T008 - getFollowedPostLasTwoWeeks (US-006) --> Emmanuel Schenoni
+
+
+
 # Postman Testing 🟠
 
 Dentro de la carpeta resources se encuentra el archivo "Social Meli - Grupo 2.postman_collection" el cual contiene la coleccion de Postman donde se realizan las pruebas. 
