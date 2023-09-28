@@ -5,6 +5,18 @@ API de proyecto grupal para el Bootcamp Java que permite seguir usuarios en la p
 
 Abrir el archivo pom.xml en IntelliJ para levantar el servidor, las pruebas se pueden realizar desde la carpeta de Tests bajo el siguiente orden:
 
+
+### Actividad individual
+Se agregan los siguientes test de integracion con distintos escenarios: 
+
+- US 01 - Follow user
+- US 02 - Followers count
+- US 03 - Followers list
+- US 04 - Followed list
+- US 05 - Add post
+- US 06 - Posts by followed users
+
+
 ### Tests
 
 - Test 0001 (US 0001): Verificar que el usuario a seguir exista.
