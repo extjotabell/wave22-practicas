@@ -64,7 +64,7 @@ GET
 Trabajado en grupo.
 
 ## Trabajo individual
-Se realizaron tests de integración sobre los controllers del user (US0001, US0002 y US0003) y del post (US0005), llegando a un 84% de coverage.
+Se realizaron tests de integración sobre los controllers del user (US0001, US0002, US0003 y US0007) y del post (US0005), llegando a un 86% de coverage.
 
 ## Integrantes
 - Cecilia Morlacchi
