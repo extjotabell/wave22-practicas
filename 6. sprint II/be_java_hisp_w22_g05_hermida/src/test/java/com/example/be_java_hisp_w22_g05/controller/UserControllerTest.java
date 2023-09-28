@@ -129,11 +129,12 @@ public class UserControllerTest {
     void followersCountValidationError() throws Exception {
 
         int userId = 0;
+        String errorMessage = "El id debe ser mayor a cero";
 
         mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/count", userId))
                 .andDo(print()).andExpect(content().contentType("application/json"))
                 .andExpect(status().isConflict())
-                .andExpect(jsonPath("$.explanation").value("Errores en las siguientes validaciones:"));
+                .andExpect(jsonPath("$.messages[0]").value(errorMessage));
     }
 
     /**

@@ -6,6 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import net.minidev.json.JSONArray;
+import net.minidev.json.parser.JSONParser;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -54,15 +59,23 @@ public class PostControllerTest {
     @Test
     @DisplayName("Post error validaciones")
     void savePostValidationError() throws Exception{
-        ProductDto productDto = new ProductDto(1, "Name", "Type", "Brand", "Color", "Notes");
-
+        ProductDto productDto = new ProductDto(1, "Name", "TypeTypeTypeType", "Brand", "Color", "N/t&s");
         PostDto input = new PostDto(1, 0, null, productDto, 0, 11000000.00, false, null);
 
+        List<String> errorList = new ArrayList<>();
+        errorList.add("El id debe ser mayor a 0");
+        errorList.add("La fecha no puede estar vacia");
+        errorList.add("El precio maximo por producto no puede ser mayor a 10.000.000");
+        errorList.add("La longitud no puede superar los 15 caracteres");
+        errorList.add("El campo no puede poseer caracteres especiales");
+
         String payload = writer.writeValueAsString(input);
+        JSONParser jsonParser = new JSONParser(JSONParser.DEFAULT_PERMISSIVE_MODE);
+        JSONArray jsonErrorList = (JSONArray) jsonParser.parse(writer.writeValueAsString(errorList));
 
         mockMvc.perform(MockMvcRequestBuilders.post("/products/post").contentType(MediaType.APPLICATION_JSON).content(payload))
                 .andDo(print()).andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.explanation").value("Se encontraron los siguientes errores en las validaciones: "));
+                .andExpect(jsonPath("$.messages").value(Matchers.containsInAnyOrder(jsonErrorList.toArray())));
     }
 
     /**
