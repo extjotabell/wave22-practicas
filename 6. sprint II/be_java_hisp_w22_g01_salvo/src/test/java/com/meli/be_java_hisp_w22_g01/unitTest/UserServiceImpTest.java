@@ -42,7 +42,7 @@ class UserServiceImpTest {
     UserServiceImp userService;
 
     @Test
-    @DisplayName("T-0003 ✅: Verifica el ordenamiento mediante name_asc")
+    @DisplayName("T-0003 ✅: Verifica la existencia de ordenamiento mediante name_asc")
     void t0003Ok() {
         // ARRANGE
         String order1 = "name_asc";

@@ -7,8 +7,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -16,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserControllerTest {
+class UserControllerTest {
     @Autowired
     MockMvc mockMvc;
 
@@ -34,7 +32,8 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.user_name").value("Lisa"))
                 .andExpect(jsonPath("$.followed[0].user_name").value("Rick Harrison"))
                 .andDo(print());
-    }@Test
+    }
+    @Test
     @DisplayName("US0004 🚫: Usuario no existe")
     void testUS0004Fail() throws Exception {
         // ARRANGE
