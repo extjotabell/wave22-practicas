@@ -99,7 +99,7 @@ public class StudentControllerTests {
 
         mockMvc.perform(request)
                 .andExpect(expectedStatus)
-                .andExpect(jsonPath("$.description").value("El alumno con Id " + id + " no se encuetra registrado."))
+                .andExpect(jsonPath("$.description").value("No se encontró el usuario con id: " + 10))
                 .andDo(print());
     }
 
