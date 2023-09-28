@@ -38,7 +38,7 @@ class UserServiceImpTest {
 
     @InjectMocks
     UserServiceImp userService;
-    
+
     @Test
     @DisplayName("T-0002 ✅: Verificar que el usuario a dejar de seguir exista.")
     void t0002Ok(){
