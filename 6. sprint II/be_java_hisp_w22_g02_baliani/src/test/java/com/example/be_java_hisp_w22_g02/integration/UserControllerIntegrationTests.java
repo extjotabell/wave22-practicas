@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -44,6 +45,7 @@ public class UserControllerIntegrationTests {
     }
 
     @Test
+    @DisplayName("Follow user integration test - Ok")
     void followUser_Ok_Test() throws Exception {
 
         int userId = 1;
@@ -62,6 +64,7 @@ public class UserControllerIntegrationTests {
     }
 
     @Test
+    @DisplayName("Follow user integration test - Not found user id")
     void followUser_NotFoundUserId_Test() throws Exception {
 
         int userId = 999;
@@ -80,6 +83,7 @@ public class UserControllerIntegrationTests {
     }
 
     @Test
+    @DisplayName("Follow user integration test - Not found user id to follow")
     void followUser_NotFoundUserIdToFollow_Test() throws Exception {
 
         int userId = 1;
@@ -98,6 +102,7 @@ public class UserControllerIntegrationTests {
     }
 
     @Test
+    @DisplayName("Follow user integration test - Follow twice")
     void followUser_FollowTwice_Test() throws Exception {
 
         int userId = 1;
@@ -116,6 +121,7 @@ public class UserControllerIntegrationTests {
     }
 
     @Test
+    @DisplayName("Follow user integration test - Same user id")
     void followUser_SameUserId_Test() throws Exception {
 
         int userId = 1;
@@ -133,6 +139,7 @@ public class UserControllerIntegrationTests {
     }
 
     @Test
+    @DisplayName("Get followers integration test - Ok")
     void getFollowers_Ok_Test() throws Exception {
 
         int userId = 10;
@@ -150,6 +157,7 @@ public class UserControllerIntegrationTests {
     }
 
     @Test
+    @DisplayName("Get followers integration test - Not found")
     void getFollowers_NotFound_Test() throws Exception {
 
         int userId = 999;
@@ -166,6 +174,7 @@ public class UserControllerIntegrationTests {
     }
 
     @Test
+    @DisplayName("Get followed integration test - Ok")
     void getFollowedUser_Ok_Test() throws Exception {
 
         int userId = 1;
@@ -184,6 +193,7 @@ public class UserControllerIntegrationTests {
     }
 
     @Test
+    @DisplayName("Get followed integration test - Not found")
     void getFollowedUser_NotFound_Test() throws Exception {
 
         int userId = 999;
@@ -200,6 +210,7 @@ public class UserControllerIntegrationTests {
     }
 
     @Test
+    @DisplayName("Get followers count by userId integration test - Ok")
     void getFollowersCountByUserId_Ok_Test() throws Exception {
 
         int userId = 10;
@@ -215,6 +226,7 @@ public class UserControllerIntegrationTests {
     }
 
     @Test
+    @DisplayName("Get followers count by userId integration test - Not found")
     void getFollowersCountByUserId_NotFound_Test() throws Exception {
 
         int userId = 999;
@@ -231,6 +243,7 @@ public class UserControllerIntegrationTests {
     }
 
     @Test
+    @DisplayName("Unfollow user integration test - Ok")
     void unfollowUser_Ok_Test() throws Exception{
 
         int userId = 15;
@@ -250,6 +263,7 @@ public class UserControllerIntegrationTests {
     }
 
     @Test
+    @DisplayName("Unfollow user integration test - Not found user id")
     void unfollowUser_NotFoundUserId_Test() throws Exception {
 
         int userId = 999;
@@ -268,6 +282,7 @@ public class UserControllerIntegrationTests {
     }
 
     @Test
+    @DisplayName("Unfollow user integration test - Not found user id to follow")
     void unfollowUser_NotFoundUserIdToUnfollow_Test() throws Exception {
 
         int userId = 1;
@@ -286,6 +301,7 @@ public class UserControllerIntegrationTests {
     }
 
     @Test
+    @DisplayName("Unfollow user integration test - Not following")
     void unfollowUser_NotFollowing_Test() throws Exception {
 
         int userId = 8;
@@ -304,6 +320,7 @@ public class UserControllerIntegrationTests {
     }
 
     @Test
+    @DisplayName("Unfollow user integration test - Same user id")
     void unfollowUser_SameUserId_Test() throws Exception {
 
         int userId = 1;
