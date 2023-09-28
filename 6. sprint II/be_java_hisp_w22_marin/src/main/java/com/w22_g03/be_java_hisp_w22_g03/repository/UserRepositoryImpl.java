@@ -36,10 +36,7 @@ public class UserRepositoryImpl implements UserRepository {
     public User findFollower(int userIdToFollow, int userId) {
         List<User> listOfFollowers = findFollowers(userIdToFollow);
         Optional<User> user = listOfFollowers.stream().filter(u-> u.getUserId() == userId).findFirst();
-        if (user.isPresent()){
-            return user.get();
-        }
-        return null;
+        return user.orElse(null);
     }
 
     @Override
