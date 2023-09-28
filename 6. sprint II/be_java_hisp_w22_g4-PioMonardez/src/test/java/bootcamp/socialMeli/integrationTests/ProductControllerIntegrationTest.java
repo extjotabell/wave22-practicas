@@ -40,7 +40,7 @@ public class ProductControllerIntegrationTest {
     @DisplayName("US 06 - Posts by followed users - OK")
     void getPostsByFollowedUsersTestOk() throws Exception
     {
-        mockMvc.perform(get("/products/followed/2/list")
+        mockMvc.perform(get("/products/followed/{userId}/list", 2)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -54,7 +54,7 @@ public class ProductControllerIntegrationTest {
     @DisplayName("US 06 - Posts by followed users ordered by desc - OK")
     void getPostsByFollowedUsersTestOrderDescOk() throws Exception
     {
-        mockMvc.perform(get("/products/followed/2/list")
+        mockMvc.perform(get("/products/followed/{userId}/list", 2)
                         .contentType(MediaType.APPLICATION_JSON)
                         .param("order", ProductOrderListEnum.date_desc.name()))
                 .andDo(print())
@@ -69,7 +69,7 @@ public class ProductControllerIntegrationTest {
     @DisplayName("US 06 - Posts by followed users ordered by asc - OK")
     void getPostsByFollowedUsersTestOrderAscOk() throws Exception
     {
-        mockMvc.perform(get("/products/followed/2/list")
+        mockMvc.perform(get("/products/followed/{userId}/list", 2)
                         .contentType(MediaType.APPLICATION_JSON)
                         .param("order", ProductOrderListEnum.date_asc.name()))
                 .andDo(print())
@@ -85,7 +85,7 @@ public class ProductControllerIntegrationTest {
     void getPostsByFollowedUsersTestFailUserNotFound() throws Exception
     {
 
-        mockMvc.perform(get("/products/followed/80/list")
+        mockMvc.perform(get("/products/followed/{userId}/list", 80)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isNotFound())
