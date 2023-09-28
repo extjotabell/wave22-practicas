@@ -57,6 +57,7 @@ public class IntegrationTest {
         mapper.registerModule(new JavaTimeModule());
     }
 
+    //US-0004
     /**
      * This integration test calls /users/{user_id}/followed/list endpoint and checks
      * that a user that follows one user returns a FollowedDTO with one user followed.
@@ -110,7 +111,7 @@ public class IntegrationTest {
         Assertions.assertEquals(mapper.writeValueAsString(expectedFollowedDTOWithZero), result.getResponse().getContentAsString());
     }
 
-    //US0005
+    //US-0005
     /**
      * This test verifies that the /products/post POST endpoint returns the response PostDTO expected.
      * It requires another PostDTO in body. This postDTO cant have postId.
