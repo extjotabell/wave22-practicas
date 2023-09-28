@@ -41,6 +41,26 @@ La coleccion de Postman para utilizar mas facilmente los endpoints del pryecto s
 - GET /products/followed/{userId}/list?order=date_asc (Rezno y Agustin)
 - GET /products/followed/{userId}/list?order=date_desc (Rezno y Agustin)
 
+## Testing
+
+- T-0001 (US 0001): Verificar que el usuario a seguir exista. (Matías)
+- T-0002 (US 0007): Verificar que el usuario a dejar de seguir exista. (Santiago)
+- T-0003 (US 0008): Verificar que el tipo de ordenamiento alfabético exista. (Lucas)
+- T-0004 (US 0008): Verificar el correcto ordenamiento ascendente y descendente por nombre. (Gaspar)
+- T-0005 (US 0009): Verificar que el tipo de ordenamiento por fecha exista. (Renzo)
+- T-0006 (US 0009): Verificar el correcto ordenamiento ascendente y descendente por fecha. (Agustín)
+- T-0007 (US 0002): Verificar que la cantidad de seguidores de un determinado usuario sea correcta. (Santiago)
+- T-0008 (US 0006): Verificar que la consulta de publicaciones realizadas en las últimas dos semanas de un determinado vendedor sean efectivamente de las últimas dos semanas. (Renzo)
+
+### Integration Tests
+- POST /products/post
+    - Agregar un post correctamente (Agustín)
+    - No se agregan posts con usuarios inexistentes (Agustín)
+- GET /users/{userId}/followers/list
+    - Obtener los seguidores de un usuario correctamente (Agustín)
+- GET /users/{userId}/followed/list
+    - Obtener los seguidos de un usuario correctamente (Agustín)
+
 ## Integrantes
 - Gaspar Zanini
 - Lucas Espinosa
