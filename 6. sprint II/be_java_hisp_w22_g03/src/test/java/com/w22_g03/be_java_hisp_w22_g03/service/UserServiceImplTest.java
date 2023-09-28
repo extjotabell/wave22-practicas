@@ -63,11 +63,15 @@ class UserServiceImplTest {
     void tearDown() {
     }
 
+     //T-0001
+
+    /*
+    * Verifies that startFollowing() successfully initiates a follow action.
+    * It checks that the user with ID 1 successfully followed the user with ID 2.
+    */
     @Test
     void startFollowingOk() {
         // arrange
-        User follower = TestUtilGenerator.createTestUser(2, "Batalla");
-        User followed = TestUtilGenerator.createTestUserSeller(1, "Insua");
         when(userRepo.findById(1)).thenReturn(follower);
         when(userRepo.findById(2)).thenReturn(followed);
 
@@ -79,6 +83,9 @@ class UserServiceImplTest {
         assertEquals("1 successfully followed 2", response.getMessage());
     }
 
+    /*
+     * Verifies that startFollowing() throws a BadRequestException when trying to follow the same user.
+    */
     @Test
     void startFollowing_SameUser() {
         //act & assert
@@ -86,6 +93,9 @@ class UserServiceImplTest {
         assertEquals("User can't add themselves.", exception.getMessage());
     }
 
+    /*
+    * Verifies that startFollowing() throws a NotFoundException when the user is not found.
+    */
     @Test
     void startFollowing_UserNotFound() {
         //arrange
@@ -96,24 +106,26 @@ class UserServiceImplTest {
         assertEquals("User not found", exception.getMessage());
     }
 
+    /*
+    * Verifies that startFollowing() throws a BadRequestException when the user is not a seller.
+    */
     @Test
     void startFollowing_UserNotSeller() {
         // arrange
-        User follower = TestUtilGenerator.createTestUser(2, "Batalla");
-        User followed = TestUtilGenerator.createTestUser(1, "Insua");
         when(userRepo.findById(1)).thenReturn(follower);
-        when(userRepo.findById(2)).thenReturn(followed);
+        when(userRepo.findById(2)).thenReturn(follower2);
 
         // act & assert
         BadRequestException exception = assertThrows(BadRequestException.class, () -> userService.startFollowing(1, 2));
         assertEquals("User is not seller.", exception.getMessage());
     }
 
+    /*
+    * Verifies that startFollowing() throws a BadRequestException when trying to follow a user that is already being followed.
+    */
     @Test
     void startFollowing_AlreadyFollowed() {
         // arrange
-        User follower = TestUtilGenerator.createTestUser(2, "Batalla");
-        User followed = TestUtilGenerator.createTestUserSeller(1, "Insua");
         follower.addFollowed(followed);
         when(userRepo.findById(1)).thenReturn(follower);
         when(userRepo.findById(2)).thenReturn(followed);
