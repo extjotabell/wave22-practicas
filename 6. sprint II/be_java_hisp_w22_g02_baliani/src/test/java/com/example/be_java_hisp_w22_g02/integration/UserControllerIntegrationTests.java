@@ -165,5 +165,39 @@ public class UserControllerIntegrationTests {
 
     }
 
+    @Test
+    void getFollowedUser_Ok_Test() throws Exception {
+
+        int userId = 1;
+        UserFollowedDTO expected = new UserFollowedDTO(1, "pepito1234");
+        UserFollowDTO userFollow = new UserFollowDTO(10, "miguelito");
+        expected.setFollowed(List.of(userFollow));
+        String expectedString = mapper.writeValueAsString(expected);
+
+        MvcResult mvcResult = mockMvc.perform(get("/users/{userId}/followed/list", userId))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+
+        assertEquals(expectedString, mvcResult.getResponse().getContentAsString());
+
+    }
+
+    @Test
+    void getFollowedUser_NotFound_Test() throws Exception {
+
+        int userId = 999;
+        ExceptionDto expected = new ExceptionDto(String.format(USER_ID_NOT_FOUND.toString(), userId));
+        String expectedString = mapper.writeValueAsString(expected);
+
+        MvcResult mvcResult = mockMvc.perform(get("/users/{userId}/followed/list", userId))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andReturn();
+
+        assertEquals(expectedString, mvcResult.getResponse().getContentAsString());
+
+    }
+
 
 }
