@@ -56,4 +56,46 @@ public class UserControllerIntegrationTest {
                         .value("Intentando seguir un COMPRADOR"))
                 .andReturn();
     }
+
+    @Test
+    void followUserTestFailUserNotFound() throws Exception
+    {
+        mockMvc.perform(post("/users/20/follow/5")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.message")
+                        .value("User with ID #20 not found"))
+                .andReturn();
+    }
+
+    @Test
+    void getFollowersCountTestOk() throws Exception
+    {
+        mockMvc.perform(get("/users/5/followers/list")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.user_id")
+                        .value(5))
+                .andExpect(jsonPath("$.user_name")
+                        .value("Soledad"))
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+    }
+
+    @Test
+    void getFollowersCountTestFailUserNotFound() throws Exception
+    {
+        mockMvc.perform(get("/users/20/followers/list")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message")
+                        .value("User with ID #20 not found"))
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+    }
+
 }
