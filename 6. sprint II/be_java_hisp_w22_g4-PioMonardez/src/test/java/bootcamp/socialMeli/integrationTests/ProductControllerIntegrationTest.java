@@ -28,4 +28,80 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ProductControllerIntegrationTest {
     @Autowired
     MockMvc mockMvc;
+
+    //No se especifica orden, lo ordena por default
+    @Test
+    void getPostsByFollowedUsersTestOk() throws Exception
+    {
+        MvcResult mvcResult = mockMvc.perform(get("/products/followed/2/list")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.user_id")
+                        .value(2))
+                .andReturn();
+
+        assertEquals("application/json", mvcResult.getResponse().getContentType());
+    }
+
+    @Test
+    void getPostsByFollowedUsersTestOrderDescOk() throws Exception
+    {
+        MvcResult mvcResult = mockMvc.perform(get("/products/followed/2/list")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .param("order", ProductOrderListEnum.date_desc.name()))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.user_id")
+                        .value(2))
+                .andReturn();
+
+        assertEquals("application/json", mvcResult.getResponse().getContentType());
+    }
+
+    @Test
+    void getPostsByFollowedUsersTestOrderAscOk() throws Exception
+    {
+        MvcResult mvcResult = mockMvc.perform(get("/products/followed/2/list")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .param("order", ProductOrderListEnum.date_asc.name()))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.user_id")
+                        .value(2))
+                .andReturn();
+
+        assertEquals("application/json", mvcResult.getResponse().getContentType());
+    }
+
+    @Test
+    void getPostsByFollowedUsersTestFailUserNotFound() throws Exception
+    {
+
+        mockMvc.perform(get("/products/followed/80/list")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message")
+                        .value("User with ID #80 not found"))
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+    }
+
+    @Test
+    void getPostsByFollowedUsersTestFailOrderParamInvalid() throws Exception
+    {
+        mockMvc.perform(get("/products/followed/2/list")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .param("order", "prueba"))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message")
+                        .value("Argument type is invalid"))
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+    }
 }
