@@ -55,16 +55,16 @@ Valentina:
 Test:
 - T-0006 : Verificar el correcto ordenamiento ascendente y descendente por fecha. (US-0009)
 
-🎻Nicolas🇯🇵:
-Unit test:
-- T-0005 : Verificar que el tipo de ordenamiento por fecha exista (US-0009)
-- T-0008 : Verificar que la consulta de publicaciones realizadas en las últimas dos semanas de un determinado vendedor sean efectivamente de las últimas dos semanas. (US-0006)
-Integration test:
-- US0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (GET: /users/{userId}/followers/list)
-- US0004: Obtener lista de vendedores que sigue un usuario (GET: /users/{userId}/followed/list)
-- US0005: Dar de alta una nueva publicación (POST: /products/post)
-- US0008: Ordenamiento alfabético ascendente y descendente de US0003 (GET: /users/{userId}/followers/list?order=[order])
-- US0008: Ordenamiento alfabético ascendente y descendente de US0004 (GET: /users/{userId}/followed/list?order=[order])
+### 🎻Nicolas🇯🇵:
+#### Unit test:
+- _T-0005_ : Verificar que el tipo de ordenamiento por fecha exista (US-0009)
+- _T-0008_ : Verificar que la consulta de publicaciones realizadas en las últimas dos semanas de un determinado vendedor sean efectivamente de las últimas dos semanas. (US-0006)
+#### Integration test:
+- _US0003_: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (GET: /users/{userId}/followers/list)
+- _US0004_: Obtener lista de vendedores que sigue un usuario (GET: /users/{userId}/followed/list)
+- _US0005_: Dar de alta una nueva publicación (POST: /products/post)
+- _US0008_: Ordenamiento alfabético ascendente y descendente de US0003 (GET: /users/{userId}/followers/list?order=[order])
+- _US0008_: Ordenamiento alfabético ascendente y descendente de US0004 (GET: /users/{userId}/followed/list?order=[order])
 - 
 Gonzalo:
 Test:
