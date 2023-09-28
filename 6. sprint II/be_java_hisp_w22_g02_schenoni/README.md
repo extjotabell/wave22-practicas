@@ -83,6 +83,45 @@ La colección de postman se encuentra en la carpeta /resources en formato json.
 
 ✅ GET /products/followed/{userId}/list?order --> Gonzalo Messina
 
+
+# Testing Development
+
+✅ T001 - followUser (US-001) --> Gonzalo Messina
+
+✅ T002 - unfollowUser (US-007) --> Emmanuel Schenoni
+
+✅ T003 - getFollowers (US-008 - Existing Order Param)  --> Rodrigo Baliani
+
+✅ T004 - getFollowers (US-008 - Correct Order) --> Iara Roldán
+
+✅ T005 - getFollowedPostLasTwoWeeksOrd (US-009 - Existing Order Param)  --> Julio Alvarez
+
+✅ T006 - getFollowedPostLasTwoWeeksOrd (US-009 - Correct Order) --> Magui Cagna
+
+✅ T007 - getTotalFollowersByUserId (US-002) --> Rodrigo Baliani
+
+✅ T008 - getFollowedPostLasTwoWeeks (US-006) --> Emmanuel Schenoni
+
+
+# Testing Individual (Test de integración en la carpeta controller dentro de "Test")
+
+POST CONTROLLER
+
+✅ addNewPost()
+
+✅ getLastTwoWeeksPostByUserFollowed() 
+
+USER CONTROLLER
+
+✅ getFollwers()
+
+✅ getFollowedUser()
+
+✅ followUser()
+
+✅ unfollowUserNonFollow()
+
+
 # Postman Testing 🟠
 
 Dentro de la carpeta resources se encuentra el archivo "Social Meli - Grupo 2.postman_collection" el cual contiene la coleccion de Postman donde se realizan las pruebas. 
@@ -90,5 +129,4 @@ Dentro de la carpeta resources se encuentra el archivo "Social Meli - Grupo 2.po
 <img width="1672" alt="image" src="https://github.com/extjotabell/wave22-practicas/assets/143105901/3d6d3cf5-1c17-4d41-9d51-04d938adedcf">
 
 Ruta: wave22-practicas/4. sprint I/be_java_hisp_w22_g01/src/main/resources/Social Meli - Grupo 2.postman_collection.json
-
 
