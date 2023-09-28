@@ -61,7 +61,7 @@ Responsable: Luciana Yamila Pio Monardez
 
 A messi y la scaloneta ⭐⭐⭐
 
-##Parte individual
+## Parte individual
 Tests de integración:
 
 Integration Test US 01: GET users (UserController)
