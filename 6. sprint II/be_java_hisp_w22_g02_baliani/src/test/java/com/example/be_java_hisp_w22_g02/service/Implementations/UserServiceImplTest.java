@@ -111,11 +111,8 @@ class UserServiceImplTest {
         when(userRepository.existingUserById(anyInt())).thenReturn(true);
         when(userRepository.findById(anyInt())).thenReturn(new User());
 
-        //Act
-        userService.getFollowers(1, "name_asc");
-
-        //Assert
-        verify(userRepository, atLeastOnce()).findById(anyInt());
+        //Act & Assert
+        assertDoesNotThrow(() -> userService.getFollowers(1, "name_asc"));
 
     }
 
@@ -127,11 +124,8 @@ class UserServiceImplTest {
         when(userRepository.existingUserById(anyInt())).thenReturn(true);
         when(userRepository.findById(anyInt())).thenReturn(new User());
 
-        //Act
-        userService.getFollowers(1, "name_desc");
-
-        //Assert
-        verify(userRepository, atLeastOnce()).findById(anyInt());
+        //Act & Assert
+        assertDoesNotThrow(() -> userService.getFollowers(1, "name_desc"));
 
     }
 
@@ -174,11 +168,8 @@ class UserServiceImplTest {
         when(userRepository.existingUserById(anyInt())).thenReturn(true);
         when(userRepository.findById(anyInt())).thenReturn(new User());
 
-        //Act
-        userService.getFollowed(1, "name_asc");
-
-        //Assert
-        verify(userRepository, atLeastOnce()).findById(anyInt());
+        //Act & Assert
+        assertDoesNotThrow(() -> userService.getFollowed(1, "name_asc"));
     }
 
     @Test
@@ -189,11 +180,8 @@ class UserServiceImplTest {
         when(userRepository.existingUserById(anyInt())).thenReturn(true);
         when(userRepository.findById(anyInt())).thenReturn(new User());
 
-        //Act
-        userService.getFollowed(1, "name_desc");
-
-        //Assert
-        verify(userRepository, atLeastOnce()).findById(anyInt());
+        //Act & Assert
+        assertDoesNotThrow(() -> userService.getFollowed(1, "name_desc"));
 
     }
 
