@@ -1,0 +1,786 @@
+{
+	"info": {
+		"_postman_id": "72728c49-cac7-4af5-b814-97f6f07862f4",
+		"name": "Sprint 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29307478"
+	},
+	"item": [
+		{
+			"name": "Add Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post For Non Existing User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post With User Id Less Than 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post With Product Id Less Than 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 0,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post WIth Product Name Field Of More Than 40 Characters",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post WIth Special Characters On Product Name Field",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post WIth Brand Field Of More Than 25 Characters",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brandddddddddddddddddddddd\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post WIth Special Characters On Brand Field",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"bran%d\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post WIth Type Field Of More Than 15 Characters",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algaaaaaaaaaaaaao\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 1,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post WIth Special Characters On Type Field",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"alga%\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 1,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post WIth Type Color Of More Than 15 Characters",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blueeeeeeeeeeeeeeeeeeeeeeeeee\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 1,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post WIth Special Characters On Color Field",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"alga\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue&\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 1,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post WIth Type Note Of More Than 80 Characters",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"slasdkasghdfjhasfjhasjfhasjhkdfajshdflahjsfjhlasdfjhklasdfljhkasdfhljashfajshdfalshdfkjhasjdfklhaskjdfhasjkldfhajkshdfkjlahsfdjkhasdflasjdkfhasdlkfhaskjdfhaskljhdfjaklsdfhasjdfhlaksjdhfkljasdfkljahsdflkjhasdfkjhasdkjfhaksjdhflahsdfajshdf\"\n  },\n  \"category\": 1,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post WIth Special Characters On Note Field",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"alga\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue&\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 1,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post With Price Above 10M",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"15-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 100000000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post With Missing Fields",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 1,\n  \"date\": \"02-09-2023\",\n  \"product\": {\n    \"product_id\" : 1,\n    \"product_name\": \"product\",\n    \"type\" : \"algo\",\n    \"brand\" : \"brand\",\n    \"color\" : \"blue\",\n    \"notes\" : \"sl\"\n  },\n  \"category\": 11,\n  \"price\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Follow",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:8080/users/0/follow/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Follow With Id Less Than 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:8080/users/0/follow/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Follow By A Non Existing User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:8080/users/0/follow/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Follow A Non Existing User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:8080/users/1/follow/100"
+			},
+			"response": []
+		},
+		{
+			"name": "Count Followers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/users/1/followers/count"
+			},
+			"response": []
+		},
+		{
+			"name": "Count Followers With User Id Less Than 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/users/0/followers/count"
+			},
+			"response": []
+		},
+		{
+			"name": "Count Followers Of Non Existing User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/users/100/followers/count"
+			},
+			"response": []
+		},
+		{
+			"name": "Followers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/users/1/followers/list"
+			},
+			"response": []
+		},
+		{
+			"name": "Followers With User Id Less Than 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/users/0/followers/list"
+			},
+			"response": []
+		},
+		{
+			"name": "Followers With Non Existing User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/users/100/followers/list"
+			},
+			"response": []
+		},
+		{
+			"name": "Followers By Name Desc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/1/followers/list?order=name_desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1",
+						"followers",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "name_desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Followers By Name Asc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/1/followers/list?order=name_asc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1",
+						"followers",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "name_asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Followers By Name With Wrong Order Type",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/1/followers/list?order=name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1",
+						"followers",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "name"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Followed",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/users/1/followed/list"
+			},
+			"response": []
+		},
+		{
+			"name": "Followed With User Id Less Than 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/users/0/followed/list"
+			},
+			"response": []
+		},
+		{
+			"name": "Followed With Non Existing User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/users/100/followed/list"
+			},
+			"response": []
+		},
+		{
+			"name": "Followed By Name Desc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/1/followed/list?order=name_desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1",
+						"followed",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "name_desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Followed By Name Asc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/1/followed/list?order=name_asc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1",
+						"followed",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "name_asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Followed By Name With Wrong Order Type",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/1/followed/list?order=name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1",
+						"followed",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "name"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unfollow",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:8080/users/0/unfollow/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Unfollow With Id Less Than 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:8080/users/0/unfollow/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Unfollow Non Existing User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:8080/users/0/unfollow/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Unfollow By Non Existing User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:8080/users/0/unfollow/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Lista de Posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/products/followed/0/list"
+			},
+			"response": []
+		},
+		{
+			"name": "Lista de Posts With User Id Less Than 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/products/followed/0/list"
+			},
+			"response": []
+		},
+		{
+			"name": "Lista de Posts Of Non Existing User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/products/followed/100/list"
+			},
+			"response": []
+		},
+		{
+			"name": "Lista de Posts By Date Desc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/followed/0/list?order=date_desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"followed",
+						"0",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "date_desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista de Posts By Date Asc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/followed/0/list?order=date_asc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"followed",
+						"0",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "date_asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista de Posts By Date With Wrong Order Type",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/followed/0/list?order=date_asc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"followed",
+						"0",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "date_asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista de Posts By Date With User Id Less Than 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/followed/1/list?order=date_asc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"followed",
+						"1",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "date_asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista de Posts By Date Of Non Existing User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/followed/1/list?order=date_asc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"followed",
+						"1",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "date_asc"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
