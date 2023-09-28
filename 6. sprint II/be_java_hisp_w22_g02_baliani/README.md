@@ -86,6 +86,8 @@ La colección de postman se encuentra en la carpeta /resources en formato json.
 
 # Testing Development
 
+Unitarios:
+
 ✅ T001 - followUser (US-001) --> Gonzalo Messina
 
 ✅ T002 - unfollowUser (US-007) --> Emmanuel Schenoni
@@ -102,6 +104,17 @@ La colección de postman se encuentra en la carpeta /resources en formato json.
 
 ✅ T008 - getFollowedPostLasTwoWeeks (US-006) --> Emmanuel Schenoni
 
+Integracion (UserController):
+
+✅ Follow user
+
+✅ Unfollow user
+
+✅ Get followers
+
+✅ Get followed
+
+✅ Get followers count
 
 
 # Postman Testing 🟠
@@ -112,4 +125,10 @@ Dentro de la carpeta resources se encuentra el archivo "Social Meli - Grupo 2.po
 
 Ruta: wave22-practicas/4. sprint I/be_java_hisp_w22_g01/src/main/resources/Social Meli - Grupo 2.postman_collection.json
 
+
+# Nota desarrollo individual
+
+Se agregaron los tests de integración.
+
+Adicionalmente, se modificaron los test correspondientes al test T0003 ya que, si bien pasaban ok, no realizaban la prueba que se requería.
 
