@@ -1,23 +1,11 @@
 package com.example.be_java_hisp_w22_g05.controller;
-import ch.qos.logback.core.joran.spi.NoAutoStart;
-import com.example.be_java_hisp_w22_g05.entity.User;
-import com.example.be_java_hisp_w22_g05.utils.PostGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
-import org.springframework.http.MediaType;
-import com.example.be_java_hisp_w22_g05.dto.PostDto;
-import com.example.be_java_hisp_w22_g05.dto.ProductDto;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-
-import java.time.LocalDate;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -32,18 +20,7 @@ public class UserControllerIntegralTest {
     @Autowired
     MockMvc mockMvc;
 
-    private ObjectWriter mapper;
-
-    public UserControllerIntegralTest() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-
-        this.mapper = objectMapper
-                .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
-                .writer();
-    }
-
-
+    //Follow Integral Tests
     @Nested
     class Follow{
         @Test
@@ -68,6 +45,7 @@ public class UserControllerIntegralTest {
 
     }
 
+    //Follow Count Integral Tests
     @Nested
     class FollowersCount{
         @Test
@@ -91,6 +69,7 @@ public class UserControllerIntegralTest {
         }
     }
 
+    //List Of Followed Integral Tests
     @Nested
     class ListOfFollwed{
 
@@ -115,6 +94,7 @@ public class UserControllerIntegralTest {
         }
     }
 
+    //Unfollow Integral Tests
     @Nested
     class Unfollow{
         @Test
@@ -138,6 +118,7 @@ public class UserControllerIntegralTest {
         }
     }
 
+    //List of Followed Sellers Integral Tests
     @Nested
     class LisOfFollowedSellers{
         @Test

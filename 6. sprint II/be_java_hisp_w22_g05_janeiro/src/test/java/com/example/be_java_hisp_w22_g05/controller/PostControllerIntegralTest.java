@@ -42,6 +42,7 @@ public class PostControllerIntegralTest {
     }
 
 
+    //Save New Post Integrals Tests
     @Nested
     class savePost{
         @Test
@@ -62,7 +63,6 @@ public class PostControllerIntegralTest {
         @Test
         @DisplayName("Save product invalid param")
         void postSaveAlreadyExistsTest() throws Exception {
-            PostGenerator postGenerator = new PostGenerator();
             ProductDto product = new ProductDto(1,"reloj","ropa","alguna","negro","asd");
             PostDto postDto = new PostDto(2, 2,LocalDate.now(),product,1,120.0,null,null);
             String jsonPayload = mapper.writeValueAsString(postDto);
@@ -94,6 +94,7 @@ public class PostControllerIntegralTest {
         }
     }
 
+    //List Posts From Sellers Integral Tests
     @Nested
     class ListPostFromSellers{
 

@@ -229,15 +229,11 @@ public class UserServiceTest {
             // ARRANGE
             User user = new User(1, "carlos", new ArrayList<>(), new ArrayList<>());
             User userFollower =  new User(2, "maria", new ArrayList<>(), new ArrayList<>());
-
             user.getFollower().add(userFollower);
-
             UserNumberFollowersDto expected = new UserNumberFollowersDto(user.getId(), user.getName(), user.getFollower().size());
-
             when (userRepository.findUsersById(user.getId())).thenReturn(user);
 
             // ACT
-
             UserNumberFollowersDto result = userService.getNumberFollowers(user.getId());
 
             // ASSERT
@@ -245,77 +241,89 @@ public class UserServiceTest {
         }
     }
 
+    //Aqui realize otros unit test no requeridos para aumentar el coverage
     @Nested
     class testsParteIndividual{
-        @Test
-        @DisplayName("Already follow Error")
-        void alreadyFollow(){
-            //Arrange
-            User follower = new User(1,"Enzo", new ArrayList<>(), new ArrayList<>());
-            User seller = new User(2,"Mati", new ArrayList<>(), new ArrayList<>());
-            follower.getFollowed().add(seller);
-            when(userRepository.findUsersById(1)).thenReturn(follower);
-            when(userRepository.findUsersById(2)).thenReturn(seller);
 
-            //Act & Assert
-            Assertions.assertThrows(FollowException.class, ()-> userService.followUser(follower.getId(), seller.getId()));
+        //Follow Units Tests
+        @Nested
+        class Follow{
+            @Test
+            @DisplayName("Already follow Error")
+            void alreadyFollow(){
+                //Arrange
+                User follower = new User(1,"Enzo", new ArrayList<>(), new ArrayList<>());
+                User seller = new User(2,"Mati", new ArrayList<>(), new ArrayList<>());
+                follower.getFollowed().add(seller);
+                when(userRepository.findUsersById(1)).thenReturn(follower);
+                when(userRepository.findUsersById(2)).thenReturn(seller);
+
+                //Act & Assert
+                Assertions.assertThrows(FollowException.class, ()-> userService.followUser(follower.getId(), seller.getId()));
+            }
         }
 
-        @Test
-        @DisplayName("User Number Followers Not Found")
-        void UserNumberFollowersNotFound(){
-            //Arrange
-            when(userRepository.findUsersById(1)).thenReturn(null);
+        //Number Followers Units Test
+        @Nested
+        class NumberFollowers{
+            @Test
+            @DisplayName("User Number Followers Not Found")
+            void UserNumberFollowersNotFound(){
+                //Arrange
+                when(userRepository.findUsersById(1)).thenReturn(null);
 
-            //Act & Assert
-            Assertions.assertThrows(NotFoundException.class, ()-> userService.getNumberFollowers(1));
-        }
-
-        @Test
-        @DisplayName("List Of Users Followed Not Found")
-        void ListOfUsersFollowedNotFound(){
-            //Arrange
-            when(userRepository.findUsersById(1)).thenReturn(null);
-
-            //Act & Assert
-            Assertions.assertThrows(NotFoundException.class, ()-> userService.getListOfUsersFollowedBy(1, ""));
-        }
-
-        @Test
-        @DisplayName("Unfollowed Not Found")
-        void unfollowedNotFound(){
-            //Arrange
-            User follower = new User(1,"Enzo", new ArrayList<>(), new ArrayList<>());
-            User seller = new User(2,"Mati", new ArrayList<>(), new ArrayList<>());
-
-            when(userRepository.findUsersById(1)).thenReturn(follower);
-            when(userRepository.findUsersById(2)).thenReturn(seller);
-
-
-            //Act & Assert
-            Assertions.assertThrows(NotFoundException.class, ()-> userService.unfollowUser(follower.getId(), seller.getId()));
-        }
-
-        @Test
-        @DisplayName("List Of Users Followed Ok")
-        void getListOfUsersFollowedByOkTest(){
-            //Arrange
-            String expected = "Mati";
-            User follower = new User(1,"Enzo", new ArrayList<>(), new ArrayList<>());
-            User seller = new User(2,"Mati", new ArrayList<>(), new ArrayList<>());
-            follower.getFollowed().add(seller);
-
-            when(userRepository.findUsersById(1)).thenReturn(follower);
-
-            //Act
-            UserFollowedDto obtain = userService.getListOfUsersFollowedBy(1, null);
-
-            //Assert
-            Assertions.assertEquals(expected,obtain.getFollowed().get(0).getName());
+                //Act & Assert
+                Assertions.assertThrows(NotFoundException.class, ()-> userService.getNumberFollowers(1));
+            }
         }
 
 
+        //ListOfUsersFollowed Units Tests
+        @Nested
+        class ListOfUsersFollowed{
+            @Test
+            @DisplayName("List Of Users Followed Not Found")
+            void ListOfUsersFollowedNotFound(){
+                //Arrange
+                when(userRepository.findUsersById(1)).thenReturn(null);
 
+                //Act & Assert
+                Assertions.assertThrows(NotFoundException.class, ()-> userService.getListOfUsersFollowedBy(1, ""));
+            }
+
+            @Test
+            @DisplayName("List Of Users Followed Ok")
+            void getListOfUsersFollowedByOkTest(){
+                //Arrange
+                String expected = "Mati";
+                User follower = new User(1,"Enzo", new ArrayList<>(), new ArrayList<>());
+                User seller = new User(2,"Mati", new ArrayList<>(), new ArrayList<>());
+                follower.getFollowed().add(seller);
+                when(userRepository.findUsersById(1)).thenReturn(follower);
+
+                //Act
+                UserFollowedDto obtain = userService.getListOfUsersFollowedBy(1, null);
+
+                //Assert
+                Assertions.assertEquals(expected,obtain.getFollowed().get(0).getName());
+            }
+        }
+
+        //Unfollow Units Tests
+        @Nested
+        class Unfollow{
+            @Test
+            @DisplayName("Unfollowed Not Found")
+            void unfollowedNotFound(){
+                //Arrange
+                User follower = new User(1,"Enzo", new ArrayList<>(), new ArrayList<>());
+                User seller = new User(2,"Mati", new ArrayList<>(), new ArrayList<>());
+                when(userRepository.findUsersById(1)).thenReturn(follower);
+                when(userRepository.findUsersById(2)).thenReturn(seller);
+
+                //Act & Assert
+                Assertions.assertThrows(NotFoundException.class, ()-> userService.unfollowUser(follower.getId(), seller.getId()));
+            }
+        }
     }
-
 }
