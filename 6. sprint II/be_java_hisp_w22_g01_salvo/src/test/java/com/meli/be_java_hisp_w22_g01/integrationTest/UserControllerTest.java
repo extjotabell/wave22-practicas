@@ -33,6 +33,7 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.followed[0].user_name").value("Rick Harrison"))
                 .andDo(print());
     }
+
     @Test
     @DisplayName("US0004 🚫: Usuario no existe")
     void testUS0004Fail() throws Exception {
