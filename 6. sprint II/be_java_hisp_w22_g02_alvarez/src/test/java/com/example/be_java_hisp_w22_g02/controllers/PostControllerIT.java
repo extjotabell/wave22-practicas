@@ -2,7 +2,6 @@ package com.example.be_java_hisp_w22_g02.controllers;
 
 import com.example.be_java_hisp_w22_g02.dto.request.PostDTO;
 import com.example.be_java_hisp_w22_g02.dto.request.ProductDto;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -34,10 +33,8 @@ public class PostControllerIT {
             .setDateFormat(new SimpleDateFormat("dd-MM-yyyy"))
             .writer();
 
-    //Add user post
     @Nested
-    class PostTest {
-
+    class AddPost {
         @Test
         void shouldReturnPostWhenAddUserPost() throws Exception {
             // ARRANGE
@@ -75,6 +72,24 @@ public class PostControllerIT {
                     .andExpect(bodyExpected)
                     .andDo(MockMvcResultHandlers.print());
 
+        }
+    }
+
+    @Nested
+    class GetPosts {
+        @Test
+        void shouldResponseOkWhenGetPosts() throws Exception {
+
+            // ARRANGE & ACT
+            MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/products/followed/1/list");
+            ResultMatcher statusExpected = MockMvcResultMatchers.status().isOk();
+            ResultMatcher contentTypeExpected = MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON);
+
+            // ASSERT
+            mockMvc.perform(request)
+                    .andExpect(statusExpected)
+                    .andExpect(contentTypeExpected)
+                    .andDo(MockMvcResultHandlers.print());
         }
     }
 }
