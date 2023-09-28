@@ -10,11 +10,57 @@ Abrir el archivo pom.xml en IntelliJ para levantar el servidor, las pruebas se p
 Se agregan los siguientes test de integracion con distintos escenarios: 
 
 - US 01 - Follow user
+
+Casos:
+
+Seguir usuario exitosamente
+Intentar seguir a un usuario que ya se sigue
+Intentar seguirse a uno mismo (mismo user id)
+Intentar seguir a un usuario con el rol COMPRADOR
+Intentar seguir a un usuario que no existe
+
 - US 02 - Followers count
+Casos:
+
+Obtener el contador de seguidores
+Intentar obtener el contador de seguidores de un usuario que no existe
+
 - US 03 - Followers list
+
+Obtener la lista de seguidores
+Intentar obtener la lista de seguidores de un usuario que no existe
+
+
 - US 04 - Followed list
+
+Casos:
+Obtener la lista de seguidos
+Intentar obtener la lista de seguidos de un usuario que no existe
+
 - US 05 - Add post
+
+Casos:
+Agregar un post
+Intentar agregar un post con un user id que no existe
+Intentar agregar un post con payload incompleto, en este caso sin especificar el user id
+
 - US 06 - Posts by followed users
+
+Casos:
+Obtener lista de posts de usuarios seguidos
+Obtener lista de posts de usuarios seguidos por orden asc
+Obtener lista de posts de usuarios seguidos por orden desc
+Intentar obtener lista de posts de usuarios seguidos por un usuario que no existe
+Intentar obtener lista de posts de usuarios seguidos por un parametro de ordenamiento invalido(solo se admite asc o desc)
+
+
+- US 07 - Unfollow user
+
+Casos:
+Dejar de seguir a un usuario
+Intentar dejar de seguir a un usuario que no existe
+Intentar dejar de seguir a un usuario que no se sigue
+Intentar dejar de seguir a uno mismo(mismo id)
 
 
 ### Tests

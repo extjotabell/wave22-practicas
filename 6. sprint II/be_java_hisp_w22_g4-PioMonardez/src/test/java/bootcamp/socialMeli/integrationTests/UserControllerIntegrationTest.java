@@ -53,6 +53,21 @@ public class UserControllerIntegrationTest {
     }
 
     @Test
+    @DisplayName("US 01 - Follow user - Already follow user")
+    void followUserTestFailTryFollowSameUser() throws Exception
+    {
+        mockMvc.perform(post("/users/{userId}/follow/{userIdToFollow}", 2, 2)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.message")
+                        .value("IDs enviados iguales"))
+                .andExpect(exception -> assertTrue(exception.getResolvedException() instanceof BadRequestException))
+                .andReturn();
+    }
+
+    @Test
     @DisplayName("US 01 - Follow user - User is COMPRADOR")
     void followUserTestFailFollowComprador() throws Exception
     {
