@@ -104,4 +104,78 @@ public class ProductControllerIntegrationTest {
                 .andExpect(content().contentType("application/json"))
                 .andReturn();
     }
+
+    @Test
+    void addPostTestOk() throws Exception
+    {
+        PostDto postDto = new PostDto(1, null, LocalDate.now(), new ProductDto(
+                100, "Joystick", "Joystick", "Microsoft", "Blanco", "Joystick xbox"),
+                33, 560.00);
+
+        ObjectWriter writer = new ObjectMapper()
+                .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
+                .writer();
+
+        String payload = writer.writeValueAsString(postDto);
+
+
+        MvcResult result = mockMvc.perform(post("/products/post")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(payload))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("text/plain;charset=UTF-8"))
+                .andExpect(content().string("Se agrego exitosamente un nuevo post con el id : 101"))
+                .andReturn();
+    }
+
+    @Test
+    void addPostTestFailUserNotFound() throws Exception
+    {
+        PostDto postDto = new PostDto(80, null, LocalDate.now(), new ProductDto(
+                100, "Joystick", "Joystick", "Microsoft", "Blanco", "Joystick xbox"),
+                33, 560.00);
+
+        ObjectWriter writer = new ObjectMapper()
+                .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
+                .writer();
+
+        String payload = writer.writeValueAsString(postDto);
+
+
+        MvcResult result = mockMvc.perform(post("/products/post")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(payload))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.message")
+                        .value("User with ID #80 not found"))
+                .andReturn();
+    }
+
+    @Test
+    void addPostTestFailIncompletePayloadEmptyUserId() throws Exception
+    {
+        PostDto postDto = new PostDto(null, null, LocalDate.now(), new ProductDto(
+                100, "Joystick", "Joystick", "Microsoft", "Blanco", "Joystick xbox"),
+                33, 350.0);
+
+        ObjectWriter writer = new ObjectMapper()
+                .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
+                .writer();
+
+        String payload = writer.writeValueAsString(postDto);
+
+
+        MvcResult result = mockMvc.perform(post("/products/post")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(payload))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.message")
+                        .value("El  id no puede estar vacío. ;"))
+                .andReturn();
+    }
 }
