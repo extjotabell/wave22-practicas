@@ -1,6 +1,8 @@
 
 # Social Meli - Sprint 2
 
+## Parte Grupal
+
 API de proyecto grupal para el Bootcamp Java que permite seguir usuarios en la plataforma Social Meli, crear publicaciones y ver las publicaciones creadas por otros usuarios de la plataforma.
 
 Abrir el archivo pom.xml en IntelliJ para levantar el servidor, las pruebas se pueden realizar desde la carpeta de Tests bajo el siguiente orden:
@@ -40,7 +42,7 @@ Responsable: Nicolas Guglielmi
 Responsable: Luciana Yamila Pio Monardez
 
 
-## Integrantes
+### Integrantes
 
 - Alejandro Gabriel Hetman
 
@@ -57,7 +59,17 @@ Responsable: Luciana Yamila Pio Monardez
 - Tatiana Elorza
 
 
-## Agradecimientos 
+### Agradecimientos 
 
 A messi y la scaloneta ⭐⭐⭐
 
+
+## Parte individual
+
+Se agregan los siguientes tests de integración:
+
+- Integration Test **US 0005**: POST ***/post*** - [ ProductController ]
+
+- Integration Test **US 0007**: POST ***/unfollow*** - [ UsersController ]
+
+Estimated tests coverage: **78%**

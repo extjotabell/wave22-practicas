@@ -35,7 +35,7 @@ class ProductControllerTest {
         // ARRANGE
         int validSellerUserId = 6;
         ProductDto productDtoRequest = new ProductDto(1, "Silla Gamer", "Gamer", "Racer", "Red and Black", "Special Edition");
-        PostDto postDtoRequest = new PostDto(validSellerUserId, LocalDate.now(), productDtoRequest, 100, 1500D);
+        PostDto postDtoRequest = new PostDto(validSellerUserId, null, LocalDate.now(), productDtoRequest, 100, 1500D);
 
         ObjectWriter writer = new ObjectMapper()
                                     .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
@@ -57,7 +57,7 @@ class ProductControllerTest {
         // ARRANGE
         int invalidSellerUserId = 10000;
         ProductDto productDtoRequest = new ProductDto(1, "Silla Gamer", "Gamer", "Racer", "Red and Black", "Special Edition");
-        PostDto postDtoRequest = new PostDto(invalidSellerUserId, LocalDate.now(), productDtoRequest, 100, 1500D);
+        PostDto postDtoRequest = new PostDto(invalidSellerUserId, null, LocalDate.now(), productDtoRequest, 100, 1500D);
 
         ObjectWriter writer = new ObjectMapper()
                 .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
