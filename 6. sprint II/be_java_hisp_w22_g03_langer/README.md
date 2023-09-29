@@ -59,3 +59,7 @@ Las colecciones de Postman para utilizar mas facilmente los endpoints del proyec
 - Renzo Matias Bayarri
 - Santiago Tobias Langer
 - Agustin Tarda
+
+## Tests de integración
+Para la parte individual y el bonus, hice tests de integración de las user stories 0004 y 0005. 
+Estos tests incluyen casos OK como casos fallidos para llegar al 82% de coverage.
