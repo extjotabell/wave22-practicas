@@ -36,7 +36,7 @@ public class CharacterRepositoryImplTest {
     }
 
     @Test
-    void findAllByNameContainsTestFail()
+    void findAllByNameContainsTestEmpty()
     {
         //ARRANGE
         String query = "Prueba";
