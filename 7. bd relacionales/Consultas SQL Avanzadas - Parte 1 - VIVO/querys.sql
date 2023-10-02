@@ -43,7 +43,7 @@ where apellido like "G%";
 select autores.nombre from autores
 join libro_autor on libro_autor.id_autor = autores.id
 join libros on libro_autor.id_libro = libros.id
-where autores.nombre = "El Universo: Guía de viaje";
+where libros.titulo = "El Universo: Guía de viaje";
 
 -- ¿Qué libros se prestaron al lector “Filippo Galli”?
 
