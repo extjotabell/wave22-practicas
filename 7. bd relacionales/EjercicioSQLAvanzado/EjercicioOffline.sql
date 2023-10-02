@@ -25,4 +25,12 @@ group by g.name
 having cantidad >= 3
 
 #5
-
+select t.nombre, t.apellido
+from
+(select a.first_name as nombre, a.last_name as apellido, count(a.last_name) as apariciones
+from actors a
+inner join actor_movie am on a.id = am.actor_id
+inner join movies m on am.movie_id = m.id
+where m.title like "La Guerra de las galaxias%"
+group by a.first_name, a.last_name) t
+where t.apariciones >= 2; 
