@@ -1,0 +1,178 @@
+PUT /zapatillas
+{
+  "mappings": {
+    "properties": {
+      "marca": { "type": "keyword" },
+      "modelo": { "type": "text" },
+      "precio": { "type": "float" }
+    }
+  }
+}
+
+# Zapatilla 1
+POST /zapatillas/_doc/1
+{
+  "marca": "Nike",
+  "modelo": "Air Max 270",
+  "precio": 150.0
+}
+
+# Zapatilla 2
+POST /zapatillas/_doc/2
+{
+  "marca": "Adidas",
+  "modelo": "Ultraboost 21",
+  "precio": 160.0
+}
+
+# Zapatilla 3
+POST /zapatillas/_doc/3
+{
+  "marca": "Puma",
+  "modelo": "RS-X Reinvent",
+  "precio": 120.0
+}
+
+# Zapatilla 4
+POST /zapatillas/_doc/4
+{
+  "marca": "Reebok",
+  "modelo": "Nano X",
+  "precio": 130.0
+}
+
+# Zapatilla 5
+POST /zapatillas/_doc/5
+{
+  "marca": "New Balance",
+  "modelo": "Fresh Foam X",
+  "precio": 140.0
+}
+
+# Zapatilla 6
+POST /zapatillas/_doc/6
+{
+  "marca": "Under Armour",
+  "modelo": "Hovr Phantom",
+  "precio": 125.0
+}
+
+# Zapatilla 7
+POST /zapatillas/_doc/7
+{
+  "marca": "Saucony",
+  "modelo": "Ride 14",
+  "precio": 130.0
+}
+
+# Zapatilla 8
+POST /zapatillas/_doc/8
+{
+  "marca": "ASICS",
+  "modelo": "GEL-Kayano 28",
+  "precio": 160.0
+}
+
+# Zapatilla 9
+POST /zapatillas/_doc/9
+{
+  "marca": "Brooks",
+  "modelo": "Ghost 14",
+  "precio": 140.0
+}
+
+# Zapatilla 10
+POST /zapatillas/_doc/10
+{
+  "marca": "Mizuno",
+  "modelo": "Wave Rider 25",
+  "precio": 135.0
+}
+
+# Zapatilla 11
+POST /zapatillas/_doc/11
+{
+  "marca": "Nike",
+  "modelo": "React Infinity Run",
+  "precio": 155.0
+}
+
+# Zapatilla 12
+POST /zapatillas/_doc/12
+{
+  "marca": "Adidas",
+  "modelo": "NMD R1",
+  "precio": 170.0
+}
+
+# Zapatilla 13
+POST /zapatillas/_doc/13
+{
+  "marca": "Puma",
+  "modelo": "Future Rider",
+  "precio": 110.0
+}
+
+# Zapatilla 14
+POST /zapatillas/_doc/14
+{
+  "marca": "Reebok",
+  "modelo": "Classic Leather",
+  "precio": 120.0
+}
+
+# Zapatilla 15
+POST /zapatillas/_doc/15
+{
+  "marca": "New Balance",
+  "modelo": "993",
+  "precio": 175.0
+}
+
+# Zapatilla 16
+POST /zapatillas/_doc/16
+{
+  "marca": "Under Armour",
+  "modelo": "Charged Bandit 7",
+  "precio": 130.0
+}
+
+# Zapatilla 17
+POST /zapatillas/_doc/17
+{
+  "marca": "Saucony",
+  "modelo": "Kinvara 12",
+  "precio": 125.0
+}
+
+# Zapatilla 18
+POST /zapatillas/_doc/18
+{
+  "marca": "ASICS",
+  "modelo": "GT-2000 10",
+  "precio": 140.0
+}
+
+# Zapatilla 19
+POST /zapatillas/_doc/19
+{
+  "marca": "Brooks",
+  "modelo": "Launch 8",
+  "precio": 120.0
+}
+
+# Zapatilla 20
+POST /zapatillas/_doc/20
+{
+  "marca": "Mizuno",
+  "modelo": "Wave Inspire 17",
+  "precio": 130.0
+}
+
+GET zapatillas/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "size": 20
+}
