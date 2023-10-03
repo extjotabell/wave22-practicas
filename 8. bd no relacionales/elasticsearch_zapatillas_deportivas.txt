@@ -1,0 +1,188 @@
+PUT /zapatillas_deportivas
+{
+  "mappings": {
+    "properties": {
+      "brand": {
+        "type": "keyword"
+      },
+      "size": {
+        "type": "integer"
+      },
+      "color": {
+        "type": "keyword"
+      },
+      "price": {
+        "type": "float"
+      }
+    }
+  }
+}
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Nike",
+  "size": 10,
+  "color": "Red",
+  "price": 99.99
+}
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Adidas",
+  "size": 8,
+  "color": "Blue",
+  "price": 79.99
+}
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Puma",
+  "size": 9,
+  "color": "Black",
+  "price": 64.99
+}
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Reebok",
+  "size": 11,
+  "color": "White",
+  "price": 89.99
+}
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Nike",
+  "size": 7,
+  "color": "Green"
+}
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Adidas",
+  "size": 8,
+  "color": "Red",
+  "price": 74.99
+}
+
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Puma",
+  "size": 10,
+  "color": "Blue",
+  "price": 54.99
+}
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Reebok",
+  "size": 9,
+  "color": "Black",
+  "price": 79.99
+}
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Nike",
+  "size": 12,
+  "color": "White",
+  "price": 99.99
+}
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Adidas",
+  "size": 7,
+  "color": "Green",
+  "price": 69.99
+}
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Puma",
+  "size": 11,
+  "color": "Red",
+  "price": 59.99
+}
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Reebok",
+  "size": 8,
+  "color": "Blue",
+  "price": 84.99
+}
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Nike",
+  "size": 9,
+  "color": "Black",
+  "price": 94.99
+}
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Adidas",
+  "size": 10,
+  "color": "White",
+  "price": 69.99
+}
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Puma",
+  "size": 12,
+  "color": "Green",
+  "price": 49.99
+}
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Reebok",
+  "size": 7,
+  "color": "Red",
+  "price": 79.99
+}
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Nike",
+  "size": 8,
+  "color": "Blue",
+  "price": 109.99
+}
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Adidas",
+  "size": 11,
+  "color": "Black",
+  "price": 64.99
+}
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Nike",
+  "size": 7,
+  "color": "Yellow",
+  "price": 79.99
+}
+
+POST /zapatiilas_deportivas/_doc
+{
+  "brand": "Adidas",
+  "size": 9,
+  "color": "Purple",
+  "price": 89.99
+}
+
+GET zapatiilas_deportivas/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "size": 20
+}
+
