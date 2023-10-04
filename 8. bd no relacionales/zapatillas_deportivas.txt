@@ -1,0 +1,164 @@
+PUT zapatillas
+{
+  "mappings": {
+    "properties": {
+      "marca": {
+        "type": "text"
+      },
+      "modelo":{
+        "type": "text"
+      },
+      "precio":{
+        "type": "double"
+      },
+      "stock":{
+        "type": "boolean"
+      }
+    }
+  }
+}
+
+POST zapatillas/_doc
+{
+  "marca": "Nike",
+  "modelo": "Mercurial",
+  "precio": 20000,
+  "stock": true
+}
+POST zapatillas/_doc
+{
+  "marca": "Adidas",
+  "modelo": "Predator",
+  "precio": 22000,
+  "stock": false
+}
+POST zapatillas/_doc
+{
+  "marca": "Nike",
+  "modelo": "Air Max",
+  "precio": 110000,
+  "stock": true
+}
+POST zapatillas/_doc
+{
+  "marca": "Nike",
+  "modelo": "Air Jordan",
+  "precio": 80000,
+  "stock": false
+}
+POST zapatillas/_doc
+{
+  "marca": "Adidas",
+  "modelo": "Superstar",
+  "precio": 90000,
+  "stock": true
+}
+POST zapatillas/_doc
+{
+  "marca": "Adidas",
+  "modelo": "Lite Racer",
+  "precio": 40000,
+  "stock": true
+}
+POST zapatillas/_doc
+{
+  "marca": "Adidas",
+  "modelo": "Duramo",
+  "precio": 47000,
+  "stock": true
+}
+POST zapatillas/_doc
+{
+  "marca": "Nike",
+  "modelo": "AirMax 97",
+  "precio": 50000,
+  "stock": true
+}
+POST zapatillas/_doc
+{
+  "marca": "Puma",
+  "modelo": "Suede Classic",
+  "precio": 50000,
+  "stock": true
+}
+POST zapatillas/_doc
+{
+  "marca": "Puma",
+  "modelo": "Forever Run",
+  "precio": 112000,
+  "stock": false
+}
+POST zapatillas/_doc
+{
+  "marca": "Puma",
+  "modelo": "Palermo",
+  "precio": 83000,
+  "stock": true
+}
+POST zapatillas/_doc
+{
+  "marca": "Nike",
+  "modelo": "Jordan Break",
+  "precio": 33000,
+  "stock": true
+}
+POST zapatillas/_doc
+{
+  "marca": "Nike",
+  "modelo": "Dunk Low",
+  "precio": 90000,
+  "stock": false
+}
+POST zapatillas/_doc
+{
+  "marca": "Adidas",
+  "modelo": "Gazelle Bold",
+  "precio": 90000,
+  "stock": false
+}
+POST zapatillas/_doc
+{
+  "marca": "Nike",
+  "modelo": "Predator",
+  "precio": 20000,
+  "stock": true
+}
+POST zapatillas/_doc
+{
+  "marca": "Puma",
+  "modelo": "Breakthrough",
+  "precio": 75000,
+  "stock": false
+}
+POST zapatillas/_doc
+{
+  "marca": "Puma",
+  "modelo": "Velophasis",
+  "precio": 112000,
+  "stock": true
+}
+POST zapatillas/_doc
+{
+  "marca": "Nike",
+  "modelo": "Jordan Stadium",
+  "precio": 105000,
+  "stock": true
+}
+POST zapatillas/_doc
+{
+  "marca": "Nike",
+  "modelo": "Air More Uptempo",
+  "precio": 140000,
+  "stock": true
+}
+POST zapatillas/_doc
+{
+  "marca": "Adidas",
+  "modelo": "Court",
+  "precio": 43500,
+  "stock": false
+}
+
+GET zapatillas/_search?size=20
+GET zapatillas/_search?q=marca:nike&size=5
+GET zapatillas/_search?q=marca:adidas or precio:110000
