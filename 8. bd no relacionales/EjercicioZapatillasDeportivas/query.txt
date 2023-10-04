@@ -1,0 +1,30 @@
+GET zapatillas_deportivas/_search?size=23
+
+POST zapatillas_deportivas/_doc
+{
+  "Talla": 43,
+  "ID": 21,
+  "Marca": "Nike",
+  "Modelo": "Air Jordan",
+  "Precio": 220
+}
+
+GET zapatillas_deportivas/_search?q=ID:21
+
+POST zapatillas_deportivas/_update_by_query
+{
+  "query": {
+    "match": {
+      "ID": "21"
+    }
+  },
+  "script": {
+    "source": "ctx._source.Marca = 'Adidas'; ctx._source.Modelo = 'Super Star'"
+  }
+}
+
+GET zapatillas_deportivas/_search?q=ID:21
+
+DELETE zapatillas_deportivas/_doc/FzDM-ooBPqtE0Y0XcSwh
+
+GET zapatillas_deportivas/_search?q=ID:21
