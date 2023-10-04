@@ -1,0 +1,7 @@
+"_id","_index","_score","_type",marca,"marca.keyword",modelo,"modelo.keyword",precio,talla,"talla.keyword"
+"c6U0-4oBuk0MjfSfe-_O",productos,1,"_doc",Nike,Nike,"Air Max 90","Air Max 90","150.99",42,42
+"dKU8-4oBuk0MjfSf1-_x",productos,1,"_doc",Puma,Puma,"Clyde Court","Clyde Court","120.5",41,41
+"daU8-4oBuk0MjfSf3O_9",productos,1,"_doc",Reebok,Reebok,"Nano X1","Nano X1","129.99",43,43
+"dqU8-4oBuk0MjfSf6e9K",productos,1,"_doc","New Balance","New Balance","Fresh Foam Roav","Fresh Foam Roav","89.95",38,38
+"d6U8-4oBuk0MjfSf8e-G",productos,1,"_doc","Under Armour","Under Armour","Project Rock","Project Rock","179.99",44,44
+"eKU8-4oBuk0MjfSf-e84",productos,1,"_doc",Converse,Converse,"Chuck Taylor All Star","Chuck Taylor All Star","59.99",40,40
