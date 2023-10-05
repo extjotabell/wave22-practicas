@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "35328ab4-4bc1-45fa-aa27-2459012fe54e",
+		"name": "JPAREpoLasPErlas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/jewelry/new",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"joya1\",\n    \"material\": \"oro\",\n    \"peso\": 12,\n    \"particularidad\": \"rare\",\n    \"poseePiedra\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/jewelry/new",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jewelry",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/jewelry/delete/1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"joya1\",\n    \"material\": \"oro\",\n    \"peso\": 12,\n    \"particularidad\": \"rare\",\n    \"poseePiedra\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/jewelry/delete/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jewelry",
+						"delete",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/jewelry/update/1",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"joya1Modified\",\n    \"material\": \"oro\",\n    \"peso\": 12,\n    \"particularidad\": \"rare\",\n    \"poseePiedra\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/jewelry/update/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jewelry",
+						"update",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/jewelry",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/jewelry",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jewelry"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
