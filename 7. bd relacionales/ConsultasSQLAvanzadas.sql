@@ -43,7 +43,7 @@ SELECT nombre, apellido from estudiante where apellido like 'G%';
 /* 9 */
 SELECT nombre from autor
 JOIN libro_autor ON autor.id_autor = libro_autor.id_autor
-JOIN libro ON libro.id_libro = libro_autor.id_libro where libro.titulo like 'El Universo: Guía de viaje'
+JOIN libro ON libro.id_libro = libro_autor.id_libro where libro.titulo like 'El Universo: Guía de viaje';
 /* 10 */
 SELECT titulo 
 FROM libro
@@ -57,13 +57,13 @@ SELECT estudiante.nombre
 from estudiante
 JOIN prestamo on prestamo.id_lector = estudiante.id_lector
 JOIN libro ON libro.id_libro = prestamo.id_libro
-WHERE area like 'Base de datos'
+WHERE area like 'Base de datos';
 /* 13 */
 SELECT titulo from libro
 JOIN libro_autor ON libro_autor.id_libro = libro.id_libro
-JOIN autor ON libro_autor.id_autor = autor.id_autor WHERE autor.nombre like 'J.K. Rowling'
+JOIN autor ON libro_autor.id_autor = autor.id_autor WHERE autor.nombre like 'J.K. Rowling';
 /* 14 */
 SELECT titulo 
 from libro
-JOIN prestamo ON prestamo.id_libro = libro.id_libro WHERE fecha_devolucion like '2021-07-16%'
+JOIN prestamo ON prestamo.id_libro = libro.id_libro WHERE fecha_devolucion like '2021-07-16%';
 
