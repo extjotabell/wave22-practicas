@@ -15,5 +15,5 @@ public interface IJewelryService {
 
     Long deleteById(Long id);
 
-//    JewelDTO updateById(Long id, JewelDTO updatedJewel);
+    JewelDTO updateById(Long id, JewelDTO updatedJewel);
 }

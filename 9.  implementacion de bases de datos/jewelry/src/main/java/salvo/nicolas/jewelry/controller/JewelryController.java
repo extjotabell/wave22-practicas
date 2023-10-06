@@ -29,4 +29,9 @@ public class JewelryController {
         return new ResponseEntity<>(service.deleteById(id) , HttpStatus.OK);
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateJewel(@PathVariable Long id, JewelDTO updatedJewel){
+        return new ResponseEntity<>(service.updateById(id, updatedJewel) , HttpStatus.OK);
+    }
+
 }

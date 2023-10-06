@@ -53,14 +53,15 @@ public class JewelryService implements IJewelryService {
         throw new NotFoundException("No se encontró la joya con id: " + id);
     }
 
-//    @Override
-//    @Transactional
-//    public JewelDTO updateById(Long id, JewelDTO updatedJewel) {
-//        Optional<Jewel> foundJewel = jewelryRepository.findById(id);
-//        if (foundJewel.isPresent()) {
-//            JewelDTO jewelDTO = Util.mapper.convertValue(foundJewel, JewelDTO.class);
-//            // jewelryRepository.save(foundJewel.get()); No es necesario ya que esta dentro de un metodo transactional y lo maneja automáticamente
-//        }
-//        throw new NotFoundException("No se encontró la joya con id: " + id);
-//    }
+    @Override
+    @Transactional
+    public JewelDTO updateById(Long id, JewelDTO updatedJewel) {
+        Optional<Jewel> foundJewel = jewelryRepository.findById(id);
+        if (foundJewel.isPresent()) {
+            Jewel jewel = Util.mapper.convertValue(updatedJewel, Jewel.class);
+            jewelryRepository.save(jewel);
+            return updatedJewel;
+        }
+        throw new NotFoundException("No se encontró la joya con id: " + id);
+    }
 }
