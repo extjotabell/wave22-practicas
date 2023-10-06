@@ -1,7 +1,8 @@
-package com.meli.obtenerdiploma.service;
+package com.meli.obtenerdiploma.unitTesting.service;
 
 import com.meli.obtenerdiploma.repository.StudentDAO;
 import com.meli.obtenerdiploma.repository.StudentRepository;
+import com.meli.obtenerdiploma.service.StudentService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

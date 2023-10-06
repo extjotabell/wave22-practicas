@@ -1,9 +1,10 @@
-package com.meli.obtenerdiploma.repository;
+package com.meli.obtenerdiploma.unitTesting.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.meli.obtenerdiploma.model.StudentDTO;
+import com.meli.obtenerdiploma.repository.StudentRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,5 +1,6 @@
-package com.meli.obtenerdiploma.controller;
+package com.meli.obtenerdiploma.unitTesting.controller;
 
+import com.meli.obtenerdiploma.controller.ObtenerDiplomaController;
 import com.meli.obtenerdiploma.service.ObtenerDiplomaService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
