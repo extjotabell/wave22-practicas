@@ -20,8 +20,8 @@ public class JewelryController {
     }
 
     @GetMapping()
-    public ResponseEntity<?> getAll(){
-        return new ResponseEntity<>(service.getAll() , HttpStatus.OK);
+    public ResponseEntity<?> getAll(@RequestParam(required = false) boolean showDeleted){
+        return new ResponseEntity<>(service.getAll(showDeleted) , HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")

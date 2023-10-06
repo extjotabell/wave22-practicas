@@ -11,8 +11,8 @@ import org.hibernate.annotations.Where;
 
 @Entity
 @Getter @Setter
-@SQLDelete(sql = "UPDATE jewel SET sellable = false WHERE id=?")
-@Where(clause = "sellable=true")
+//@SQLDelete(sql = "UPDATE jewel SET sellable = false WHERE id=?")
+//@Where(clause = "sellable=true")
 public class Jewel {
 
     @Id

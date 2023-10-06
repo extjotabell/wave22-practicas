@@ -9,7 +9,7 @@ public interface IJewelryService {
 
     Long create(JewelDTO jewelDTO);
 
-    List<JewelDTO> getAll();
+    List<JewelDTO> getAll(boolean showDeleted);
 
     JewelDTO getById(Long id);
 
