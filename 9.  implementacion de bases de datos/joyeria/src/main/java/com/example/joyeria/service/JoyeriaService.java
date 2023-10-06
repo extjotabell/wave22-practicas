@@ -25,7 +25,7 @@ public class JoyeriaService implements IJoyeriaService {
     @Override
     public List<JoyaDTO> getAll() {
         ObjectMapper mapper = new ObjectMapper();
-        List<Joya> joyas = repo.findAll();
+        List<Joya> joyas = repo.findAllVentaONo();
         return joyas.stream().map(joya -> mapper.convertValue(joya, JoyaDTO.class)).toList();
     }
 
