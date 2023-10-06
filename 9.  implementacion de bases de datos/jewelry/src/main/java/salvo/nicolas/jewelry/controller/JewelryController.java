@@ -30,7 +30,7 @@ public class JewelryController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateJewel(@PathVariable Long id, JewelDTO updatedJewel){
+    public ResponseEntity<?> updateJewel(@PathVariable Long id, @RequestBody JewelDTO updatedJewel){
         return new ResponseEntity<>(service.updateById(id, updatedJewel) , HttpStatus.OK);
     }
 

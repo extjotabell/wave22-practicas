@@ -58,7 +58,10 @@ public class JewelryService implements IJewelryService {
     public JewelDTO updateById(Long id, JewelDTO updatedJewel) {
         Optional<Jewel> foundJewel = jewelryRepository.findById(id);
         if (foundJewel.isPresent()) {
+            System.out.println("ENTRA!");
+            System.out.println(updatedJewel);
             Jewel jewel = Util.mapper.convertValue(updatedJewel, Jewel.class);
+            jewel.setId(id);
             jewelryRepository.save(jewel);
             return updatedJewel;
         }
