@@ -13,6 +13,7 @@ EXPLAIN SELECT * FROM movies;
 /* TABLAS TEMPORALES*/
 
 CREATE TEMPORARY TABLE Harringui (nombreActor varchar(40), apellidoActor varchar(40));
+
 INSERT INTO Harringui SELECT DISTINCT act.first_name, act.last_name
 FROM movies mo
 JOIN actor_movie am ON mo.id = am.movie_id
