@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @Repository
 public interface IJoyeriaRepository extends JpaRepository<Joya,Long> {
-    @Query("SELECT j FROM Joya j WHERE j.ventaONo = true")
-    List<Joya> findAllVentaONo();
+    List<Joya> findAllByVentaONoTrue();
 }
 
