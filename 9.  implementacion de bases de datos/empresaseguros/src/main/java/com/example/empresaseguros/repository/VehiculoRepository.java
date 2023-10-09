@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface VehiculoRepository extends JpaRepository<Vehiculo, Integer> {
     @Query("SELECT v.patente FROM Vehiculo v")
-    public List<Vehiculo> obtenerTodasLasPatentes();
+    public List<String> obtenerTodasLasPatentes();
 
     @Query("SELECT v.marca, v.patente FROM Vehiculo v ORDER BY v.añoFabricacion")
     public List<Vehiculo> obtenerPatenteYMarcaOrdenadoPorAñoDeFabricacion();

@@ -1,6 +1,7 @@
 package com.example.empresaseguros.dto;
 
 import com.example.empresaseguros.entity.Siniestro;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
@@ -20,7 +21,10 @@ public class VehiculoDTO {
     private String patente;
     private String marca;
     private String modelo;
+
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate añoFabricacion;
+
     private int cantidadRuedas;
     private List<Siniestro> siniestros;
 }

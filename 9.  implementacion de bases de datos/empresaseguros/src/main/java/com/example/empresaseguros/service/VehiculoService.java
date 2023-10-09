@@ -1,6 +1,7 @@
 package com.example.empresaseguros.service;
 
 import com.example.empresaseguros.dto.VehiculoDTO;
+import com.example.empresaseguros.dto.responce.VehiculoPatenteDTO;
 import com.example.empresaseguros.entity.Vehiculo;
 import com.example.empresaseguros.repository.VehiculoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,7 +22,6 @@ public class VehiculoService implements IVehiculoService {
     ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
     public Integer create(VehiculoDTO vehiculoDTO) {
-        ObjectMapper mapper = new ObjectMapper();
         Vehiculo vehiculo = mapper.convertValue(vehiculoDTO, Vehiculo.class);
         return repository.save(vehiculo).getId_vehiculo();
     }
@@ -31,6 +31,14 @@ public class VehiculoService implements IVehiculoService {
 
         return vehiculoList.stream()
                 .map(vehiculo -> mapper.convertValue(vehiculo, VehiculoDTO.class)).toList();
+    }
+
+    @Override
+    public List<VehiculoPatenteDTO> getAllPatentes() {
+        List<String> patentesList = repository.obtenerTodasLasPatentes();
+
+        return patentesList.stream()
+                .map(vehiculo -> mapper.convertValue(vehiculo , VehiculoPatenteDTO.class)).toList();
     }
 
     public List<VehiculoDTO> getVehiculosMas4RuedasDeEsteAño(){

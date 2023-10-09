@@ -1,10 +1,8 @@
 package com.example.empresaseguros.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -12,6 +10,7 @@ import java.time.LocalDate;
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Table(name = "Siniestros")
 public class Siniestro {
 
@@ -19,6 +18,7 @@ public class Siniestro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_siniestro;
 
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate fecha;
     private Double perdidaEconomica;
 }

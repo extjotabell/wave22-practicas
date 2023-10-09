@@ -16,6 +16,8 @@ public class SiniestroService implements ISiniestroService {
 
     @Autowired
     SiniestroRepository repository;
+
+    @Autowired
     VehiculoRepository vehiculoRepository;
 
     public Integer create(SiniestroDTO siniestroDTO){
