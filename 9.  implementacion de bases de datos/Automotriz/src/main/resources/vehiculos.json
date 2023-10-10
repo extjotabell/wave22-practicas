@@ -1,0 +1,51 @@
+{
+  "vehiculos": [
+    {
+      "id": 1,
+      "patente": "ABC123",
+      "marca": "Toyota",
+      "modelo": "Corolla",
+      "anioDeFabricacion": "2019-01-01",
+      "cantidadDeRuedas": 4,
+      "siniestros": [
+        {
+          "id": 1,
+          "fecha": "2023-01-15",
+          "perdidaEconomica": 5000.00,
+          "idVehiculoDenunciado": 2
+        },
+        {
+          "id": 2,
+          "fecha": "2023-05-20",
+          "perdidaEconomica": 3000.50,
+          "idVehiculoDenunciado": 3
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "patente": "DEF456",
+      "marca": "Ford",
+      "modelo": "Focus",
+      "anioDeFabricacion": "2020-03-10",
+      "cantidadDeRuedas": 4,
+      "siniestros": [
+        {
+          "id": 3,
+          "fecha": "2023-02-28",
+          "perdidaEconomica": 7000.75,
+          "idVehiculoDenunciado": 1
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "patente": "GHI789",
+      "marca": "Chevrolet",
+      "modelo": "Malibu",
+      "anioDeFabricacion": "2018-11-05",
+      "cantidadDeRuedas": 4,
+      "siniestros": []
+    }
+  ]
+}
