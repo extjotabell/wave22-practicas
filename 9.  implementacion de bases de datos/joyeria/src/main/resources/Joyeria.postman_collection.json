@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "55ff9090-8174-4e37-a2ed-5161e09739be",
+		"name": "Joyeria",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29806303"
+	},
+	"item": [
+		{
+			"name": "Guardar joya",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Taza\",\n    \"material\": \"Porcelana\",\n    \"peso\": 300,\n    \"particularidad\": \"Dinastia Qing\",\n    \"posee_piedra\": false,\n    \"ventaONo\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/jewelry/new",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jewelry",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ver joyas a la venta",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/jewelry",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jewelry"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar logicamente una joya",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/jewelry/delete/102",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jewelry",
+						"delete",
+						"102"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar elemento",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Taza\",\n    \"material\": \"Porcelana\",\n    \"peso\": 1000,\n    \"particularidad\": \"Dinastia Qing\",\n    \"posee_piedra\": false,\n    \"ventaONo\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/jewelry/update/102",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jewelry",
+						"update",
+						"102"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
