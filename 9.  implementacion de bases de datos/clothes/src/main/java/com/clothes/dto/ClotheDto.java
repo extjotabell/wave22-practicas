@@ -1,5 +1,6 @@
 package com.clothes.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClotheDto {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Long code;
     private String name;
     private String type;
     private String brand;
