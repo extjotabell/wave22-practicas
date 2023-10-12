@@ -1,0 +1,16 @@
+INSERT INTO `clothes` (`code`, `nombre`, `tipo`, `marca`, `color`, `talle`, `cantidad`, `precio_venta`) VALUES
+    ('001', 'Remera', 'Camiseta', 'Nike', 'Rojo', 'M', 20, 29.99),
+    ('002', 'Pantalón', 'Pantalón', 'Adidas', 'Negro', 'L', 15, 49.99),
+    ('003', 'Buzo', 'Abrigo', 'Nike', 'Negro', 'S', 12, 60),
+    ('004', 'Buzo', 'Abrigo', 'Puma', 'Gris', 'XL', 12, 69.99),
+    ('005', 'Jean', 'Pantalón', 'Levis', 'Azul', 'S', 18, 79.99),
+    ('006', 'Abrigo', 'Abrigo', 'The North Face', 'Negro', 'L', 8, 149.99),
+    ('007', 'Vestido', 'Vestido', 'Zara', 'Rojo', 'S', 10, 39.99),
+    ('008', 'Bufanda', 'Accesorio', 'H&M', 'Verde', 'M', 30, 9.99),
+    ('009', 'Sombrero', 'Accesorio', 'Gucci', 'Negro', 'L', 15, 129.99),
+    ('010', 'Shorts', 'Pantalón', 'Adidas', 'Azul', 'M', 22, 34.99),
+    ('011', 'Calcetines', 'Calcetines', 'Nike', 'Blanco', '39-42', 50, 5.99),
+    ('012', 'Top', 'Camiseta', 'Calvin Klein', 'Negro', 'S', 14, 19.99),
+    ('013', 'Gorra', 'Accesorio', 'New Era', 'Azul', 'XS', 20, 24.99),
+    ('014', 'Chaleco', 'Abrigo', 'Columbia', 'Gris', 'M', 7, 89.99),
+    ('015', 'Bufanda', 'Accesorio', 'H&M', 'Rojo', 'XL', 25, 12.99);
