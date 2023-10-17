@@ -1,0 +1,30 @@
+# Creando el indice con metodo PUT: http://localhost:9200/zapatillas
+
+{"mappings":{
+    "properties": {
+      "marca": {"type": "keyword"},
+      "modelo": {"type": "text"},
+      "talla": {"type": "float"},
+      "color": {"type": "keyword"},
+      "precio": {"type": "float"},
+      "disponibilidad": {"type": "boolean"}
+    }
+  }
+}
+
+# POST para agregar un registro: http://localhost:9200/zapatillas/_doc
+
+{
+  "marca": "Nike",
+  "modelo": "Air Max 270",
+  "talla": 9.5,
+  "color": "Negro",
+  "precio": 129.99,
+  "disponibilidad": true
+}
+
+# GET para obtenerlo por ID
+
+http://localhost:9200/zapatillas/_doc/K4aBO4sBLmDm3SAKOsR0
+
+donde "K4aBO4sBLmDm3SAKOsR0" es el ID del registro

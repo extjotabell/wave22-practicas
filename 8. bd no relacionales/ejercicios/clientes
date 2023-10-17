@@ -1,0 +1,20 @@
+# Primer POST y GET de elastic search
+## Agrego un registro al indice clientes
+
+POST /clientes/_doc
+{
+  "nombre": "Iara",
+  "apellido":"Roldan",
+  "pais":"Argentina",
+  "localidad":"Buenos Aires"
+}
+
+## Busqueda
+GET /clientes/_search
+{
+  "query":{
+    "match": {
+      "pais": "Argentina"
+    }
+  }
+}

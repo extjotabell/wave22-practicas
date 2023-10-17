@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="de749b06-ba52-4bb2-be0c-06aca9c9dcd0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../5. testing/integradores/calculadora-metros-cuadrados/src/test/java/com/mercadolibre/calculadorametroscuadrados/controller/CalculateRestControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../5. testing/integradores/calculadora-metros-cuadrados/src/test/java/com/mercadolibre/calculadorametroscuadrados/dto/HouseDTOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../5. testing/integradores/calculadora-metros-cuadrados/src/test/java/com/mercadolibre/calculadorametroscuadrados/dto/HouseResponseDTOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../5. testing/integradores/calculadora-metros-cuadrados/src/test/java/com/mercadolibre/calculadorametroscuadrados/dto/RoomDTOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../5. testing/integradores/calculadora-metros-cuadrados/src/test/java/com/mercadolibre/calculadorametroscuadrados/integration/CalculateControllerIntegrationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../5. testing/integradores/calculadora-metros-cuadrados/src/test/java/com/mercadolibre/calculadorametroscuadrados/service/CalculateServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../5. testing/integration-tests/starwars/src/test/java/com/mercadolibre/starwars/integration/FindControllerIntegrationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../5. testing/unit-test/roman-numerals/src/test/java/com/mercadolibre/romannumerals/controller/ControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../5. testing/unit-test/starwars/src/test/java/com/mercadolibre/starwars/controller/FindControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../5. testing/unit-test/starwars/src/test/java/com/mercadolibre/starwars/dto/CharacterDTOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../5. testing/unit-test/starwars/src/test/java/com/mercadolibre/starwars/repositories/CharacterRepositoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../5. testing/unit-test/starwars/src/test/java/com/mercadolibre/starwars/service/FindServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../5. testing/unit-test/starwars/src/test/java/com/mercadolibre/starwars/utils/ObjectFactoryHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../8. bd no relacionales/ejercicios/clientes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../8. bd no relacionales/ejercicios/zapatillasDeportivas" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../claveCompuesta/compras/src/main/java/com/example/compras/controller/CompraController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../claveCompuesta/compras/src/main/java/com/example/compras/dto/CompraDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../claveCompuesta/compras/src/main/java/com/example/compras/model/Cliente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../claveCompuesta/compras/src/main/java/com/example/compras/model/Compra.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../claveCompuesta/compras/src/main/java/com/example/compras/model/CompraId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../claveCompuesta/compras/src/main/java/com/example/compras/repository/CompraRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../claveCompuesta/compras/src/main/java/com/example/compras/service/CompraService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../joyeria/src/main/java/com/meli/joyeria/dto/JoyaDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../joyeria/src/main/java/com/meli/joyeria/service/IJoyeriaService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../joyeria/src/main/java/com/meli/joyeria/service/JoyeriaService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testerManual/demo/src/main/java/com/example/demo/controller/TestCaseController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testerManual/demo/src/main/java/com/example/demo/dto/TestCaseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testerManual/demo/src/main/java/com/example/demo/model/TestCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testerManual/demo/src/main/java/com/example/demo/repository/TestCaseRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testerManual/demo/src/main/java/com/example/demo/service/ITestCaseService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testerManual/demo/src/main/java/com/example/demo/service/TestCaseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../claveCompuesta/movies/HELP.md" beforeDir="false" afterPath="$PROJECT_DIR$/../claveCompuesta/movies/HELP.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../claveCompuesta/movies/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../claveCompuesta/movies/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../claveCompuesta/movies/src/main/java/com/example/movies/MoviesApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../claveCompuesta/movies/src/main/java/com/example/movies/MoviesApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../claveCompuesta/movies/src/test/java/com/example/movies/MoviesApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../claveCompuesta/movies/src/test/java/com/example/movies/MoviesApplicationTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2WsSpZi9DRLwPlqqiZS3ozN8sFq" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "roldan__iara",
+    "last_opened_file_path": "/Users/iroldan/Desktop/bootcamp/github/wave22-practicas 15.38.33/wave22-practicas/9.  implementacion de bases de datos/movies",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="de749b06-ba52-4bb2-be0c-06aca9c9dcd0" name="Changes" comment="" />
+      <created>1697519977358</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1697519977358</updated>
+      <workItem from="1697519978360" duration="37000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
