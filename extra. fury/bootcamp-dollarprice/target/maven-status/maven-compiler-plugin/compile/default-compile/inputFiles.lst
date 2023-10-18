@@ -1,0 +1,16 @@
+/Users/slanger/Documents/bootcamp/origina-etapa-1-fury-lets-practice/src/main/java/com/mercadolibre/bootcamp_demo_java_app/config/SpringDocConfig.java
+/Users/slanger/Documents/bootcamp/origina-etapa-1-fury-lets-practice/src/main/java/com/mercadolibre/bootcamp_demo_java_app/api/services/RestClientService.java
+/Users/slanger/Documents/bootcamp/origina-etapa-1-fury-lets-practice/src/main/java/com/mercadolibre/bootcamp_demo_java_app/controller/ItemPriceController.java
+/Users/slanger/Documents/bootcamp/origina-etapa-1-fury-lets-practice/src/main/java/com/mercadolibre/bootcamp_demo_java_app/dtos/CurrencyEnum.java
+/Users/slanger/Documents/bootcamp/origina-etapa-1-fury-lets-practice/src/main/java/com/mercadolibre/bootcamp_demo_java_app/services/ItemsService.java
+/Users/slanger/Documents/bootcamp/origina-etapa-1-fury-lets-practice/src/main/java/com/mercadolibre/bootcamp_demo_java_app/api/services/ItemsApiService.java
+/Users/slanger/Documents/bootcamp/origina-etapa-1-fury-lets-practice/src/main/java/com/mercadolibre/bootcamp_demo_java_app/config/ExecutorConfig.java
+/Users/slanger/Documents/bootcamp/origina-etapa-1-fury-lets-practice/src/main/java/com/mercadolibre/bootcamp_demo_java_app/exceptions/ApiException.java
+/Users/slanger/Documents/bootcamp/origina-etapa-1-fury-lets-practice/src/main/java/com/mercadolibre/bootcamp_demo_java_app/exceptions/ApiError.java
+/Users/slanger/Documents/bootcamp/origina-etapa-1-fury-lets-practice/src/main/java/com/mercadolibre/bootcamp_demo_java_app/dtos/ItemDTO.java
+/Users/slanger/Documents/bootcamp/origina-etapa-1-fury-lets-practice/src/main/java/com/mercadolibre/bootcamp_demo_java_app/config/SpringConfig.java
+/Users/slanger/Documents/bootcamp/origina-etapa-1-fury-lets-practice/src/main/java/com/mercadolibre/bootcamp_demo_java_app/controller/PingController.java
+/Users/slanger/Documents/bootcamp/origina-etapa-1-fury-lets-practice/src/main/java/com/mercadolibre/bootcamp_demo_java_app/util/ScopeUtils.java
+/Users/slanger/Documents/bootcamp/origina-etapa-1-fury-lets-practice/src/main/java/com/mercadolibre/bootcamp_demo_java_app/config/ControllerExceptionHandler.java
+/Users/slanger/Documents/bootcamp/origina-etapa-1-fury-lets-practice/src/main/java/com/mercadolibre/bootcamp_demo_java_app/Application.java
+/Users/slanger/Documents/bootcamp/origina-etapa-1-fury-lets-practice/src/main/java/com/mercadolibre/bootcamp_demo_java_app/exceptions/InternalServerErrorException.java
