@@ -1,0 +1,15 @@
+# Created at 2023-10-18T15:58:09.303
+WARNING: An illegal reflective access operation has occurred
+
+# Created at 2023-10-18T15:58:09.303
+WARNING: Illegal reflective access by com.mercadolibre.bootcamp_demo_java_app.unit.ScopeUtilTest (file:/Users/mleiva/Documents/wave22-practicas/Fury/origina-etapa-1-fury-lets-practice/target/test-classes/) to field java.lang.reflect.Field.modifiers
+
+# Created at 2023-10-18T15:58:09.303
+WARNING: Please consider reporting this to the maintainers of com.mercadolibre.bootcamp_demo_java_app.unit.ScopeUtilTest
+
+# Created at 2023-10-18T15:58:09.303
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+
+# Created at 2023-10-18T15:58:09.303
+WARNING: All illegal access operations will be denied in a future release
+
