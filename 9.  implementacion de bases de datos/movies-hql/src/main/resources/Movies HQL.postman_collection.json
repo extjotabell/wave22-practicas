@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "1cd0ad95-70fc-4be7-b382-31ae278659d2",
+		"name": "Movies HQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29768204"
+	},
+	"item": [
+		{
+			"name": "Get all actor that have favorite movies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/actors/haveFavoriteMovie",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors",
+						"haveFavoriteMovie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all actor that have rating superior to",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/actors?rating=8",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors"
+					],
+					"query": [
+						{
+							"key": "rating",
+							"value": "8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all actors that works in movie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/actors/movies/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors",
+						"movies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all movies that has actor with ranking more than",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/movies/actors?rating=9",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"actors"
+					],
+					"query": [
+						{
+							"key": "rating",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all movies that are of genre",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/movies/genre/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"genre",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all series that seasons are more than",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/series?seasonNumber=7",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"series"
+					],
+					"query": [
+						{
+							"key": "seasonNumber",
+							"value": "7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all episodes that an actor works",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/series?seasonNumber=7",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"series"
+					],
+					"query": [
+						{
+							"key": "seasonNumber",
+							"value": "7"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
