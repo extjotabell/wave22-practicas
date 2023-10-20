@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "9ff283ea-5e12-4756-9230-d2c1d157d3e3",
+		"name": "Fury Deportistas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29806303"
+	},
+	"item": [
+		{
+			"name": "Find Sports",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/findSports",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"findSports"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Tenis",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/findSport/Tenis",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"findSport",
+						"Tenis"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Sports People (persons)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/findSportsPersons",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"findSportsPersons"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
