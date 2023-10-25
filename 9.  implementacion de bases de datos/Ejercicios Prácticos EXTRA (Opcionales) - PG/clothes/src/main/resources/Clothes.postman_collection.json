@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "96608169-7162-4052-b8fd-05879e6a56cd",
+		"name": "Clothes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29541502"
+	},
+	"item": [
+		{
+			"name": "Crear Prenda",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n      \"name\": \"Cotton T-shirt\",\n      \"type\": \"T-shirt\",\n      \"brand\": \"Nike\",\n      \"color\": \"Black\",\n      \"size\": \"M\",\n      \"quantity\": 20,\n      \"price\": 29.99\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/clothes"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todas las prendas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/clothes"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Prenda por codigo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/clothes/5"
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar prenda",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n      \"name\": \"Cotton T-shirt\",\n      \"type\": \"T-shirt\",\n      \"brand\": \"Nike\",\n      \"color\": \"Black\",\n      \"size\": \"S\",\n      \"quantity\": 20,\n      \"price\": 29.99\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/clothes/5"
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar prenda",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "localhost:8080/api/clothes/5"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener prendas por talle",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/clothes/BySize/S"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener prendas por nombre",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/clothes?name=Camiseta",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"clothes"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Camiseta"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
