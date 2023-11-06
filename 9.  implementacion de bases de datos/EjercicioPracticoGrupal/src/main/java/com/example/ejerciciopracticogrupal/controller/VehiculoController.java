@@ -1,7 +1,6 @@
 package com.example.ejerciciopracticogrupal.controller;
 
 import com.example.ejerciciopracticogrupal.dto.response.*;
-import com.example.ejerciciopracticogrupal.service.IVehiculoService;
 import com.example.ejerciciopracticogrupal.service.VehiculoServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class VehiculoController {
     }
 
     @GetMapping("/patentesYMarcas")
-    public ResponseEntity<List<VehiculoDTO>> getAllPatentesYMarcas(){
+    public ResponseEntity<?> getAllPatentesYMarcas(){
         return ResponseEntity.ok(vehiculoService.getAllPatentesYMarcas());
     }
 
@@ -38,12 +37,12 @@ public class VehiculoController {
     }
 
     @GetMapping("/perdidasEconomicas")
-    public ResponseEntity<List<VehiculoDTO>> getAllPatentesYMarcasConPerdidaEconomica(){
+    public ResponseEntity<?> getAllPatentesYMarcasConPerdidaEconomica(){
         return ResponseEntity.ok(vehiculoService.getAllPatentesYMarcasConPerdidaEconomica());
     }
 
     @GetMapping("/perdidasEconomicasYTotales")
-    public ResponseEntity<List<PerdidasPorVehiculoDTO>> getAllPatentesYMarcasConPerdidaEconomicaYTotal(){
+    public ResponseEntity<List<VehiculoSiniestroDTO>> getAllPatentesYMarcasConPerdidaEconomicaYTotal(){
         return ResponseEntity.ok(vehiculoService.getAllPatentesYMarcasConPerdidaEconomicaYTotal());
     }
 }

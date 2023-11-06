@@ -1,5 +1,6 @@
 package com.example.ejerciciopracticogrupal.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +23,7 @@ public class Siniestro {
     @Column(name = "perdida_economica")
     private Double perdidaEconomica;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "vehiculo_id")
     private Vehiculo vehiculo;
 }

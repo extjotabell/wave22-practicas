@@ -31,6 +31,12 @@ public class Vehiculo {
     @Column(name = "cantidad_ruedas")
     private Integer cantidadRuedas;
 
-    @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Siniestro> siniestros;
+
+    public Vehiculo(String patente, String marca, LocalDate fechaFabricacion) {
+        this.patente = patente;
+        this.marca = marca;
+        this.fechaFabricacion = fechaFabricacion;
+    }
 }

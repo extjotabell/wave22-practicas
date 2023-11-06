@@ -1,13 +1,11 @@
 package com.example.ejerciciopracticogrupal.service;
 
-import com.example.ejerciciopracticogrupal.dto.response.PatentesDTO;
-import com.example.ejerciciopracticogrupal.dto.response.PerdidasPorVehiculoDTO;
-import com.example.ejerciciopracticogrupal.dto.response.VehiculoDTO;
-import com.example.ejerciciopracticogrupal.model.Vehiculo;
+import com.example.ejerciciopracticogrupal.dto.response.*;
+import com.example.ejerciciopracticogrupal.projection.MarcaPatenteModeloView;
 import com.example.ejerciciopracticogrupal.repository.IVehiculoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,16 +19,22 @@ public class VehiculoServiceImpl implements IVehiculoService {
     @Autowired
     ObjectMapper objectMapper;
 
+    private final ModelMapper modelMapper;
+
+    public VehiculoServiceImpl() {
+        this.modelMapper = new ModelMapper();
+    }
+
     @Override
     public PatentesDTO getAllPatentes() {
         return new PatentesDTO(vehiculoRepository.findAllPatentes());
     }
 
     @Override
-    public List<VehiculoDTO> getAllPatentesYMarcas() {
-        List<Vehiculo> vehiculos = vehiculoRepository.findAllPatentesYMarcas();
-        return vehiculos.stream()
-                .map(v -> objectMapper.convertValue(v, VehiculoDTO.class))
+    public List<?> getAllPatentesYMarcas() {
+        return vehiculoRepository.findAllPatentesYMarcas()
+                .stream()
+                .map(obj -> modelMapper.map(obj, VehiculoDTO.class))
                 .toList();
     }
 
@@ -40,18 +44,20 @@ public class VehiculoServiceImpl implements IVehiculoService {
     }
 
     @Override
-    public List<VehiculoDTO> getAllPatentesYMarcasConPerdidaEconomica() {
-        List<Vehiculo> vehiculos = this.vehiculoRepository.findAllPatentesYMarcasConPerdidaEconomica();
+    public List<?> getAllPatentesYMarcasConPerdidaEconomica() {
+        List<MarcaPatenteModeloView> vehiculos = this.vehiculoRepository.findAllPatentesYMarcasConPerdidaEconomica();
+
         return vehiculos.stream()
-                .map(v -> objectMapper.convertValue(v, VehiculoDTO.class))
+                .map(v -> modelMapper.map(v, VehiculoSiniestroDTO.class))
                 .toList();
+
     }
 
     @Override
-    public List<PerdidasPorVehiculoDTO> getAllPatentesYMarcasConPerdidaEconomicaYTotal() {
-        List<Pair<Vehiculo,Double>> vehiculoConPerdidasTotales = vehiculoRepository.findAllPatentesYMarcasConPerdidaEconomicaYTotal();
+    public List<VehiculoSiniestroDTO> getAllPatentesYMarcasConPerdidaEconomicaYTotal() {
+        List<MarcaPatenteModeloView> vehiculoConPerdidasTotales = vehiculoRepository.findAllPatentesYMarcasConPerdidaEconomicaYTotal();
         return vehiculoConPerdidasTotales.stream()
-                .map(v -> new PerdidasPorVehiculoDTO(objectMapper.convertValue(v.getFirst(), VehiculoDTO.class),v.getSecond()))
+                .map(v -> modelMapper.map(v, VehiculoSiniestroDTO.class))
                 .toList();
     }
 }

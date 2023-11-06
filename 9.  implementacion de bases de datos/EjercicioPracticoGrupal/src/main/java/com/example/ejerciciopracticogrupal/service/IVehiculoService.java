@@ -1,8 +1,7 @@
 package com.example.ejerciciopracticogrupal.service;
 
 import com.example.ejerciciopracticogrupal.dto.response.PatentesDTO;
-import com.example.ejerciciopracticogrupal.dto.response.PerdidasPorVehiculoDTO;
-import com.example.ejerciciopracticogrupal.dto.response.VehiculoDTO;
+import com.example.ejerciciopracticogrupal.dto.response.VehiculoSiniestroDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,11 +10,11 @@ import java.util.List;
 public interface IVehiculoService {
     PatentesDTO getAllPatentes();
 
-    List<VehiculoDTO> getAllPatentesYMarcas();
+    List<?> getAllPatentesYMarcas();
 
     PatentesDTO getAllVehiculos4RuedasYActuales();
 
-    List<VehiculoDTO> getAllPatentesYMarcasConPerdidaEconomica();
+    List<?> getAllPatentesYMarcasConPerdidaEconomica();
 
-    List<PerdidasPorVehiculoDTO> getAllPatentesYMarcasConPerdidaEconomicaYTotal();
+    List<VehiculoSiniestroDTO> getAllPatentesYMarcasConPerdidaEconomicaYTotal();
 }
